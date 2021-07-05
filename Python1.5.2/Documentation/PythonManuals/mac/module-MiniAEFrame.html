@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>16. MiniAEFrame --
+Support to act as an Open Scripting Architecture server.</TITLE>
+<META NAME="description" CONTENT="16. MiniAEFrame --
+Support to act as an Open Scripting Architecture server.">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="previous" HREF="module-FrameWork.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="aeserver-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html547"
+ HREF="aeserver-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html543"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html539"
+ HREF="dialogwindow-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html545"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html546"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html548"
+ HREF="aeserver-objects.html">16.1 AEServer Objects</A>
+<b>Up:</b> <A NAME="tex2html544"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html540"
+ HREF="dialogwindow-objects.html">15.5 DialogWindow Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0021600000000000000000">
+<SPAN CLASS="arabic">16</SPAN>. <tt>MiniAEFrame</tt> --
+         Support to act as an Open Scripting Architecture server.</A>
+</H1>
+
+
+<P>
+
+<P>
+The module <tt>MiniAEFrame</tt> provides a framework for an application
+that can function as an Open Scripting Architecture
+<a name="l2h-2092"></a>(OSA) server, i.e. receive and process
+AppleEvents<a name="l2h-2093"></a>. It can be used in conjunction with
+<tt>FrameWork</tt><a name="l2h-"></a> or standalone.
+
+<P>
+This module is temporary, it will eventually be replaced by a module
+that handles argument names better and possibly automates making your
+application scriptable.
+
+<P>
+The <tt>MiniAEFrame</tt> module defines the following classes:
+
+<P>
+<dl><dt><b><a name="l2h-2099"><tt>AEServer</tt></a></b> ()
+<dd>
+A class that handles AppleEvent dispatch. Your application should
+subclass this class together with either
+<tt>MiniApplication</tt> or
+<tt>FrameWork.Application</tt>. Your <tt>__init__()</tt> method should
+call the <tt>__init__()</tt> method for both classes.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-2107"><tt>MiniApplication</tt></a></b> ()
+<dd>
+A class that is more or less compatible with
+<tt>FrameWork.Application</tt> but with less functionality. Its
+event loop supports the apple menu, command-dot and AppleEvents; other
+events are passed on to the Python interpreter and/or Sioux.
+Useful if your application wants to use <tt>AEServer</tt> but does not
+provide its own windows, etc.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html549"
+ HREF="aeserver-objects.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">1</SPAN> AEServer Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html547"
+ HREF="aeserver-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html543"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html539"
+ HREF="dialogwindow-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html545"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html546"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html548"
+ HREF="aeserver-objects.html">16.1 AEServer Objects</A>
+<b>Up:</b> <A NAME="tex2html544"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html540"
+ HREF="dialogwindow-objects.html">15.5 DialogWindow Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

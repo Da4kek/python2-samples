@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>14. EasyDialogs --
+Basic Macintosh dialogs.</TITLE>
+<META NAME="description" CONTENT="14. EasyDialogs --
+Basic Macintosh dialogs.">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="module-FrameWork.html">
+<LINK REL="previous" HREF="module-macspeech.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="module-FrameWork.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html462"
+ HREF="module-FrameWork.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html458"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html452"
+ HREF="speech-channel-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html460"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html461"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html463"
+ HREF="module-FrameWork.html">15. FrameWork  </A>
+<b>Up:</b> <A NAME="tex2html459"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html453"
+ HREF="speech-channel-objects.html">13.2 Speech Channel Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0021400000000000000000">
+<SPAN CLASS="arabic">14</SPAN>. <tt>EasyDialogs</tt> --
+         Basic Macintosh dialogs.</A>
+</H1>
+
+
+<P>
+
+<P>
+The <tt>EasyDialogs</tt> module contains some simple dialogs for
+the Macintosh, modelled after the <tt>stdwin</tt> dialogs with similar
+names. All routines have an optional parameter <i>id</i> with which you
+can override the DLOG resource used for the dialog, as long as the
+item numbers correspond. See the source for details.
+ 
+The <tt>EasyDialogs</tt> module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-1678"><tt>Message</tt></a></b> (<var>str</var>)
+<dd>
+A modal dialog with the message text <i>str</i>, which should be at
+most 255 characters long, is displayed. Control is returned when the
+user clicks ``OK''.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1709"><tt>AskString</tt></a></b> (<var>prompt</var><big>[</big><var>, default</var><big>]</big>)
+<dd>
+Ask the user to input a string value, in a modal dialog. <i>prompt</i>
+is the promt message, the optional <i>default</i> arg is the initial
+value for the string. All strings can be at most 255 bytes
+long. <tt>AskString()</tt> returns the string entered or <tt>None</tt>
+in case the user cancelled.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1710"><tt>AskYesNoCancel</tt></a></b> (<var>question</var><big>[</big><var>, default</var><big>]</big>)
+<dd>
+Present a dialog with text <i>question</i> and three buttons labelled
+``yes'', ``no'' and ``cancel''. Return <tt>1</tt> for yes, <tt>0</tt> for
+no and <tt>-1</tt> for cancel. The default return value chosen by
+hitting return is <tt>0</tt>. This can be changed with the optional
+<i>default</i> argument.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1713"><tt>ProgressBar</tt></a></b> (<big>[</big><var>label</var><big>[</big><var>, maxval</var><big>]</big><big>]</big>)
+<dd>
+Display a modeless progress dialog with a thermometer bar. <i>label</i>
+is the text string displayed (default ``Working...''), <i>maxval</i> is
+the value at which progress is complete (default <tt>100</tt>). The
+returned object has one method, <tt>set(<i>value</i>)</tt>, which sets
+the value of the progress bar. The bar remains visible until the
+object returned is discarded.
+
+<P>
+The progress bar has a ``cancel'' button, but it is currently
+non-functional.
+</dl>
+
+<P>
+Note that <tt>EasyDialogs</tt> does not currently use the notification
+manager. This means that displaying dialogs while the program is in
+the background will lead to unexpected results and possibly
+crashes. Also, all dialogs are modeless and hence expect to be at the
+top of the stacking order. This is true when the dialogs are created,
+but windows that pop-up later (like a console window) may also result
+in crashes.
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html462"
+ HREF="module-FrameWork.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html458"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html452"
+ HREF="speech-channel-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html460"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html461"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html463"
+ HREF="module-FrameWork.html">15. FrameWork  </A>
+<b>Up:</b> <A NAME="tex2html459"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html453"
+ HREF="speech-channel-objects.html">13.2 Speech Channel Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

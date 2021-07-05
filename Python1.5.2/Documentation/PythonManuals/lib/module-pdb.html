@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>9. The Python Debugger</TITLE>
+<META NAME="description" CONTENT="9. The Python Debugger">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="profile.html">
+<LINK REL="previous" HREF="unix.html">
+<LINK REL="up" HREF="lib.html">
+<LINK REL="next" HREF="node148.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2270"
+ HREF="node148.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2266"
+ HREF="lib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2260"
+ HREF="module-commands.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2268"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2269"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2271"
+ HREF="node148.html">9.1 Debugger Commands</A>
+<b>Up:</b> <A NAME="tex2html2267"
+ HREF="lib.html">Python Library Reference</A>
+<b>Previous:</b> <A NAME="tex2html2261"
+ HREF="module-commands.html">8.16 commands  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0011000000000000000000">
+<SPAN CLASS="arabic">9</SPAN>. The Python Debugger</A>
+</H1>
+
+
+<P>
+
+<P>
+<a name="l2h-14523"></a>
+<P>
+The module <tt>pdb</tt> defines an interactive source code debugger for
+Python programs.  It supports setting
+(conditional) breakpoints and single stepping
+at the source line level, inspection of stack frames, source code
+listing, and evaluation of arbitrary Python code in the context of any
+stack frame.  It also supports post-mortem debugging and can be called
+under program control.
+
+<P>
+The debugger is extensible -- it is actually defined as a class
+<tt>Pdb</tt>.
+<a name="l2h-14527"></a>
+This is currently undocumented but easily understood by reading the
+source.  The extension interface uses the (also undocumented) modules
+<tt>bdb</tt><a name="l2h-"></a> and <tt>cmd</tt><a name="l2h-"></a>.
+
+<P>
+A primitive windowing version of the debugger also exists -- this is
+module <tt>wdb</tt>, which requires <tt>stdwin</tt> (see the chapter
+on STDWIN specific modules).
+<a name="l2h-"></a><a name="l2h-"></a>
+<P>
+The debugger's prompt is "<tt>(Pdb) </tt>".
+Typical usage to run a program under control of the debugger is:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; import pdb
+&gt;&gt;&gt; import mymodule
+&gt;&gt;&gt; pdb.run('mymodule.test()')
+&gt; &lt;string&gt;(0)?()
+(Pdb) continue
+&gt; &lt;string&gt;(1)?()
+(Pdb) continue
+NameError: 'spam'
+&gt; &lt;string&gt;(1)?()
+(Pdb)
+</pre></dl>
+
+<P>
+"<tt>pdb.py</tt>" can also be invoked as
+a script to debug other scripts.  For example:
+
+<P>
+<dl><dd><pre>
+python /usr/local/lib/python1.5/pdb.py myscript.py
+</pre></dl>
+
+<P>
+Typical usage to inspect a crashed program is:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; import pdb
+&gt;&gt;&gt; import mymodule
+&gt;&gt;&gt; mymodule.test()
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+  File "./mymodule.py", line 4, in test
+    test2()
+  File "./mymodule.py", line 3, in test2
+    print spam
+NameError: spam
+&gt;&gt;&gt; pdb.pm()
+&gt; ./mymodule.py(3)test2()
+-&gt; print spam
+(Pdb)
+</pre></dl>
+
+<P>
+The module defines the following functions; each enters the debugger
+in a slightly different way:
+
+<P>
+<dl><dt><b><a name="l2h-14705"><tt>run</tt></a></b> (<var>statement</var><big>[</big><var>, globals</var><big>[</big><var>, locals</var><big>]</big><big>]</big>)
+<dd>
+Execute the <i>statement</i> (given as a string) under debugger
+control.  The debugger prompt appears before any code is executed; you
+can set breakpoints and type <tt>continue</tt>, or you can step through
+the statement using <tt>step</tt> or <tt>next</tt> (all these commands are
+explained below).  The optional <i>globals</i> and <i>locals</i>
+arguments specify the environment in which the code is executed; by
+default the dictionary of the module <tt>__main__</tt> is used.  (See
+the explanation of the <tt>exec</tt> statement or the <tt>eval()</tt>
+built-in function.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14706"><tt>runeval</tt></a></b> (<var>expression</var><big>[</big><var>, globals</var><big>[</big><var>, locals</var><big>]</big><big>]</big>)
+<dd>
+Evaluate the <i>expression</i> (given as a a string) under debugger
+control.  When <tt>runeval()</tt> returns, it returns the value of the
+expression.  Otherwise this function is similar to
+<tt>run()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14691"><tt>runcall</tt></a></b> (<var>function</var><big>[</big><var>, argument, ...</var><big>]</big>)
+<dd>
+Call the <i>function</i> (a function or method object, not a string)
+with the given arguments.  When <tt>runcall()</tt> returns, it returns
+whatever the function call returned.  The debugger prompt appears as
+soon as the function is entered.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14572"><tt>set_trace</tt></a></b> ()
+<dd>
+Enter the debugger at the calling stack frame.  This is useful to
+hard-code a breakpoint at a given point in a program, even if the code
+is not otherwise being debugged (e.g. when an assertion fails).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14576"><tt>post_mortem</tt></a></b> (<var>traceback</var>)
+<dd>
+Enter post-mortem debugging of the given <i>traceback</i> object.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14581"><tt>pm</tt></a></b> ()
+<dd>
+Enter post-mortem debugging of the traceback found in
+<tt>sys.last_traceback</tt>.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html2272"
+ HREF="node148.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Debugger Commands</A>
+<LI><A NAME="tex2html2273"
+ HREF="node149.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> How It Works</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2270"
+ HREF="node148.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2266"
+ HREF="lib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2260"
+ HREF="module-commands.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2268"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2269"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2271"
+ HREF="node148.html">9.1 Debugger Commands</A>
+<b>Up:</b> <A NAME="tex2html2267"
+ HREF="lib.html">Python Library Reference</A>
+<b>Previous:</b> <A NAME="tex2html2261"
+ HREF="module-commands.html">8.16 commands  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

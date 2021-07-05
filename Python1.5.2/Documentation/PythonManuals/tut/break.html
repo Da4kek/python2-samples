@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4.4 break and continue Statements, and
+else Clauses on Loops
+</TITLE>
+<META NAME="description" CONTENT="4.4 break and continue Statements, and
+else Clauses on Loops
+">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="tut.css">
+<LINK REL="next" HREF="pass.html">
+<LINK REL="previous" HREF="range.html">
+<LINK REL="up" HREF="moreControl.html">
+<LINK REL="next" HREF="pass.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html414"
+ HREF="pass.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html411"
+ HREF="moreControl.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html405"
+ HREF="range.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Tutorial</b></td>
+<td align=right width="20%"><A NAME="tex2html413"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html415"
+ HREF="pass.html">4.5 pass Statements</A>
+<b>Up:</b> <A NAME="tex2html412"
+ HREF="moreControl.html">4. More Control Flow</A>
+<b>Previous:</b> <A NAME="tex2html406"
+ HREF="range.html">4.3 The range() Function</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION006400000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>break</tt> and <tt>continue</tt> Statements, and
+         <tt>else</tt> Clauses on Loops
+         
+</H1>
+
+<P>
+The <tt>break</tt> statement, like in C, breaks out of the smallest
+enclosing <tt>for</tt> or <tt>while</tt> loop.
+
+<P>
+The <tt>continue</tt> statement, also borrowed from C, continues
+with the next iteration of the loop.
+
+<P>
+Loop statements may have an <tt>else</tt> clause; it is executed when
+the loop terminates through exhaustion of the list (with
+<tt>for</tt>) or when the condition becomes false (with
+<tt>while</tt>), but not when the loop is terminated by a
+<tt>break</tt> statement.  This is exemplified by the following loop,
+which searches for prime numbers:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; for n in range(2, 10):
+...     for x in range(2, n):
+...         if n % x == 0:
+...            print n, 'equals', x, '*', n/x
+...            break
+...     else:
+...          print n, 'is a prime number'
+... 
+2 is a prime number
+3 is a prime number
+4 equals 2 * 2
+5 is a prime number
+6 equals 2 * 3
+7 is a prime number
+8 equals 2 * 4
+9 equals 3 * 3
+</pre></dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html414"
+ HREF="pass.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html411"
+ HREF="moreControl.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html405"
+ HREF="range.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Tutorial</b></td>
+<td align=right width="20%"><A NAME="tex2html413"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html415"
+ HREF="pass.html">4.5 pass Statements</A>
+<b>Up:</b> <A NAME="tex2html412"
+ HREF="moreControl.html">4. More Control Flow</A>
+<b>Previous:</b> <A NAME="tex2html406"
+ HREF="range.html">4.3 The range() Function</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

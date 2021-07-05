@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8.13 syslog --
+Unix syslog library routines.</TITLE>
+<META NAME="description" CONTENT="8.13 syslog --
+Unix syslog library routines.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-stat.html">
+<LINK REL="previous" HREF="module-resource.html">
+<LINK REL="up" HREF="unix.html">
+<LINK REL="next" HREF="module-stat.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2213"
+ HREF="module-stat.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2209"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2203"
+ HREF="node141.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2211"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2212"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2214"
+ HREF="module-stat.html">8.14 stat  </A>
+<b>Up:</b> <A NAME="tex2html2210"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2204"
+ HREF="node141.html">8.12.2 Resource Usage</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00101300000000000000000">
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">13</SPAN> <tt>syslog</tt> --
+         Unix syslog library routines.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides an interface to the Unix <tt>syslog</tt> library
+routines.  Refer to the Unix manual pages for a detailed description
+of the <tt>syslog</tt> facility.
+
+<P>
+The module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-14200"><tt>syslog</tt></a></b> (<big>[</big><var>priority,</var><big>]</big><var> message</var>)
+<dd>
+Send the string <i>message</i> to the system logger.  A trailing
+newline is added if necessary.  Each message is tagged with a priority
+composed of a <i>facility</i> and a <i>level</i>.  The optional
+<i>priority</i> argument, which defaults to <tt>LOG_INFO</tt>,
+determines the message priority.  If the facility is not encoded in
+<i>priority</i> using logical-or (<tt>LOG_INFO | LOG_USER</tt>), the
+value given in the <tt>openlog()</tt> call is used.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14204"><tt>openlog</tt></a></b> (<var>ident</var><big>[</big><var>, logopt</var><big>[</big><var>, facility</var><big>]</big><big>]</big>)
+<dd>
+Logging options other than the defaults can be set by explicitly
+opening the log file with <tt>openlog()</tt> prior to calling
+<tt>syslog()</tt>.  The defaults are (usually) <i>ident</i> =
+<tt>'syslog'</tt>, <i>logopt</i> = <tt>0</tt>, <i>facility</i> =
+<tt>LOG_USER</tt>.  The <i>ident</i> argument is a string which is
+prepended to every message.  The optional <i>logopt</i> argument is a
+bit field - see below for possible values to combine.  The optional
+<i>facility</i> argument sets the default facility for messages which
+do not have a facility explicitly encoded.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14158"><tt>closelog</tt></a></b> ()
+<dd>
+Close the log file.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14162"><tt>setlogmask</tt></a></b> (<var>maskpri</var>)
+<dd>
+This function set the priority mask to <i>maskpri</i> and returns the
+previous mask value.  Calls to <tt>syslog()</tt> with a priority
+level not set in <i>maskpri</i> are ignored.  The default is to log all
+priorities.  The function <tt>LOG_MASK(<i>pri</i>)</tt> calculates the
+mask for the individual priority <i>pri</i>.  The function
+<tt>LOG_UPTO(<i>pri</i>)</tt> calculates the mask for all priorities up
+to and including <i>pri</i>.
+</dl>
+
+<P>
+The module defines the following constants:
+
+<P>
+<DL>
+<DD><P>
+<DT><STRONG>Priority levels (high to low):</STRONG>
+<DD><P>
+<tt>LOG_EMERG</tt>, <tt>LOG_ALERT</tt>, <tt>LOG_CRIT</tt>,
+<tt>LOG_ERR</tt>, <tt>LOG_WARNING</tt>, <tt>LOG_NOTICE</tt>,
+<tt>LOG_INFO</tt>, <tt>LOG_DEBUG</tt>.
+
+<P>
+<DT><STRONG>Facilities:</STRONG>
+<DD><P>
+<tt>LOG_KERN</tt>, <tt>LOG_USER</tt>, <tt>LOG_MAIL</tt>,
+<tt>LOG_DAEMON</tt>, <tt>LOG_AUTH</tt>, <tt>LOG_LPR</tt>,
+<tt>LOG_NEWS</tt>, <tt>LOG_UUCP</tt>, <tt>LOG_CRON</tt> and
+<tt>LOG_LOCAL0</tt> to <tt>LOG_LOCAL7</tt>.
+
+<P>
+<DT><STRONG>Log options:</STRONG>
+<DD><P>
+<tt>LOG_PID</tt>, <tt>LOG_CONS</tt>, <tt>LOG_NDELAY</tt>,
+<tt>LOG_NOWAIT</tt> and <tt>LOG_PERROR</tt> if defined in
+<tt>&lt;syslog.h&gt;</tt>.
+
+<P>
+</DL><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2213"
+ HREF="module-stat.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2209"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2203"
+ HREF="node141.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2211"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2212"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2214"
+ HREF="module-stat.html">8.14 stat  </A>
+<b>Up:</b> <A NAME="tex2html2210"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2204"
+ HREF="node141.html">8.12.2 Resource Usage</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

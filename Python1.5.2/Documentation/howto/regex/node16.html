@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4.4 Other Assertions</TITLE>
+<META NAME="description" CONTENT="4.4 Other Assertions">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="up" HREF="node12.html">
+<LINK REL="next" HREF="node17.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html234"
+ HREF="node17.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html231"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html227"
+ HREF="node15.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html233"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html235"
+ HREF="node17.html">5. Modifying Strings</A>
+<b>Up:</b> <A NAME="tex2html232"
+ HREF="node12.html">4. More Pattern Power</A>
+<b>Previous:</b> <A NAME="tex2html228"
+ HREF="node15.html">4.3 Non-capturing, and Named</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000540000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Other Assertions</A>
+</H2>
+
+<P>
+Another zero-width assertion is the lookahead assertion.  Lookahead
+assertions are available in both positive and negative form, and 
+look like this:
+
+<P>
+<DL COMPACT>
+<DT><tt>(?=...)</tt>
+<DD>Positive lookahead assertion.  This succeeds
+if the contained regular expression, represented here by <tt>...</tt>,
+successfully matches at the current location, and fails otherwise.
+But, once the contained expression has been tried, the matching engine
+doesn't advance at all; the rest of the pattern is tried right where
+the assertion started.
+
+<P>
+<DT><tt>(?!...)</tt>
+<DD>Negative lookahead assertion.  This is the
+opposite of the positive assertion; it succeeds if the contained expression
+<i>doesn't</i> match at the current position in the string.
+</DL>
+
+<P>
+An example will help make this concrete, and will demonstrate a case
+where a lookahead is useful.  Consider a simple pattern to match a
+filename, and split it apart into a base name and an extension,
+separated by a "<tt>.</tt>".  For example, in "<tt>news.rc</tt>", "<tt>news</tt>"
+is the base name, and "<tt>rc</tt>" is the filename's extension.  
+
+<P>
+The pattern to match this is quite simple: <tt>.*[.].*$</tt>.
+(Notice that the "<tt>.</tt>" needs to be treated specially because it's a
+metacharacter; I've put it inside a character class.  Also notice the
+trailing <tt>$</tt>; this is added to ensure that all the rest of the
+string must be included in the extension.)  This regular expression
+matches "<tt>foo.bar</tt>" and "<tt>autoexec.bat</tt>" and "<tt>sendmail.cf</tt>" and
+"<tt>printers.conf</tt>".
+
+<P>
+Now, consider complicating the problem a bit; what if you want to
+match filenames where the extension is not "<tt>bat</tt>"?
+Some incorrect attempts:
+
+<P>
+<tt>.*[.][b].*$</tt>
+
+<P>
+First attempt: Exclude "<tt>bat</tt>" by requiring that the first
+character of the extension is not a "<tt>b</tt>".  This is wrong, because it 
+also doesn't match
+"<tt>foo.bar</tt>".
+
+<P>
+<tt>.*[.]([b]..|.[&#226;].|..[t])$</tt>
+
+<P>
+The expression gets messier when you try to patch up the first
+solution by requiring one of the following cases must match: the first
+character of the extension isn't
+"<tt>b</tt>"; the second character isn't "<tt>a</tt>"; or the third
+character isn't "<tt>t</tt>".  This accepts "<tt>foo.bar</tt>" and rejects
+"<tt>autoexec.bat</tt>", but it requires a three-letter extension, and doesn't accept "<tt>sendmail.cf</tt>".  Another bug, so we'll complicate the pattern again in an effort to fix it.
+
+<P>
+<tt>.*[.]([b].?.?|.[&#226;]?.?|..?[t]?)$</tt>
+
+<P>
+In the third attempt, the second and third letters are all made
+optional in order to allow matching extensions shorter than three
+characters, such as "<tt>sendmail.cf</tt>".
+
+<P>
+The pattern's getting really complicated now, which makes it hard to
+read and understand.  When you write a regular expression, ask
+yourself: if you encountered this expression in a program, how hard
+would it be to figure out what the expression was intended to do?
+Worse, this solution doesn't scale well; if the problem changes, and you want to exclude
+both
+"<tt>bat</tt>" and "<tt>exe</tt>" as extensions, the pattern would get still more complicated and confusing.
+
+<P>
+A negative lookahead cuts through all this.  Go back to the original
+pattern, and, before the <tt>.*</tt> which matches the extension,
+insert <tt>(?!bat$)</tt>.  This means: if the expression <tt>bat</tt>
+doesn't match at this point, try the rest of the pattern; if
+<tt>bat$</tt> does match, the whole pattern will fail.  (The trailing
+<tt>$</tt> is required to ensure that something like
+"<tt>sample.batch</tt>", where the extension only starts with "<tt>bat</tt>",
+will be allowed.
+
+<P>
+After this modification, the whole pattern is
+<tt>.*[.](?!bat$).*$</tt>.  Excluding another filename extension is
+now easy; simply add it as an alternative inside the assertion.
+<tt>.*[.](?!bat$|exe$).*$</tt>
+excludes both "<tt>bat</tt>" and "<tt>exe</tt>".
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html234"
+ HREF="node17.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html231"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html227"
+ HREF="node15.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html233"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html235"
+ HREF="node17.html">5. Modifying Strings</A>
+<b>Up:</b> <A NAME="tex2html232"
+ HREF="node12.html">4. More Pattern Power</A>
+<b>Previous:</b> <A NAME="tex2html228"
+ HREF="node15.html">4.3 Non-capturing, and Named</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

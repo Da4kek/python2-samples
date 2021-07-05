@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>3.1 Listing whole packages</title>
+<META NAME="description" CONTENT="3.1 Listing whole packages">
+<META NAME="keywords" CONTENT="dist">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="dist.css">
+<LINK REL="next" href="listing-modules.html">
+<LINK REL="previous" href="setup-script.html">
+<LINK REL="up" href="setup-script.html">
+<LINK REL="next" href="listing-modules.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="setup-script.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="setup-script.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="listing-modules.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="setup-script.html">3 Writing the Setup</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="setup-script.html">3 Writing the Setup</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="listing-modules.html">3.2 Listing individual modules</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+3.1 Listing whole packages
+</H2>
+
+<P>
+The <font face="sans-serif">packages</font> option tells the Distutils to process (build,
+distribute, install, etc.) all pure Python modules found in each package
+mentioned in the <font face="sans-serif">packages</font> list.  In order to do this, of
+course, there has to be a correspondence between package names and
+directories in the filesystem.  The default correspondence is the most
+obvious one, i.e. package <tt class="module">distutils</tt> is found in the directory
+<span class="file">distutils</span> relative to the distribution root.  Thus, when you say
+<code>packages = ['foo']</code> in your setup script, you are promising that
+the Distutils will find a file <span class="file">foo/__init__.py</span> (which might
+be spelled differently on your system, but you get the idea) relative to
+the directory where your setup script lives.  (If you break this
+promise, the Distutils will issue a warning but process the broken
+package anyways.)
+
+<P>
+If you use a different convention to lay out your source directory,
+that's no problem: you just have to supply the <font face="sans-serif">package_dir</font>
+option to tell the Distutils about your convention.  For example, say
+you keep all Python source under <span class="file">lib</span>, so that modules in the
+``root package'' (i.e., not in any package at all) are right in
+<span class="file">lib</span>, modules in the <tt class="module">foo</tt> package are in <span class="file">lib/foo</span>,
+and so forth.  Then you would put
+<dl><dd><pre class="verbatim">
+package_dir = {'': 'lib'}
+</pre></dl>
+in your setup script.  (The keys to this dictionary are package names,
+and an empty package name stands for the root package.  The values are
+directory names relative to your distribution root.)  In this case, when
+you say <code>packages = ['foo']</code>, you are promising that the file
+<span class="file">lib/foo/__init__.py</span> exists.
+
+<P>
+Another possible convention is to put the <tt class="module">foo</tt> package right in 
+<span class="file">lib</span>, the <tt class="module">foo.bar</tt> package in <span class="file">lib/bar</span>, etc.  This
+would be written in the setup script as
+<dl><dd><pre class="verbatim">
+package_dir = {'foo': 'lib'}
+</pre></dl>
+A <code><var>package</var>: <var>dir</var></code> entry in the <font face="sans-serif">package_dir</font>
+dictionary implicitly applies to all packages below <var>package</var>, so
+the <tt class="module">foo.bar</tt> case is automatically handled here.  In this
+example, having <code>packages = ['foo', 'foo.bar']</code> tells the Distutils
+to look for <span class="file">lib/__init__.py</span> and
+<span class="file">lib/bar/__init__.py</span>.  (Keep in mind that although
+<font face="sans-serif">package_dir</font> applies recursively, you must explicitly list all
+packages in <font face="sans-serif">packages</font>: the Distutils will <i>not</i> recursively
+scan your source tree looking for any directory with an
+<span class="file">__init__.py</span> file.)
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="setup-script.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="setup-script.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="listing-modules.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="setup-script.html">3 Writing the Setup</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="setup-script.html">3 Writing the Setup</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="listing-modules.html">3.2 Listing individual modules</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

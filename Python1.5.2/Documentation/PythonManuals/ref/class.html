@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.6 Class definitions</TITLE>
+<META NAME="description" CONTENT="7.6 Class definitions">
+<META NAME="keywords" CONTENT="ref">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ref.css">
+<LINK REL="previous" HREF="function.html">
+<LINK REL="up" HREF="compound.html">
+<LINK REL="next" HREF="top-level.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1245"
+ HREF="top-level.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1241"
+ HREF="compound.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1237"
+ HREF="function.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html1243"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html1244"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1246"
+ HREF="top-level.html">8. Top-level components</A>
+<b>Up:</b> <A NAME="tex2html1242"
+ HREF="compound.html">7. Compound statements</A>
+<b>Previous:</b> <A NAME="tex2html1238"
+ HREF="function.html">7.5 Function definitions</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009600000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">6</SPAN> Class definitions
+</H1>
+<a name="l2h-3765"></a>
+
+<P>
+A class definition defines a class object (see section <A HREF="types.html#types">3.2</A>):
+<a name="l2h-"></a>
+<P>
+<dl><dd><pre>
+classdef:       "class" classname [inheritance] ":" suite
+inheritance:    "(" [expression_list] ")"
+classname:      identifier
+</pre></dl>
+
+<P>
+A class definition is an executable statement.  It first evaluates the
+inheritance list, if present.  Each item in the inheritance list
+should evaluate to a class object.  The class's suite is then executed
+in a new execution frame (see section <A HREF="execframes.html#execframes">4.1</A>), using a newly
+created local namespace and the original global namespace.
+(Usually, the suite contains only function definitions.)  When the
+class's suite finishes execution, its execution frame is discarded but
+its local namespace is saved.  A class object is then created using
+the inheritance list for the base classes and the saved local
+namespace for the attribute dictionary.  The class name is bound to this
+class object in the original local namespace.
+<a name="l2h-3772"></a><a name="l2h-3773"></a>
+<a name="l2h-3775"></a>
+<a name="l2h-3777"></a>
+
+<P>
+<b>Programmer's note:</b> variables defined in the class definition
+are class variables; they are shared by all instances.  To define
+instance variables, they must be given a value in the the
+<tt>__init__()</tt> method or in another method.  Both class and
+instance variables are accessible through the notation
+```codeself.name'', and an instance variable hides a class variable
+with the same name when accessed in this way.  Class variables with
+immutable values can be used as defaults for instance variables.
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1245"
+ HREF="top-level.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1241"
+ HREF="compound.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1237"
+ HREF="function.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html1243"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html1244"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1246"
+ HREF="top-level.html">8. Top-level components</A>
+<b>Up:</b> <A NAME="tex2html1242"
+ HREF="compound.html">7. Compound statements</A>
+<b>Previous:</b> <A NAME="tex2html1238"
+ HREF="function.html">7.5 Function definitions</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

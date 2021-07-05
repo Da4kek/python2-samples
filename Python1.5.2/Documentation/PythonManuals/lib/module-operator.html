@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.5 operator --
+Standard operators as functions.</TITLE>
+<META NAME="description" CONTENT="3.5 operator --
+Standard operators as functions.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-traceback.html">
+<LINK REL="previous" HREF="module-UserList.html">
+<LINK REL="up" HREF="python.html">
+<LINK REL="next" HREF="module-traceback.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html923"
+ HREF="module-traceback.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html919"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html913"
+ HREF="module-UserList.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html921"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html922"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html924"
+ HREF="module-traceback.html">3.6 traceback  </A>
+<b>Up:</b> <A NAME="tex2html920"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html914"
+ HREF="module-UserList.html">3.4 UserList  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION005500000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>operator</tt> --
+         Standard operators as functions.</A>
+</H1>
+
+
+<P>
+
+<P>
+The <tt>operator</tt> module exports a set of functions implemented in C
+corresponding to the intrinsic operators of Python.  For example,
+<tt>operator.add(x, y)</tt> is equivalent to the expression <tt>x+y</tt>.  The
+function names are those used for special class methods; variants without
+leading and trailing "<tt>__</tt>" are also provided for convenience.
+
+<P>
+The <tt>operator</tt> module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-3109"><tt>add</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3111"><tt>__add__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return <i>a</i> <tt>+</tt> <i>b</i>, for <i>a</i> and <i>b</i> numbers.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3120"><tt>sub</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3122"><tt>__sub__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return <i>a</i> <tt>-</tt> <i>b</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3129"><tt>mul</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3131"><tt>__mul__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return <i>a</i> <tt>*</tt> <i>b</i>, for <i>a</i> and <i>b</i> numbers.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3140"><tt>div</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3142"><tt>__div__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return <i>a</i> <tt>/</tt> <i>b</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3149"><tt>mod</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3151"><tt>__mod__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return <i>a</i> <tt>%</tt> <i>b</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3158"><tt>neg</tt></a></b> (<var>o</var>)
+<dd>
+<dt><b><a name="l2h-3160"><tt>__neg__</tt></a></b> (<var>o</var>)
+<dd>
+Return <i>o</i> negated.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3165"><tt>pos</tt></a></b> (<var>o</var>)
+<dd>
+<dt><b><a name="l2h-3167"><tt>__pos__</tt></a></b> (<var>o</var>)
+<dd>
+Return <i>o</i> positive.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3172"><tt>abs</tt></a></b> (<var>o</var>)
+<dd>
+<dt><b><a name="l2h-3174"><tt>__abs__</tt></a></b> (<var>o</var>)
+<dd>
+Return the absolute value of <i>o</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3179"><tt>inv</tt></a></b> (<var>o</var>)
+<dd>
+<dt><b><a name="l2h-3181"><tt>__inv__</tt></a></b> (<var>o</var>)
+<dd>
+Return the inverse of <i>o</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3186"><tt>lshift</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3188"><tt>__lshift__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return <i>a</i> shifted left by <i>b</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3194"><tt>rshift</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3196"><tt>__rshift__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return <i>a</i> shifted right by <i>b</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3202"><tt>and_</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3204"><tt>__and__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return the bitwise and of <i>a</i> and <i>b</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3210"><tt>or_</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3212"><tt>__or__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return the bitwise or of <i>a</i> and <i>b</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3218"><tt>xor</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3220"><tt>__xor__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return the bitwise exclusive or of <i>a</i> and <i>b</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3226"><tt>not_</tt></a></b> (<var>o</var>)
+<dd>
+<dt><b><a name="l2h-3228"><tt>__not__</tt></a></b> (<var>o</var>)
+<dd>
+Return the outcome of <tt>not</tt> <i>o</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3234"><tt>truth</tt></a></b> (<var>o</var>)
+<dd>
+Return <tt>1</tt> if <i>o</i> is true, and 0 otherwise.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3240"><tt>concat</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3242"><tt>__concat__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return <i>a</i> <tt>+</tt> <i>b</i> for <i>a</i> and <i>b</i> sequences.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3251"><tt>repeat</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3253"><tt>__repeat__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return <i>a</i> <tt>*</tt> <i>b</i> where <i>a</i> is a sequence and
+<i>b</i> is an integer.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3262"><tt>contains</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3264"><tt>sequenceIncludes</tt></a></b> (<var>a, b</var>)
+<dd>
+Return the outcome of the test <i>b</i> <tt>in</tt> <i>a</i>.
+Note the reversed operands.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3271"><tt>countOf</tt></a></b> (<var>a, b</var>)
+<dd>
+Return the number of occurrences of <i>b</i> in <i>a</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3277"><tt>indexOf</tt></a></b> (<var>a, b</var>)
+<dd>
+Return the index of the first of occurrence of <i>b</i> in <i>a</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3283"><tt>getitem</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3285"><tt>__getitem__</tt></a></b> (<var>a, b</var>)
+<dd>
+Return the value of <i>a</i> at index <i>b</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3291"><tt>setitem</tt></a></b> (<var>a, b, c</var>)
+<dd>
+<dt><b><a name="l2h-3293"><tt>__setitem__</tt></a></b> (<var>a, b, c</var>)
+<dd>
+Set the value of <i>a</i> at index <i>b</i> to <i>c</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3300"><tt>delitem</tt></a></b> (<var>a, b</var>)
+<dd>
+<dt><b><a name="l2h-3302"><tt>__delitem__</tt></a></b> (<var>a, b</var>)
+<dd>
+Remove the value of <i>a</i> at index <i>b</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3308"><tt>getslice</tt></a></b> (<var>a, b, c</var>)
+<dd>
+<dt><b><a name="l2h-3310"><tt>__getslice__</tt></a></b> (<var>a, b, c</var>)
+<dd>
+Return the slice of <i>a</i> from index <i>b</i> to index <i>c</i><tt>-1</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3318"><tt>setslice</tt></a></b> (<var>a, b, c, v</var>)
+<dd>
+<dt><b><a name="l2h-3320"><tt>__setslice__</tt></a></b> (<var>a, b, c, v</var>)
+<dd>
+Set the slice of <i>a</i> from index <i>b</i> to index <i>c</i><tt>-1</tt> to the
+sequence <i>v</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3329"><tt>delslice</tt></a></b> (<var>a, b, c</var>)
+<dd>
+<dt><b><a name="l2h-3331"><tt>__delslice__</tt></a></b> (<var>a, b, c</var>)
+<dd>
+Delete the slice of <i>a</i> from index <i>b</i> to index <i>c</i><tt>-1</tt>.
+</dl>
+
+<P>
+Example: Build a dictionary that maps the ordinals from <tt>0</tt> to
+<tt>256</tt> to their character equivalents.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; import operator
+&gt;&gt;&gt; d = {}
+&gt;&gt;&gt; keys = range(256)
+&gt;&gt;&gt; vals = map(chr, keys)
+&gt;&gt;&gt; map(operator.setitem, [d]*len(keys), keys, vals)
+</pre></dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html923"
+ HREF="module-traceback.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html919"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html913"
+ HREF="module-UserList.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html921"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html922"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html924"
+ HREF="module-traceback.html">3.6 traceback  </A>
+<b>Up:</b> <A NAME="tex2html920"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html914"
+ HREF="module-UserList.html">3.4 UserList  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

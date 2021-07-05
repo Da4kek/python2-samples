@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1.2 Intermezzo: Errors and Exceptions</TITLE>
+<META NAME="description" CONTENT="1.2 Intermezzo: Errors and Exceptions">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ext.css">
+<LINK REL="next" HREF="backToExample.html">
+<LINK REL="previous" HREF="simpleExample.html">
+<LINK REL="up" HREF="intro.html">
+<LINK REL="next" HREF="backToExample.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html124"
+ HREF="backToExample.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html121"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html115"
+ HREF="simpleExample.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html123"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html125"
+ HREF="backToExample.html">1.3 Back to the</A>
+<b>Up:</b> <A NAME="tex2html122"
+ HREF="intro.html">1. Extending Python with</A>
+<b>Previous:</b> <A NAME="tex2html116"
+ HREF="simpleExample.html">1.1 A Simple Example</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION003200000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Intermezzo: Errors and Exceptions
+</H1>
+
+<P>
+An important convention throughout the Python interpreter is the
+following: when a function fails, it should set an exception condition
+and return an error value (usually a <tt>NULL</tt> pointer).  Exceptions
+are stored in a static global variable inside the interpreter; if this
+variable is <tt>NULL</tt> no exception has occurred.  A second global
+variable stores the ``associated value'' of the exception (the second
+argument to <tt>raise</tt>).  A third variable contains the stack
+traceback in case the error originated in Python code.  These three
+variables are the C equivalents of the Python variables
+<tt>sys.exc_type</tt>, <tt>sys.exc_value</tt> and <tt>sys.exc_traceback</tt>
+(see the section on module <tt>sys</tt> in the <i>Python Library
+Reference</i>).  It is important to know about them to understand how
+errors are passed around.
+
+<P>
+The Python API defines a number of functions to set various types of
+exceptions.
+
+<P>
+The most common one is <tt>PyErr_SetString()</tt>.  Its arguments
+are an exception object and a C string.  The exception object is
+usually a predefined object like <tt>PyExc_ZeroDivisionError</tt>.  The
+C string indicates the cause of the error and is converted to a
+Python string object and stored as the ``associated value'' of the
+exception.
+
+<P>
+Another useful function is <tt>PyErr_SetFromErrno()</tt>, which only
+takes an exception argument and constructs the associated value by
+inspection of the (Unix) global variable <tt>errno</tt>.  The most
+general function is <tt>PyErr_SetObject()</tt>, which takes two object
+arguments, the exception and its associated value.  You don't need to
+<tt>Py_INCREF()</tt> the objects passed to any of these functions.
+
+<P>
+You can test non-destructively whether an exception has been set with
+<tt>PyErr_Occurred()</tt>.  This returns the current exception object,
+or <tt>NULL</tt> if no exception has occurred.  You normally don't need
+to call <tt>PyErr_Occurred()</tt> to see whether an error occurred in a
+function call, since you should be able to tell from the return value.
+
+<P>
+When a function <i>f</i> that calls another function <i>g</i> detects
+that the latter fails, <i>f</i> should itself return an error value
+(e.g. <tt>NULL</tt> or <tt>-1</tt>).  It should <i>not</i> call one of the
+<tt>PyErr_*()</tt> functions -- one has already been called by <i>g</i>.
+<i>f</i>'s caller is then supposed to also return an error indication
+to <i>its</i> caller, again <i>without</i> calling <tt>PyErr_*()</tt>,
+and so on -- the most detailed cause of the error was already
+reported by the function that first detected it.  Once the error
+reaches the Python interpreter's main loop, this aborts the currently
+executing Python code and tries to find an exception handler specified
+by the Python programmer.
+
+<P>
+(There are situations where a module can actually give a more detailed
+error message by calling another <tt>PyErr_*()</tt> function, and in
+such cases it is fine to do so.  As a general rule, however, this is
+not necessary, and can cause information about the cause of the error
+to be lost: most operations can fail for a variety of reasons.)
+
+<P>
+To ignore an exception set by a function call that failed, the exception
+condition must be cleared explicitly by calling <tt>PyErr_Clear()</tt>. 
+The only time C code should call <tt>PyErr_Clear()</tt> is if it doesn't
+want to pass the error on to the interpreter but wants to handle it
+completely by itself (e.g. by trying something else or pretending
+nothing happened).
+
+<P>
+Note that a failing <tt>malloc()</tt> call must be turned into an
+exception -- the direct caller of <tt>malloc()</tt> (or
+<tt>realloc()</tt>) must call <tt>PyErr_NoMemory()</tt> and
+return a failure indicator itself.  All the object-creating functions
+(<tt>PyInt_FromLong()</tt> etc.) already do this, so only if you
+call <tt>malloc()</tt> directly this note is of importance.
+
+<P>
+Also note that, with the important exception of
+<tt>PyArg_ParseTuple()</tt> and friends, functions that return an
+integer status usually return a positive value or zero for success and
+<tt>-1</tt> for failure, like Unix system calls.
+
+<P>
+Finally, be careful to clean up garbage (by making
+<tt>Py_XDECREF()</tt> or <tt>Py_DECREF()</tt> calls for objects
+you have already created) when you return an error indicator!
+
+<P>
+The choice of which exception to raise is entirely yours.  There are
+predeclared C objects corresponding to all built-in Python exceptions,
+e.g. <tt>PyExc_ZeroDivisionError</tt> which you can use directly.  Of
+course, you should choose exceptions wisely -- don't use
+<tt>PyExc_TypeError</tt> to mean that a file couldn't be opened (that
+should probably be <tt>PyExc_IOError</tt>).  If something's wrong with
+the argument list, the <tt>PyArg_ParseTuple()</tt> function usually
+raises <tt>PyExc_TypeError</tt>.  If you have an argument whose value
+which must be in a particular range or must satisfy other conditions,
+<tt>PyExc_ValueError</tt> is appropriate.
+
+<P>
+You can also define a new exception that is unique to your module.
+For this, you usually declare a static object variable at the
+beginning of your file, e.g.
+
+<P>
+<dl><dd><pre>
+static PyObject *SpamError;
+</pre></dl>
+
+<P>
+and initialize it in your module's initialization function
+(<tt>initspam()</tt>) with an exception object, e.g. (leaving out
+the error checking for now):
+
+<P>
+<dl><dd><pre>
+void
+initspam()
+{
+    PyObject *m, *d;
+
+    m = Py_InitModule("spam", SpamMethods);
+    d = PyModule_GetDict(m);
+    SpamError = PyErr_NewException("spam.error", NULL, NULL);
+    PyDict_SetItemString(d, "error", SpamError);
+}
+</pre></dl>
+
+<P>
+Note that the Python name for the exception object is
+<tt>spam.error</tt>.  The <tt>PyErr_NewException()</tt> function
+may create either a string or class, depending on whether the
+"<tt>-X</tt>" flag was passed to the interpreter.  If "<tt>-X</tt>" was used,
+<tt>SpamError</tt> will be a string object, otherwise it will be a
+class object with the base class being <tt>Exception</tt>,
+described in the <i>Python Library Reference</i> under ``Built-in
+Exceptions.''
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html124"
+ HREF="backToExample.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html121"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html115"
+ HREF="simpleExample.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html123"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html125"
+ HREF="backToExample.html">1.3 Back to the</A>
+<b>Up:</b> <A NAME="tex2html122"
+ HREF="intro.html">1. Extending Python with</A>
+<b>Previous:</b> <A NAME="tex2html116"
+ HREF="simpleExample.html">1.1 A Simple Example</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

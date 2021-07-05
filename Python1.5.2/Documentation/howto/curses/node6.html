@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4. Displaying Text</TITLE>
+<META NAME="description" CONTENT="4. Displaying Text">
+<META NAME="keywords" CONTENT="curses">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="curses.css">
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="up" HREF="curses.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html87"
+ HREF="node7.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html84"
+ HREF="curses.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html78"
+ HREF="node5.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Curses Programming with Python</b></td>
+<td align=right width="20%"><A NAME="tex2html86"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html88"
+ HREF="node7.html">4.1 Attributes and Colour</A>
+<b>Up:</b> <A NAME="tex2html85"
+ HREF="curses.html">Curses Programming with Python</A>
+<b>Previous:</b> <A NAME="tex2html79"
+ HREF="node5.html">3. Windows and Pads</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000500000000000000000">
+<SPAN CLASS="arabic">4</SPAN>. Displaying Text</A>
+</H1>
+
+<P>
+From a C programmer's point of view, curses may sometimes look like
+a twisty maze of functions, all subtly different.  For example,
+<tt>addstr()</tt> displays a string at the current cursor location
+in the <tt>stdscr</tt> window, while <tt>mvaddstr()</tt> moves to a
+given y,x coordinate first before displaying the string.
+<tt>waddstr()</tt> is just like <tt>addstr()</tt>, but allows
+specifying a window to use, instead of using <tt>stdscr</tt> by default.
+<tt>mvwaddstr()</tt> follows similarly.
+
+<P>
+Fortunately the Python interface hides all these details;
+<tt>stdscr</tt> is a window object like any other, and methods like
+<tt>addstr()</tt> accept multiple argument forms.  Usually there are
+four different forms.
+
+<P>
+<table border align=center>
+  <tr><th><b>Form</b></th>
+      <th><b>Description</b></th>
+<tr><td><i>str</i> or <i>ch</i></td>
+      <td align=center>Display the string <i>str</i> or
+character <i>ch</i></td>
+<tr><td><i>str</i> or <i>ch</i>, <i>attr</i></td>
+      <td align=center>Display the string <i>str</i> or
+character <i>ch</i>, using attribute <i>attr</i></td>
+<tr><td><i>y</i>, <i>x</i>, <i>str</i> or <i>ch</i></td>
+      <td align=center>Move to position <i>y,x</i> within the window, and display <i>str</i>
+or <i>ch</i></td>
+<tr><td><i>y</i>, <i>x</i>, <i>str</i> or <i>ch</i>, <i>attr</i></td>
+      <td align=center>Move to position <i>y,x</i> within the window, and display <i>str</i>
+or <i>ch</i>, using attribute <i>attr</i></td>
+
+</table>
+
+<P>
+Attributes allow displaying text in highlighted forms, such as in
+boldface, underline, reverse code, or in colour.  They'll be explained
+in more detail in the next subsection.
+
+<P>
+The <tt>addstr()</tt> function takes a Python string as the value to
+be displayed, while the <tt>addch()</tt> functions take a character,
+which can be either a Python string of length 1, or an integer.  If
+it's a string, you're limited to displaying characters between 0 and
+255.  SVr4 curses provides constants for extension characters; these
+constants are integers greater than 255.  For example,
+<tt>ACS_PLMINUS</tt> is a +/- symbol, and <tt>ACS_ULCORNER</tt> is
+the upper left corner of a box (handy for drawing borders).
+
+<P>
+Windows remember where the cursor was left after the last operation,
+so if you leave out the <i>y,x</i> coordinates, the string or character
+will be displayed wherever the last operation left off.  You can also
+move the cursor with the <tt>move(<i>y,x</i>)</tt> method.  Because
+some terminals always display a flashing cursor, you may want to
+ensure that the cursor is positioned in some location where it won't
+be distracting; it can be confusing to have the cursor blinking at
+some apparently random location.  If your application doesn't need a
+blinking cursor at all, you can call the
+<tt>leaveok(<i>bool</i>)</tt> method.  When <i>bool</i> is true, the
+curses library will attempt to suppress the flashing cursor, and you
+won't need to worry about leaving it in odd locations.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html89"
+ HREF="node7.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Attributes and Colour</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html87"
+ HREF="node7.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html84"
+ HREF="curses.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html78"
+ HREF="node5.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Curses Programming with Python</b></td>
+<td align=right width="20%"><A NAME="tex2html86"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html88"
+ HREF="node7.html">4.1 Attributes and Colour</A>
+<b>Up:</b> <A NAME="tex2html85"
+ HREF="curses.html">Curses Programming with Python</A>
+<b>Previous:</b> <A NAME="tex2html79"
+ HREF="node5.html">3. Windows and Pads</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

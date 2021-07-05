@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Contents</TITLE>
+<META NAME="description" CONTENT="Contents">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ext.css">
+<LINK REL="next" HREF="intro.html">
+<LINK REL="previous" HREF="front.html">
+<LINK REL="up" HREF="ext.html">
+<LINK REL="next" HREF="intro.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html48"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html46"
+ HREF="ext.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html40"
+ HREF="front.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%">  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html49"
+ HREF="intro.html">1. Extending Python with</A>
+<b>Up:</b> <A NAME="tex2html47"
+ HREF="ext.html">Extending and Embedding the</A>
+<b>Previous:</b> <A NAME="tex2html41"
+ HREF="front.html">Front Matter</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+<BR>
+
+<H2><A NAME="SECTION002000000000000000000">
+Contents</A>
+</H2>
+<!--Table of Contents-->
+
+<UL>
+<LI><A NAME="tex2html50"
+ HREF="contents.html">Contents</A>
+<LI><A NAME="tex2html51"
+ HREF="intro.html">1. Extending Python with C or C++ code</A>
+<UL>
+<LI><A NAME="tex2html52"
+ HREF="simpleExample.html">1.1 A Simple Example</A>
+<LI><A NAME="tex2html53"
+ HREF="errors.html">1.2 Intermezzo: Errors and Exceptions</A>
+<LI><A NAME="tex2html54"
+ HREF="backToExample.html">1.3 Back to the Example</A>
+<LI><A NAME="tex2html55"
+ HREF="methodTable.html">1.4 The Module's Method Table and Initialization Function</A>
+<LI><A NAME="tex2html56"
+ HREF="compilation.html">1.5 Compilation and Linkage</A>
+<LI><A NAME="tex2html57"
+ HREF="callingPython.html">1.6 Calling Python Functions From C</A>
+<LI><A NAME="tex2html58"
+ HREF="parseTuple.html">1.7 Format Strings for PyArg_ParseTuple()</A>
+<LI><A NAME="tex2html59"
+ HREF="parseTupleAndKeywords.html">1.8 Keyword Parsing with PyArg_ParseTupleAndKeywords()</A>
+<LI><A NAME="tex2html60"
+ HREF="buildValue.html">1.9 The Py_BuildValue() Function</A>
+<LI><A NAME="tex2html61"
+ HREF="refcounts.html">1.10 Reference Counts</A>
+<UL>
+<LI><A NAME="tex2html62"
+ HREF="refcountsInPython.html">1.10.1 Reference Counting in Python</A>
+<LI><A NAME="tex2html63"
+ HREF="ownershipRules.html">1.10.2 Ownership Rules</A>
+<LI><A NAME="tex2html64"
+ HREF="thinIce.html">1.10.3 Thin Ice</A>
+<LI><A NAME="tex2html65"
+ HREF="nullPointers.html">1.10.4 NULL Pointers</A>
+</UL>
+<LI><A NAME="tex2html66"
+ HREF="cplusplus.html">1.11 Writing Extensions in C++</A>
+</UL>
+<LI><A NAME="tex2html67"
+ HREF="embedding.html">2. Embedding Python in another application</A>
+<UL>
+<LI><A NAME="tex2html68"
+ HREF="embeddingInCplusplus.html">2.1 Embedding Python in C++</A>
+</UL>
+<LI><A NAME="tex2html69"
+ HREF="dynload.html">3. Dynamic Loading</A>
+<UL>
+<LI><A NAME="tex2html70"
+ HREF="dynloadConfig.html">3.1 Configuring and Building the Interpreter for Dynamic Loading</A>
+<UL>
+<LI><A NAME="tex2html71"
+ HREF="sharedlibs.html">3.1.1 Shared Libraries</A>
+<LI><A NAME="tex2html72"
+ HREF="irixDynload.html">3.1.2 SGI IRIX 4 Dynamic Loading</A>
+<LI><A NAME="tex2html73"
+ HREF="gnuDynload.html">3.1.3 GNU Dynamic Loading</A>
+</UL>
+<LI><A NAME="tex2html74"
+ HREF="makedynload.html">3.2 Building a Dynamically Loadable Module</A>
+<UL>
+<LI><A NAME="tex2html75"
+ HREF="linking.html">3.2.1 Shared Libraries</A>
+<LI><A NAME="tex2html76"
+ HREF="irixLinking.html">3.2.2 SGI IRIX 4 Dynamic Loading</A>
+<LI><A NAME="tex2html77"
+ HREF="gnuLinking.html">3.2.3 GNU Dynamic Loading</A>
+</UL></UL></UL>
+<!--End of Table of Contents-->
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html48"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html46"
+ HREF="ext.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html40"
+ HREF="front.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%">  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html49"
+ HREF="intro.html">1. Extending Python with</A>
+<b>Up:</b> <A NAME="tex2html47"
+ HREF="ext.html">Extending and Embedding the</A>
+<b>Previous:</b> <A NAME="tex2html41"
+ HREF="front.html">Front Matter</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

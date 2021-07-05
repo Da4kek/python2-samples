@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.2 Alias Objects</TITLE>
+<META NAME="description" CONTENT="7.2 Alias Objects">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="finfo-objects.html">
+<LINK REL="previous" HREF="fsspec-objects.html">
+<LINK REL="up" HREF="module-macfs.html">
+<LINK REL="next" HREF="finfo-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html296"
+ HREF="finfo-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html292"
+ HREF="module-macfs.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html286"
+ HREF="fsspec-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html294"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html295"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html297"
+ HREF="finfo-objects.html">7.3 FInfo Objects</A>
+<b>Up:</b> <A NAME="tex2html293"
+ HREF="module-macfs.html">7. macfs  </A>
+<b>Previous:</b> <A NAME="tex2html287"
+ HREF="fsspec-objects.html">7.1 FSSpec objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION002720000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Alias Objects
+</H2>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>data</tt></a></b>
+<dd>
+The raw data for the Alias record, suitable for storing in a resource
+or transmitting to other programs.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-808"><tt>Resolve</tt></a></b> (<big>[</big><var>file</var><big>]</big>)
+<dd>
+Resolve the alias. If the alias was created as a relative alias you
+should pass the file relative to which it is. Return the FSSpec for
+the file pointed to and a flag indicating whether the Alias object
+itself was modified during the search process. If the file does
+not exist but the path leading up to it does exist a valid fsspec
+is returned.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-813"><tt>GetInfo</tt></a></b> (<var>num</var>)
+<dd>
+An interface to the C routine <tt>GetAliasInfo()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-819"><tt>Update</tt></a></b> (<var>file, </var><big>[</big><var>file2</var><big>]</big>)
+<dd>
+Update the alias to point to the <i>file</i> given. If <i>file2</i> is
+present a relative alias will be created.
+</dl>
+
+<P>
+Note that it is currently not possible to directly manipulate a
+resource as an Alias object. Hence, after calling
+<tt>Update()</tt> or after <tt>Resolve()</tt> indicates that the alias
+has changed the Python program is responsible for getting the
+<tt>data</tt> value from the Alias object and modifying the
+resource.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html296"
+ HREF="finfo-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html292"
+ HREF="module-macfs.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html286"
+ HREF="fsspec-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html294"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html295"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html297"
+ HREF="finfo-objects.html">7.3 FInfo Objects</A>
+<b>Up:</b> <A NAME="tex2html293"
+ HREF="module-macfs.html">7. macfs  </A>
+<b>Previous:</b> <A NAME="tex2html287"
+ HREF="fsspec-objects.html">7.1 FSSpec objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

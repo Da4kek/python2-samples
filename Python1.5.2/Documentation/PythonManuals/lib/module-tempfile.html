@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.4 tempfile --
+Generate temporary file names.</TITLE>
+<META NAME="description" CONTENT="6.4 tempfile --
+Generate temporary file names.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-errno.html">
+<LINK REL="previous" HREF="module-getopt.html">
+<LINK REL="up" HREF="allos.html">
+<LINK REL="next" HREF="module-errno.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1676"
+ HREF="module-errno.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1672"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1666"
+ HREF="module-getopt.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1674"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1675"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1677"
+ HREF="module-errno.html">6.5 errno  </A>
+<b>Up:</b> <A NAME="tex2html1673"
+ HREF="allos.html">6. Generic Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1667"
+ HREF="module-getopt.html">6.3 getopt  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008400000000000000000">
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>tempfile</tt> --
+         Generate temporary file names.</A>
+</H1>
+
+
+<P>
+
+<P>
+<a name="l2h-9663"></a>
+<a name="l2h-9665"></a>
+
+<P>
+This module generates temporary file names.  It is not Unix specific,
+but it may require some help on non-Unix systems.
+
+<P>
+Note: the modules does not create temporary files, nor does it
+automatically remove them when the current process exits or dies.
+
+<P>
+The module defines a single user-callable function:
+
+<P>
+<dl><dt><b><a name="l2h-9671"><tt>mktemp</tt></a></b> ()
+<dd>
+Return a unique temporary filename.  This is an absolute pathname of a
+file that does not exist at the time the call is made.  No two calls
+will return the same filename.
+</dl>
+
+<P>
+The module uses two global variables that tell it how to construct a
+temporary name.  The caller may assign values to them; by default they
+are initialized at the first call to <tt>mktemp()</tt>.
+
+<P>
+<dl><dt><b><a name="l2h-9675"><tt>tempdir</tt></a></b>
+<dd>
+When set to a value other than <tt>None</tt>, this variable defines the
+directory in which filenames returned by <tt>mktemp()</tt> reside.
+The default is taken from the environment variable <a name="l2h-9678">$TMPDIR</a>; if
+this is not set, either "<tt>/usr/tmp</tt>" is used (on Unix), or the
+current working directory (all other systems).  No check is made to
+see whether its value is valid.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9683"><tt>template</tt></a></b>
+<dd>
+When set to a value other than <tt>None</tt>, this variable defines the
+prefix of the final component of the filenames returned by
+<tt>mktemp()</tt>.  A string of decimal digits is added to generate
+unique filenames.  The default is either "<tt>@<i>pid</i>.</tt>" where
+<i>pid</i> is the current process ID (on Unix), or "<tt>tmp</tt>" (all
+other systems).
+</dl>
+
+<P>
+<b>Warning:</b> if a Unix process uses <tt>mktemp()</tt>, then
+calls <tt>fork()</tt> and both parent and child continue to use
+<tt>mktemp()</tt>, the processes will generate conflicting temporary
+names.  To resolve this, the child process should assign <tt>None</tt>
+to <tt>template</tt>, to force recomputing the default on the next call
+to <tt>mktemp()</tt>.
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1676"
+ HREF="module-errno.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1672"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1666"
+ HREF="module-getopt.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1674"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1675"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1677"
+ HREF="module-errno.html">6.5 errno  </A>
+<b>Up:</b> <A NAME="tex2html1673"
+ HREF="allos.html">6. Generic Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1667"
+ HREF="module-getopt.html">6.3 getopt  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8.3 pwd --
+The password database.</TITLE>
+<META NAME="description" CONTENT="8.3 pwd --
+The password database.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-grp.html">
+<LINK REL="previous" HREF="module-posixpath.html">
+<LINK REL="up" HREF="unix.html">
+<LINK REL="next" HREF="module-grp.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2058"
+ HREF="module-grp.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2054"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2048"
+ HREF="module-posixpath.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2056"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2057"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2059"
+ HREF="module-grp.html">8.4 grp  </A>
+<b>Up:</b> <A NAME="tex2html2055"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2049"
+ HREF="module-posixpath.html">8.2 posixpath  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0010300000000000000000">
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>pwd</tt> --
+         The password database.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides access to the Unix password database.
+It is available on all Unix versions.
+
+<P>
+Password database entries are reported as 7-tuples containing the
+following items from the password database (see <tt>&lt;pwd.h&gt;</tt>), in order:
+<tt>pw_name</tt>,
+<tt>pw_passwd</tt>,
+<tt>pw_uid</tt>,
+<tt>pw_gid</tt>,
+<tt>pw_gecos</tt>,
+<tt>pw_dir</tt>,
+<tt>pw_shell</tt>.
+The uid and gid items are integers, all others are strings.
+A <tt>KeyError</tt> exception is raised if the entry asked for cannot be found.
+
+<P>
+It defines the following items:
+
+<P>
+<dl><dt><b><a name="l2h-13182"><tt>getpwuid</tt></a></b> (<var>uid</var>)
+<dd>
+Return the password database entry for the given numeric user ID.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13186"><tt>getpwnam</tt></a></b> (<var>name</var>)
+<dd>
+Return the password database entry for the given user name.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13190"><tt>getpwall</tt></a></b> ()
+<dd>
+Return a list of all available password database entries, in arbitrary order.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2058"
+ HREF="module-grp.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2054"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2048"
+ HREF="module-posixpath.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2056"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2057"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2059"
+ HREF="module-grp.html">8.4 grp  </A>
+<b>Up:</b> <A NAME="tex2html2055"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2049"
+ HREF="module-posixpath.html">8.2 posixpath  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

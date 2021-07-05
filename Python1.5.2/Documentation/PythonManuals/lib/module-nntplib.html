@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.8 nntplib --
+NNTP protocol client.</TITLE>
+<META NAME="description" CONTENT="11.8 nntplib --
+NNTP protocol client.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-smtplib.html">
+<LINK REL="previous" HREF="module-imaplib.html">
+<LINK REL="up" HREF="internet.html">
+<LINK REL="next" HREF="nntp-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2752"
+ HREF="nntp-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2748"
+ HREF="internet.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2742"
+ HREF="imap4-example.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2750"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2751"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2753"
+ HREF="nntp-objects.html">11.8.1 NNTP Objects</A>
+<b>Up:</b> <A NAME="tex2html2749"
+ HREF="internet.html">11. Internet Protocols and</A>
+<b>Previous:</b> <A NAME="tex2html2743"
+ HREF="imap4-example.html">11.7.2 IMAP4 Example</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0013800000000000000000">
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>nntplib</tt> --
+         NNTP protocol client.</A>
+</H1>
+
+
+<P>
+
+<P>
+<a name="l2h-16955"></a>
+<a name="l2h-16957"></a>
+<P>
+This module defines the class <tt>NNTP</tt> which implements the client
+side of the NNTP protocol.  It can be used to implement a news reader
+or poster, or automated news processors.  For more information on NNTP
+(Network News Transfer Protocol), see Internet <a name=>RFC 977</a>.
+
+<P>
+Here are two small examples of how it can be used.  To list some
+statistics about a newsgroup and print the subjects of the last 10
+articles:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; s = NNTP('news.cwi.nl')
+&gt;&gt;&gt; resp, count, first, last, name = s.group('comp.lang.python')
+&gt;&gt;&gt; print 'Group', name, 'has', count, 'articles, range', first, 'to', last
+Group comp.lang.python has 59 articles, range 3742 to 3803
+&gt;&gt;&gt; resp, subs = s.xhdr('subject', first + '-' + last)
+&gt;&gt;&gt; for id, sub in subs[-10:]: print id, sub
+... 
+3792 Re: Removing elements from a list while iterating...
+3793 Re: Who likes Info files?
+3794 Emacs and doc strings
+3795 a few questions about the Mac implementation
+3796 Re: executable python scripts
+3797 Re: executable python scripts
+3798 Re: a few questions about the Mac implementation 
+3799 Re: PROPOSAL: A Generic Python Object Interface for Python C Modules
+3802 Re: executable python scripts 
+3803 Re: \POSIX{} wait and SIGCHLD
+&gt;&gt;&gt; s.quit()
+'205 news.cwi.nl closing connection.  Goodbye.'
+</pre></dl>
+
+<P>
+To post an article from a file (this assumes that the article has
+valid headers):
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; s = NNTP('news.cwi.nl')
+&gt;&gt;&gt; f = open('/tmp/article')
+&gt;&gt;&gt; s.post(f)
+'240 Article posted successfully.'
+&gt;&gt;&gt; s.quit()
+'205 news.cwi.nl closing connection.  Goodbye.'
+</pre></dl>
+The module itself defines the following items:
+
+<P>
+<dl><dt><b><a name="l2h-17233"><tt>NNTP</tt></a></b> (<var>host</var><big>[</big><var>, port</var><big>]</big>)
+<dd>
+Return a new instance of the <tt>NNTP</tt> class, representing a
+connection to the NNTP server running on host <i>host</i>, listening at
+port <i>port</i>.  The default <i>port</i> is 119.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16973"><tt>error_reply</tt></a></b>
+<dd>
+Exception raised when an unexpected reply is received from the server.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16976"><tt>error_temp</tt></a></b>
+<dd>
+Exception raised when an error code in the range 400-499 is received.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16979"><tt>error_perm</tt></a></b>
+<dd>
+Exception raised when an error code in the range 500-599 is received.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16982"><tt>error_proto</tt></a></b>
+<dd>
+Exception raised when a reply is received from the server that does
+not begin with a digit in the range 1-5.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html2754"
+ HREF="nntp-objects.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> NNTP Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2752"
+ HREF="nntp-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2748"
+ HREF="internet.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2742"
+ HREF="imap4-example.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2750"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2751"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2753"
+ HREF="nntp-objects.html">11.8.1 NNTP Objects</A>
+<b>Up:</b> <A NAME="tex2html2749"
+ HREF="internet.html">11. Internet Protocols and</A>
+<b>Previous:</b> <A NAME="tex2html2743"
+ HREF="imap4-example.html">11.7.2 IMAP4 Example</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

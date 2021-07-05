@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>5.1 Splitting Strings</TITLE>
+<META NAME="description" CONTENT="5.1 Splitting Strings">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="next" HREF="node19.html">
+<LINK REL="previous" HREF="node17.html">
+<LINK REL="up" HREF="node17.html">
+<LINK REL="next" HREF="node19.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html258"
+ HREF="node19.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html255"
+ HREF="node17.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html249"
+ HREF="node17.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html257"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html259"
+ HREF="node19.html">5.2 Search and Replace</A>
+<b>Up:</b> <A NAME="tex2html256"
+ HREF="node17.html">5. Modifying Strings</A>
+<b>Previous:</b> <A NAME="tex2html250"
+ HREF="node17.html">5. Modifying Strings</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000610000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Splitting Strings</A>
+</H2>
+
+<P>
+The <tt>split()</tt> method of a <tt>RegexObject</tt> splits a string
+apart wherever the RE matches, returning a list of the pieces.
+It's similar to <tt>string.split()</tt>, providing much more
+generality in the delimiters that you can split by;
+<tt>string.split()</tt> only supports splitting by whitespace, or by
+a fixed string.  As you'd expect, there's a module-level
+<tt>re.split()</tt> function, too.
+
+<P>
+<dl><dt><b><a name="l2h-577"><tt>split</tt></a></b> (<var>string, </var><big>[</big><var>, maxsplit<tt> = 0</tt></var><big>]</big>)
+<dd>
+  Split <i>string</i> by the matches of the regular expression.  If
+  capturing parentheses are used in the RE, then their contents will also be returned as part of the resulting list.  If <i>maxsplit</i> is nonzero, at most <i>maxsplit</i> splits
+  are performed.
+</dl>
+
+<P>
+You can limit the number of splits made, by passing a value for
+<i>maxsplit</i>.  When <i>maxsplit</i> is nonzero, at most
+<i>maxsplit</i> splits will be made, and the remainder of the string is
+returned as the final element of the list.  In the following example,
+the delimiter will be any sequence of non-alphanumeric characters.
+<dl><dd><pre>
+&gt;&gt;&gt; p = re.compile(r'\W+')
+&gt;&gt;&gt; p.split('This is a test, short and sweet, of split().')
+['This', 'is', 'a', 'test', 'short', 'and', 'sweet', 'of', 'split', '']
+&gt;&gt;&gt; p.split('This is a test, short and sweet, of split().', 3)
+['This', 'is', 'a', 'test, short and sweet, of split().']
+</pre></dl>
+Sometimes you're not only interested in what the text between
+delimiters is, but also need to know what the delimiter was.  If
+capturing parentheses are used in the RE, then their values are also
+returned as part of the list.  Compare the following calls:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; p = re.compile(r'\W+')
+&gt;&gt;&gt; p2 = re.compile(r'(\W+)')
+&gt;&gt;&gt; p.split('This... is a test.')
+['This', 'is', 'a', 'test', '']
+&gt;&gt;&gt; p2.split('This... is a test.')
+['This', '... ', 'is', ' ', 'a', ' ', 'test', '.', '']
+</pre></dl>
+The module-level function <tt>re.split()</tt> adds the RE to be
+used as the first argument, but is otherwise the same.  
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; re.split('[\W]+', 'Words, words, words.')
+['Words', 'words', 'words', '']
+&gt;&gt;&gt; re.split('([\W]+)', 'Words, words, words.')
+['Words', ', ', 'words', ', ', 'words', '.', '']
+&gt;&gt;&gt; re.split('[\W]+', 'Words, words, words.', 1)
+['Words', 'words, words.']
+</pre></dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html258"
+ HREF="node19.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html255"
+ HREF="node17.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html249"
+ HREF="node17.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html257"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html259"
+ HREF="node19.html">5.2 Search and Replace</A>
+<b>Up:</b> <A NAME="tex2html256"
+ HREF="node17.html">5. Modifying Strings</A>
+<b>Previous:</b> <A NAME="tex2html250"
+ HREF="node17.html">5. Modifying Strings</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

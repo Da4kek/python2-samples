@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.3 Greedy versus Non-Greedy</TITLE>
+<META NAME="description" CONTENT="6.3 Greedy versus Non-Greedy">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="next" HREF="node24.html">
+<LINK REL="previous" HREF="node22.html">
+<LINK REL="up" HREF="node20.html">
+<LINK REL="next" HREF="node24.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html315"
+ HREF="node24.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html312"
+ HREF="node20.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html306"
+ HREF="node22.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html314"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html316"
+ HREF="node24.html">6.4 Not using re.VERBOSE</A>
+<b>Up:</b> <A NAME="tex2html313"
+ HREF="node20.html">6. Common Problems</A>
+<b>Previous:</b> <A NAME="tex2html307"
+ HREF="node22.html">6.2 match() versus search()</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000730000000000000000">
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN> Greedy versus Non-Greedy</A>
+</H2>
+
+<P>
+When repeating a regular expression, as in <tt>a*</tt>, the resulting
+action is to consume as much of the pattern as possible.  This
+fact often bites you when you're trying to match a pair of
+balanced delimiters, such as the angle brackets surrounding an HTML
+tag.  The na&#239;ve pattern for matching a single HTML tag doesn't
+work because of the greedy nature of <tt>.*</tt>.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; s = '&lt;html&gt;&lt;head&gt;&lt;title&gt;Title&lt;/title&gt;'
+&gt;&gt;&gt; len(s)
+32
+&gt;&gt;&gt; print re.match('&lt;.*&gt;', s).span()
+(0, 32)
+&gt;&gt;&gt; print re.match('&lt;.*&gt;', s).group()
+&lt;html&gt;&lt;head&gt;&lt;title&gt;Title&lt;/title&gt;
+</pre></dl>
+The RE matches the "<tt>&lt;</tt>" in "<tt>&lt;html&gt;</tt>", and the
+<tt>.*</tt> consumes the rest of the string.  There's still more left
+in the RE, though, and the <tt>&gt;</tt> can't match at the end of
+the string, so the regular expression engine has to backtrack
+character by character until it finds a match for the <tt>&gt;</tt>.  
+The final match extends from the "<tt>&lt;</tt>" in "<tt>&lt;html&gt;</tt>"
+to the "<tt>&gt;</tt>" in "<tt>&lt;/title&gt;</tt>", which isn't what you want.
+
+<P>
+In this case, the solution is to use the non-greedy qualifiers
+<tt>*?</tt>, <tt>+?</tt>, <tt>??</tt>, or
+<tt>{<i>m</i>,<i>n</i>}?</tt>, which match as <i>little</i> text as
+possible.  In the above example, the "<tt>&gt;</tt>" is tried
+immediately after the first "<tt>&lt;</tt>" matches, and when it fails,
+the engines advances a character at a time, retrying the "<tt>&gt;</tt>"
+at every step.  This produces just the right result:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; print re.match('&lt;.*?&gt;', s).group()
+&lt;html&gt;
+</pre></dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html315"
+ HREF="node24.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html312"
+ HREF="node20.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html306"
+ HREF="node22.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html314"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html316"
+ HREF="node24.html">6.4 Not using re.VERBOSE</A>
+<b>Up:</b> <A NAME="tex2html313"
+ HREF="node20.html">6. Common Problems</A>
+<b>Previous:</b> <A NAME="tex2html307"
+ HREF="node22.html">6.2 match() versus search()</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

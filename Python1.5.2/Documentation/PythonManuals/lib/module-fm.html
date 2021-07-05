@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>16.7 fm --
+Font Manager interface for SGI workstations.</TITLE>
+<META NAME="description" CONTENT="16.7 fm --
+Font Manager interface for SGI workstations.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-gl2.html">
+<LINK REL="previous" HREF="module-flp.html">
+<LINK REL="up" HREF="sgi.html">
+<LINK REL="next" HREF="module-gl2.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3569"
+ HREF="module-gl2.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3565"
+ HREF="sgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3559"
+ HREF="module-flp.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3567"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3568"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3570"
+ HREF="module-gl2.html">16.8 gl  </A>
+<b>Up:</b> <A NAME="tex2html3566"
+ HREF="sgi.html">16. SGI IRIX Specific</A>
+<b>Previous:</b> <A NAME="tex2html3560"
+ HREF="module-flp.html">16.6 flp  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0018700000000000000000">
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>fm</tt> --
+         <i>Font Manager</i> interface for SGI workstations.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides access to the IRIS <i>Font Manager</i> library.
+<a name="l2h-23265"></a><a name="l2h-23266"></a>It is available only on Silicon Graphics machines.
+See also: <i>4Sight User's Guide</i>, Section 1, Chapter 5: ``Using
+the IRIS Font Manager.''
+
+<P>
+This is not yet a full interface to the IRIS Font Manager.
+Among the unsupported features are: matrix operations; cache
+operations; character operations (use string operations instead); some
+details of font info; individual glyph metrics; and printer matching.
+
+<P>
+It supports the following operations:
+
+<P>
+<dl><dt><b><a name="l2h-23270"><tt>init</tt></a></b> ()
+<dd>
+Initialization function.
+Calls <tt>fminit()</tt>.
+It is normally not necessary to call this function, since it is called
+automatically the first time the <tt>fm</tt> module is imported.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23276"><tt>findfont</tt></a></b> (<var>fontname</var>)
+<dd>
+Return a font handle object.
+Calls <tt>fmfindfont(<i>fontname</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23281"><tt>enumerate</tt></a></b> ()
+<dd>
+Returns a list of available font names.
+This is an interface to <tt>fmenumerate()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23286"><tt>prstr</tt></a></b> (<var>string</var>)
+<dd>
+Render a string using the current font (see the <tt>setfont()</tt> font
+handle method below).
+Calls <tt>fmprstr(<i>string</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23292"><tt>setpath</tt></a></b> (<var>string</var>)
+<dd>
+Sets the font search path.
+Calls <tt>fmsetpath(<i>string</i>)</tt>.
+(XXX Does not work!?!)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23297"><tt>fontpath</tt></a></b> ()
+<dd>
+Returns the current font search path.
+</dl>
+
+<P>
+Font handle objects support the following operations:
+
+<P>
+
+<dl><dt><b><a name="l2h-23302"><tt>scalefont</tt></a></b> (<var>factor</var>)
+<dd>
+Returns a handle for a scaled version of this font.
+Calls <tt>fmscalefont(<i>fh</i>, <i>factor</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23308"><tt>setfont</tt></a></b> ()
+<dd>
+Makes this font the current font.
+Note: the effect is undone silently when the font handle object is
+deleted.
+Calls <tt>fmsetfont(<i>fh</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23313"><tt>getfontname</tt></a></b> ()
+<dd>
+Returns this font's name.
+Calls <tt>fmgetfontname(<i>fh</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23318"><tt>getcomment</tt></a></b> ()
+<dd>
+Returns the comment string associated with this font.
+Raises an exception if there is none.
+Calls <tt>fmgetcomment(<i>fh</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23323"><tt>getfontinfo</tt></a></b> ()
+<dd>
+Returns a tuple giving some pertinent data about this font.
+This is an interface to <tt>fmgetfontinfo()</tt>.
+The returned tuple contains the following numbers:
+<tt>(</tt><i>printermatched</i>, <i>fixed_width</i>, <i>xorig</i>,
+<i>yorig</i>, <i>xsize</i>, <i>ysize</i>, <i>height</i>,
+<i>nglyphs</i><tt>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23338"><tt>getstrwidth</tt></a></b> (<var>string</var>)
+<dd>
+Returns the width, in pixels, of <i>string</i> when drawn in this font.
+Calls <tt>fmgetstrwidth(<i>fh</i>, <i>string</i>)</tt>.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3569"
+ HREF="module-gl2.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3565"
+ HREF="sgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3559"
+ HREF="module-flp.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3567"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3568"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3570"
+ HREF="module-gl2.html">16.8 gl  </A>
+<b>Up:</b> <A NAME="tex2html3566"
+ HREF="sgi.html">16. SGI IRIX Specific</A>
+<b>Previous:</b> <A NAME="tex2html3560"
+ HREF="module-flp.html">16.6 flp  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

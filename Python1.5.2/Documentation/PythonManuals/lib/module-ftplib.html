@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.4 ftplib --
+FTP protocol client.</TITLE>
+<META NAME="description" CONTENT="11.4 ftplib --
+FTP protocol client.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-gopherlib.html">
+<LINK REL="previous" HREF="module-httplib.html">
+<LINK REL="up" HREF="internet.html">
+<LINK REL="next" HREF="ftp-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2645"
+ HREF="ftp-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2641"
+ HREF="internet.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2635"
+ HREF="HTTP_Example.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2643"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2644"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2646"
+ HREF="ftp-objects.html">11.4.1 FTP Objects</A>
+<b>Up:</b> <A NAME="tex2html2642"
+ HREF="internet.html">11. Internet Protocols and</A>
+<b>Previous:</b> <A NAME="tex2html2636"
+ HREF="HTTP_Example.html">11.3.2 Example</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0013400000000000000000">
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>ftplib</tt> --
+         FTP protocol client.</A>
+</H1>
+
+
+<P>
+
+<P>
+<a name="l2h-16117"></a>
+
+<P>
+This module defines the class <tt>FTP</tt> and a few related items.
+The <tt>FTP</tt> class implements the client side of the FTP protocol.
+You can use this to write Python programs that perform a variety of
+automated FTP jobs, such as mirroring other ftp servers.  It is also
+used by the module <tt>urllib</tt> to handle URLs that use FTP.  For
+more information on FTP (File Transfer Protocol), see Internet
+<a name=>RFC 959</a>.
+
+<P>
+Here's a sample session using the <tt>ftplib</tt> module:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; from ftplib import FTP
+&gt;&gt;&gt; ftp = FTP('ftp.cwi.nl')   # connect to host, default port
+&gt;&gt;&gt; ftp.login()               # user anonymous, passwd user@hostname
+&gt;&gt;&gt; ftp.retrlines('LIST')     # list directory contents
+total 24418
+drwxrwsr-x   5 ftp-usr  pdmaint     1536 Mar 20 09:48 .
+dr-xr-srwt 105 ftp-usr  pdmaint     1536 Mar 21 14:32 ..
+-rw-r--r--   1 ftp-usr  pdmaint     5305 Mar 20 09:48 INDEX
+ .
+ .
+ .
+&gt;&gt;&gt; ftp.retrbinary('RETR README', open('README', 'wb').write)
+'226 Transfer complete.'
+&gt;&gt;&gt; ftp.quit()
+</pre></dl>
+
+<P>
+The module defines the following items:
+
+<P>
+<dl><dt><b><a name="l2h-16352"><tt>FTP</tt></a></b> (<big>[</big><var>host</var><big>[</big><var>, user</var><big>[</big><var>,
+                       passwd</var><big>[</big><var>, acct</var><big>]</big><big>]</big><big>]</big><big>]</big>)
+<dd>
+Return a new instance of the <tt>FTP</tt> class.  When
+<i>host</i> is given, the method call <tt>connect(<i>host</i>)</tt> is
+made.  When <i>user</i> is given, additionally the method call
+<tt>login(<i>user</i>, <i>passwd</i>, <i>acct</i>)</tt> is made (where
+<i>passwd</i> and <i>acct</i> default to the empty string when not given).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16140"><tt>all_errors</tt></a></b>
+<dd>
+The set of all exceptions (as a tuple) that methods of <tt>FTP</tt>
+instances may raise as a result of problems with the FTP connection
+(as opposed to programming errors made by the caller).  This set
+includes the four exceptions listed below as well as
+<tt>socket.error</tt> and <tt>IOError</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16146"><tt>error_reply</tt></a></b>
+<dd>
+Exception raised when an unexpected reply is received from the server.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16149"><tt>error_temp</tt></a></b>
+<dd>
+Exception raised when an error code in the range 400-499 is received.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16152"><tt>error_perm</tt></a></b>
+<dd>
+Exception raised when an error code in the range 500-599 is received.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16155"><tt>error_proto</tt></a></b>
+<dd>
+Exception raised when a reply is received from the server that does
+not begin with a digit in the range 1-5.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html2647"
+ HREF="ftp-objects.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> FTP Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2645"
+ HREF="ftp-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2641"
+ HREF="internet.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2635"
+ HREF="HTTP_Example.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2643"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2644"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2646"
+ HREF="ftp-objects.html">11.4.1 FTP Objects</A>
+<b>Up:</b> <A NAME="tex2html2642"
+ HREF="internet.html">11. Internet Protocols and</A>
+<b>Previous:</b> <A NAME="tex2html2636"
+ HREF="HTTP_Example.html">11.3.2 Example</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

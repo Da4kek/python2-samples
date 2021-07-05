@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>4.1 Alternate installation: Unix (the home scheme)</title>
+<META NAME="description" CONTENT="4.1 Alternate installation: Unix (the home scheme)">
+<META NAME="keywords" CONTENT="inst">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="inst.css">
+<LINK REL="next" href="alt-install-home.html">
+<LINK REL="previous" href="alt-install.html">
+<LINK REL="up" href="alt-install.html">
+<LINK REL="next" href="alt-install-home.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="alt-install.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="alt-install.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="alt-install-home.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="alt-install.html">4 Alternate Installation</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="alt-install.html">4 Alternate Installation</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="alt-install-home.html">4.2 Alternate installation: Unix</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+4.1 Alternate installation: Unix (the home scheme)
+</H2>
+
+<P>
+Under Unix, there are two ways to perform an alternate installation.
+The ``prefix scheme'' is similar to how alternate installation works
+under Windows and Mac&nbsp;OS, but is not necessarily the most useful way to
+maintain a personal Python library.  Hence, we document the more
+convenient and commonly useful ``home scheme'' first.
+
+<P>
+The idea behind the ``home scheme'' is that you build and maintain a
+personal stash of Python modules, probably under your home directory.
+Installing a new module distribution is as simple as
+<dl><dd><pre class="verbatim">
+python setup.py install --home=&lt;dir&gt;
+</pre></dl>
+where you can supply any directory you like for the <b class="programopt">--home</b>
+option.  Lazy typists can just type a tilde (<code>&nbsp;</code>); the
+<code>install</code> command will expand this to your home directory:
+<dl><dd><pre class="verbatim">
+python setup.py install --home=~
+</pre></dl>
+
+<P>
+The <b class="programopt">--home</b> option defines the installation base
+directory.  Files are installed to the following directories under the
+installation base as follows:
+<table border align="center" style="border-collapse: collapse">
+  <thead>
+    <tr>
+      <th align="left"><b>Type of file</b>&nbsp;</th>
+      <th><b>Installation Directory</b>&nbsp;</th>
+      <th><b>Override option</b>&nbsp;</th>
+    </thead>
+  <tbody valign='baseline'>
+    <tr><td align="left" valign="baseline">pure module distribution</td>
+        <td><font face="sans-serif"></i>home</i></font><span class="file">/lib/python</span></td>
+        <td><b class="programopt">--install-purelib</b></td>
+    <tr><td align="left" valign="baseline">non-pure module distribution</td>
+        <td><font face="sans-serif"></i>home</i></font><span class="file">/lib/python</span></td>
+        <td><b class="programopt">--install-platlib</b></td>
+    <tr><td align="left" valign="baseline">scripts</td>
+        <td><font face="sans-serif"></i>home</i></font><span class="file">/bin</span></td>
+        <td><b class="programopt">--install-scripts</b></td>
+    <tr><td align="left" valign="baseline">data</td>
+        <td><font face="sans-serif"></i>home</i></font><span class="file">/share</span></td>
+        <td><b class="programopt">--install-data</b></td></tbody>
+</table>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="alt-install.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="alt-install.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="alt-install-home.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="alt-install.html">4 Alternate Installation</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="alt-install.html">4 Alternate Installation</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="alt-install-home.html">4.2 Alternate installation: Unix</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

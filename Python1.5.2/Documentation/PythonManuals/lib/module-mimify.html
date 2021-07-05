@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.17 mimify --
+Mimification and unmimification of mail messages.</TITLE>
+<META NAME="description" CONTENT="12.17 mimify --
+Mimification and unmimification of mail messages.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-mailbox.html">
+<LINK REL="up" HREF="netdata.html">
+<LINK REL="next" HREF="restricted.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3215"
+ HREF="restricted.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3211"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3207"
+ HREF="mailbox-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3213"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3214"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3216"
+ HREF="restricted.html">13. Restricted Execution</A>
+<b>Up:</b> <A NAME="tex2html3212"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html3208"
+ HREF="mailbox-objects.html">12.16.1 Mailbox Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00141700000000000000000">
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">17</SPAN> <tt>mimify</tt> --
+         Mimification and unmimification of mail messages.</A>
+</H1>
+
+
+<P>
+
+<P>
+The mimify module defines two functions to convert mail messages to
+and from MIME format.  The mail message can be either a simple message
+or a so-called multipart message.  Each part is treated separately.
+Mimifying (a part of) a message entails encoding the message as
+quoted-printable if it contains any characters that cannot be
+represented using 7-bit ASCII.  Unmimifying (a part of) a message
+entails undoing the quoted-printable encoding.  Mimify and unmimify
+are especially useful when a message has to be edited before being
+sent.  Typical use would be:
+
+<P>
+<dl><dd><pre>
+unmimify message
+edit message
+mimify message
+send message
+</pre></dl>
+
+<P>
+The modules defines the following user-callable functions and
+user-settable variables:
+
+<P>
+<dl><dt><b><a name="l2h-20461"><tt>mimify</tt></a></b> (<var>infile, outfile</var>)
+<dd>
+Copy the message in <i>infile</i> to <i>outfile</i>, converting parts to
+quoted-printable and adding MIME mail headers when necessary.
+<i>infile</i> and <i>outfile</i> can be file objects (actually, any
+object that has a <tt>readline</tt> method (for <i>infile</i>) or a
+<tt>write</tt> method (for <i>outfile</i>)) or strings naming the files.
+If <i>infile</i> and <i>outfile</i> are both strings, they may have the
+same value.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-20475"><tt>unmimify</tt></a></b> (<var>infile, outfile, decode_base64 = 0</var>)
+<dd> 
+Copy the message in <i>infile</i> to <i>outfile</i>, decoding all
+quoted-printable parts.  <i>infile</i> and <i>outfile</i> can be file
+objects (actually, any object that has a <tt>readline</tt> method (for
+<i>infile</i>) or a <tt>write</tt> method (for <i>outfile</i>)) or strings
+naming the files.  If <i>infile</i> and <i>outfile</i> are both strings,
+they may have the same value.
+If the <i>decode_base64</i> argument is provided and tests true, any
+parts that are coded in the base64 encoding are decoded as well.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-20490"><tt>mime_decode_header</tt></a></b> (<var>line</var>)
+<dd>
+Return a decoded version of the encoded header line in <i>line</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-20495"><tt>mime_encode_header</tt></a></b> (<var>line</var>)
+<dd>
+Return a MIME-encoded version of the header line in <i>line</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-20499"><tt>MAXLEN</tt></a></b>
+<dd>
+By default, a part will be encoded as quoted-printable when it
+contains any non-ASCII characters (i.e., characters with the 8th bit
+set), or if there are any lines longer than <tt>MAXLEN</tt> characters
+(default value 200).  
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-20503"><tt>CHARSET</tt></a></b>
+<dd>
+When not specified in the mail headers, a character set must be filled
+in.  The string used is stored in <tt>CHARSET</tt>, and the default
+value is ISO-8859-1 (also known as Latin1 (latin-one)).
+</dl>
+
+<P>
+This module can also be used from the command line.  Usage is as
+follows:
+<dl><dd><pre>
+mimify.py -e [-l length] [infile [outfile]]
+mimify.py -d [-b] [infile [outfile]]
+</pre></dl>
+to encode (mimify) and decode (unmimify) respectively.  <i>infile</i>
+defaults to standard input, <i>outfile</i> defaults to standard output.
+The same file can be specified for input and output.
+
+<P>
+If the <tt>-l</tt> option is given when encoding, if there are any lines
+longer than the specified <i>length</i>, the containing part will be
+encoded.
+
+<P>
+If the <tt>-b</tt> option is given when decoding, any base64 parts will
+be decoded as well.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3215"
+ HREF="restricted.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3211"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3207"
+ HREF="mailbox-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3213"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3214"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3216"
+ HREF="restricted.html">13. Restricted Execution</A>
+<b>Up:</b> <A NAME="tex2html3212"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html3208"
+ HREF="mailbox-objects.html">12.16.1 Mailbox Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4. DOM: The Document Object Model</TITLE>
+<META NAME="description" CONTENT="4. DOM: The Document Object Model">
+<META NAME="keywords" CONTENT="xml-howto">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="xml-howto.css">
+<LINK REL="next" HREF="node13.html">
+<LINK REL="previous" HREF="SAX.html">
+<LINK REL="up" HREF="xml-howto.html">
+<LINK REL="next" HREF="node12.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html153"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html150"
+ HREF="xml-howto.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html144"
+ HREF="node10.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/XML HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html152"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html154"
+ HREF="node12.html">4.1 Related Links</A>
+<b>Up:</b> <A NAME="tex2html151"
+ HREF="xml-howto.html">Python/XML HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html145"
+ HREF="node10.html">3.4 Related Links</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000500000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">4</SPAN>. DOM: The Document Object Model
+</H1>
+
+<P>
+<i>The Document Object Model is currently at first draft stage, and 
+isn't even close to being a standard.  The Python DOM is therefore not 
+yet documented.  If you want to look at the code and use it anyway,
+feel free (report any bugs you find), but be aware that your code may
+need to be changed for future DOM drafts.</i>
+
+<P>
+The Document Object Model specifies a tree-based representation for an
+XML document.  A top-level Document instance is the root of the tree,
+and has a single child which is the top-level Element instance; this
+instance has children nodes representing the content and any
+sub-elements.  These sub-element nodes can have further children, and
+so forth.  Functions are defined which let you traverse the resulting
+tree any way you like, access element and attribute values, insert and
+delete nodes, and convert the tree back into XML.
+
+<P>
+The DOM is useful for modifying the tree; you can remove a node from
+one place in the tree, and insert it somewhere else.  You can also
+construct a DOM tree yourself, and convert it to XML; this is often a
+more flexible way of producing XML output than simply writing
+<tt>&lt;tag1&gt;</tt>...<tt>&lt;/tag1&gt;</tt> to a file.
+
+<P>
+While the DOM doesn't require that the entire tree be resident in
+memory at one time, the Python implementation currently keeps the
+whole tree in RAM.  This means you may not have enough memory to
+process very large documents, measuring tens or hundreds of megabytes.
+It's possible to write a DOM implementation that stores most of the
+tree on disk or in a database, and reads in new sections as they're
+accessed, but this hasn't been done yet, and such implementations
+often impose limitations on how the tree can be accessed.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html155"
+ HREF="node12.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Related Links</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html153"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html150"
+ HREF="xml-howto.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html144"
+ HREF="node10.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/XML HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html152"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html154"
+ HREF="node12.html">4.1 Related Links</A>
+<b>Up:</b> <A NAME="tex2html151"
+ HREF="xml-howto.html">Python/XML HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html145"
+ HREF="node10.html">3.4 Related Links</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

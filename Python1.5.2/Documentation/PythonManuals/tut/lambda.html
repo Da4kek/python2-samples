@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4.7.4 Lambda Forms </TITLE>
+<META NAME="description" CONTENT="4.7.4 Lambda Forms ">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="tut.css">
+<LINK REL="next" HREF="docstrings.html">
+<LINK REL="previous" HREF="arbitraryArgs.html">
+<LINK REL="up" HREF="defining.html">
+<LINK REL="next" HREF="docstrings.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html494"
+ HREF="docstrings.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html491"
+ HREF="defining.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html485"
+ HREF="arbitraryArgs.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Tutorial</b></td>
+<td align=right width="20%"><A NAME="tex2html493"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html495"
+ HREF="docstrings.html">4.7.5 Documentation Strings</A>
+<b>Up:</b> <A NAME="tex2html492"
+ HREF="defining.html">4.7 More on Defining</A>
+<b>Previous:</b> <A NAME="tex2html486"
+ HREF="arbitraryArgs.html">4.7.3 Arbitrary Argument Lists</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION006740000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> Lambda Forms 
+</H2>
+
+<P>
+By popular demand, a few features commonly found in functional
+programming languages and Lisp have been added to Python.  With the
+<tt>lambda</tt> keyword, small anonymous functions can be created.
+Here's a function that returns the sum of its two arguments:
+"<tt>lambda a, b: a+b</tt>".  Lambda forms can be used wherever function
+objects are required.  They are syntactically restricted to a single
+expression.  Semantically, they are just syntactic sugar for a normal
+function definition.  Like nested function definitions, lambda forms
+cannot reference variables from the containing scope, but this can be
+overcome through the judicious use of default argument values, e.g.
+
+<P>
+<dl><dd><pre>
+def make_incrementor(n):
+    return lambda x, incr=n: x+incr
+</pre></dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html494"
+ HREF="docstrings.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html491"
+ HREF="defining.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html485"
+ HREF="arbitraryArgs.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Tutorial</b></td>
+<td align=right width="20%"><A NAME="tex2html493"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html495"
+ HREF="docstrings.html">4.7.5 Documentation Strings</A>
+<b>Up:</b> <A NAME="tex2html492"
+ HREF="defining.html">4.7 More on Defining</A>
+<b>Previous:</b> <A NAME="tex2html486"
+ HREF="arbitraryArgs.html">4.7.3 Arbitrary Argument Lists</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>13.4.1 Example </title>
+<META NAME="description" CONTENT="13.4.1 Example ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="lib.css">
+<LINK REL="next" href="expat-errors.html">
+<LINK REL="previous" href="module-xml.parsers.expat.html">
+<LINK REL="up" href="module-xml.parsers.expat.html">
+<LINK REL="next" href="expat-errors.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-xml.parsers.expat.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="module-xml.parsers.expat.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="expat-errors.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-xml.parsers.expat.html">13.4 xml.parsers.expat  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="module-xml.parsers.expat.html">13.4 xml.parsers.expat  </A>
+<b class="navlabel">Next:</b> <a class="sectref" href="expat-errors.html">13.4.2 Expat error constants</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+13.4.1 Example 
+</H2>
+
+<P>
+The following program defines three handlers that just print out their
+arguments.
+
+<P>
+<dl><dd><pre class="verbatim">
+import xml.parsers.expat
+
+# 3 handler functions
+def start_element(name, attrs):
+    print 'Start element:', name, attrs
+def end_element(name):
+    print 'End element:', name
+def char_data(data):
+    print 'Character data:', repr(data)
+
+p = xml.parsers.expat.ParserCreate()
+
+p.StartElementHandler = start_element
+p.EndElementHandler = end_element
+p.CharacterDataHandler = char_data
+
+p.Parse("""&lt;?xml version="1.0"?&gt;
+&lt;parent id="top"&gt;&lt;child1 name="paul"&gt;Text goes here&lt;/child1&gt;
+&lt;child2 name="fred"&gt;More text&lt;/child2&gt;
+&lt;/parent&gt;""")
+</pre></dl>
+
+<P>
+The output from this program is:
+
+<P>
+<dl><dd><pre class="verbatim">
+Start element: parent {'id': 'top'}
+Start element: child1 {'name': 'paul'}
+Character data: 'Text goes here'
+End element: child1
+Character data: '\012'
+Start element: child2 {'name': 'fred'}
+Character data: 'More text'
+End element: child2
+Character data: '\012'
+End element: parent
+</pre></dl>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-xml.parsers.expat.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="module-xml.parsers.expat.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="expat-errors.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-xml.parsers.expat.html">13.4 xml.parsers.expat  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="module-xml.parsers.expat.html">13.4 xml.parsers.expat  </A>
+<b class="navlabel">Next:</b> <a class="sectref" href="expat-errors.html">13.4.2 Expat error constants</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

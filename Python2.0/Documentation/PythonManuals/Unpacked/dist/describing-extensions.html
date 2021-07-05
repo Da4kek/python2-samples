@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>3.3 Describing extension modules</title>
+<META NAME="description" CONTENT="3.3 Describing extension modules">
+<META NAME="keywords" CONTENT="dist">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="dist.css">
+<LINK REL="previous" href="listing-modules.html">
+<LINK REL="up" href="setup-script.html">
+<LINK REL="next" HREF="node11.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="listing-modules.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="setup-script.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node11.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="listing-modules.html">3.2 Listing individual modules</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="setup-script.html">3 Writing the Setup</A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node11.html">3.3.1 Extension names and</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+3.3 Describing extension modules
+</H2>
+
+<P>
+Just as writing Python extension modules is a bit more complicated than
+writing pure Python modules, describing them to the Distutils is a bit
+more complicated.  Unlike pure modules, it's not enough just to list
+modules or packages and expect the Distutils to go out and find the
+right files; you have to specify the extension name, source file(s), and
+any compile/link requirements (include directories, libraries to link
+with, etc.).
+
+<P>
+All of this is done through another keyword argument to
+<tt class="function">setup()</tt>, the <font face="sans-serif">extensions</font> option.  <font face="sans-serif">extensions</font>
+is just a list of <tt class="class">Extension</tt> instances, each of which describes a
+single extension module.  Suppose your distribution includes a single
+extension, called <tt class="module">foo</tt> and implemented by <span class="file">foo.c</span>.  If no
+additional instructions to the compiler/linker are needed, describing
+this extension is quite simple:
+<dl><dd><pre class="verbatim">
+Extension("foo", ["foo.c"])
+</pre></dl>
+The <tt class="class">Extension</tt> class can be imported from
+<tt class="module">distutils.core</tt>, along with <tt class="function">setup()</tt>.  Thus, the setup
+script for a module distribution that contains only this one extension
+and nothing else might be:
+<dl><dd><pre class="verbatim">
+from distutils.core import setup, Extension
+setup(name = "foo", version = "1.0",
+      ext_modules = [Extension("foo", ["foo.c"])])
+</pre></dl>
+
+<P>
+The <tt class="class">Extension</tt> class (actually, the underlying extension-building
+machinery implemented by the <code>built_ext</code> command) supports a
+great deal of flexibility in describing Python extensions, which is
+explained in the following sections.  
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html208"
+  HREF="node11.html">3.3.1 Extension names and packages</A>
+<LI><A NAME="tex2html209"
+  HREF="node12.html">3.3.2 Extension source files</A>
+<LI><A NAME="tex2html210"
+  HREF="node13.html">3.3.3 Preprocessor options</A>
+<LI><A NAME="tex2html211"
+  HREF="node14.html">3.3.4 Library options</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="listing-modules.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="setup-script.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node11.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="listing-modules.html">3.2 Listing individual modules</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="setup-script.html">3 Writing the Setup</A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node11.html">3.3.1 Extension names and</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,271 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.1 os --
+Miscellaneous OS interfaces.</TITLE>
+<META NAME="description" CONTENT="6.1 os --
+Miscellaneous OS interfaces.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-time.html">
+<LINK REL="previous" HREF="allos.html">
+<LINK REL="up" HREF="allos.html">
+<LINK REL="next" HREF="module-time.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1640"
+ HREF="module-time.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1636"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1630"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1638"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1639"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1641"
+ HREF="module-time.html">6.2 time  </A>
+<b>Up:</b> <A NAME="tex2html1637"
+ HREF="allos.html">6. Generic Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1631"
+ HREF="allos.html">6. Generic Operating System</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008100000000000000000">
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>os</tt> --
+         Miscellaneous OS interfaces.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides a more portable way of using operating system
+(OS) dependent functionality than importing an OS dependent built-in
+module like <tt>posix</tt>.
+
+<P>
+When the optional built-in module <tt>posix</tt> is available, this
+module exports the same functions and data as <tt>posix</tt>; otherwise,
+it searches for an OS dependent built-in module like <tt>mac</tt> and
+exports the same functions and data as found there.  The design of all
+Python's built-in OS dependent modules is such that as long as the same
+functionality is available, it uses the same interface; e.g., the
+function <tt>os.stat(<i>file</i>)</tt> returns stat info about <i>file</i>
+in a format compatible with the POSIX interface.
+
+<P>
+Extensions peculiar to a particular OS are also available through the
+<tt>os</tt> module, but using them is of course a threat to
+portability!
+
+<P>
+Note that after the first time <tt>os</tt> is imported, there is
+<i>no</i> performance penalty in using functions from <tt>os</tt>
+instead of directly from the OS dependent built-in module, so there
+should be <i>no</i> reason not to use <tt>os</tt>!
+
+<P>
+In addition to whatever the correct OS dependent module exports, the
+following variables and functions are always exported by <tt>os</tt>:
+
+<P>
+<dl><dt><b><a name="l2h-9175"><tt>name</tt></a></b>
+<dd>
+The name of the OS dependent module imported.  The following names
+have currently been registered: <tt>'posix'</tt>, <tt>'nt'</tt>,
+<tt>'dos'</tt>, <tt>'mac'</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9182"><tt>path</tt></a></b>
+<dd>
+The corresponding OS dependent standard module for pathname
+operations, e.g., <tt>posixpath</tt> or <tt>macpath</tt>.  Thus, (given
+the proper imports), <tt>os.path.split(<i>file</i>)</tt> is equivalent to but
+more portable than <tt>posixpath.split(<i>file</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9189"><tt>curdir</tt></a></b>
+<dd>
+The constant string used by the OS to refer to the current directory,
+e.g. <tt>'.'</tt> for POSIX or <tt>':'</tt> for the Macintosh.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9195"><tt>pardir</tt></a></b>
+<dd>
+The constant string used by the OS to refer to the parent directory,
+e.g. <tt>'..'</tt> for POSIX or <tt>'::'</tt> for the Macintosh.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9201"><tt>sep</tt></a></b>
+<dd>
+The character used by the OS to separate pathname components,
+e.g. "<tt>/</tt>" for POSIX or "<tt>:</tt>" for the Macintosh.
+Note that knowing this is not sufficient to be able to parse or
+concatenate pathnames -- use <tt>os.path.split()</tt> and
+<tt>os.path.join()</tt> -- but it is occasionally useful.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9209"><tt>altsep</tt></a></b>
+<dd>
+An alternative character used by the OS to separate pathname components,
+or <tt>None</tt> if only one separator character exists.  This is set to
+"<tt>/</tt>" on DOS/Windows systems where <tt>sep</tt> is a backslash.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9215"><tt>pathsep</tt></a></b>
+<dd>
+The character conventionally used by the OS to separate search patch
+components (as in <a name="l2h-9216">$PATH</a>), e.g. "<tt>:</tt>" for POSIX or
+"<tt>;</tt>" for MS-DOS.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9222"><tt>linesep</tt></a></b>
+<dd>
+The string used to separate (or, rather, terminate) lines on the
+current platform.  This may be a single character, e.g. <tt>'&#92;n'</tt>
+for POSIX or <tt>'&#92;r'</tt> for MacOS, or multiple characters,
+e.g. <tt>'&#92;r&#92;n'</tt> for MS-DOS.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9229"><tt>defpath</tt></a></b>
+<dd>
+The default search path used by <tt>exec*p*()</tt> if the environment
+doesn't have a <tt>'PATH'</tt> key.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9300"><tt>makedirs</tt></a></b> (<var>path</var><big>[</big><var>, mode</var><big>]</big>)
+<dd>
+<b>New in version 1.5.2.</b><p>
+Recursive directory creation function.  Like <tt>mkdir()</tt>,
+but makes all intermediate-level directories needed to contain the
+leaf directory.  Throws an <tt>os.error</tt> exception if the leaf
+directory already exists or cannot be created.  The default <i>mode</i>
+is <tt>0777</tt> (octal).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9244"><tt>removedirs</tt></a></b> (<var>path</var>)
+<dd>
+<b>New in version 1.5.2.</b><p>
+Recursive directory removal function.  Works like
+<tt>rmdir()</tt> except that, if the leaf directory is
+successfully removed, directories corresponding to rightmost path
+segments will be pruned way until either the whole path is consumed or
+an error is raised (which is ignored, because it generally means that
+a parent directory is not empty).  Throws an <tt>os.error</tt>
+exception if the leaf directory could not be successfully removed.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9251"><tt>renames</tt></a></b> (<var>old, new</var>)
+<dd>
+<b>New in version 1.5.2.</b><p>
+Recursive directory or file renaming function.
+Works like <tt>rename()</tt>, except creation of any intermediate
+directories needed to make the new pathname good is attempted first.
+After the rename, directories corresponding to rightmost path segments
+of the old name will be pruned away using <tt>removedirs()</tt>.
+
+<P>
+Note: this function can fail with the new directory structure made if
+you lack permissions needed to remove the leaf directory or file.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9258"><tt>execl</tt></a></b> (<var>path, arg0, arg1, ...</var>)
+<dd>
+This is equivalent to
+"<tt>execv(<i>path</i>, (<i>arg0</i>, <i>arg1</i>, ...))</tt>".
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9265"><tt>execle</tt></a></b> (<var>path, arg0, arg1, ..., env</var>)
+<dd>
+This is equivalent to
+"<tt>execve(<i>path</i>, (<i>arg0</i>, <i>arg1</i>, ...), <i>env</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9273"><tt>execlp</tt></a></b> (<var>path, arg0, arg1, ...</var>)
+<dd>
+This is equivalent to
+"<tt>execvp(<i>path</i>, (<i>arg0</i>, <i>arg1</i>, ...))</tt>".
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9280"><tt>execvp</tt></a></b> (<var>path, args</var>)
+<dd>
+This is like "<tt>execv(<i>path</i>, <i>args</i>)</tt>" but duplicates
+the shell's actions in searching for an executable file in a list of
+directories.  The directory list is obtained from
+<tt>environ['PATH']</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9287"><tt>execvpe</tt></a></b> (<var>path, args, env</var>)
+<dd>
+This is a cross between <tt>execve()</tt> and <tt>execvp()</tt>.
+The directory list is obtained from <tt><i>env</i>['PATH']</tt>.
+</dl>
+
+<P>
+(The functions <tt>execv()</tt> and <tt>execve()</tt> are not
+documented here, since they are implemented by the OS dependent
+module.  If the OS dependent module doesn't define either of these,
+the functions that rely on it will raise an exception.  They are
+documented in the section on module <tt>posix</tt>, together with all
+other functions that <tt>os</tt> imports from the OS dependent module.)
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1640"
+ HREF="module-time.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1636"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1630"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1638"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1639"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1641"
+ HREF="module-time.html">6.2 time  </A>
+<b>Up:</b> <A NAME="tex2html1637"
+ HREF="allos.html">6. Generic Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1631"
+ HREF="allos.html">6. Generic Operating System</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

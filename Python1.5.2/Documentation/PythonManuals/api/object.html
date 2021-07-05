@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.1 Object Protocol</TITLE>
+<META NAME="description" CONTENT="6.1 Object Protocol">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="next" HREF="number.html">
+<LINK REL="previous" HREF="abstract.html">
+<LINK REL="up" HREF="abstract.html">
+<LINK REL="next" HREF="number.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html329"
+ HREF="number.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html325"
+ HREF="abstract.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html319"
+ HREF="abstract.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html327"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html328"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html330"
+ HREF="number.html">6.2 Number Protocol</A>
+<b>Up:</b> <A NAME="tex2html326"
+ HREF="abstract.html">6. Abstract Objects Layer</A>
+<b>Previous:</b> <A NAME="tex2html320"
+ HREF="abstract.html">6. Abstract Objects Layer</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008100000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Object Protocol
+</H1>
+
+<P>
+<dl><dt>int <b><a name="l2h-709"><tt>PyObject_Print</tt></a></b>(<var>PyObject *o, FILE *fp, int flags</var>)
+<dd>
+Print an object <i>o</i>, on file <i>fp</i>.  Returns <tt>-1</tt> on error
+The flags argument is used to enable certain printing
+options. The only option currently supported is
+<tt>Py_PRINT_RAW</tt>.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-718"><tt>PyObject_HasAttrString</tt></a></b>(<var>PyObject *o, char *attr_name</var>)
+<dd>
+Returns <tt>1</tt> if <i>o</i> has the attribute <i>attr_name</i>, and
+<tt>0</tt> otherwise.  This is equivalent to the Python expression
+"<tt>hasattr(<i>o</i>, <i>attr_name</i>)</tt>".
+This function always succeeds.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-729"><tt>PyObject_GetAttrString</tt></a></b>(<var>PyObject *o, char *attr_name</var>)
+<dd>
+Retrieve an attribute named <i>attr_name</i> from object <i>o</i>.
+Returns the attribute value on success, or <tt>NULL</tt> on failure.
+This is the equivalent of the Python expression
+"<tt><i>o</i>.<i>attr_name</i></tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-739"><tt>PyObject_HasAttr</tt></a></b>(<var>PyObject *o, PyObject *attr_name</var>)
+<dd>
+Returns <tt>1</tt> if <i>o</i> has the attribute <i>attr_name</i>, and
+<tt>0</tt> otherwise.  This is equivalent to the Python expression
+"<tt>hasattr(<i>o</i>, <i>attr_name</i>)</tt>". 
+This function always succeeds.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-750"><tt>PyObject_GetAttr</tt></a></b>(<var>PyObject *o, PyObject *attr_name</var>)
+<dd>
+Retrieve an attribute named <i>attr_name</i> from object <i>o</i>.
+Returns the attribute value on success, or <tt>NULL</tt> on failure.
+This is the equivalent of the Python expression
+"<tt><i>o</i>.<i>attr_name</i></tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-760"><tt>PyObject_SetAttrString</tt></a></b>(<var>PyObject *o, char *attr_name, PyObject *v</var>)
+<dd>
+Set the value of the attribute named <i>attr_name</i>, for object
+<i>o</i>, to the value <i>v</i>. Returns <tt>-1</tt> on failure.  This is
+the equivalent of the Python statement "<tt><i>o</i>.<i>attr_name</i> =
+<i>v</i></tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-772"><tt>PyObject_SetAttr</tt></a></b>(<var>PyObject *o, PyObject *attr_name, PyObject *v</var>)
+<dd>
+Set the value of the attribute named <i>attr_name</i>, for
+object <i>o</i>,
+to the value <i>v</i>. Returns <tt>-1</tt> on failure.  This is
+the equivalent of the Python statement "<tt><i>o</i>.<i>attr_name</i> =
+<i>v</i></tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-784"><tt>PyObject_DelAttrString</tt></a></b>(<var>PyObject *o, char *attr_name</var>)
+<dd>
+Delete attribute named <i>attr_name</i>, for object <i>o</i>. Returns
+<tt>-1</tt> on failure.  This is the equivalent of the Python
+statement: "<tt>del <i>o</i>.<i>attr_name</i></tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-794"><tt>PyObject_DelAttr</tt></a></b>(<var>PyObject *o, PyObject *attr_name</var>)
+<dd>
+Delete attribute named <i>attr_name</i>, for object <i>o</i>. Returns
+<tt>-1</tt> on failure.  This is the equivalent of the Python
+statement "<tt>del <i>o</i>.<i>attr_name</i></tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-804"><tt>PyObject_Cmp</tt></a></b>(<var>PyObject *o1, PyObject *o2, int *result</var>)
+<dd>
+Compare the values of <i>o1</i> and <i>o2</i> using a routine provided
+by <i>o1</i>, if one exists, otherwise with a routine provided by
+<i>o2</i>.  The result of the comparison is returned in <i>result</i>.
+Returns <tt>-1</tt> on failure.  This is the equivalent of the Python
+statement "<tt><i>result</i> = cmp(<i>o1</i>, <i>o2</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-818"><tt>PyObject_Compare</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+Compare the values of <i>o1</i> and <i>o2</i> using a routine provided
+by <i>o1</i>, if one exists, otherwise with a routine provided by
+<i>o2</i>.  Returns the result of the comparison on success.  On error,
+the value returned is undefined; use <tt>PyErr_Occurred()</tt> to
+detect an error.  This is equivalent to the
+Python expression "<tt>cmp(<i>o1</i>, <i>o2</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-830"><tt>PyObject_Repr</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Compute the string representation of object, <i>o</i>.  Returns the
+string representation on success, <tt>NULL</tt> on failure.  This is
+the equivalent of the Python expression "<tt>repr(<i>o</i>)</tt>".
+Called by the <tt>repr()</tt><a name="l2h-"></a> built-in function
+and by reverse quotes.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-840"><tt>PyObject_Str</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Compute the string representation of object <i>o</i>.  Returns the
+string representation on success, <tt>NULL</tt> on failure.  This is
+the equivalent of the Python expression "<tt>str(<i>o</i>)</tt>".
+Called by the <tt>str()</tt><a name="l2h-"></a> built-in function and
+by the <tt>print</tt> statement.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-851"><tt>PyCallable_Check</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Determine if the object <i>o</i>, is callable.  Return <tt>1</tt> if the
+object is callable and <tt>0</tt> otherwise.
+This function always succeeds.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-859"><tt>PyObject_CallObject</tt></a></b>(<var>PyObject *callable_object, PyObject *args</var>)
+<dd>
+Call a callable Python object <i>callable_object</i>, with
+arguments given by the tuple <i>args</i>.  If no arguments are
+needed, then args may be <tt>NULL</tt>.  Returns the result of the
+call on success, or <tt>NULL</tt> on failure.  This is the equivalent
+of the Python expression "<tt>apply(<i>o</i>, <i>args</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-870"><tt>PyObject_CallFunction</tt></a></b>(<var>PyObject *callable_object, char *format, ...</var>)
+<dd>
+Call a callable Python object <i>callable_object</i>, with a
+variable number of C arguments. The C arguments are described
+using a <tt>Py_BuildValue()</tt> style format string. The format may
+be <tt>NULL</tt>, indicating that no arguments are provided.  Returns the
+result of the call on success, or <tt>NULL</tt> on failure.  This is
+the equivalent of the Python expression "<tt>apply(<i>o</i>,
+<i>args</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-883"><tt>PyObject_CallMethod</tt></a></b>(<var>PyObject *o, char *m, char *format, ...</var>)
+<dd>
+Call the method named <i>m</i> of object <i>o</i> with a variable number
+of C arguments.  The C arguments are described by a
+<tt>Py_BuildValue()</tt> format string.  The format may be <tt>NULL</tt>,
+indicating that no arguments are provided. Returns the result of the
+call on success, or <tt>NULL</tt> on failure.  This is the equivalent of the
+Python expression "<tt><i>o</i>.<i>method</i>(<i>args</i>)</tt>".
+Note that Special method names, such as <tt>__add__()</tt>,
+<tt>__getitem__()</tt>, and so on are not supported. The specific
+abstract-object routines for these must be used.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-899"><tt>PyObject_Hash</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Compute and return the hash value of an object <i>o</i>.  On
+failure, return <tt>-1</tt>.  This is the equivalent of the Python
+expression "<tt>hash(<i>o</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-907"><tt>PyObject_IsTrue</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Returns <tt>1</tt> if the object <i>o</i> is considered to be true, and
+<tt>0</tt> otherwise. This is equivalent to the Python expression
+"<tt>not not <i>o</i></tt>".
+This function always succeeds.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-916"><tt>PyObject_Type</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+On success, returns a type object corresponding to the object
+type of object <i>o</i>. On failure, returns <tt>NULL</tt>.  This is
+equivalent to the Python expression "<tt>type(<i>o</i>)</tt>".
+<a name="l2h-"></a></dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-925"><tt>PyObject_Length</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Return the length of object <i>o</i>.  If the object <i>o</i> provides
+both sequence and mapping protocols, the sequence length is
+returned. On error, <tt>-1</tt> is returned.  This is the equivalent
+to the Python expression "<tt>len(<i>o</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-934"><tt>PyObject_GetItem</tt></a></b>(<var>PyObject *o, PyObject *key</var>)
+<dd>
+Return element of <i>o</i> corresponding to the object <i>key</i> or
+<tt>NULL</tt> on failure. This is the equivalent of the Python expression
+"<tt><i>o</i>[<i>key</i>]</tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-944"><tt>PyObject_SetItem</tt></a></b>(<var>PyObject *o, PyObject *key, PyObject *v</var>)
+<dd>
+Map the object <i>key</i> to the value <i>v</i>.
+Returns <tt>-1</tt> on failure.  This is the equivalent
+of the Python statement "<tt><i>o</i>[<i>key</i>] = <i>v</i></tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-955"><tt>PyObject_DelItem</tt></a></b>(<var>PyObject *o, PyObject *key, PyObject *v</var>)
+<dd>
+Delete the mapping for <i>key</i> from <i>o</i>.  Returns <tt>-1</tt> on
+failure. This is the equivalent of the Python statement "<tt>del
+<i>o</i>[<i>key</i>]</tt>".
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html329"
+ HREF="number.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html325"
+ HREF="abstract.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html319"
+ HREF="abstract.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html327"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html328"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html330"
+ HREF="number.html">6.2 Number Protocol</A>
+<b>Up:</b> <A NAME="tex2html326"
+ HREF="abstract.html">6. Abstract Objects Layer</A>
+<b>Previous:</b> <A NAME="tex2html320"
+ HREF="abstract.html">6. Abstract Objects Layer</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

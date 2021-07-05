@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4. xml.sax.saxlib</TITLE>
+<META NAME="description" CONTENT="4. xml.sax.saxlib">
+<META NAME="keywords" CONTENT="xml-ref">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="xml-ref.css">
+<LINK REL="next" HREF="node23.html">
+<LINK REL="previous" HREF="node10.html">
+<LINK REL="up" HREF="xml-ref.html">
+<LINK REL="next" HREF="node14.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html197"
+ HREF="node14.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html194"
+ HREF="xml-ref.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html188"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/XML Reference Guide</b></td>
+<td align=right width="20%"><A NAME="tex2html196"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html198"
+ HREF="node14.html">4.1 AttributeList methods</A>
+<b>Up:</b> <A NAME="tex2html195"
+ HREF="xml-ref.html">Python/XML Reference Guide</A>
+<b>Previous:</b> <A NAME="tex2html189"
+ HREF="node12.html">3.2 ParserFactory methods</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000500000000000000000">
+<SPAN CLASS="arabic">4</SPAN>. xml.sax.saxlib</A>
+</H1>
+
+<P>
+<dl><dt><b><a name="l2h-132"><tt>AttributeList</tt></a></b> ()
+<dd>
+Interface for an attribute list. This interface provides
+    information about a list of attributes for an element (only
+    specified or defaulted attributes will be reported). Note that the
+    information returned by this object will be valid only during the
+    scope of the <tt>DocumentHandler.startElement</tt> callback, and the
+    attributes will not necessarily be provided in the order declared
+    or specified.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-137"><tt>DocumentHandler</tt></a></b> ()
+<dd>
+Handle general document events. This is the main client
+    interface for SAX: it contains callbacks for the most important
+    document events, such as the start and end of elements. You need
+    to create an object that implements this interface, and then
+    register it with the <tt>Parser</tt>. If you do not want to implement
+    the entire interface, you can derive a class from <tt>HandlerBase</tt>,
+    which implements the default functionality. You can find the
+    location of any document event using the <tt>Locator</tt> interface
+    supplied by <tt>setDocumentLocator()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-145"><tt>DTDHandler</tt></a></b> ()
+<dd>
+Handle DTD events. This interface specifies only those DTD
+    events required for basic parsing (unparsed entities and
+    attributes). If you do not want to implement the entire interface,
+    you can extend <tt>HandlerBase</tt>, which implements the default
+    behaviour.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-150"><tt>EntityResolver</tt></a></b> ()
+<dd>
+This is the basic interface for resolving entities. If you create an object
+    implementing this interface, then register the object with your
+    <tt>Parser</tt> instance, the parser will call the method in your object to
+    resolve all external entities. Note that <tt>HandlerBase</tt> implements
+    this interface with the default behaviour.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-156"><tt>ErrorHandler</tt></a></b> ()
+<dd>
+This is the basic interface for SAX error handlers. If you create an object
+    that implements this interface, then register the object with your
+    Parser, the parser will call the methods in your object to report
+    all warnings and errors. There are three levels of errors
+    available: warnings, (possibly) recoverable errors, and
+    unrecoverable errors. All methods take a SAXParseException as the
+    only parameter.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-160"><tt>HandlerBase</tt></a></b> ()
+<dd>
+Default base class for handlers. This class implements the default
+    behaviour for four SAX interfaces, inheriting from them all:
+    <tt>EntityResolver</tt>, <tt>DTDHandler</tt>,
+    <tt>DocumentHandler</tt>, and <tt>ErrorHandler</tt>.  Rather than
+    implementing those full interfaces, you may simply extend this
+    class and override the methods that you need. Note that the use of
+    this class is optional, since you are free to implement the
+    interfaces directly if you wish.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-168"><tt>Locator</tt></a></b> ()
+<dd>
+Interface for associating a SAX event with a document
+location. A locator object will return valid results only during
+calls to methods of the <tt>SAXDocumentHandler</tt> class; 
+at any other time, the results are unpredictable.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-173"><tt>Parser</tt></a></b> ()
+<dd>
+Basic interface for SAX parsers. All SAX
+    parsers must implement this basic interface: it allows users to
+    register handlers for different types of events and to initiate a
+    parse from a URI, a character stream, or a byte stream. SAX
+    parsers should also implement a zero-argument constructor.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-177"><tt>SAXException</tt></a></b> (<var>msg, exception, locator</var>)
+<dd>
+Encapsulate an XML error or warning. This class can contain
+    basic error or warning information from either the XML parser or
+    the application: you can subclass it to provide additional
+    functionality, or to add localization. Note that although you will
+    receive a <tt>SAXException</tt> as the argument to the handlers in the
+    <tt>ErrorHandler</tt> interface, you are not actually required to throw
+    the exception; instead, you can simply read the information in
+    it.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-183"><tt>SAXParseException</tt></a></b> (<var>msg, exception, locator</var>)
+<dd>
+Encapsulate an XML parse error or warning.
+    
+This exception will include information for locating the error in the
+    original XML document. Note that although the application will
+    receive a <tt>SAXParseException</tt> as the argument to the
+    handlers in the <tt>ErrorHandler</tt> interface, the application is not
+    actually required to throw the exception; instead, it can simply
+    read the information in it and take a different action.
+
+<P>
+Since this exception is a subclass of <tt>SAXException</tt>, it inherits
+    the ability to wrap another exception.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html199"
+ HREF="node14.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>AttributeList</tt> methods</A>
+<LI><A NAME="tex2html200"
+ HREF="node15.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>DocumentHandler</tt> methods</A>
+<LI><A NAME="tex2html201"
+ HREF="node16.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>DTDHandler</tt> methods</A>
+<LI><A NAME="tex2html202"
+ HREF="node17.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>EntityResolver</tt> methods</A>
+<LI><A NAME="tex2html203"
+ HREF="node18.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>ErrorHandler</tt> methods</A>
+<LI><A NAME="tex2html204"
+ HREF="node19.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>Locator</tt> methods</A>
+<LI><A NAME="tex2html205"
+ HREF="node20.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>Parser</tt> methods</A>
+<LI><A NAME="tex2html206"
+ HREF="node21.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>SAXException</tt> methods</A>
+<LI><A NAME="tex2html207"
+ HREF="node22.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">9</SPAN> <tt>SAXParseException</tt> methods</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html197"
+ HREF="node14.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html194"
+ HREF="xml-ref.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html188"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/XML Reference Guide</b></td>
+<td align=right width="20%"><A NAME="tex2html196"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html198"
+ HREF="node14.html">4.1 AttributeList methods</A>
+<b>Up:</b> <A NAME="tex2html195"
+ HREF="xml-ref.html">Python/XML Reference Guide</A>
+<b>Previous:</b> <A NAME="tex2html189"
+ HREF="node12.html">3.2 ParserFactory methods</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

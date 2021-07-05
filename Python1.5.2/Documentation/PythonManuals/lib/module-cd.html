@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>16.3 cd --
+Interface to the CD-ROM on Silicon Graphics systems.</TITLE>
+<META NAME="description" CONTENT="16.3 cd --
+Interface to the CD-ROM on Silicon Graphics systems.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-fl2.html">
+<LINK REL="previous" HREF="module-al2.html">
+<LINK REL="up" HREF="sgi.html">
+<LINK REL="next" HREF="player-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3460"
+ HREF="player-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3456"
+ HREF="sgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3450"
+ HREF="module-al2.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3458"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3459"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3461"
+ HREF="player-objects.html">16.3.1 Player Objects</A>
+<b>Up:</b> <A NAME="tex2html3457"
+ HREF="sgi.html">16. SGI IRIX Specific</A>
+<b>Previous:</b> <A NAME="tex2html3451"
+ HREF="module-al2.html">16.2 AL  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0018300000000000000000">
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>cd</tt> --
+         Interface to the CD-ROM on Silicon Graphics systems.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides an interface to the Silicon Graphics CD library.
+It is available only on Silicon Graphics systems.
+
+<P>
+The way the library works is as follows.  A program opens the CD-ROM
+device with <tt>open()</tt> and creates a parser to parse the data
+from the CD with <tt>createparser()</tt>.  The object returned by
+<tt>open()</tt> can be used to read data from the CD, but also to get
+status information for the CD-ROM device, and to get information about
+the CD, such as the table of contents.  Data from the CD is passed to
+the parser, which parses the frames, and calls any callback
+functions that have previously been added.
+
+<P>
+An audio CD is divided into <i>tracks</i> or <i>programs</i> (the terms
+are used interchangeably).  Tracks can be subdivided into
+<i>indices</i>.  An audio CD contains a <i>table of contents</i> which
+gives the starts of the tracks on the CD.  Index 0 is usually the
+pause before the start of a track.  The start of the track as given by
+the table of contents is normally the start of index 1.
+
+<P>
+Positions on a CD can be represented in two ways.  Either a frame
+number or a tuple of three values, minutes, seconds and frames.  Most
+functions use the latter representation.  Positions can be both
+relative to the beginning of the CD, and to the beginning of the
+track.
+
+<P>
+Module <tt>cd</tt> defines the following functions and constants:
+
+<P>
+<dl><dt><b><a name="l2h-22278"><tt>createparser</tt></a></b> ()
+<dd>
+Create and return an opaque parser object.  The methods of the parser
+object are described below.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22282"><tt>msftoframe</tt></a></b> (<var>minutes, seconds, frames</var>)
+<dd>
+Converts a <tt>(<i>minutes</i>, <i>seconds</i>, <i>frames</i>)</tt> triple
+representing time in absolute time code into the corresponding CD
+frame number.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22516"><tt>open</tt></a></b> (<big>[</big><var>device</var><big>[</big><var>, mode</var><big>]</big><big>]</big>)
+<dd>
+Open the CD-ROM device.  The return value is an opaque player object;
+methods of the player object are described below.  The device is the
+name of the SCSI device file, e.g. <tt>'/dev/scsi/sc0d4l0'</tt>, or
+<tt>None</tt>.  If omitted or <tt>None</tt>, the hardware inventory is
+consulted to locate a CD-ROM drive.  The <i>mode</i>, if not omited,
+should be the string <tt>'r'</tt>.
+</dl>
+
+<P>
+The module defines the following variables:
+
+<P>
+<dl><dt><b><a name="l2h-22297"><tt>error</tt></a></b>
+<dd>
+Exception raised on various errors.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22300"><tt>DATASIZE</tt></a></b>
+<dd>
+The size of one frame's worth of audio data.  This is the size of the
+audio data as passed to the callback of type <tt>audio</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22304"><tt>BLOCKSIZE</tt></a></b>
+<dd>
+The size of one uninterpreted frame of audio data.
+</dl>
+
+<P>
+The following variables are states as returned by
+<tt>getstatus()</tt>:
+
+<P>
+<dl><dt><b><a name="l2h-22308"><tt>READY</tt></a></b>
+<dd>
+The drive is ready for operation loaded with an audio CD.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22311"><tt>NODISC</tt></a></b>
+<dd>
+The drive does not have a CD loaded.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22314"><tt>CDROM</tt></a></b>
+<dd>
+The drive is loaded with a CD-ROM.  Subsequent play or read operations
+will return I/O errors.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22317"><tt>ERROR</tt></a></b>
+<dd>
+An error aoocurred while trying to read the disc or its table of
+contents.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22320"><tt>PLAYING</tt></a></b>
+<dd>
+The drive is in CD player mode playing an audio CD through its audio
+jacks.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22323"><tt>PAUSED</tt></a></b>
+<dd>
+The drive is in CD layer mode with play paused.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22326"><tt>STILL</tt></a></b>
+<dd>
+The equivalent of <tt>PAUSED</tt> on older (non 3301) model Toshiba
+CD-ROM drives.  Such drives have never been shipped by SGI.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22330"><tt>audio</tt></a></b>
+<dd>
+<dt><b><a name="l2h-22331"><tt>pnum</tt></a></b><dd>
+<dt><b><a name="l2h-22332"><tt>index</tt></a></b><dd>
+<dt><b><a name="l2h-22333"><tt>ptime</tt></a></b><dd>
+<dt><b><a name="l2h-22334"><tt>atime</tt></a></b><dd>
+<dt><b><a name="l2h-22335"><tt>catalog</tt></a></b><dd>
+<dt><b><a name="l2h-22336"><tt>ident</tt></a></b><dd>
+<dt><b><a name="l2h-22337"><tt>control</tt></a></b><dd>
+Integer constants describing the various types of parser callbacks
+that can be set by the <tt>addcallback()</tt> method of CD parser
+objects (see below).
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html3462"
+ HREF="player-objects.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Player Objects</A>
+<LI><A NAME="tex2html3463"
+ HREF="cd-parser-objects.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Parser Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3460"
+ HREF="player-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3456"
+ HREF="sgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3450"
+ HREF="module-al2.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3458"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3459"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3461"
+ HREF="player-objects.html">16.3.1 Player Objects</A>
+<b>Up:</b> <A NAME="tex2html3457"
+ HREF="sgi.html">16. SGI IRIX Specific</A>
+<b>Previous:</b> <A NAME="tex2html3451"
+ HREF="module-al2.html">16.2 AL  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

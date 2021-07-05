@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.3.4 Emulating sequence and mapping types</TITLE>
+<META NAME="description" CONTENT="3.3.4 Emulating sequence and mapping types">
+<META NAME="keywords" CONTENT="ref">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ref.css">
+<LINK REL="next" HREF="sequence-methods.html">
+<LINK REL="previous" HREF="callable-types.html">
+<LINK REL="up" HREF="specialnames.html">
+<LINK REL="next" HREF="sequence-methods.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html618"
+ HREF="sequence-methods.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html614"
+ HREF="specialnames.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html608"
+ HREF="callable-types.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html616"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html617"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html619"
+ HREF="sequence-methods.html">3.3.5 Additional methods for</A>
+<b>Up:</b> <A NAME="tex2html615"
+ HREF="specialnames.html">3.3 Special method names</A>
+<b>Previous:</b> <A NAME="tex2html609"
+ HREF="callable-types.html">3.3.3 Emulating callable objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION005340000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> Emulating sequence and mapping types
+</H2>
+
+<P>
+The following methods can be defined to emulate sequence or mapping
+objects.  The first set of methods is used either to emulate a
+sequence or to emulate a mapping; the difference is that for a
+sequence, the allowable keys should be the integers <i>k</i> for which
+<tt>0 &lt;= <i>k</i> &lt; <i>N</i></tt> where <i>N</i> is the length of the
+sequence, and the method <tt>__getslice__()</tt> (see below) should be
+defined.  It is also recommended that mappings provide methods
+<tt>keys()</tt>, <tt>values()</tt>, <tt>items()</tt>,
+<tt>has_key()</tt>, <tt>get()</tt>, <tt>clear()</tt>, <tt>copy()</tt>,
+and <tt>update()</tt> behaving similar to those for
+Python's standard dictionary objects; mutable sequences should provide
+methods <tt>append()</tt>, <tt>count()</tt>, <tt>index()</tt>,
+<tt>insert()</tt>, <tt>pop()</tt>, <tt>remove()</tt>, <tt>reverse()</tt>
+and <tt>sort()</tt>, like Python standard list objects.  Finally,
+sequence types should implement addition (meaning concatenation) and
+multiplication (meaning repetition) by defining the methods
+<tt>__add__()</tt>, <tt>__radd__()</tt>, <tt>__mul__()</tt> and
+<tt>__rmul__()</tt> described below; they should not define
+<tt>__coerce__()</tt> or other numerical operators.
+<a name="l2h-1237"></a><a name="l2h-1238"></a><a name="l2h-1239"></a><a name="l2h-1240"></a><a name="l2h-1241"></a><a name="l2h-1242"></a><a name="l2h-1243"></a><a name="l2h-1244"></a><a name="l2h-1245"></a><a name="l2h-1246"></a><a name="l2h-1247"></a><a name="l2h-1248"></a><a name="l2h-1249"></a><a name="l2h-1250"></a><a name="l2h-1251"></a><a name="l2h-1252"></a><a name="l2h-1253"></a><a name="l2h-1254"></a><a name="l2h-1255"></a><a name="l2h-1256"></a><a name="l2h-1257"></a>
+<P>
+<dl><dt><b>__len__</b> (<var>self</var>)
+<dd>
+Called to implement the built-in function
+<tt>len()</tt><a name="l2h-"></a>.  Should return the length of the
+object, an integer <tt>&gt;=</tt> 0.  Also, an object that doesn't define a
+<tt>__nonzero__()</tt> method and whose <tt>__len__()</tt> method
+returns zero is considered to be false in a Boolean context.
+<a name="l2h-1266"></a><a name="l2h-1267"></a></dl>
+
+<P>
+<dl><dt><b>__getitem__</b> (<var>self, key</var>)
+<dd>
+Called to implement evaluation of <tt><i>self</i>[<i>key</i>]</tt>.
+For a sequence types, the accepted keys should be integers.  Note that the
+special interpretation of negative indices (if the class wishes to
+emulate a sequence type) is up to the <tt>__getitem__()</tt> method.
+<a name="l2h-1275"></a></dl>
+
+<P>
+<dl><dt><b>__setitem__</b> (<var>self, key, value</var>)
+<dd>
+Called to implement assignment to <tt><i>self</i>[<i>key</i>]</tt>.  Same
+note as for <tt>__getitem__()</tt>.
+<a name="l2h-1283"></a></dl>
+
+<P>
+<dl><dt><b>__delitem__</b> (<var>self, key</var>)
+<dd>
+Called to implement deletion of <tt><i>self</i>[<i>key</i>]</tt>.  Same
+note as for <tt>__getitem__()</tt>.
+<a name="l2h-1291"></a></dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html618"
+ HREF="sequence-methods.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html614"
+ HREF="specialnames.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html608"
+ HREF="callable-types.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html616"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html617"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html619"
+ HREF="sequence-methods.html">3.3.5 Additional methods for</A>
+<b>Up:</b> <A NAME="tex2html615"
+ HREF="specialnames.html">3.3 Special method names</A>
+<b>Previous:</b> <A NAME="tex2html609"
+ HREF="callable-types.html">3.3.3 Emulating callable objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

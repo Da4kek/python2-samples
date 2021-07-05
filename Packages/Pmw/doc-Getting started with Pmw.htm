@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0045)http://www.dscpl.com.au/pmw/doc/starting.html -->
+<HTML><HEAD><TITLE>Getting started with Pmw</TITLE>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META 
+content="Pmw - a toolkit for building high-level compound widgets in Python" 
+name=description>
+<META content="python, megawidget, mega widget, compound widget, gui, tkinter" 
+name=content>
+<META content="MSHTML 5.00.2614.3500" name=GENERATOR></HEAD>
+<BODY aLink=#ff0000 bgColor=#ffffff link=#0000ee text=#000000 vLink=#551a8b>
+<H1 align=center>Getting started with Pmw</H1>
+<P>
+<CENTER>
+<P align=center><IMG alt="" height=5 
+src="Getting started with Pmw_files/blue_line.gif" width=320> </P></CENTER>
+<DL>
+  <DT>
+  <H2>Introduction</H2>
+  <DD>
+  <P>This document describes how to fetch and install Pmw, and how to run the 
+  demonstrations and tests. </P>
+  <DT>
+  <H2>Requirements</H2>
+  <DD>
+  <P>Pmw.0.8.4 requires the _tkinter and Tkinter modules. It works with python 
+  1.5.2 and Tk 8.0. </P>
+  <P>If the BLT extension to Tk is present, Pmw will use the BLT busy command 
+  during modal dialogs to display a clock cursor. Also, the Pmw.Blt interface to 
+  the BLT busy, graph, stripchart, tabset and vector commands will be available. 
+  Only BLT version 2.4i is supported. You can find BLT at <A 
+  href="http://www.tcltk.com/blt/">http://www.tcltk.com/blt/</A>. </P>
+  <DT>
+  <H2>Distribution and installation</H2>
+  <DD>
+  <P>Releases of the Pmw distribution are available via ftp from 
+  <CODE>ftp.dscpl.com.au</CODE>. This release is available at <A 
+  href="ftp://ftp.dscpl.com.au/pub/pmw/Pmw.0.8.4.tar.gz"><CODE>pub/pmw/Pmw.0.8.4.tar.gz</CODE></A>, 
+  released on 12 May 2000. This is a compressed tar file which, under Unix, can 
+  be unpacked like this: 
+  <DL>
+    <DD><PRE>gunzip Pmw.0.8.4.tar.gz
+tar xvf Pmw.0.8.4.tar
+</PRE></DD></DL>
+  <P></P>
+  <P>Under Microsoft Windows, you will need a program such as WinZip (<A 
+  href="http://www.winzip.com/">http://www.winzip.com/</A>) that can unpack the 
+  gzipped tar files. You may need to change the suffix of the file to 
+  <STRONG>.tgz</STRONG> for WinZip to recognise it. </P>
+  <P>This will unpack into a directory named Pmw. You now need to put this 
+  directory somewhere python can find it, preferably in one of the standard 
+  places, such as in the <CODE>site-packages</CODE> directory (eg: 
+  <CODE>/usr/local/lib/python1.5/site-packages/Pmw</CODE>) or the 
+  <CODE>sys.prefix</CODE> directory (eg: <CODE>C:\Program 
+  Files\Python\Pmw</CODE> or <CODE>/usr/local/lib/python1.5</CODE>). </P>
+  <P>If you do not have access to these standard directories, place the Pmw 
+  directory somewhere on your <CODE>PYTHONPATH</CODE> or <CODE>sys.path</CODE>. 
+  If this is not possible, place the Pmw directory somewhere else and add the 
+  parent directory to your <CODE>PYTHONPATH</CODE> or <CODE>sys.path</CODE>. 
+</P>
+  <P>If you have previously installed Pmw version 0.6 or later, then the new 
+  version can share the same <CODE>Pmw</CODE> directory as the previous 
+  versions. You will need to perform the <CODE>tar</CODE> extraction in the 
+  directory containing (that is, the parent directory of) the existing 
+  <CODE>Pmw</CODE> directory. By default, your applications will use the most 
+  recent version of Pmw. If required, the function <CODE>Pmw.setversion()</CODE> 
+  can be used to specify a version to be used. See the reference manual for 
+  details. If you are no longer using the older versions, you can safely remove 
+  the corresponding subdirectories from the <CODE>Pmw</CODE> directory. </P>
+  <DT>
+  <H2>Documentation</H2>
+  <DD>
+  <P>The <CODE>doc</CODE> directory for each Pmw version contains all the 
+  documentation for that version of Pmw. See the local <A 
+  href="http://www.dscpl.com.au/pmw/doc/index.html">home page</A> for a complete 
+  list of documents. The files in this directory are also available from the <A 
+  href="http://www.dscpl.com.au/pmw/">official Pmw home page</A>. </P>
+  <DT>
+  <H2>Demonstrations and tests</H2>
+  <DD>
+  <P>A good way to get an overview of the functionality provided by Pmw is to 
+  run the demonstrations and tests and look at the demonstration code. To view a 
+  comprehensive demonstration of many of the features of Pmw run the 
+  <CODE>All.py</CODE> script, which can be found in the <CODE>demos</CODE> 
+  subdirectory of each version of Pmw. 
+  <P>You do not have to install Pmw to run the demonstrations and tests, simply 
+  change into the appropriate directory and run the file <CODE>All.py</CODE>. 
+  See <A 
+  href="http://www.dscpl.com.au/pmw/doc/demosandtests.html">Demonstrations and 
+  tests</A> for more information about running the demonstrations and tests and 
+  how to create your own. </P><A name=contributions></A>
+  <DT>
+  <H2>Contributions welcome</H2>
+  <DD>
+  <P>If you create some whiz-bang megawidgets and would like to contribute them 
+  to Pmw, they will be most welcome. You should be able to get some idea of the 
+  coding style used in Pmw code by reading <A 
+  href="http://www.dscpl.com.au/pmw/doc/howtobuild.html">How to build Pmw 
+  megawidgets</A> and by looking at the Pmw library code itself in the 
+  <CODE>lib</CODE> directory of each Pmw version. </P>
+  <P>If you would like to contribute a megawidget, it would be preferable if it 
+  also came with a simple demonstration and a test script. See <A 
+  href="http://www.dscpl.com.au/pmw/doc/demosandtests.html">Demonstrations and 
+  tests</A> for information about how to create new demonstrations and tests. 
+  <P>Each megawidget should also have a reference manual describing its options, 
+  components and methods. </P><A name=docgen></A>
+  <DT>
+  <H2>Generating the documentation</H2>
+  <DD>
+  <P>The released reference manuals are automatically generated by merging 
+  specially marked-up text with the output from megawidget query methods, such 
+  as <CODE>components()</CODE>, <CODE>options()</CODE> and 
+  <CODE>componentaliases()</CODE>, and various other introspective devices. If 
+  you are interested to see how the documentation is generated, you can fetch 
+  the marked-up text and the python script to convert the text to html from <A 
+  href="ftp://ftp.dscpl.com.au/pub/pmw/Pmw.0.8.4.docsrc.tar.gz"><CODE>pub/pmw/Pmw.0.8.4.docsrc.tar.gz</CODE></A>. 
+  Download this file into the <CODE>Pmw/Pmw_0_8_4</CODE> directory of the Pmw 
+  source tree. Unzip and untar the file. This will create a <CODE>docsrc</CODE> 
+  sub-directory of <CODE>Pmw/Pmw_0_8_4</CODE>. If you want to keep the 
+  documentation which came with the Pmw distribution, rename the old 
+  <CODE>doc</CODE> directory. Then change directory to <CODE>docsrc</CODE> and 
+  run <CODE>createmanuals.py</CODE>. After printing lots of warnings about 
+  documentation that has not been written yet, this will create a new 
+  <CODE>doc</CODE> directory containing all the html documentation. 
+  <P>Here is an example set of commands to unpack the documentation source and 
+  regenerate the documentation, assuming you have downloaded the source in the 
+  Pmw/Pmw_0_8_4 directory: 
+  <DL>
+    <DD><PRE>cd Pmw/Pmw_0_8_4
+gunzip Pmw.0.8.4.docsrc.tar.gz
+tar xvf Pmw.0.8.4.docsrc.tar
+mv doc doc.old
+cd docsrc
+./createmanuals.py
+</PRE></DD></DL>
+  <P></P>
+  <P>If running under Unix, you will need to run the 
+  <CODE>createmanuals.py</CODE> script with a valid DISPLAY environment 
+  variable, since it creates each megawidget and then queries it for its 
+  options, components, etc. This is because Tk (and hence Tkinter) requires a 
+  connection to an X server to run. </P>
+  <DT>
+  <H2>Future plans and bugs</H2>
+  <DD>
+  <P>The <A href="http://www.dscpl.com.au/pmw/doc/todo.html">todo list</A> 
+  contains a long list of of suggestions, bugs and enhancements for Pmw. If you 
+  are interested in doing any of these, please let me (<A 
+  href="mailto:gregm@iname.com"><I>gregm@iname.com</I></A>) know. Some of the 
+  items in the todo list may be considered bugs. There are also some other 
+  problems due to idiosyncrasies in the implementation of Tk. </P>
+  <DT>
+  <H2>Acknowledgements</H2>
+  <DD>
+  <P>The initial ideas for Pmw were blatantly stolen from the itcl extensions <A 
+  href="http://www.tcltk.com/itk">[incr Tk]</A> by Michael McLennan and <A 
+  href="http://www.tcltk.com/iwidgets">[incr Widgets]</A> by Mark Ulferts. 
+  Several of the megawidgets are direct translations from the itcl to python. 
+  </P>
+  <P>The base classes and most megawidgets were written by Greg McFarlane and 
+  Peter Munnings. Contributed megawidgets include: Pmw.TimeCounter by Joe 
+  VanAndel, Pmw.Group and an early version of Pmw.NoteBook by Case Roole, 
+  Pmw.ScrolledCanvas, Pmw.ScrolledFrame and another early version of 
+  Pmw.NoteBook by Joe Saltiel and Pmw.OptionMenu by Roman Sulzhyk. A big thank 
+  you to the following people for their bug reports, fixes, enhancements and 
+  suggestions: David Ascher, Robin Becker, Siggy Brentrup, Mark Colclough, 
+  Jerome Gay, Clemens Hintze, Rob Hooft Jack Jansen, Jonathan Kelly, Magnus 
+  Kessler, Matthias Klose, Andreas Kostyrka, Fredrik Lundh, Magnus Lycka, Graham 
+  Matthews, Dieter Maurer, Michael McLay, Daniel Michelson, Georg Mischler, Rob 
+  Pearson, Case Roole, Joe Saltiel, Roman Sulzhyk, Shen Wang, Chris Wright, and 
+  Guido van Rossum. Special thanks to Case Roole and Michael McLay for help with 
+  getting Pmw to work with python 1.5 packages and many other nifty features. My 
+  deepest apologies if I have forgotten anyone. Please let me know. </P>
+  <P>The Pmw home page and ftp site is made available courtesy of <A 
+  href="http://www.dscpl.com.au/">Dumpleton Software Consulting Pty Limited</A>. 
+  </P>
+  <P>The current maintainer is Greg McFarlane. If you have any comments, 
+  enhancements or new contributions, please contact me at <A 
+  href="mailto:gregm@iname.com"><I>gregm@iname.com</I></A>. </P></DD></DL>
+<CENTER>
+<P align=center><IMG alt="" height=5 
+src="Getting started with Pmw_files/blue_line.gif" width=320> </P></CENTER><FONT 
+size=-1>
+<CENTER>
+<P align=center><A href="http://www.dscpl.com.au/pmw/doc/index.html">Home</A>. 
+Pmw 0.8.4 Maintainer <A href="mailto:gregm@iname.com">gregm@iname.com</A>. 12 
+May 2000 </P></CENTER></FONT></BODY></HTML>

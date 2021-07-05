@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1. Introduction</TITLE>
+<META NAME="description" CONTENT="1. Introduction">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="module-mac.html">
+<LINK REL="previous" HREF="contents.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="module-mac.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html151"
+ HREF="module-mac.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html147"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html141"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html149"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html150"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html152"
+ HREF="module-mac.html">2. mac  </A>
+<b>Up:</b> <A NAME="tex2html148"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html142"
+ HREF="contents.html">Contents</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002100000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>. Introduction
+</H1>
+
+<P>
+The modules in this manual are available on the Apple Macintosh only.
+
+<P>
+Aside from the modules described here there are also interfaces to
+various MacOS toolboxes, which are currently not extensively
+described. The toolboxes for which modules exist are:
+<tt>AE</tt> (Apple Events),
+<tt>Cm</tt> (Component Manager),
+<tt>Ctl</tt> (Control Manager),
+<tt>Dlg</tt> (Dialog Manager),
+<tt>Evt</tt> (Event Manager),
+<tt>Fm</tt> (Font Manager),
+<tt>List</tt> (List Manager),
+<tt>Menu</tt> (Moenu Manager),
+<tt>Qd</tt> (QuickDraw),
+<tt>Qt</tt> (QuickTime),
+<tt>Res</tt> (Resource Manager and Handles),
+<tt>Scrap</tt> (Scrap Manager),
+<tt>Snd</tt> (Sound Manager),
+<tt>TE</tt> (TextEdit),
+<tt>Waste</tt> (non-Apple <b>TextEdit</b> replacement) and
+<tt>Win</tt> (Window Manager).
+
+<P>
+If applicable the module will define a number of Python objects for
+the various structures declared by the toolbox, and operations will be
+implemented as methods of the object. Other operations will be
+implemented as functions in the module. Not all operations possible in
+C will also be possible in Python (callbacks are often a problem), and
+parameters will occasionally be different in Python (input and output
+buffers, especially). All methods and functions have a <tt>__doc__</tt>
+string describing their arguments and return values, and for
+additional description you are referred to <i>Inside Macintosh</i> or
+similar works.
+
+<P>
+The following modules are documented here:
+
+<P>
+<table>
+  <tr><td><b><tt><a href="module-mac.html">mac</a></tt></b></td>
+      <td>Similar interfaces to the <tt>posix</tt> module.</td></tr>
+  <tr><td><b><tt><a href="module-macpath.html">macpath</a></tt></b></td>
+      <td>MacOS path manipulation functions.</td></tr>
+  <tr><td><b><tt><a href="module-ctb.html">ctb</a></tt></b></td>
+      <td>Interfaces to the Communications Tool Box.  Only the Connection
+Manager is supported.</td></tr>
+  <tr><td><b><tt><a href="module-macconsole.html">macconsole</a></tt></b></td>
+      <td>Think C's console package.</td></tr>
+  <tr><td><b><tt><a href="module-macdnr.html">macdnr</a></tt></b></td>
+      <td>Interfaces to the Macintosh Domain Name Resolver.</td></tr>
+  <tr><td><b><tt><a href="module-macfs.html">macfs</a></tt></b></td>
+      <td>Support for FSSpec, the Alias Manager, <b>finder</b> aliases,
+and the Standard File package.</td></tr>
+  <tr><td><b><tt><a href="module-ic.html">ic</a></tt></b></td>
+      <td>Access to Internet Config.</td></tr>
+  <tr><td><b><tt><a href="module-MacOS.html">MacOS</a></tt></b></td>
+      <td>Access to MacOS specific interpreter features.</td></tr>
+  <tr><td><b><tt><a href="module-macostools.html">macostools</a></tt></b></td>
+      <td>Convenience routines for file manipulation.</td></tr>
+  <tr><td><b><tt><a href="module-findertools.html">findertools</a></tt></b></td>
+      <td>Wrappers around the <b>finder</b>'s Apple Events interface.</td></tr>
+  <tr><td><b><tt><a href="module-mactcp.html">mactcp</a></tt></b></td>
+      <td>The MacTCP interfaces.</td></tr>
+  <tr><td><b><tt><a href="module-macspeech.html">macspeech</a></tt></b></td>
+      <td>Interface to the Macintosh Speech Manager.</td></tr>
+  <tr><td><b><tt><a href="module-EasyDialogs.html">EasyDialogs</a></tt></b></td>
+      <td>Basic Macintosh dialogs.</td></tr>
+  <tr><td><b><tt><a href="module-FrameWork.html">FrameWork</a></tt></b></td>
+      <td>Interactive application framework.</td></tr>
+  <tr><td><b><tt><a href="module-MiniAEFrame.html">MiniAEFrame</a></tt></b></td>
+      <td>Support to act as an Open Scripting Architecture (OSA) server
+(``Apple Events'').</td></tr>
+</table>
+<BR>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html151"
+ HREF="module-mac.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html147"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html141"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html149"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html150"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html152"
+ HREF="module-mac.html">2. mac  </A>
+<b>Up:</b> <A NAME="tex2html148"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html142"
+ HREF="contents.html">Contents</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

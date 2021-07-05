@@ -1,0 +1,307 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>5.6 array --
+Efficient arrays of uniformly typed numeric values.</TITLE>
+<META NAME="description" CONTENT="5.6 array --
+Efficient arrays of uniformly typed numeric values.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-fileinput.html">
+<LINK REL="previous" HREF="module-bisect.html">
+<LINK REL="up" HREF="misc.html">
+<LINK REL="next" HREF="module-fileinput.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1571"
+ HREF="module-fileinput.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1567"
+ HREF="misc.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1561"
+ HREF="bisect-example.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1569"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1570"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1572"
+ HREF="module-fileinput.html">5.7 fileinput  </A>
+<b>Up:</b> <A NAME="tex2html1568"
+ HREF="misc.html">5. Miscellaneous Services</A>
+<b>Previous:</b> <A NAME="tex2html1562"
+ HREF="bisect-example.html">5.5.1 Example</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION007600000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>array</tt> --
+         Efficient arrays of uniformly typed numeric values.</A>
+</H1>
+
+
+<P>
+
+<P>
+<a name="l2h-8554"></a>
+<P>
+This module defines a new object type which can efficiently represent
+an array of basic values: characters, integers, floating point
+numbers.  Arrays are sequence types and behave very much like lists,
+except that the type of objects stored in them is constrained.  The
+type is specified at object creation time by using a <i>type code</i>,
+which is a single character.  The following type codes are defined:
+
+<P>
+<table border align=center>
+  <tr><th><b>Type code</b></th>
+      <th align=left><b>C Type</b></th>
+      <th><b>Minimum size in bytes</b></th>
+<tr><td align=center><code>'c'</code></td>
+      <td>character</td>
+      <td align=center>1</td>
+<tr><td align=center><code>'b'</code></td>
+      <td>signed integer</td>
+      <td align=center>1</td>
+<tr><td align=center><code>'B'</code></td>
+      <td>unsigned integer</td>
+      <td align=center>1</td>
+<tr><td align=center><code>'h'</code></td>
+      <td>signed integer</td>
+      <td align=center>2</td>
+<tr><td align=center><code>'H'</code></td>
+      <td>unsigned integer</td>
+      <td align=center>2</td>
+<tr><td align=center><code>'i'</code></td>
+      <td>signed integer</td>
+      <td align=center>2</td>
+<tr><td align=center><code>'I'</code></td>
+      <td>unsigned integer</td>
+      <td align=center>2</td>
+<tr><td align=center><code>'l'</code></td>
+      <td>signed integer</td>
+      <td align=center>4</td>
+<tr><td align=center><code>'L'</code></td>
+      <td>unsigned integer</td>
+      <td align=center>4</td>
+<tr><td align=center><code>'f'</code></td>
+      <td>floating point</td>
+      <td align=center>4</td>
+<tr><td align=center><code>'d'</code></td>
+      <td>floating point</td>
+      <td align=center>8</td>
+
+</table>
+
+<P>
+The actual representation of values is determined by the machine
+architecture (strictly speaking, by the C implementation).  The actual
+size can be accessed through the <i>itemsize</i> attribute.  The values
+stored  for <tt>'L'</tt> and <tt>'I'</tt> items will be represented as
+Python long integers when retrieved, because Python's plain integer
+type cannot represent the full range of C's unsigned (long) integers.
+
+<P>
+The module defines the following function and type object:
+
+<P>
+<dl><dt><b><a name="l2h-8711"><tt>array</tt></a></b> (<var>typecode</var><big>[</big><var>, initializer</var><big>]</big>)
+<dd>
+Return a new array whose items are restricted by <i>typecode</i>, and
+initialized from the optional <i>initializer</i> value, which must be a
+list or a string.  The list or string is passed to the new array's
+<tt>fromlist()</tt> or <tt>fromstring()</tt> method (see below) to add
+initial items to the array.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8610"><tt>ArrayType</tt></a></b>
+<dd>
+Type object corresponding to the objects returned by
+<tt>array()</tt>.
+</dl>
+
+<P>
+Array objects support the following data items and methods:
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>typecode</tt></a></b>
+<dd>
+The typecode character used to create the array.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>itemsize</tt></a></b>
+<dd>
+The length in bytes of one array item in the internal representation.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8620"><tt>append</tt></a></b> (<var>x</var>)
+<dd>
+Append a new item with value <i>x</i> to the end of the array.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8625"><tt>buffer_info</tt></a></b> ()
+<dd>
+Return a tuple <tt>(<i>address</i>, <i>length</i>)</tt> giving the current
+memory address and the length in bytes of the buffer used to hold
+array's contents.  This is occasionally useful when working with
+low-level (and inherently unsafe) I/O interfaces that require memory
+addresses, such as certain <tt>ioctl()</tt> operations.  The returned
+numbers are valid as long as the array exists and no length-changing
+operations are applied to it.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8632"><tt>byteswap</tt></a></b> (<var>x</var>)
+<dd>
+``Byteswap'' all items of the array.  This is only supported for
+integer values.  It is useful when reading data from a file written
+on a machine with a different byte order.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8636"><tt>fromfile</tt></a></b> (<var>f, n</var>)
+<dd>
+Read <i>n</i> items (as machine values) from the file object <i>f</i>
+and append them to the end of the array.  If less than <i>n</i> items
+are available, <tt>EOFError</tt> is raised, but the items that were
+available are still inserted into the array.  <i>f</i> must be a real
+built-in file object; something else with a <tt>read()</tt> method won't
+do.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8646"><tt>fromlist</tt></a></b> (<var>list</var>)
+<dd>
+Append items from the list.  This is equivalent to
+"<tt>for x in <i>list</i>: a.append(x)</tt>"
+except that if there is a type error, the array is unchanged.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8651"><tt>fromstring</tt></a></b> (<var>s</var>)
+<dd>
+Appends items from the string, interpreting the string as an
+array of machine values (i.e. as if it had been read from a
+file using the <tt>fromfile()</tt> method).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8656"><tt>insert</tt></a></b> (<var>i, x</var>)
+<dd>
+Insert a new item with value <i>x</i> in the array before position
+<i>i</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8662"><tt>read</tt></a></b> (<var>f, n</var>)
+<dd>
+<b>Deprecated since release 1.5.1.</b>
+Use the <tt>fromfile()</tt> method.<p>
+Read <i>n</i> items (as machine values) from the file object <i>f</i>
+and append them to the end of the array.  If less than <i>n</i> items
+are available, <tt>EOFError</tt> is raised, but the items that were
+available are still inserted into the array.  <i>f</i> must be a real
+built-in file object; something else with a <tt>read()</tt> method won't
+do.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8674"><tt>reverse</tt></a></b> ()
+<dd>
+Reverse the order of the items in the array.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8678"><tt>tofile</tt></a></b> (<var>f</var>)
+<dd>
+Write all items (as machine values) to the file object <i>f</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8683"><tt>tolist</tt></a></b> ()
+<dd>
+Convert the array to an ordinary list with the same items.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8687"><tt>tostring</tt></a></b> ()
+<dd>
+Convert the array to an array of machine values and return the
+string representation (the same sequence of bytes that would
+be written to a file by the <tt>tofile()</tt> method.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8692"><tt>write</tt></a></b> (<var>f</var>)
+<dd>
+<b>Deprecated since release 1.5.1.</b>
+Use the <tt>tofile()</tt> method.<p>
+Write all items (as machine values) to the file object <i>f</i>.
+</dl>
+
+<P>
+When an array object is printed or converted to a string, it is
+represented as <tt>array(<i>typecode</i>, <i>initializer</i>)</tt>.  The
+<i>initializer</i> is omitted if the array is empty, otherwise it is a
+string if the <i>typecode</i> is <tt>'c'</tt>, otherwise it is a list of
+numbers.  The string is guaranteed to be able to be converted back to
+an array with the same type and value using reverse quotes
+(<tt>``</tt>).  Examples:
+
+<P>
+<dl><dd><pre>
+array('l')
+array('c', 'hello world')
+array('l', [1, 2, 3, 4, 5])
+array('d', [1.0, 2.0, 3.14])
+</pre></dl>
+
+<P>
+<p><b>See Also:</b></p>
+
+<p>Module <tt><b><a href="module-struct.html">struct</a></b></tt>&nbsp;&nbsp;&nbsp;(Packing and unpacking of heterogeneous binary data.)</p>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1571"
+ HREF="module-fileinput.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1567"
+ HREF="misc.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1561"
+ HREF="bisect-example.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1569"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1570"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1572"
+ HREF="module-fileinput.html">5.7 fileinput  </A>
+<b>Up:</b> <A NAME="tex2html1568"
+ HREF="misc.html">5. Miscellaneous Services</A>
+<b>Previous:</b> <A NAME="tex2html1562"
+ HREF="bisect-example.html">5.5.1 Example</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

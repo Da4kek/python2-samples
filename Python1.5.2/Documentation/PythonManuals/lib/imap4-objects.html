@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.7.1 IMAP4 Objects</TITLE>
+<META NAME="description" CONTENT="11.7.1 IMAP4 Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="imap4-example.html">
+<LINK REL="previous" HREF="module-imaplib.html">
+<LINK REL="up" HREF="module-imaplib.html">
+<LINK REL="next" HREF="imap4-example.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2730"
+ HREF="imap4-example.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2726"
+ HREF="module-imaplib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2720"
+ HREF="module-imaplib.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2728"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2729"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2731"
+ HREF="imap4-example.html">11.7.2 IMAP4 Example</A>
+<b>Up:</b> <A NAME="tex2html2727"
+ HREF="module-imaplib.html">11.7 imaplib  </A>
+<b>Previous:</b> <A NAME="tex2html2721"
+ HREF="module-imaplib.html">11.7 imaplib  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0013710000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> IMAP4 Objects
+</H2>
+
+<P>
+All IMAP4rev1 commands are represented by methods of the same name,
+either upper-case or lower-case.
+
+<P>
+Each command returns a tuple: <tt>(</tt><i>type</i>, <tt>[</tt><i>data</i>,
+...<tt>])</tt> where <i>type</i> is usually <tt>'OK'</tt> or <tt>'NO'</tt>,
+and <i>data</i> is either the text from the command response, or
+mandated results from the command.
+
+<P>
+An <tt>IMAP4</tt> instance has the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-16699"><tt>append</tt></a></b> (<var>mailbox, flags, date_time, message</var>)
+<dd>
+  Append message to named mailbox. 
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16703"><tt>authenticate</tt></a></b> (<var>func</var>)
+<dd>
+  Authenticate command -- requires response processing. This is
+  currently unimplemented, and raises an exception. 
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16707"><tt>check</tt></a></b> ()
+<dd>
+  Checkpoint mailbox on server. 
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16711"><tt>close</tt></a></b> ()
+<dd>
+  Close currently selected mailbox. Deleted messages are removed from
+  writable mailbox. This is the recommended command before
+  "<tt>LOGOUT</tt>".
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16716"><tt>copy</tt></a></b> (<var>message_set, new_mailbox</var>)
+<dd>
+  Copy <i>message_set</i> messages onto end of <i>new_mailbox</i>. 
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16722"><tt>create</tt></a></b> (<var>mailbox</var>)
+<dd>
+  Create new mailbox named <i>mailbox</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16727"><tt>delete</tt></a></b> (<var>mailbox</var>)
+<dd>
+  Delete old mailbox named <i>mailbox</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16732"><tt>expunge</tt></a></b> ()
+<dd>
+  Permanently remove deleted items from selected mailbox. Generates an
+  "<tt>EXPUNGE</tt>" response for each deleted message. Returned data
+  contains a list of "<tt>EXPUNGE</tt>" message numbers in order
+  received.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16738"><tt>fetch</tt></a></b> (<var>message_set, message_parts</var>)
+<dd>
+  Fetch (parts of) messages. Returned data are tuples of message part
+  envelope and data.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16742"><tt>list</tt></a></b> (<big>[</big><var>directory</var><big>[</big><var>, pattern</var><big>]</big><big>]</big>)
+<dd>
+  List mailbox names in <i>directory</i> matching
+  <i>pattern</i>.  <i>directory</i> defaults to the top-level mail
+  folder, and <i>pattern</i> defaults to match anything.  Returned data
+  contains a list of "<tt>LIST</tt>" responses.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16751"><tt>login</tt></a></b> (<var>user, password</var>)
+<dd>
+  Identify the client using a plaintext password.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16755"><tt>logout</tt></a></b> ()
+<dd>
+  Shutdown connection to server. Returns server "<tt>BYE</tt>" response.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16760"><tt>lsub</tt></a></b> (<big>[</big><var>directory</var><big>[</big><var>, pattern</var><big>]</big><big>]</big>)
+<dd>
+  List subscribed mailbox names in directory matching pattern.
+  <i>directory</i> defaults to the top level directory and
+  <i>pattern</i> defaults to match any mailbox.
+  Returned data are tuples of message part envelope and data.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16766"><tt>recent</tt></a></b> ()
+<dd>
+  Prompt server for an update. Returned data is <tt>None</tt> if no new
+  messages, else value of "<tt>RECENT</tt>" response.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16772"><tt>rename</tt></a></b> (<var>oldmailbox, newmailbox</var>)
+<dd>
+  Rename mailbox named <i>oldmailbox</i> to <i>newmailbox</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16778"><tt>response</tt></a></b> (<var>code</var>)
+<dd>
+  Return data for response <i>code</i> if received, or
+  <tt>None</tt>. Returns the given code, instead of the usual type.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16784"><tt>search</tt></a></b> (<var>charset, criteria</var>)
+<dd>
+  Search mailbox for matching messages. Returned data contains a space
+  separated list of matching message numbers.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16788"><tt>select</tt></a></b> (<big>[</big><var>mailbox</var><big>[</big><var>, readonly</var><big>]</big><big>]</big>)
+<dd>
+  Select a mailbox. Returned data is the count of messages in
+  <i>mailbox</i> ("<tt>EXISTS</tt>" response).  The default <i>mailbox</i>
+  is <tt>'INBOX'</tt>.  If the <i>readonly</i> flag is set, modifications
+  to the mailbox are not allowed.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16797"><tt>status</tt></a></b> (<var>mailbox, names</var>)
+<dd>
+  Request named status conditions for <i>mailbox</i>. 
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16802"><tt>store</tt></a></b> (<var>message_set, command, flag_list</var>)
+<dd>
+  Alters flag dispositions for messages in mailbox.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16806"><tt>subscribe</tt></a></b> (<var>mailbox</var>)
+<dd>
+  Subscribe to new mailbox.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16810"><tt>uid</tt></a></b> (<var>command, args</var>)
+<dd>
+  Execute command args with messages identified by UID, rather than
+  message number. Returns response appropriate to command.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16814"><tt>unsubscribe</tt></a></b> (<var>mailbox</var>)
+<dd>
+  Unsubscribe from old mailbox.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16818"><tt>xatom</tt></a></b> (<var>name</var><big>[</big><var>, arg1</var><big>[</big><var>, arg2</var><big>]</big><big>]</big>)
+<dd>
+  Allow simple extension commands notified by server in
+  "<tt>CAPABILITY</tt>" response.
+</dl>
+
+<P>
+The following attributes are defined on instances of <tt>IMAP4</tt>:
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>PROTOCOL_VERSION</tt></a></b>
+<dd>
+The most recent supported protocol in the "<tt>CAPABILITY</tt>"
+response from the server.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>debug</tt></a></b>
+<dd>
+Integer value to control debugging output.  The initialize value is
+taken from the module variable <tt>Debug</tt>.  Values greater than
+three trace each command.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2730"
+ HREF="imap4-example.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2726"
+ HREF="module-imaplib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2720"
+ HREF="module-imaplib.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2728"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2729"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2731"
+ HREF="imap4-example.html">11.7.2 IMAP4 Example</A>
+<b>Up:</b> <A NAME="tex2html2727"
+ HREF="module-imaplib.html">11.7 imaplib  </A>
+<b>Previous:</b> <A NAME="tex2html2721"
+ HREF="module-imaplib.html">11.7 imaplib  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

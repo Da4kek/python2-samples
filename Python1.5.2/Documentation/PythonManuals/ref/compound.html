@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7. Compound statements</TITLE>
+<META NAME="description" CONTENT="7. Compound statements">
+<META NAME="keywords" CONTENT="ref">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ref.css">
+<LINK REL="next" HREF="top-level.html">
+<LINK REL="previous" HREF="simple.html">
+<LINK REL="up" HREF="ref.html">
+<LINK REL="next" HREF="if.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1169"
+ HREF="if.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1165"
+ HREF="ref.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1159"
+ HREF="exec.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html1167"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html1168"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1170"
+ HREF="if.html">7.1 The if statement</A>
+<b>Up:</b> <A NAME="tex2html1166"
+ HREF="ref.html">Python Reference Manual</A>
+<b>Previous:</b> <A NAME="tex2html1160"
+ HREF="exec.html">6.13 The exec statement</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009000000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">7</SPAN>. Compound statements
+</H1>
+<a name="l2h-3588"></a>
+
+<P>
+Compound statements contain (groups of) other statements; they affect
+or control the execution of those other statements in some way.  In
+general, compound statements span multiple lines, although in simple
+incarnations a whole compound statement may be contained in one line.
+
+<P>
+The <tt>if</tt>, <tt>while</tt> and <tt>for</tt> statements implement
+traditional control flow constructs.  <tt>try</tt> specifies exception
+handlers and/or cleanup code for a group of statements.  Function and
+class definitions are also syntactically compound statements.
+
+<P>
+Compound statements consist of one or more `clauses.'  A clause
+consists of a header and a `suite.'  The clause headers of a
+particular compound statement are all at the same indentation level.
+Each clause header begins with a uniquely identifying keyword and ends
+with a colon.  A suite is a group of statements controlled by a
+clause.  A suite can be one or more semicolon-separated simple
+statements on the same line as the header, following the header's
+colon, or it can be one or more indented statements on subsequent
+lines.  Only the latter form of suite can contain nested compound
+statements; the following is illegal, mostly because it wouldn't be
+clear to which <tt>if</tt> clause a following <tt>else</tt> clause would
+belong:
+<a name="l2h-3596"></a><a name="l2h-3597"></a>
+<P>
+<dl><dd><pre>
+if test1: if test2: print x
+</pre></dl>
+
+<P>
+Also note that the semicolon binds tighter than the colon in this
+context, so that in the following example, either all or none of the
+<tt>print</tt> statements are executed:
+
+<P>
+<dl><dd><pre>
+if x &lt; y &lt; z: print x; print y; print z
+</pre></dl>
+
+<P>
+Summarizing:
+
+<P>
+<dl><dd><pre>
+compound_stmt:  if_stmt | while_stmt | for_stmt
+              | try_stmt | funcdef | classdef
+suite:          stmt_list NEWLINE | NEWLINE INDENT statement+ DEDENT
+statement:      stmt_list NEWLINE | compound_stmt
+stmt_list:      simple_stmt (";" simple_stmt)* [";"]
+</pre></dl>
+
+<P>
+Note that statements always end in a
+<tt>NEWLINE</tt><a name="l2h-3606"></a> possibly followed by a
+<tt>DEDENT</tt>.<a name="l2h-3608"></a> Also note that optional
+continuation clauses always begin with a keyword that cannot start a
+statement, thus there are no ambiguities (the `dangling
+<tt>else</tt>' problem is solved in Python by requiring nested
+<tt>if</tt> statements to be indented).
+<a name="l2h-3611"></a>
+
+<P>
+The formatting of the grammar rules in the following sections places
+each clause on a separate line for clarity.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html1171"
+ HREF="if.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> The <tt>if</tt> statement</A>
+<LI><A NAME="tex2html1172"
+ HREF="while.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> The <tt>while</tt> statement</A>
+<LI><A NAME="tex2html1173"
+ HREF="for.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> The <tt>for</tt> statement</A>
+<LI><A NAME="tex2html1174"
+ HREF="try.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> The <tt>try</tt> statement</A>
+<LI><A NAME="tex2html1175"
+ HREF="function.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> Function definitions</A>
+<LI><A NAME="tex2html1176"
+ HREF="class.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">6</SPAN> Class definitions</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1169"
+ HREF="if.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1165"
+ HREF="ref.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1159"
+ HREF="exec.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html1167"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html1168"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1170"
+ HREF="if.html">7.1 The if statement</A>
+<b>Up:</b> <A NAME="tex2html1166"
+ HREF="ref.html">Python Reference Manual</A>
+<b>Previous:</b> <A NAME="tex2html1160"
+ HREF="exec.html">6.13 The exec statement</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

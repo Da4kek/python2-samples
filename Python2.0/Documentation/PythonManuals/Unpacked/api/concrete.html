@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>7. Concrete Objects Layer </title>
+<META NAME="description" CONTENT="7. Concrete Objects Layer ">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="api.css">
+<LINK REL="next" href="initialization.html">
+<LINK REL="previous" href="abstract.html">
+<LINK REL="up" HREF="api.html">
+<LINK REL="next" href="fundamental.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="mapping.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A HREF="api.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="fundamental.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="mapping.html">6.4 Mapping Protocol</A>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="api.html">Python/C API Reference Manual</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="fundamental.html">7.1 Fundamental Objects</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1>
+<BR>
+7. Concrete Objects Layer 
+</H1>
+
+<P>
+The functions in this chapter are specific to certain Python object
+types.  Passing them an object of the wrong type is not a good idea;
+if you receive an object from a Python program and you are not sure
+that it has the right type, you must perform a type check first;
+for example. to check that an object is a dictionary, use
+<tt class="cfunction">PyDict_Check()</tt>.  The chapter is structured like the
+``family tree'' of Python object types.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html432"
+  href="fundamental.html">7.1 Fundamental Objects </A>
+<UL>
+<LI><A NAME="tex2html433"
+  href="typeObjects.html">7.1.1 Type Objects </A>
+<LI><A NAME="tex2html434"
+  href="noneObject.html">7.1.2 The None Object </A>
+</UL>
+<LI><A NAME="tex2html435"
+  href="sequenceObjects.html">7.2 Sequence Objects </A>
+<UL>
+<LI><A NAME="tex2html436"
+  href="stringObjects.html">7.2.1 String Objects </A>
+<LI><A NAME="tex2html437"
+  href="unicodeObjects.html">7.2.2 Unicode Objects </A>
+<UL>
+<LI><A NAME="tex2html438"
+  href="builtinCodecs.html">7.2.2.1 Builtin Codecs </A>
+<LI><A NAME="tex2html439"
+  href="unicodeMethodsAndSlots.html">7.2.2.2 Methods and Slot Functions </A>
+</UL>
+<LI><A NAME="tex2html440"
+  href="bufferObjects.html">7.2.3 Buffer Objects </A>
+<LI><A NAME="tex2html441"
+  href="tupleObjects.html">7.2.4 Tuple Objects </A>
+<LI><A NAME="tex2html442"
+  href="listObjects.html">7.2.5 List Objects </A>
+</UL>
+<LI><A NAME="tex2html443"
+  href="mapObjects.html">7.3 Mapping Objects </A>
+<UL>
+<LI><A NAME="tex2html444"
+  href="dictObjects.html">7.3.1 Dictionary Objects </A>
+</UL>
+<LI><A NAME="tex2html445"
+  href="numericObjects.html">7.4 Numeric Objects </A>
+<UL>
+<LI><A NAME="tex2html446"
+  href="intObjects.html">7.4.1 Plain Integer Objects </A>
+<LI><A NAME="tex2html447"
+  href="longObjects.html">7.4.2 Long Integer Objects </A>
+<LI><A NAME="tex2html448"
+  href="floatObjects.html">7.4.3 Floating Point Objects </A>
+<LI><A NAME="tex2html449"
+  href="complexObjects.html">7.4.4 Complex Number Objects </A>
+<UL>
+<LI><A NAME="tex2html450"
+  HREF="node44.html">7.4.4.1 Complex Numbers as C Structures</A>
+<LI><A NAME="tex2html451"
+  HREF="node45.html">7.4.4.2 Complex Numbers as Python Objects</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html452"
+  href="otherObjects.html">7.5 Other Objects </A>
+<UL>
+<LI><A NAME="tex2html453"
+  href="fileObjects.html">7.5.1 File Objects </A>
+<LI><A NAME="tex2html454"
+  href="moduleObjects.html">7.5.2 Module Objects </A>
+<LI><A NAME="tex2html455"
+  href="cObjects.html">7.5.3 CObjects </A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="mapping.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A HREF="api.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="fundamental.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="mapping.html">6.4 Mapping Protocol</A>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="api.html">Python/C API Reference Manual</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="fundamental.html">7.1 Fundamental Objects</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

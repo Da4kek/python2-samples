@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>1.3 The old way: no standards</title>
+<META NAME="description" CONTENT="1.3 The old way: no standards">
+<META NAME="keywords" CONTENT="inst">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="inst.css">
+<LINK REL="previous" href="new-standard.html">
+<LINK REL="up" href="intro.html">
+<LINK REL="next" href="standard-install.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="new-standard.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="intro.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="standard-install.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="new-standard.html">1.2 The new standard:</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="intro.html">1 Introduction</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="standard-install.html">2 Standard Build and</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+1.3 The old way: no standards
+</H2>
+
+<P>
+Before the Distutils, there was no infrastructure to support installing
+third-party modules in a consistent, standardized way.  Thus, it's not
+really possible to write a general manual for installing Python modules
+that don't use the Distutils; the only truly general statement that can
+be made is, ``Read the module's own installation instructions.''
+
+<P>
+However, if such instructions exist at all, they are often woefully
+inadequate and targeted at experienced Python developers.  Such users
+are already familiar with how the Python library is laid out on their
+platform, and know where to copy various files in order for Python to
+find them.  This document makes no such assumptions, and explains how
+the Python library is laid out on three major platforms (Unix, Windows,
+and Mac&nbsp;OS), so that you can understand what happens when the Distutils
+do their job <i>and</i> know how to install modules manually when the
+module author fails to provide a setup script.
+
+<P>
+Additionally, while there has not previously been a standard
+installation mechanism, Python has had some standard machinery for
+building extensions on Unix since Python <b>** version? **</b>.  This machinery
+(the <span class="file">Makefile.pre.in</span> file) is superseded by the Distutils, but it
+will no doubt live on in older module distributions for a while.  This
+<span class="file">Makefile.pre.in</span> mechanism is documented in the ``Extending &amp;
+Embedding Python'' manual, but that manual is aimed at module
+developers--hence, we include documentation for builders/installers
+here.
+
+<P>
+All of the pre-Distutils material is tucked away in
+section&nbsp;<A href="pre-distutils.html#pre-distutils">7</A>.
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="new-standard.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="intro.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="standard-install.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="new-standard.html">1.2 The new standard:</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="intro.html">1 Introduction</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="standard-install.html">2 Standard Build and</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

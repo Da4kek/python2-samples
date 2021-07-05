@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>3. MacOS Toolbox Modules </title>
+<META NAME="description" CONTENT="3. MacOS Toolbox Modules ">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="mac.css">
+<LINK REL="next" href="undocumented-modules.html">
+<LINK REL="previous" href="macpython-modules.html">
+<LINK REL="up" HREF="mac.html">
+<LINK REL="next" href="module-AE.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-aetypes.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A HREF="mac.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="module-AE.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Macintosh Library Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-aetypes.html">2.16 aetypes  </A>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="mac.html">Macintosh Library Modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="module-AE.html">3.1 AE  </A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1>
+<BR>
+3. MacOS Toolbox Modules 
+</H1>
+
+<P>
+There are a set of modules that provide interfaces to various MacOS
+toolboxes.  If applicable the module will define a number of Python
+objects for the various structures declared by the toolbox, and
+operations will be implemented as methods of the object.  Other
+operations will be implemented as functions in the module.  Not all
+operations possible in C will also be possible in Python (callbacks
+are often a problem), and parameters will occasionally be different in
+Python (input and output buffers, especially).  All methods and
+functions have a <tt class="member">__doc__</tt> string describing their arguments
+and return values, and for additional description you are referred to
+<em class='citetitle'><a
+ href='http://developer.apple.com/techpubs/macos8/mac8.html'
+ title='Inside
+Macintosh'
+ >Inside
+Macintosh <img src='../icons/offsite.gif'
+  border='0' class='offsitelink' height='15' width='17' alt='[off-site link]'
+  ></a></em> or similar works.
+
+<P>
+<b>Warning!</b>  These modules are not yet documented.  If you
+wish to contribute documentation of any of these modules, please get
+in touch with <span class="email">python-docs@python.org</span>.
+
+<P>
+<table class='synopsistable'>
+  <tr><td><b><tt class='module'><a href='module-AE.html'>AE</a></tt></b></td>
+      <td class='synopsis'>Interface to the Apple Events toolbox</td></tr>
+  <tr><td><b><tt class='module'><a href='module-Cm.html'>Cm</a></tt></b></td>
+      <td class='synopsis'>Interface to the Component Manager</td></tr>
+  <tr><td><b><tt class='module'><a href='module-Ctl.html'>Ctl</a></tt></b></td>
+      <td class='synopsis'>Interface to the Control Manager</td></tr>
+  <tr><td><b><tt class='module'><a href='module-Dlg.html'>Dlg</a></tt></b></td>
+      <td class='synopsis'>Interface to the Dialog Manager</td></tr>
+  <tr><td><b><tt class='module'><a href='module-Evt.html'>Evt</a></tt></b></td>
+      <td class='synopsis'>Interface to the Event Manager</td></tr>
+  <tr><td><b><tt class='module'><a href='module-Fm.html'>Fm</a></tt></b></td>
+      <td class='synopsis'>Interface to the Font Manager</td></tr>
+  <tr><td><b><tt class='module'><a href='module-List.html'>List</a></tt></b></td>
+      <td class='synopsis'>Interface to the List Manager</td></tr>
+  <tr><td><b><tt class='module'><a href='module-Menu.html'>Menu</a></tt></b></td>
+      <td class='synopsis'>Interface to the Menu Manager</td></tr>
+  <tr><td><b><tt class='module'><a href='module-Qd.html'>Qd</a></tt></b></td>
+      <td class='synopsis'>Interface to the QuickDraw toolbox</td></tr>
+  <tr><td><b><tt class='module'><a href='module-Qt.html'>Qt</a></tt></b></td>
+      <td class='synopsis'>Interface to the QuickTime toolbox</td></tr>
+  <tr><td><b><tt class='module'><a href='module-Res.html'>Res</a></tt></b></td>
+      <td class='synopsis'>Interface to the Resource Manager and Handles</td></tr>
+  <tr><td><b><tt class='module'><a href='module-Scrap.html'>Scrap</a></tt></b></td>
+      <td class='synopsis'>Interface to the Scrap Manager</td></tr>
+  <tr><td><b><tt class='module'><a href='module-Snd.html'>Snd</a></tt></b></td>
+      <td class='synopsis'>Interface to the Sound Manager </td></tr>
+  <tr><td><b><tt class='module'><a href='module-TE.html'>TE</a></tt></b></td>
+      <td class='synopsis'>Interface to TextEdit</td></tr>
+  <tr><td><b><tt class='module'><a href='module-waste.html'>waste</a></tt></b></td>
+      <td class='synopsis'>Interface to the ``WorldScript-Aware Styled Text Engine.''</td></tr>
+  <tr><td><b><tt class='module'><a href='module-Win.html'>Win</a></tt></b></td>
+      <td class='synopsis'>Interface to the Window Manager</td></tr>
+</table>
+
+<BR>
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-aetypes.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A HREF="mac.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="module-AE.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Macintosh Library Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-aetypes.html">2.16 aetypes  </A>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="mac.html">Macintosh Library Modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="module-AE.html">3.1 AE  </A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>6.3.1 Augmented Assignment statements </title>
+<META NAME="description" CONTENT="6.3.1 Augmented Assignment statements ">
+<META NAME="keywords" CONTENT="ref">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="ref.css">
+<LINK REL="previous" href="assignment.html">
+<LINK REL="up" href="assignment.html">
+<LINK REL="next" href="pass.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="assignment.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="assignment.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="pass.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="assignment.html">6.3 Assignment statements</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="assignment.html">6.3 Assignment statements</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="pass.html">6.4 The pass statement</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+6.3.1 Augmented Assignment statements 
+</H2>
+
+<P>
+Augmented assignment is the combination, in a single statement, of a binary
+operation and an assignment statement:
+
+
+<P>
+<dl><dd><pre class="verbatim">
+augmented_assignment_stmt: target augop expression_list
+augop:           "+=" | "-=" | "*=" | "/=" | "%=" | "**="
+               | "&gt;&gt;=" | "&lt;&lt;=" | "&amp;=" | "^=" | "|="
+target:          identifier | "(" target_list ")" | "[" target_list "]"
+               | attributeref | subscription | slicing
+</pre></dl>
+
+<P>
+(See section <A href="primaries.html#primaries">5.3</A> for the syntax definitions for the last
+three symbols.)
+
+<P>
+An augmented assignment evaluates the target (which, unlike normal
+assignment statements, cannot be an unpacking) and the expression
+list, performs the binary operation specific to the type of assignment
+on the two operands, and assigns the result to the original
+target.  The target is only evaluated once.
+
+<P>
+An augmented assignment expression like <code>x += 1</code> can be rewritten as
+<code>x = x + 1</code> to achieve a similar, but not exactly equal effect. In the
+augmented version, <code>x</code> is only evaluated once. Also, when possible, the
+actual operation is performed <i>in-place</i>, meaning that rather than
+creating a new object and assigning that to the target, the old object is
+modified instead.
+
+<P>
+With the exception of assigning to tuples and multiple targets in a single
+statement, the assignment done by augmented assignment statements is handled
+the same way as normal assignments. Similarly, with the exception of the
+possible <i>in-place</i> behaviour, the binary operation performed by
+augmented assignment is the same as the normal binary operations.
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="assignment.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="assignment.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="pass.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="assignment.html">6.3 Assignment statements</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="assignment.html">6.3 Assignment statements</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="pass.html">6.4 The pass statement</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

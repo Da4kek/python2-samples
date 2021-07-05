@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>2.10.1 TCP Stream Objects</title>
+<META NAME="description" CONTENT="2.10.1 TCP Stream Objects">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="mac.css">
+<LINK REL="next" HREF="node42.html">
+<LINK REL="previous" href="module-mactcp.html">
+<LINK REL="up" href="module-mactcp.html">
+<LINK REL="next" HREF="node42.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-mactcp.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="module-mactcp.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node42.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Macintosh Library Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-mactcp.html">2.10 mactcp  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="module-mactcp.html">2.10 mactcp  </A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node42.html">2.10.2 TCP Status Objects</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0041010000000000000000">
+2.10.1 TCP Stream Objects</A>
+</H2>
+
+<P>
+<dl><dt><b><a name='l2h-140'><tt class='member'>asr</tt></a></b>
+<dd>
+
+When set to a value different than <code>None</code> this should refer to a
+function with two integer parameters: an event code and a detail. This
+function will be called upon network-generated events such as urgent
+data arrival.  Macintosh documentation calls this the
+<i class="dfn">asynchronous service routine</i>.  In addition, it is called with
+eventcode <code>MACTCP.PassiveOpenDone</code> when a <tt class="method">PassiveOpen()</tt>
+completes. This is a Python addition to the MacTCP semantics.
+It is safe to do further calls from <var>asr</var>.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-141'><tt class='method'>PassiveOpen</tt></a></b> (<var>port</var>)
+<dd>
+Wait for an incoming connection on TCP port <var>port</var> (zero makes the
+system pick a free port). The call returns immediately, and you should
+use <tt class="method">wait()</tt> to wait for completion. You should not issue any method
+calls other than <tt class="method">wait()</tt>, <tt class="method">isdone()</tt> or
+<tt class="method">GetSockName()</tt> before the call completes.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-142'><tt class='method'>wait</tt></a></b> ()
+<dd>
+Wait for <tt class="method">PassiveOpen()</tt> to complete.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-143'><tt class='method'>isdone</tt></a></b> ()
+<dd>
+Return <code>1</code> if a <tt class="method">PassiveOpen()</tt> has completed.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-144'><tt class='method'>GetSockName</tt></a></b> ()
+<dd>
+Return the TCP address of this side of a connection as a 2-tuple
+<code>(<var>host</var>, <var>port</var>)</code>, both integers.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-145'><tt class='method'>ActiveOpen</tt></a></b> (<var>lport, host, rport</var>)
+<dd>
+Open an outgoing connection to TCP address <code>(<var>host</var>,
+<var>rport</var>)</code>. Use
+local port <var>lport</var> (zero makes the system pick a free port). This
+call blocks until the connection has been established.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-146'><tt class='method'>Send</tt></a></b> (<var>buf, push, urgent</var>)
+<dd>
+Send data <var>buf</var> over the connection. <var>push</var> and <var>urgent</var>
+are flags as specified by the TCP standard.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-147'><tt class='method'>Rcv</tt></a></b> (<var>timeout</var>)
+<dd>
+Receive data. The call returns when <var>timeout</var> seconds have passed
+or when (according to the MacTCP documentation) ``a reasonable amount
+of data has been received''. The return value is a 3-tuple
+<code>(<var>data</var>, <var>urgent</var>, <var>mark</var>)</code>. If urgent data is
+outstanding <code>Rcv</code> will always return that before looking at any
+normal data. The first call returning urgent data will have the
+<var>urgent</var> flag set, the last will have the <var>mark</var> flag set.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-148'><tt class='method'>Close</tt></a></b> ()
+<dd>
+Tell MacTCP that no more data will be transmitted on this
+connection. The call returns when all data has been acknowledged by
+the receiving side.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-149'><tt class='method'>Abort</tt></a></b> ()
+<dd>
+Forcibly close both sides of a connection, ignoring outstanding data.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-150'><tt class='method'>Status</tt></a></b> ()
+<dd>
+Return a TCP status object for this stream giving the current status
+(see below).
+</dl>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-mactcp.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="module-mactcp.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node42.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Macintosh Library Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-mactcp.html">2.10 mactcp  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="module-mactcp.html">2.10 mactcp  </A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node42.html">2.10.2 TCP Status Objects</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

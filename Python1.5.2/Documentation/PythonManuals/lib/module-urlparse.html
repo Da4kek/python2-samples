@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.10 urlparse --
+Parse URLs into components.</TITLE>
+<META NAME="description" CONTENT="11.10 urlparse --
+Parse URLs into components.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-SocketServer.html">
+<LINK REL="previous" HREF="module-smtplib.html">
+<LINK REL="up" HREF="internet.html">
+<LINK REL="next" HREF="module-SocketServer.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2811"
+ HREF="module-SocketServer.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2807"
+ HREF="internet.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2801"
+ HREF="SMTP-example.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2809"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2810"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2812"
+ HREF="module-SocketServer.html">11.11 SocketServer  </A>
+<b>Up:</b> <A NAME="tex2html2808"
+ HREF="internet.html">11. Internet Protocols and</A>
+<b>Previous:</b> <A NAME="tex2html2802"
+ HREF="SMTP-example.html">11.9.2 SMTP Example</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00131000000000000000000">
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">10</SPAN> <tt>urlparse</tt> --
+         Parse URLs into components.</A>
+</H1>
+
+
+<P>
+
+<P>
+<a name="l2h-17505"></a><a name="l2h-17506"></a><a name="l2h-17507"></a><a name="l2h-17508"></a>
+<a name="l2h-17510"></a>
+
+<P>
+This module defines a standard interface to break URL strings up in
+components (addessing scheme, network location, path etc.), to combine
+the components back into a URL string, and to convert a ``relative
+URL'' to an absolute URL given a ``base URL.''
+
+<P>
+The module has been designed to match the Internet RFC on Relative
+Uniform Resource Locators (and discovered a bug in an earlier
+draft!).  Refer to <a name=>RFC 1808</a> for details on relative
+URLs and <a name=>RFC 1738</a> for information on basic URL syntax.
+
+<P>
+It defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-17553"><tt>urlparse</tt></a></b> (<var>urlstring</var><big>[</big><var>, default_scheme</var><big>[</big><var>, allow_fragments</var><big>]</big><big>]</big>)
+<dd>
+Parse a URL into 6 components, returning a 6-tuple: (addressing
+scheme, network location, path, parameters, query, fragment
+identifier).  This corresponds to the general structure of a URL:
+<tt><i>scheme</i>://<i>netloc</i>/<i>path</i>;<i>parameters</i>?<i>query</i>#<i>fragment</i></tt>.
+Each tuple item is a string, possibly empty.
+The components are not broken up in smaller parts (e.g. the network
+location is a single string), and % escapes are not expanded.
+The delimiters as shown above are not part of the tuple items,
+except for a leading slash in the <i>path</i> component, which is
+retained if present.
+
+<P>
+Example:
+
+<P>
+<dl><dd><pre>
+urlparse('http://www.cwi.nl:80/%7Eguido/Python.html')
+</pre></dl>
+yields the tuple
+
+<P>
+<dl><dd><pre>
+('http', 'www.cwi.nl:80', '/%7Eguido/Python.html', '', '', '')
+</pre></dl>
+If the <i>default_scheme</i> argument is specified, it gives the
+default addressing scheme, to be used only if the URL string does not
+specify one.  The default value for this argument is the empty string.
+
+<P>
+If the <i>allow_fragments</i> argument is zero, fragment identifiers
+are not allowed, even if the URL's addressing scheme normally does
+support them.  The default value for this argument is <tt>1</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17534"><tt>urlunparse</tt></a></b> (<var>tuple</var>)
+<dd>
+Construct a URL string from a tuple as returned by <tt>urlparse()</tt>.
+This may result in a slightly different, but equivalent URL, if the
+URL that was parsed originally had redundant delimiters, e.g. a ? with
+an empty query (the draft states that these are equivalent).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17552"><tt>urljoin</tt></a></b> (<var>base, url</var><big>[</big><var>, allow_fragments</var><big>]</big>)
+<dd>
+Construct a full (``absolute'') URL by combining a ``base URL''
+(<i>base</i>) with a ``relative URL'' (<i>url</i>).  Informally, this
+uses components of the base URL, in particular the addressing scheme,
+the network location and (part of) the path, to provide missing
+components in the relative URL.
+
+<P>
+Example:
+
+<P>
+<dl><dd><pre>
+urljoin('http://www.cwi.nl/%7Eguido/Python.html', 'FAQ.html')
+</pre></dl>
+yields the string
+
+<P>
+<dl><dd><pre>
+'http://www.cwi.nl/%7Eguido/FAQ.html'
+</pre></dl>
+The <i>allow_fragments</i> argument has the same meaning as for
+<tt>urlparse()</tt>.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2811"
+ HREF="module-SocketServer.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2807"
+ HREF="internet.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2801"
+ HREF="SMTP-example.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2809"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2810"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2812"
+ HREF="module-SocketServer.html">11.11 SocketServer  </A>
+<b>Up:</b> <A NAME="tex2html2808"
+ HREF="internet.html">11. Internet Protocols and</A>
+<b>Previous:</b> <A NAME="tex2html2802"
+ HREF="SMTP-example.html">11.9.2 SMTP Example</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

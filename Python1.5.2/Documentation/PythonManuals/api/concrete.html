@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7. Concrete Objects Layer</TITLE>
+<META NAME="description" CONTENT="7. Concrete Objects Layer">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="next" HREF="initialization.html">
+<LINK REL="previous" HREF="abstract.html">
+<LINK REL="up" HREF="api.html">
+<LINK REL="next" HREF="fundamental.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html387"
+ HREF="fundamental.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html383"
+ HREF="api.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html377"
+ HREF="node24.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html385"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html386"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html388"
+ HREF="fundamental.html">7.1 Fundamental Objects</A>
+<b>Up:</b> <A NAME="tex2html384"
+ HREF="api.html">Python/C API Reference Manual</A>
+<b>Previous:</b> <A NAME="tex2html378"
+ HREF="node24.html">6.5 Constructors</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009000000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">7</SPAN>. Concrete Objects Layer
+</H1>
+
+<P>
+The functions in this chapter are specific to certain Python object
+types.  Passing them an object of the wrong type is not a good idea;
+if you receive an object from a Python program and you are not sure
+that it has the right type, you must perform a type check first;
+e.g. to check that an object is a dictionary, use
+<tt>PyDict_Check()</tt>.  The chapter is structured like the
+``family tree'' of Python object types.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html389"
+ HREF="fundamental.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Fundamental Objects</A>
+<UL>
+<LI><A NAME="tex2html390"
+ HREF="typeObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Type Objects</A>
+<LI><A NAME="tex2html391"
+ HREF="noneObject.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> The None Object</A>
+</UL>
+<LI><A NAME="tex2html392"
+ HREF="sequenceObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Sequence Objects</A>
+<UL>
+<LI><A NAME="tex2html393"
+ HREF="stringObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> String Objects</A>
+<LI><A NAME="tex2html394"
+ HREF="tupleObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Tuple Objects</A>
+<LI><A NAME="tex2html395"
+ HREF="listObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> List Objects</A>
+</UL>
+<LI><A NAME="tex2html396"
+ HREF="mapObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> Mapping Objects</A>
+<UL>
+<LI><A NAME="tex2html397"
+ HREF="dictObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Dictionary Objects</A>
+</UL>
+<LI><A NAME="tex2html398"
+ HREF="numericObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> Numeric Objects</A>
+<UL>
+<LI><A NAME="tex2html399"
+ HREF="intObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Plain Integer Objects</A>
+<LI><A NAME="tex2html400"
+ HREF="longObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Long Integer Objects</A>
+<LI><A NAME="tex2html401"
+ HREF="floatObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> Floating Point Objects</A>
+<LI><A NAME="tex2html402"
+ HREF="complexObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Complex Number Objects</A>
+</UL>
+<LI><A NAME="tex2html403"
+ HREF="otherObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> Other Objects</A>
+<UL>
+<LI><A NAME="tex2html404"
+ HREF="fileObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> File Objects</A>
+<LI><A NAME="tex2html405"
+ HREF="cObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> CObjects</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html387"
+ HREF="fundamental.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html383"
+ HREF="api.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html377"
+ HREF="node24.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html385"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html386"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html388"
+ HREF="fundamental.html">7.1 Fundamental Objects</A>
+<b>Up:</b> <A NAME="tex2html384"
+ HREF="api.html">Python/C API Reference Manual</A>
+<b>Previous:</b> <A NAME="tex2html378"
+ HREF="node24.html">6.5 Constructors</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

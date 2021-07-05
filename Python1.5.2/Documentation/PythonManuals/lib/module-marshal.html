@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.12 marshal --
+Python object serialization (with different constraints).</TITLE>
+<META NAME="description" CONTENT="3.12 marshal --
+Python object serialization (with different constraints).">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-imp.html">
+<LINK REL="previous" HREF="module-copy.html">
+<LINK REL="up" HREF="python.html">
+<LINK REL="next" HREF="module-imp.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1007"
+ HREF="module-imp.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1003"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html997"
+ HREF="module-copy.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1005"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1006"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1008"
+ HREF="module-imp.html">3.13 imp  </A>
+<b>Up:</b> <A NAME="tex2html1004"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html998"
+ HREF="module-copy.html">3.11 copy  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0051200000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">12</SPAN> <tt>marshal</tt> --
+         Python object serialization (with different constraints).</A>
+</H1>
+
+
+<P>
+
+<P>
+This module contains functions that can read and write Python
+values in a binary format.  The format is specific to Python, but
+independent of machine architecture issues (e.g., you can write a
+Python value to a file on a PC, transport the file to a Sun, and read
+it back there).  Details of the format are undocumented on purpose;
+it may change between Python versions (although it rarely does).<A NAME="tex2html12"
+ HREF="#foot4077"><SUP><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A>
+<P>
+This is not a general ``persistency'' module.  For general persistency
+and transfer of Python objects through RPC calls, see the modules
+<tt>pickle</tt> and <tt>shelve</tt>.  The <tt>marshal</tt> module exists
+mainly to support reading and writing the ``pseudo-compiled'' code for
+Python modules of "<tt>.pyc</tt>" files.
+<a name="l2h-"></a><a name="l2h-"></a><a name="l2h-"></a>
+<P>
+Not all Python object types are supported; in general, only objects
+whose value is independent from a particular invocation of Python can
+be written and read by this module.  The following types are supported:
+<tt>None</tt>, integers, long integers, floating point numbers,
+strings, tuples, lists, dictionaries, and code objects, where it
+should be understood that tuples, lists and dictionaries are only
+supported as long as the values contained therein are themselves
+supported; and recursive lists and dictionaries should not be written
+(they will cause infinite loops).
+
+<P>
+<b>Caveat:</b> On machines where C's <tt>long int</tt> type has more than
+32 bits (such as the DEC Alpha), it
+is possible to create plain Python integers that are longer than 32
+bits.  Since the current <tt>marshal</tt> module uses 32 bits to
+transfer plain Python integers, such values are silently truncated.
+This particularly affects the use of very long integer literals in
+Python modules -- these will be accepted by the parser on such
+machines, but will be silently be truncated when the module is read
+from the "<tt>.pyc</tt>" instead.<A NAME="tex2html13"
+ HREF="#foot4126"><SUP><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A>
+<P>
+There are functions that read/write files as well as functions
+operating on strings.
+
+<P>
+The module defines these functions:
+
+<P>
+<dl><dt><b><a name="l2h-4093"><tt>dump</tt></a></b> (<var>value, file</var>)
+<dd>
+  Write the value on the open file.  The value must be a supported
+  type.  The file must be an open file object such as
+  <tt>sys.stdout</tt> or returned by <tt>open()</tt> or
+  <tt>posix.popen()</tt>.
+
+<P>
+If the value has (or contains an object that has) an unsupported type,
+  a <tt>ValueError</tt> exception is raised -- but garbage data
+  will also be written to the file.  The object will not be properly
+  read back by <tt>load()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-4102"><tt>load</tt></a></b> (<var>file</var>)
+<dd>
+  Read one value from the open file and return it.  If no valid value
+  is read, raise <tt>EOFError</tt>, <tt>ValueError</tt> or
+  <tt>TypeError</tt>.  The file must be an open file object.
+
+<P>
+<b>Warning:</b> If an object containing an unsupported type was
+  marshalled with <tt>dump()</tt>, <tt>load()</tt> will substitute
+  <tt>None</tt> for the unmarshallable type.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-4113"><tt>dumps</tt></a></b> (<var>value</var>)
+<dd>
+  Return the string that would be written to a file by
+  <tt>dump(<i>value</i>, <i>file</i>)</tt>.  The value must be a supported
+  type.  Raise a <tt>ValueError</tt> exception if value has (or
+  contains an object that has) an unsupported type.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-4120"><tt>loads</tt></a></b> (<var>string</var>)
+<dd>
+  Convert the string to a value.  If no valid value is found, raise
+  <tt>EOFError</tt>, <tt>ValueError</tt> or
+  <tt>TypeError</tt>.  Extra characters in the string are ignored.
+</dl>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot4077">...85</A><A NAME="foot4077"
+ HREF="module-marshal.html#tex2html12"><SUP><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A>
+<DD>The name of this module stems from a bit of terminology used
+by the designers of Modula-3 (amongst others), who use the term
+``marshalling'' for shipping of data around in a self-contained form.
+Strictly speaking, ``to marshal'' means to convert some data from
+internal to external form (in an RPC buffer for instance) and
+``unmarshalling'' for the reverse process.
+
+<DT><A NAME="foot4126">...86</A><A NAME="foot4126"
+ HREF="module-marshal.html#tex2html13"><SUP><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A>
+<DD>A solution would be to refuse such literals in the parser,
+since they are inherently non-portable.  Another solution would be to
+let the <tt>marshal</tt> module raise an exception when an integer
+value would be truncated.  At least one of these solutions will be
+implemented in a future version.
+
+</DL><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1007"
+ HREF="module-imp.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1003"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html997"
+ HREF="module-copy.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1005"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1006"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1008"
+ HREF="module-imp.html">3.13 imp  </A>
+<b>Up:</b> <A NAME="tex2html1004"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html998"
+ HREF="module-copy.html">3.11 copy  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

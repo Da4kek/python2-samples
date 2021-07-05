@@ -1,0 +1,440 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>16.4.2 Form Objects</TITLE>
+<META NAME="description" CONTENT="16.4.2 Form Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="forms-objects.html">
+<LINK REL="previous" HREF="FL_Functions.html">
+<LINK REL="up" HREF="module-fl2.html">
+<LINK REL="next" HREF="forms-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3523"
+ HREF="forms-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3519"
+ HREF="module-fl2.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3513"
+ HREF="FL_Functions.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3521"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3522"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3524"
+ HREF="forms-objects.html">16.4.3 FORMS Objects</A>
+<b>Up:</b> <A NAME="tex2html3520"
+ HREF="module-fl2.html">16.4 fl  </A>
+<b>Previous:</b> <A NAME="tex2html3514"
+ HREF="FL_Functions.html">16.4.1 Functions Defined in</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0018420000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Form Objects
+</H2>
+
+<P>
+Form objects (returned by <tt>make_form()</tt> above) have the
+following methods.  Each method corresponds to a C function whose
+name is prefixed with "<tt>fl_</tt>"; and whose first argument is a form
+pointer; please refer to the official FORMS documentation for
+descriptions.
+
+<P>
+All the <tt>add_*()</tt> methods return a Python object representing
+the FORMS object.  Methods of FORMS objects are described below.  Most
+kinds of FORMS object also have some methods specific to that kind;
+these methods are listed here.
+
+<P>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22749"><tt>show_form</tt></a></b> (<var>placement, bordertype, name</var>)
+<dd>
+  Show the form.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22753"><tt>hide_form</tt></a></b> ()
+<dd>
+  Hide the form.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22757"><tt>redraw_form</tt></a></b> ()
+<dd>
+  Redraw the form.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22761"><tt>set_form_position</tt></a></b> (<var>x, y</var>)
+<dd>
+Set the form's position.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22765"><tt>freeze_form</tt></a></b> ()
+<dd>
+Freeze the form.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22769"><tt>unfreeze_form</tt></a></b> ()
+<dd>
+  Unfreeze the form.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22773"><tt>activate_form</tt></a></b> ()
+<dd>
+  Activate the form.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22777"><tt>deactivate_form</tt></a></b> ()
+<dd>
+  Deactivate the form.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22781"><tt>bgn_group</tt></a></b> ()
+<dd>
+  Begin a new group of objects; return a group object.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22785"><tt>end_group</tt></a></b> ()
+<dd>
+  End the current group of objects.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22789"><tt>find_first</tt></a></b> ()
+<dd>
+  Find the first object in the form.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22793"><tt>find_last</tt></a></b> ()
+<dd>
+  Find the last object in the form.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22797"><tt>add_box</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a box object to the form.
+No extra methods.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22801"><tt>add_text</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a text object to the form.
+No extra methods.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22805"><tt>add_clock</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a clock object to the form. 
+<BR>
+Method:
+<tt>get_clock()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22810"><tt>add_button</tt></a></b> (<var>type, x, y, w, h,  name</var>)
+<dd>
+Add a button object to the form. 
+<BR>
+Methods:
+<tt>get_button()</tt>,
+<tt>set_button()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22816"><tt>add_lightbutton</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a lightbutton object to the form. 
+<BR>
+Methods:
+<tt>get_button()</tt>,
+<tt>set_button()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22822"><tt>add_roundbutton</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a roundbutton object to the form. 
+<BR>
+Methods:
+<tt>get_button()</tt>,
+<tt>set_button()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22828"><tt>add_slider</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a slider object to the form. 
+<BR>
+Methods:
+<tt>set_slider_value()</tt>,
+<tt>get_slider_value()</tt>,
+<tt>set_slider_bounds()</tt>,
+<tt>get_slider_bounds()</tt>,
+<tt>set_slider_return()</tt>,
+<tt>set_slider_size()</tt>,
+<tt>set_slider_precision()</tt>,
+<tt>set_slider_step()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22840"><tt>add_valslider</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a valslider object to the form. 
+<BR>
+Methods:
+<tt>set_slider_value()</tt>,
+<tt>get_slider_value()</tt>,
+<tt>set_slider_bounds()</tt>,
+<tt>get_slider_bounds()</tt>,
+<tt>set_slider_return()</tt>,
+<tt>set_slider_size()</tt>,
+<tt>set_slider_precision()</tt>,
+<tt>set_slider_step()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22852"><tt>add_dial</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a dial object to the form. 
+<BR>
+Methods:
+<tt>set_dial_value()</tt>,
+<tt>get_dial_value()</tt>,
+<tt>set_dial_bounds()</tt>,
+<tt>get_dial_bounds()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22860"><tt>add_positioner</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a positioner object to the form. 
+<BR>
+Methods:
+<tt>set_positioner_xvalue()</tt>,
+<tt>set_positioner_yvalue()</tt>,
+<tt>set_positioner_xbounds()</tt>,
+<tt>set_positioner_ybounds()</tt>,
+<tt>get_positioner_xvalue()</tt>,
+<tt>get_positioner_yvalue()</tt>,
+<tt>get_positioner_xbounds()</tt>,
+<tt>get_positioner_ybounds()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22872"><tt>add_counter</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a counter object to the form. 
+<BR>
+Methods:
+<tt>set_counter_value()</tt>,
+<tt>get_counter_value()</tt>,
+<tt>set_counter_bounds()</tt>,
+<tt>set_counter_step()</tt>,
+<tt>set_counter_precision()</tt>,
+<tt>set_counter_return()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22882"><tt>add_input</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a input object to the form. 
+<BR>
+Methods:
+<tt>set_input()</tt>,
+<tt>get_input()</tt>,
+<tt>set_input_color()</tt>,
+<tt>set_input_return()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22890"><tt>add_menu</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a menu object to the form. 
+<BR>
+Methods:
+<tt>set_menu()</tt>,
+<tt>get_menu()</tt>,
+<tt>addto_menu()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22897"><tt>add_choice</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a choice object to the form. 
+<BR>
+Methods:
+<tt>set_choice()</tt>,
+<tt>get_choice()</tt>,
+<tt>clear_choice()</tt>,
+<tt>addto_choice()</tt>,
+<tt>replace_choice()</tt>,
+<tt>delete_choice()</tt>,
+<tt>get_choice_text()</tt>,
+<tt>set_choice_fontsize()</tt>,
+<tt>set_choice_fontstyle()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22910"><tt>add_browser</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a browser object to the form. 
+<BR>
+Methods:
+<tt>set_browser_topline()</tt>,
+<tt>clear_browser()</tt>,
+<tt>add_browser_line()</tt>,
+<tt>addto_browser()</tt>,
+<tt>insert_browser_line()</tt>,
+<tt>delete_browser_line()</tt>,
+<tt>replace_browser_line()</tt>,
+<tt>get_browser_line()</tt>,
+<tt>load_browser()</tt>,
+<tt>get_browser_maxline()</tt>,
+<tt>select_browser_line()</tt>,
+<tt>deselect_browser_line()</tt>,
+<tt>deselect_browser()</tt>,
+<tt>isselected_browser_line()</tt>,
+<tt>get_browser()</tt>,
+<tt>set_browser_fontsize()</tt>,
+<tt>set_browser_fontstyle()</tt>,
+<tt>set_browser_specialkey()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV><dl><dt><b><a name="l2h-22932"><tt>add_timer</tt></a></b> (<var>type, x, y, w, h, name</var>)
+<dd>
+Add a timer object to the form. 
+<BR>
+Methods:
+<tt>set_timer()</tt>,
+<tt>get_timer()</tt>.
+</dl>
+<DIV ALIGN="LEFT">
+</DIV>
+
+<P>
+Form objects have the following data attributes; see the FORMS
+documentation:
+
+<P>
+<table border align=center>
+  <tr><th align=left><b>Name</b></th>
+      <th align=left><b>C Type</b></th>
+      <th align=left><b>Meaning</b></th>
+  <tr><td><member>window</member></td>
+      <td>int (read-only)</td>
+      <td>GL window id</td>
+  <tr><td><member>w</member></td>
+      <td>float</td>
+      <td>form width</td>
+  <tr><td><member>h</member></td>
+      <td>float</td>
+      <td>form height</td>
+  <tr><td><member>x</member></td>
+      <td>float</td>
+      <td>form x origin</td>
+  <tr><td><member>y</member></td>
+      <td>float</td>
+      <td>form y origin</td>
+  <tr><td><member>deactivated</member></td>
+      <td>int</td>
+      <td>nonzero if form is deactivated</td>
+  <tr><td><member>visible</member></td>
+      <td>int</td>
+      <td>nonzero if form is visible</td>
+  <tr><td><member>frozen</member></td>
+      <td>int</td>
+      <td>nonzero if form is frozen</td>
+  <tr><td><member>doublebuf</member></td>
+      <td>int</td>
+      <td>nonzero if double buffering on</td>
+
+</table>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3523"
+ HREF="forms-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3519"
+ HREF="module-fl2.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3513"
+ HREF="FL_Functions.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3521"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3522"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3524"
+ HREF="forms-objects.html">16.4.3 FORMS Objects</A>
+<b>Up:</b> <A NAME="tex2html3520"
+ HREF="module-fl2.html">16.4 fl  </A>
+<b>Previous:</b> <A NAME="tex2html3514"
+ HREF="FL_Functions.html">16.4.1 Functions Defined in</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

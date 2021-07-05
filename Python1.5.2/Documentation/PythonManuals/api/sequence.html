@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.3 Sequence Protocol</TITLE>
+<META NAME="description" CONTENT="6.3 Sequence Protocol">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="next" HREF="mapping.html">
+<LINK REL="previous" HREF="number.html">
+<LINK REL="up" HREF="abstract.html">
+<LINK REL="next" HREF="mapping.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html353"
+ HREF="mapping.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html349"
+ HREF="abstract.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html343"
+ HREF="number.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html351"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html352"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html354"
+ HREF="mapping.html">6.4 Mapping Protocol</A>
+<b>Up:</b> <A NAME="tex2html350"
+ HREF="abstract.html">6. Abstract Objects Layer</A>
+<b>Previous:</b> <A NAME="tex2html344"
+ HREF="number.html">6.2 Number Protocol</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008300000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN> Sequence Protocol
+</H1>
+
+<P>
+<dl><dt>int <b><a name="l2h-1175"><tt>PySequence_Check</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Return <tt>1</tt> if the object provides sequence protocol, and <tt>0</tt>
+otherwise.  
+This function always succeeds.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1182"><tt>PySequence_Concat</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+Return the concatenation of <i>o1</i> and <i>o2</i> on success, and <tt>NULL</tt> on
+failure.   This is the equivalent of the Python
+expression "<tt><i>o1</i> + <i>o2</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1192"><tt>PySequence_Repeat</tt></a></b>(<var>PyObject *o, int count</var>)
+<dd>
+Return the result of repeating sequence object <i>o</i> <i>count</i>
+times, or <tt>NULL</tt> on failure.  This is the equivalent of the Python
+expression "<tt><i>o</i> * <i>count</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1202"><tt>PySequence_GetItem</tt></a></b>(<var>PyObject *o, int i</var>)
+<dd>
+Return the <i>i</i>th element of <i>o</i>, or <tt>NULL</tt> on failure. This
+is the equivalent of the Python expression "<tt><i>o</i>[<i>i</i>]</tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1212"><tt>PySequence_GetSlice</tt></a></b>(<var>PyObject *o, int i1, int i2</var>)
+<dd>
+Return the slice of sequence object <i>o</i> between <i>i1</i> and
+<i>i2</i>, or <tt>NULL</tt> on failure. This is the equivalent of the Python
+expression "<tt><i>o</i>[<i>i1</i>:<i>i2</i>]</tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1224"><tt>PySequence_SetItem</tt></a></b>(<var>PyObject *o, int i, PyObject *v</var>)
+<dd>
+Assign object <i>v</i> to the <i>i</i>th element of <i>o</i>.
+Returns <tt>-1</tt> on failure.  This is the equivalent of the Python
+statement "<tt><i>o</i>[<i>i</i>] = <i>v</i></tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1236"><tt>PySequence_DelItem</tt></a></b>(<var>PyObject *o, int i</var>)
+<dd>
+Delete the <i>i</i>th element of object <i>v</i>.  Returns
+<tt>-1</tt> on failure.  This is the equivalent of the Python
+statement "<tt>del <i>o</i>[<i>i</i>]</tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1246"><tt>PySequence_SetSlice</tt></a></b>(<var>PyObject *o, int i1, int i2, PyObject *v</var>)
+<dd>
+Assign the sequence object <i>v</i> to the slice in sequence
+object <i>o</i> from <i>i1</i> to <i>i2</i>.  This is the equivalent of
+the Python statement "<tt><i>o</i>[<i>i1</i>:<i>i2</i>] = <i>v</i></tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1259"><tt>PySequence_DelSlice</tt></a></b>(<var>PyObject *o, int i1, int i2</var>)
+<dd>
+Delete the slice in sequence object <i>o</i> from <i>i1</i> to <i>i2</i>.
+Returns <tt>-1</tt> on failure. This is the equivalent of the Python
+statement "<tt>del <i>o</i>[<i>i1</i>:<i>i2</i>]</tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1271"><tt>PySequence_Tuple</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Returns the <i>o</i> as a tuple on success, and <tt>NULL</tt> on failure.
+This is equivalent to the Python expression <tt>tuple(<i>o</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1279"><tt>PySequence_Count</tt></a></b>(<var>PyObject *o, PyObject *value</var>)
+<dd>
+Return the number of occurrences of <i>value</i> in <i>o</i>, that is,
+return the number of keys for which <tt><i>o</i>[<i>key</i>] ==
+<i>value</i></tt>.  On failure, return <tt>-1</tt>.  This is equivalent to
+the Python expression "<tt><i>o</i>.count(<i>value</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1292"><tt>PySequence_In</tt></a></b>(<var>PyObject *o, PyObject *value</var>)
+<dd>
+Determine if <i>o</i> contains <i>value</i>.  If an item in <i>o</i> is
+equal to <i>value</i>, return <tt>1</tt>, otherwise return <tt>0</tt>.  On
+error, return <tt>-1</tt>.  This is equivalent to the Python expression
+"<tt><i>value</i> in <i>o</i></tt>".
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1306"><tt>PySequence_Index</tt></a></b>(<var>PyObject *o, PyObject *value</var>)
+<dd>
+Return the first index <i>i</i> for which <tt><i>o</i>[<i>i</i>] ==
+<i>value</i></tt>.  On error, return <tt>-1</tt>.    This is equivalent to
+the Python expression "<tt><i>o</i>.index(<i>value</i>)</tt>".
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html353"
+ HREF="mapping.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html349"
+ HREF="abstract.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html343"
+ HREF="number.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html351"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html352"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html354"
+ HREF="mapping.html">6.4 Mapping Protocol</A>
+<b>Up:</b> <A NAME="tex2html350"
+ HREF="abstract.html">6. Abstract Objects Layer</A>
+<b>Previous:</b> <A NAME="tex2html344"
+ HREF="number.html">6.2 Number Protocol</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

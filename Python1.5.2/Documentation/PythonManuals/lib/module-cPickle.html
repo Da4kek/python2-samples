@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.8 cPickle --
+Alternate implementation of pickle.</TITLE>
+<META NAME="description" CONTENT="3.8 cPickle --
+Alternate implementation of pickle.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-copyreg.html">
+<LINK REL="previous" HREF="module-pickle.html">
+<LINK REL="up" HREF="python.html">
+<LINK REL="next" HREF="module-copyreg.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html959"
+ HREF="module-copyreg.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html955"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html949"
+ HREF="module-pickle.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html957"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html958"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html960"
+ HREF="module-copyreg.html">3.9 copy_reg  </A>
+<b>Up:</b> <A NAME="tex2html956"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html950"
+ HREF="module-pickle.html">3.7 pickle  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION005800000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>cPickle</tt> --
+         Alternate implementation of <tt>pickle</tt>.</A>
+</H1>
+
+
+<P>
+
+<P>
+The <tt>cPickle</tt> module provides a similar interface and identical
+functionality as the <tt>pickle</tt> module, but can be up to 1000
+times faster since it is implemented in C.  The only other
+important difference to note is that <tt>Pickler()</tt> and
+<tt>Unpickler()</tt> are functions and not classes, and so cannot be
+subclassed.  This should not be an issue in most cases.
+
+<P>
+The format of the pickle data is identical to that produced using the
+<tt>pickle</tt> module, so it is possible to use <tt>pickle</tt> and
+<tt>cPickle</tt> interchangably with existing pickles.
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html959"
+ HREF="module-copyreg.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html955"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html949"
+ HREF="module-pickle.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html957"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html958"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html960"
+ HREF="module-copyreg.html">3.9 copy_reg  </A>
+<b>Up:</b> <A NAME="tex2html956"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html950"
+ HREF="module-pickle.html">3.7 pickle  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,593 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Python Library Reference</TITLE>
+<META NAME="description" CONTENT="Python Library Reference">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="front.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html47"
+ HREF="front.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html45"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html46"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html48"
+ HREF="front.html">Front Matter</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<P>
+<h1 align=center>Python Library Reference</h1>
+<center>
+<p><strong>Guido van Rossum</strong></p>
+<p>
+	Corporation for National Research Initiatives (CNRI) 
+<BR>
+1895 Preston White Drive, Reston, Va 20191, USA 
+<BR>
+E-mail: <font face=sans-serif>guido@CNRI.Reston.Va.US</font>, <font face=sans-serif>guido@python.org</font>
+</p>
+<p><strong>October 21, 1998</strong><br><strong>Release 1.5.2</strong></p>
+</center>
+<p>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html49"
+ HREF="front.html">Front Matter</A>
+<LI><A NAME="tex2html50"
+ HREF="contents.html">Contents</A>
+<LI><A NAME="tex2html51"
+ HREF="intro.html"><SPAN CLASS="arabic">1</SPAN>. Introduction</A>
+<LI><A NAME="tex2html52"
+ HREF="builtin.html"><SPAN CLASS="arabic">2</SPAN>. Built-in Types, Exceptions and Functions</A>
+<UL>
+<LI><A NAME="tex2html53"
+ HREF="types.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Built-in Types </A>
+<LI><A NAME="tex2html54"
+ HREF="module-exceptions.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Built-in Exceptions</A>
+<LI><A NAME="tex2html55"
+ HREF="built-in-funcs.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Built-in Functions </A>
+</UL>
+<LI><A NAME="tex2html56"
+ HREF="python.html"><SPAN CLASS="arabic">3</SPAN>. Python Services</A>
+<UL>
+<LI><A NAME="tex2html57"
+ HREF="module-sys.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>sys</tt> --
+         System-specific parameters and functions.</A>
+<LI><A NAME="tex2html58"
+ HREF="module-types.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>types</tt> --
+         Names for all built-in types.</A>
+<LI><A NAME="tex2html59"
+ HREF="module-UserDict.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>UserDict</tt> --
+         Class wrapper for dictionary objects.</A>
+<LI><A NAME="tex2html60"
+ HREF="module-UserList.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>UserList</tt> --
+         Class wrapper for list objects.</A>
+<LI><A NAME="tex2html61"
+ HREF="module-operator.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>operator</tt> --
+         Standard operators as functions.</A>
+<LI><A NAME="tex2html62"
+ HREF="module-traceback.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>traceback</tt> --
+         Print or retrieve a stack traceback.</A>
+<LI><A NAME="tex2html63"
+ HREF="module-pickle.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>pickle</tt> --
+         Python object serialization.</A>
+<LI><A NAME="tex2html64"
+ HREF="module-cPickle.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>cPickle</tt> --
+         Alternate implementation of <tt>pickle</tt>.</A>
+<LI><A NAME="tex2html65"
+ HREF="module-copyreg.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN> <tt>copy_reg</tt> --
+         Register <tt>pickle</tt> support functions.</A>
+<LI><A NAME="tex2html66"
+ HREF="module-shelve.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">10</SPAN> <tt>shelve</tt> --
+         Python object persistency.</A>
+<LI><A NAME="tex2html67"
+ HREF="module-copy.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">11</SPAN> <tt>copy</tt> --
+         Shallow and deep copy operations.</A>
+<LI><A NAME="tex2html68"
+ HREF="module-marshal.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">12</SPAN> <tt>marshal</tt> --
+         Python object serialization (with different constraints).</A>
+<LI><A NAME="tex2html69"
+ HREF="module-imp.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">13</SPAN> <tt>imp</tt> --
+         Access the implementation of the <tt>import</tt> statement.</A>
+<LI><A NAME="tex2html70"
+ HREF="module-parser.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">14</SPAN> <tt>parser</tt> --
+         Access parse trees of Python code.</A>
+<LI><A NAME="tex2html71"
+ HREF="module-symbol.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">15</SPAN> <tt>symbol</tt> --
+         Constants representing internal nodes of the parse tree.</A>
+<LI><A NAME="tex2html72"
+ HREF="module-token.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">16</SPAN> <tt>token</tt> --
+         Constants representing terminal nodes of the parse tree.</A>
+<LI><A NAME="tex2html73"
+ HREF="module-keyword.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">17</SPAN> <tt>keyword</tt> --
+         Test whether a string is a Python keyword.</A>
+<LI><A NAME="tex2html74"
+ HREF="module-code.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">18</SPAN> <tt>code</tt> --
+         Code object services.</A>
+<LI><A NAME="tex2html75"
+ HREF="module-pprint.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">19</SPAN> <tt>pprint</tt> --
+         Data pretty printer.</A>
+<LI><A NAME="tex2html76"
+ HREF="module-pycompile.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">20</SPAN> <tt>py_compile</tt> --
+         Compile Python source files.</A>
+<LI><A NAME="tex2html77"
+ HREF="module-compileall.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">21</SPAN> <tt>compileall</tt> --
+         Byte-compile Python libraries.</A>
+<LI><A NAME="tex2html78"
+ HREF="module-dis.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">22</SPAN> <tt>dis</tt> --
+         Disassembler.</A>
+<LI><A NAME="tex2html79"
+ HREF="module-site.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">23</SPAN> <tt>site</tt> --
+         A standard way to reference site-specific modules.</A>
+<LI><A NAME="tex2html80"
+ HREF="module-user.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">24</SPAN> <tt>user</tt> --
+         A standard way to reference user-specific modules.</A>
+<LI><A NAME="tex2html81"
+ HREF="module-builtin.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">25</SPAN> <tt>__builtin__</tt> --
+         Built-in functions.</A>
+<LI><A NAME="tex2html82"
+ HREF="module-main.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">26</SPAN> <tt>__main__</tt> --
+         Top-level script environment.</A>
+</UL>
+<LI><A NAME="tex2html83"
+ HREF="strings.html"><SPAN CLASS="arabic">4</SPAN>. String Services</A>
+<UL>
+<LI><A NAME="tex2html84"
+ HREF="module-string.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>string</tt> --
+         Common string operations.</A>
+<LI><A NAME="tex2html85"
+ HREF="module-re.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>re</tt> --
+         New Perl-style regular expression search and match operations.</A>
+<LI><A NAME="tex2html86"
+ HREF="module-regex.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>regex</tt> --
+         Regular expression search and match operations.</A>
+<LI><A NAME="tex2html87"
+ HREF="module-regsub.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>regsub</tt> --
+         Substitution and splitting operations that use regular expressions.</A>
+<LI><A NAME="tex2html88"
+ HREF="module-struct.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>struct</tt> --
+         Interpret strings as packed binary data.</A>
+<LI><A NAME="tex2html89"
+ HREF="module-StringIO.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>StringIO</tt> --
+         Read and write strings as if they were files.</A>
+<LI><A NAME="tex2html90"
+ HREF="module-cStringIO.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>cStringIO</tt> --
+         Faster version of <tt>StringIO</tt>, but not subclassable.</A>
+</UL>
+<LI><A NAME="tex2html91"
+ HREF="misc.html"><SPAN CLASS="arabic">5</SPAN>. Miscellaneous Services</A>
+<UL>
+<LI><A NAME="tex2html92"
+ HREF="module-math.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>math</tt> --
+         Mathematical functions (<tt>sin()</tt> etc.).</A>
+<LI><A NAME="tex2html93"
+ HREF="module-cmath.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>cmath</tt> --
+         Mathematical functions for complex numbers.</A>
+<LI><A NAME="tex2html94"
+ HREF="module-whrandom.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>whrandom</tt> --
+         Floating point pseudo-random number generator.</A>
+<LI><A NAME="tex2html95"
+ HREF="module-random.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>random</tt> --
+         Generate pseudo-random numbers with various distributions.</A>
+<LI><A NAME="tex2html96"
+ HREF="module-bisect.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>bisect</tt> --
+         Array bisection algorithms for binary searching.</A>
+<LI><A NAME="tex2html97"
+ HREF="module-array.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>array</tt> --
+         Efficient arrays of uniformly typed numeric values.</A>
+<LI><A NAME="tex2html98"
+ HREF="module-fileinput.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>fileinput</tt> --
+         Iteration over lines from multiple input streams.</A>
+<LI><A NAME="tex2html99"
+ HREF="module-calendar.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>calendar</tt> --
+         Functions that emulate the Unix <b>cal</b> program.</A>
+<LI><A NAME="tex2html100"
+ HREF="module-cmd.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">9</SPAN> <tt>cmd</tt> --
+         Build line-oriented command interpreters.</A>
+</UL>
+<LI><A NAME="tex2html101"
+ HREF="allos.html"><SPAN CLASS="arabic">6</SPAN>. Generic Operating System Services</A>
+<UL>
+<LI><A NAME="tex2html102"
+ HREF="module-os.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>os</tt> --
+         Miscellaneous OS interfaces.</A>
+<LI><A NAME="tex2html103"
+ HREF="module-time.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>time</tt> --
+         Time access and conversions.</A>
+<LI><A NAME="tex2html104"
+ HREF="module-getopt.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>getopt</tt> --
+         Parser for command line options.</A>
+<LI><A NAME="tex2html105"
+ HREF="module-tempfile.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>tempfile</tt> --
+         Generate temporary file names.</A>
+<LI><A NAME="tex2html106"
+ HREF="module-errno.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>errno</tt> --
+         Standard errno system symbols.</A>
+<LI><A NAME="tex2html107"
+ HREF="module-glob.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>glob</tt> --
+         Unix shell style pathname pattern expansion.</A>
+<LI><A NAME="tex2html108"
+ HREF="module-fnmatch.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>fnmatch</tt> --
+         Unix shell style pathname pattern matching.</A>
+<LI><A NAME="tex2html109"
+ HREF="module-locale.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>locale</tt> --
+         Internationalization services.</A>
+</UL>
+<LI><A NAME="tex2html110"
+ HREF="someos.html"><SPAN CLASS="arabic">7</SPAN>. Optional Operating System Services</A>
+<UL>
+<LI><A NAME="tex2html111"
+ HREF="module-signal.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>signal</tt> --
+         Set handlers for asynchronous events.</A>
+<LI><A NAME="tex2html112"
+ HREF="module-socket.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>socket</tt> --
+         Low-level networking interface.</A>
+<LI><A NAME="tex2html113"
+ HREF="module-select.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>select</tt> --
+         Wait for I/O completion on multiple streams.</A>
+<LI><A NAME="tex2html114"
+ HREF="module-thread.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>thread</tt> --
+         Multiple threads of control.</A>
+<LI><A NAME="tex2html115"
+ HREF="module-threading.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>threading</tt> --
+         Higher-level threading interfaces.</A>
+<LI><A NAME="tex2html116"
+ HREF="module-Queue.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>Queue</tt> --
+         A synchronized queue class.</A>
+<LI><A NAME="tex2html117"
+ HREF="module-anydbm.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>anydbm</tt> --
+         Generic interface to DBM-style database modules.</A>
+<LI><A NAME="tex2html118"
+ HREF="module-dumbdbm.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>dumbdbm</tt> --
+         Portable implementation of the simple DBM interface.</A>
+<LI><A NAME="tex2html119"
+ HREF="module-whichdb.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">9</SPAN> <tt>whichdb</tt> --
+         Guess which DBM-style module created a given database.</A>
+<LI><A NAME="tex2html120"
+ HREF="module-zlib.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">10</SPAN> <tt>zlib</tt> --
+         Compression and decompression compatible with <b>gzip</b>.</A>
+<LI><A NAME="tex2html121"
+ HREF="module-gzip.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">11</SPAN> <tt>gzip</tt> --
+         <b>gzip</b> compression and decompression using files.</A>
+</UL>
+<LI><A NAME="tex2html122"
+ HREF="unix.html"><SPAN CLASS="arabic">8</SPAN>. Unix Specific Services</A>
+<UL>
+<LI><A NAME="tex2html123"
+ HREF="module-posix.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>posix</tt> --
+         The most common POSIX system calls.</A>
+<LI><A NAME="tex2html124"
+ HREF="module-posixpath.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>posixpath</tt> --
+         Common POSIX pathname manipulations.</A>
+<LI><A NAME="tex2html125"
+ HREF="module-pwd.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>pwd</tt> --
+         The password database.</A>
+<LI><A NAME="tex2html126"
+ HREF="module-grp.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>grp</tt> --
+         The group database.</A>
+<LI><A NAME="tex2html127"
+ HREF="module-crypt.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>crypt</tt> --
+         The <tt>crypt()</tt> function used to check Unix passwords.</A>
+<LI><A NAME="tex2html128"
+ HREF="module-dbm.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>dbm</tt> --
+         The standard ``database'' interface, based on ndbm.</A>
+<LI><A NAME="tex2html129"
+ HREF="module-gdbm.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>gdbm</tt> --
+         GNU's reinterpretation of dbm.</A>
+<LI><A NAME="tex2html130"
+ HREF="module-termios.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>termios</tt> --
+         POSIX style tty control.</A>
+<LI><A NAME="tex2html131"
+ HREF="module-TERMIOSuppercase.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">9</SPAN> <tt>TERMIOS</tt> --
+         Constants used with the <tt>termios</tt> module.</A>
+<LI><A NAME="tex2html132"
+ HREF="module-fcntl.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">10</SPAN> <tt>fcntl</tt> --
+         The <tt>fcntl()</tt> and <tt>ioctl()</tt> system calls.</A>
+<LI><A NAME="tex2html133"
+ HREF="module-posixfile.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">11</SPAN> <tt>posixfile</tt> --
+         A file-like object with support for locking.</A>
+<LI><A NAME="tex2html134"
+ HREF="module-resource.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">12</SPAN> <tt>resource</tt> --
+         Resource usage information.</A>
+<LI><A NAME="tex2html135"
+ HREF="module-syslog.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">13</SPAN> <tt>syslog</tt> --
+         Unix syslog library routines.</A>
+<LI><A NAME="tex2html136"
+ HREF="module-stat.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">14</SPAN> <tt>stat</tt> --
+         Utilities for interpreting <tt>stat()</tt> results.</A>
+<LI><A NAME="tex2html137"
+ HREF="module-popen2.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">15</SPAN> <tt>popen2</tt> --
+         Subprocesses with accessible standard I/O streams.</A>
+<LI><A NAME="tex2html138"
+ HREF="module-commands.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">16</SPAN> <tt>commands</tt> --
+         Wrapper functions for <tt>os.popen()</tt>.</A>
+</UL>
+<LI><A NAME="tex2html139"
+ HREF="module-pdb.html"><SPAN CLASS="arabic">9</SPAN>. The Python Debugger</A>
+<UL>
+<LI><A NAME="tex2html140"
+ HREF="node148.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Debugger Commands</A>
+<LI><A NAME="tex2html141"
+ HREF="node149.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> How It Works</A>
+</UL>
+<LI><A NAME="tex2html142"
+ HREF="profile.html"><SPAN CLASS="arabic">10</SPAN>. The Python Profiler</A>
+<UL>
+<LI><A NAME="tex2html143"
+ HREF="Profiler_Introduction.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN> Introduction to the profiler</A>
+<LI><A NAME="tex2html144"
+ HREF="Profiler_Changes.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN> How Is This Profiler Different From The Old Profiler?</A>
+<LI><A NAME="tex2html145"
+ HREF="node153.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">3</SPAN> Instant Users Manual</A>
+<LI><A NAME="tex2html146"
+ HREF="Deterministic_Profiling.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">4</SPAN> What Is Deterministic Profiling?</A>
+<LI><A NAME="tex2html147"
+ HREF="module-profile.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">5</SPAN> Reference Manual</A>
+<LI><A NAME="tex2html148"
+ HREF="node157.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">6</SPAN> Limitations</A>
+<LI><A NAME="tex2html149"
+ HREF="node158.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">7</SPAN> Calibration</A>
+<LI><A NAME="tex2html150"
+ HREF="Profiler_Extensions.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">8</SPAN> Extensions -- Deriving Better Profilers</A>
+</UL>
+<LI><A NAME="tex2html151"
+ HREF="internet.html"><SPAN CLASS="arabic">11</SPAN>. Internet Protocols and Support </A>
+<UL>
+<LI><A NAME="tex2html152"
+ HREF="module-cgi.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>cgi</tt> --
+         Common Gateway Interface support.</A>
+<LI><A NAME="tex2html153"
+ HREF="module-urllib.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>urllib</tt> --
+         Open an arbitrary object given by URL.</A>
+<LI><A NAME="tex2html154"
+ HREF="module-httplib.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>httplib</tt> --
+         HTTP protocol client.</A>
+<LI><A NAME="tex2html155"
+ HREF="module-ftplib.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>ftplib</tt> --
+         FTP protocol client.</A>
+<LI><A NAME="tex2html156"
+ HREF="module-gopherlib.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>gopherlib</tt> --
+         Gopher protocol client.</A>
+<LI><A NAME="tex2html157"
+ HREF="module-poplib.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>poplib</tt> --
+         POP3 protocol client.</A>
+<LI><A NAME="tex2html158"
+ HREF="module-imaplib.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>imaplib</tt> --
+         IMAP4 protocol client.</A>
+<LI><A NAME="tex2html159"
+ HREF="module-nntplib.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>nntplib</tt> --
+         NNTP protocol client.</A>
+<LI><A NAME="tex2html160"
+ HREF="module-smtplib.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">9</SPAN> <tt>smtplib</tt> --
+         SMTP protocol client.</A>
+<LI><A NAME="tex2html161"
+ HREF="module-urlparse.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">10</SPAN> <tt>urlparse</tt> --
+         Parse URLs into components.</A>
+<LI><A NAME="tex2html162"
+ HREF="module-SocketServer.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">11</SPAN> <tt>SocketServer</tt> --
+         A framework for network servers.</A>
+<LI><A NAME="tex2html163"
+ HREF="module-BaseHTTPServer.html"><SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">12</SPAN> <tt>BaseHTTPServer</tt> --
+         Basic HTTP server.</A>
+</UL>
+<LI><A NAME="tex2html164"
+ HREF="netdata.html"><SPAN CLASS="arabic">12</SPAN>. Internet Data Handling </A>
+<UL>
+<LI><A NAME="tex2html165"
+ HREF="module-sgmllib.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>sgmllib</tt> --
+         Simple SGML parser.</A>
+<LI><A NAME="tex2html166"
+ HREF="module-htmllib.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>htmllib</tt> --
+         A parser for HTML documents.</A>
+<LI><A NAME="tex2html167"
+ HREF="module-xmllib.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>xmllib</tt> --
+         A parser for XML documents.</A>
+<LI><A NAME="tex2html168"
+ HREF="module-formatter.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>formatter</tt> --
+         Generic output formatter and device interface.</A>
+<LI><A NAME="tex2html169"
+ HREF="module-rfc822.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>rfc822</tt> --
+         Parse RFC 822 mail headers.</A>
+<LI><A NAME="tex2html170"
+ HREF="module-mimetools.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>mimetools</tt> --
+         Tools for parsing MIME style message bodies.</A>
+<LI><A NAME="tex2html171"
+ HREF="module-multifile.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>multifile</tt> --
+         Support for reading files which contain distinct parts.</A>
+<LI><A NAME="tex2html172"
+ HREF="module-binhex.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>binhex</tt> --
+         Encode and decode files in binhex4 format.</A>
+<LI><A NAME="tex2html173"
+ HREF="module-uu.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">9</SPAN> <tt>uu</tt> --
+         Encode and decode files in uuencode format.</A>
+<LI><A NAME="tex2html174"
+ HREF="module-binascii.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">10</SPAN> <tt>binascii</tt> --
+         Convert between binary and various ascii-encoded representations.</A>
+<LI><A NAME="tex2html175"
+ HREF="module-xdrlib.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">11</SPAN> <tt>xdrlib</tt> --
+         Encode and decode XDR data.</A>
+<LI><A NAME="tex2html176"
+ HREF="module-mailcap.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">12</SPAN> <tt>mailcap</tt> --
+         Mailcap file handling.</A>
+<LI><A NAME="tex2html177"
+ HREF="module-mimetypes.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">13</SPAN> <tt>mimetypes</tt> --
+         Mapping of filename extensions to MIME types.</A>
+<LI><A NAME="tex2html178"
+ HREF="module-base64.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">14</SPAN> <tt>base64</tt> --
+         Encode and decode MIME base64 encoding.</A>
+<LI><A NAME="tex2html179"
+ HREF="module-quopri.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">15</SPAN> <tt>quopri</tt> --
+         Encode and decode MIME quoted-printable encoding.</A>
+<LI><A NAME="tex2html180"
+ HREF="module-mailbox.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">16</SPAN> <tt>mailbox</tt> --
+         Read various mailbox formats.</A>
+<LI><A NAME="tex2html181"
+ HREF="module-mimify.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">17</SPAN> <tt>mimify</tt> --
+         Mimification and unmimification of mail messages.</A>
+</UL>
+<LI><A NAME="tex2html182"
+ HREF="restricted.html"><SPAN CLASS="arabic">13</SPAN>. Restricted Execution</A>
+<UL>
+<LI><A NAME="tex2html183"
+ HREF="module-rexec.html"><SPAN CLASS="arabic">13</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>rexec</tt> --
+         Basic restricted execution framework.</A>
+<LI><A NAME="tex2html184"
+ HREF="module-Bastion.html"><SPAN CLASS="arabic">13</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>Bastion</tt> --
+         Providing restricted access to objects.</A>
+</UL>
+<LI><A NAME="tex2html185"
+ HREF="mmedia.html"><SPAN CLASS="arabic">14</SPAN>. Multimedia Services</A>
+<UL>
+<LI><A NAME="tex2html186"
+ HREF="module-audioop.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>audioop</tt> --
+         Manipulate raw audio data.</A>
+<LI><A NAME="tex2html187"
+ HREF="module-imageop.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>imageop</tt> --
+         Manipulate raw image data.</A>
+<LI><A NAME="tex2html188"
+ HREF="module-aifc.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>aifc</tt> --
+         Read and write audio files in AIFF or AIFC format.</A>
+<LI><A NAME="tex2html189"
+ HREF="module-jpeg.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>jpeg</tt> --
+         Read and write image files in compressed JPEG format.</A>
+<LI><A NAME="tex2html190"
+ HREF="module-rgbimg.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>rgbimg</tt> --
+         Read and write image files in ``SGI RGB'' format.</A>
+<LI><A NAME="tex2html191"
+ HREF="module-imghdr.html"><SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>imghdr</tt> --
+         Determine the type of image contained in a file or byte stream.</A>
+</UL>
+<LI><A NAME="tex2html192"
+ HREF="crypto.html"><SPAN CLASS="arabic">15</SPAN>. Cryptographic Services</A>
+<UL>
+<LI><A NAME="tex2html193"
+ HREF="module-md5.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>md5</tt> --
+         MD5 message digest algorithm.</A>
+<LI><A NAME="tex2html194"
+ HREF="module-mpz.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>mpz</tt> --
+         GNU MP library for arbitrary precision arithmetic.</A>
+<LI><A NAME="tex2html195"
+ HREF="module-rotor.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>rotor</tt> --
+         Enigma-like encryption and decryption.</A>
+</UL>
+<LI><A NAME="tex2html196"
+ HREF="sgi.html"><SPAN CLASS="arabic">16</SPAN>. SGI IRIX Specific Services</A>
+<UL>
+<LI><A NAME="tex2html197"
+ HREF="module-al2.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>al</tt> --
+         Audio functions on the SGI.</A>
+<LI><A NAME="tex2html198"
+ HREF="module-al2.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>AL</tt> --
+         Constants used with the <tt>al</tt> module.</A>
+<LI><A NAME="tex2html199"
+ HREF="module-cd.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>cd</tt> --
+         Interface to the CD-ROM on Silicon Graphics systems.</A>
+<LI><A NAME="tex2html200"
+ HREF="module-fl2.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>fl</tt> --
+         FORMS library interface for GUI applications.</A>
+<LI><A NAME="tex2html201"
+ HREF="module-fl2.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>FL</tt> --
+         Constants used with the <tt>fl</tt> module.</A>
+<LI><A NAME="tex2html202"
+ HREF="module-flp.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>flp</tt> --
+         Loading functions for stored FORMS designs.</A>
+<LI><A NAME="tex2html203"
+ HREF="module-fm.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>fm</tt> --
+         <i>Font Manager</i> interface for SGI workstations.</A>
+<LI><A NAME="tex2html204"
+ HREF="module-gl2.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>gl</tt> --
+         Functions from the Silicon Graphics <i>Graphics Library</i>.</A>
+<LI><A NAME="tex2html205"
+ HREF="module-DEVICE.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">9</SPAN> <tt>DEVICE</tt> --
+         Constants used with the <tt>gl</tt> module.</A>
+<LI><A NAME="tex2html206"
+ HREF="module-gl2.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">10</SPAN> <tt>GL</tt> --
+         Constants used with the <tt>gl</tt> module.</A>
+<LI><A NAME="tex2html207"
+ HREF="module-imgfile.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">11</SPAN> <tt>imgfile</tt> --
+         Support for SGI imglib files.</A>
+</UL>
+<LI><A NAME="tex2html208"
+ HREF="sunos.html"><SPAN CLASS="arabic">17</SPAN>. SunOS Specific Services</A>
+<UL>
+<LI><A NAME="tex2html209"
+ HREF="module-sunaudiodev.html"><SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>sunaudiodev</tt> --
+         Access to Sun audio hardware.</A>
+</UL>
+<LI><A NAME="tex2html210"
+ HREF="undoc.html"><SPAN CLASS="arabic">18</SPAN>. Undocumented Modules</A>
+<UL>
+<LI><A NAME="tex2html211"
+ HREF="node264.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">1</SPAN> Frameworks; somewhat harder to document, but well worth the effort</A>
+<LI><A NAME="tex2html212"
+ HREF="node265.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">2</SPAN> Stuff useful to a lot of people, including the CGI crowd</A>
+<LI><A NAME="tex2html213"
+ HREF="node266.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">3</SPAN> Miscellaneous useful utilities</A>
+<LI><A NAME="tex2html214"
+ HREF="node267.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">4</SPAN> Parsing Python</A>
+<LI><A NAME="tex2html215"
+ HREF="node268.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">5</SPAN> Platform specific modules</A>
+<LI><A NAME="tex2html216"
+ HREF="node269.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">6</SPAN> Code objects and files, debugger etc.</A>
+<LI><A NAME="tex2html217"
+ HREF="node270.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">7</SPAN> Multimedia</A>
+<LI><A NAME="tex2html218"
+ HREF="node271.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">8</SPAN> Oddities</A>
+<LI><A NAME="tex2html219"
+ HREF="node272.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">9</SPAN> Obsolete</A>
+<LI><A NAME="tex2html220"
+ HREF="node273.html"><SPAN CLASS="arabic">18</SPAN>.<SPAN CLASS="arabic">10</SPAN> Extension modules</A>
+</UL>
+<LI><A NAME="tex2html221"
+ HREF="modindex.html">Module Index</A>
+<LI><A NAME="tex2html222"
+ HREF="genindex.html">Index</A>
+<LI><A NAME="tex2html223"
+ HREF="about.html">About this document ...</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html47"
+ HREF="front.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html45"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html46"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html48"
+ HREF="front.html">Front Matter</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

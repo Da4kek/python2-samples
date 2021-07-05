@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>10.8 Extensions -- Deriving Better Profilers</title>
+<META NAME="description" CONTENT="10.8 Extensions -- Deriving Better Profilers">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="lib.css">
+<LINK REL="previous" href="profile-calibration.html">
+<LINK REL="up" href="profile.html">
+<LINK REL="next" href="profile-old.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="profile-calibration.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="profile.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="profile-old.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="profile-calibration.html">10.7 Calibration</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="profile.html">10. The Python Profiler</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="profile-old.html">10.8.1 OldProfile Class</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0012800000000000000000">
+10.8 Extensions -- Deriving Better Profilers</A>
+</H1>
+
+<P>
+The <tt class="class">Profile</tt> class of module <tt class="module">profile</tt> was written so that
+derived classes could be developed to extend the profiler.  Rather
+than describing all the details of such an effort, I'll just present
+the following two examples of derived classes that can be used to do
+profiling.  If the reader is an avid Python programmer, then it should
+be possible to use these as a model and create similar (and perchance
+better) profile classes.
+
+<P>
+If all you want to do is change how the timer is called, or which
+timer function is used, then the basic class has an option for that in
+the constructor for the class.  Consider passing the name of a
+function to call into the constructor:
+
+<P>
+<dl><dd><pre class="verbatim">
+pr = profile.Profile(your_time_func)
+</pre></dl>
+
+<P>
+The resulting profiler will call <code>your_time_func()</code> instead of
+<tt class="function">os.times()</tt>.  The function should return either a single number
+or a list of numbers (like what <tt class="function">os.times()</tt> returns).  If the
+function returns a single time number, or the list of returned numbers
+has length 2, then you will get an especially fast version of the
+dispatch routine.
+
+<P>
+Be warned that you <i>should</i> calibrate the profiler class for the
+timer function that you choose.  For most machines, a timer that
+returns a lone integer value will provide the best results in terms of
+low overhead during profiling.  (<tt class="function">os.times()</tt> is
+<i>pretty</i> bad, 'cause it returns a tuple of floating point values,
+so all arithmetic is floating point in the profiler!).  If you want to
+substitute a better timer in the cleanest fashion, you should derive a
+class, and simply put in the replacement dispatch method that better
+handles your timer call, along with the appropriate calibration
+constant :-).
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html3710"
+  href="profile-old.html">10.8.1 OldProfile Class </A>
+<LI><A NAME="tex2html3711"
+  href="profile-HotProfile.html">10.8.2 HotProfile Class </A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="profile-calibration.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="profile.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="profile-old.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="profile-calibration.html">10.7 Calibration</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="profile.html">10. The Python Profiler</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="profile-old.html">10.8.1 OldProfile Class</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

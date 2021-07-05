@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4.6 StringIO --
+Read and write strings as if they were files.</TITLE>
+<META NAME="description" CONTENT="4.6 StringIO --
+Read and write strings as if they were files.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-cStringIO.html">
+<LINK REL="previous" HREF="module-struct.html">
+<LINK REL="up" HREF="strings.html">
+<LINK REL="next" HREF="module-cStringIO.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1466"
+ HREF="module-cStringIO.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1462"
+ HREF="strings.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1456"
+ HREF="module-struct.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1464"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1465"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1467"
+ HREF="module-cStringIO.html">4.7 cStringIO  </A>
+<b>Up:</b> <A NAME="tex2html1463"
+ HREF="strings.html">4. String Services</A>
+<b>Previous:</b> <A NAME="tex2html1457"
+ HREF="module-struct.html">4.5 struct  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION006600000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>StringIO</tt> --
+         Read and write strings as if they were files.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module implements a file-like class, <tt>StringIO</tt>,
+that reads and writes a string buffer (also known as <i>memory
+files</i>). See the description on file objects for operations.
+
+<P>
+<dl><dt><b><a name="l2h-7923"><tt>StringIO</tt></a></b> (<big>[</big><var>buffer</var><big>]</big>)
+<dd>
+When a <tt>StringIO</tt> object is created, it can be initialized
+to an existing string by passing the string to the constructor.
+If no string is given, the <tt>StringIO</tt> will start empty.
+</dl>
+
+<P>
+The following methods of <tt>StringIO</tt> objects require special
+mention:
+
+<P>
+<dl><dt><b><a name="l2h-7903"><tt>getvalue</tt></a></b> ()
+<dd>
+Retrieve the entire contents of the ``file'' at any time before the
+<tt>StringIO</tt> object's <tt>close()</tt> method is called.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-7909"><tt>close</tt></a></b> ()
+<dd>
+Free the memory buffer.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1466"
+ HREF="module-cStringIO.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1462"
+ HREF="strings.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1456"
+ HREF="module-struct.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1464"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1465"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1467"
+ HREF="module-cStringIO.html">4.7 cStringIO  </A>
+<b>Up:</b> <A NAME="tex2html1463"
+ HREF="strings.html">4. String Services</A>
+<b>Previous:</b> <A NAME="tex2html1457"
+ HREF="module-struct.html">4.5 struct  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

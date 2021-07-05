@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.6 traceback --
+Print or retrieve a stack traceback.</TITLE>
+<META NAME="description" CONTENT="3.6 traceback --
+Print or retrieve a stack traceback.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-pickle.html">
+<LINK REL="previous" HREF="module-operator.html">
+<LINK REL="up" HREF="python.html">
+<LINK REL="next" HREF="module-pickle.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html935"
+ HREF="module-pickle.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html931"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html925"
+ HREF="module-operator.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html933"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html934"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html936"
+ HREF="module-pickle.html">3.7 pickle  </A>
+<b>Up:</b> <A NAME="tex2html932"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html926"
+ HREF="module-operator.html">3.5 operator  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION005600000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>traceback</tt> --
+         Print or retrieve a stack traceback.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides a standard interface to extract, format and print
+stack traces of Python programs.  It exactly mimics the behavior of
+the Python interpreter when it prints a stack trace.  This is useful
+when you want to print stack traces under program control, e.g. in a
+``wrapper'' around the interpreter.
+
+<P>
+The module uses traceback objects -- this is the object type
+that is stored in the variables <tt>sys.exc_traceback</tt> and
+<tt>sys.last_traceback</tt> and returned as the third item from
+<tt>sys.exc_info()</tt>.
+<a name="l2h-"></a>
+<P>
+The module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-3556"><tt>print_tb</tt></a></b> (<var>traceback</var><big>[</big><var>, limit</var><big>[</big><var>, file</var><big>]</big><big>]</big>)
+<dd>
+Print up to <i>limit</i> stack trace entries from <i>traceback</i>.  If
+<i>limit</i> is omitted or <tt>None</tt>, all entries are printed.
+If <i>file</i> is omitted or <tt>None</tt>, the output goes to
+<tt>sys.stderr</tt>; otherwise it should be an open file or file-like
+object to receive the output.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3543"><tt>extract_tb</tt></a></b> (<var>traceback</var><big>[</big><var>, limit</var><big>]</big>)
+<dd>
+Return a list of up to <i>limit</i> ``pre-processed'' stack trace
+entries extracted from <i>traceback</i>.  It is useful for alternate
+formatting of stack traces.  If <i>limit</i> is omitted or <tt>None</tt>,
+all entries are extracted.  A ``pre-processed'' stack trace entry is a
+quadruple (<i>filename</i>, <i>line number</i>, <i>function name</i>,
+<i>line text</i>) representing the information that is usually printed
+for a stack trace.  The <i>line text</i> is a string with leading and
+trailing whitespace stripped; if the source is not available it is
+<tt>None</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3557"><tt>print_exception</tt></a></b> (<var>type, value,
+traceback</var><big>[</big><var>, limit</var><big>[</big><var>, file</var><big>]</big><big>]</big>)
+<dd>
+Print exception information and up to <i>limit</i> stack trace entries
+from <i>traceback</i> to <i>file</i>.
+This differs from <tt>print_tb()</tt> in the
+following ways: (1) if <i>traceback</i> is not <tt>None</tt>, it prints a
+header "<tt>Traceback (innermost last):</tt>"; (2) it prints the
+exception <i>type</i> and <i>value</i> after the stack trace; (3) if
+<i>type</i> is <tt>SyntaxError</tt> and <i>value</i> has the appropriate
+format, it prints the line where the syntax error occurred with a
+caret indicating the approximate position of the error.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3558"><tt>print_exc</tt></a></b> (<big>[</big><var>limit</var><big>[</big><var>, file</var><big>]</big><big>]</big>)
+<dd>
+This is a shorthand for `<tt>print_exception(sys.exc_type,</tt>
+<tt>sys.exc_value,</tt> <tt>sys.exc_traceback,</tt> <i>limit</i><tt>,</tt>
+<i>file</i><tt>)</tt>'.  (In fact, it uses <tt>sys.exc_info()</tt> to
+retrieve the same information in a thread-safe way.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3559"><tt>print_last</tt></a></b> (<big>[</big><var>limit</var><big>[</big><var>, file</var><big>]</big><big>]</big>)
+<dd>
+This is a shorthand for `<tt>print_exception(sys.last_type,</tt>
+<tt>sys.last_value,</tt> <tt>sys.last_traceback,</tt> <i>limit</i><tt>,</tt>
+<i>file</i><tt>)</tt>'.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3563"><tt>print_stack</tt></a></b> (<big>[</big><var>f</var><big>[</big><var>, limit</var><big>[</big><var>, file</var><big>]</big><big>]</big><big>]</big>)
+<dd>
+This function prints a stack trace from its invocation point.  The
+optional <i>f</i> argument can be used to specify an alternate stack
+frame to start.  The optional <i>limit</i> and <i>file</i> arguments have the
+same meaning as for <tt>print_exception()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3548"><tt>extract_tb</tt></a></b> (<var>tb</var><big>[</big><var>, limit</var><big>]</big>)
+<dd>
+Return a list containing the raw (unformatted) traceback information
+extracted from the traceback object <i>tb</i>.  The optional
+<i>limit</i> argument has the same meaning as for
+<tt>print_exception()</tt>.  The items in the returned list are
+4-tuples containing the following values: filename, line number,
+function name, and source text line.  The source text line is stripped 
+of leading and trailing whitespace; it is <tt>None</tt> when the source
+text file is unavailable.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3561"><tt>extract_stack</tt></a></b> (<big>[</big><var>f</var><big>[</big><var>, limit</var><big>]</big><big>]</big>)
+<dd>
+Extract the raw traceback from the current stack frame.  The return
+value has the same format as for <tt>extract_tb()</tt>.  The
+optional <i>f</i> and <i>limit</i> arguments have the same meaning as
+for <tt>print_stack()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3504"><tt>format_list</tt></a></b> (<var>list</var>)
+<dd>
+Given a list of tuples as returned by <tt>extract_tb()</tt> or
+<tt>extract_stack()</tt>, return a list of strings ready for
+printing.  Each string in the resulting list corresponds to the item
+with the same index in the argument list.  Each string ends in a
+newline; the strings may contain internal newlines as well, for those
+items whose source text line is not <tt>None</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3511"><tt>format_exception_only</tt></a></b> (<var>type, value</var>)
+<dd>
+Format the exception part of a traceback.  The arguments are the
+exception type and value such as given by <tt>sys.last_type</tt> and
+<tt>sys.last_value</tt>.  The return value is a list of strings, each
+ending in a newline.  Normally, the list contains a single string;
+however, for <tt>SyntaxError</tt> exceptions, it contains several lines
+that (when printed) display detailed information about where the
+syntax error occurred.  The message indicating which exception
+occurred is the always last string in the list.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3550"><tt>format_exception</tt></a></b> (<var>type, value, tb</var><big>[</big><var>, limit</var><big>]</big>)
+<dd>
+Format a stack trace and the exception information.  The arguments 
+have the same meaning as the corresponding arguments to
+<tt>print_exception()</tt>.  The return value is a list of strings,
+each ending in a newline and some containing internal newlines.  When
+these lines are contatenated and printed, exactly the same text is
+printed as does <tt>print_exception()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3551"><tt>format_tb</tt></a></b> (<var>tb</var><big>[</big><var>, limit</var><big>]</big>)
+<dd>
+A shorthand for <tt>format_list(extract_tb(<i>tb</i>, <i>limit</i>))</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3562"><tt>format_stack</tt></a></b> (<big>[</big><var>f</var><big>[</big><var>, limit</var><big>]</big><big>]</big>)
+<dd>
+A shorthand for <tt>format_list(extract_stack(<i>f</i>, <i>limit</i>))</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-3536"><tt>tb_lineno</tt></a></b> (<var>tb</var>)
+<dd>
+This function returns the current line number set in the traceback
+object.  This is normally the same as the <tt><i>tb</i>.tb_lineno</tt>
+field of the object, but when optimization is used (the -O flag) this
+field is not updated correctly; this function calculates the correct
+value.
+</dl>
+
+<P>
+A simple example follows:
+
+<P>
+<dl><dd><pre>
+import sys, traceback
+
+def run_user_code(envdir):
+    source = raw_input("&gt;&gt;&gt; ")
+    try:
+        exec source in envdir
+    except:
+        print "Exception in user code:"
+        print '-'*60
+        traceback.print_exc(file=sys.stdout)
+        print '-'*60
+
+envdir = {}
+while 1:
+    run_user_code(envdir)
+</pre></dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html935"
+ HREF="module-pickle.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html931"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html925"
+ HREF="module-operator.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html933"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html934"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html936"
+ HREF="module-pickle.html">3.7 pickle  </A>
+<b>Up:</b> <A NAME="tex2html932"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html926"
+ HREF="module-operator.html">3.5 operator  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

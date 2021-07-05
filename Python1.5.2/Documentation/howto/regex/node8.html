@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.2 The Backslash Plague</TITLE>
+<META NAME="description" CONTENT="3.2 The Backslash Plague">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html146"
+ HREF="node9.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html143"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html137"
+ HREF="node7.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html145"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html147"
+ HREF="node9.html">3.3 Performing Matches</A>
+<b>Up:</b> <A NAME="tex2html144"
+ HREF="node6.html">3. Using Regular Expressions</A>
+<b>Previous:</b> <A NAME="tex2html138"
+ HREF="node7.html">3.1 Compiling Regular Expressions</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000420000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> The Backslash Plague</A>
+</H2>
+
+<P>
+As stated earlier, regular expressions use the backslash
+character ("<tt>&#92;</tt>") to indicate special forms or to allow
+special characters to be used without invoking their special meaning.
+This conflictts with Python's usage of the same character for the same
+purpose in string literals.
+
+<P>
+Let's say you want to write a RE that matches the string "<tt>&#92;
+section</tt>", which might be found in a <SPAN CLASS="logo LaTeX">L<SUP><SMALL>A</SMALL></SUP>T<SMALL>E</SMALL>X</SPAN> file.  To figure out what
+to write in the program code, start with the desired string to be
+matched.  Next, you must escape any backslashes and other
+metacharacters by preceding them with a backslash, resulting in the
+string "<tt>&#92;&#92;section</tt>".  The resulting string that must be passed
+to <tt>re.compile()</tt> must be <code>\\section</code>.  However, to
+express this as a Python string literal, both backslashes must be
+escaped <i>again</i>.
+
+<P>
+<table border align=center>
+  <tr><th><b>Characters</b></th>
+      <th align=left><b>Stage</b></th>
+  <tr><td align=center><code>&#92;section</code></td>
+      <td align=center>Text string to be matched</td>
+  <tr><td align=center><code>&#92;&#92;section</code></td>
+      <td align=center>Escaped backslash for <tt>re.compile</tt></td>
+  <tr><td align=center><code>"&#92;&#92;&#92;&#92;section"</code></td>
+      <td align=center>Escaped backslashes for a string literal</td>
+
+</table>
+
+<P>
+In short, to match a literal backslash, one has to write
+<tt>'&#92;&#92;&#92;&#92;'</tt> as the RE string, because the regular expression
+must be "<tt>&#92;&#92;</tt>", and each backslash must be expressed as
+"<tt>&#92;&#92;</tt>" inside a regular Python string literal.  In REs that
+feature backslashes repeatedly, this leads to lots of repeated
+backslashes which makes the resulting strings difficult to understand.
+
+<P>
+The solution is to use Python's raw string notation for regular
+expressions; backslashes are not handled in any special way in
+a string literal prefixed with "<tt>r</tt>", so <tt>r"&#92;n"</tt> is a
+two-character string containing "<tt>&#92;</tt>" and "<tt>n</tt>",
+while <tt>"&#92;n"</tt> is a one-character string containing a newline.
+Frequently regular expressions will be expressed in Python
+code using this raw string notation.  
+
+<P>
+<table border align=center>
+  <tr><th><b>Regular String</b></th>
+      <th><b>Raw string</b></th>
+  <tr><td align=center><code>"ab*"</code></td>
+      <td align=center><tt>r"ab*"</tt></td>
+  <tr><td align=center><code>"&#92;&#92;&#92;&#92;section"</code></td>
+      <td align=center><tt>r"&#92;&#92;section"</tt></td>
+  <tr><td align=center><code>"&#92;&#92;w+&#92;&#92;s+&#92;&#92;1"</code></td>
+      <td align=center><tt>r"&#92;w+&#92;s+&#92;1"</tt></td>
+
+</table>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html146"
+ HREF="node9.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html143"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html137"
+ HREF="node7.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html145"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html147"
+ HREF="node9.html">3.3 Performing Matches</A>
+<b>Up:</b> <A NAME="tex2html144"
+ HREF="node6.html">3. Using Regular Expressions</A>
+<b>Previous:</b> <A NAME="tex2html138"
+ HREF="node7.html">3.1 Compiling Regular Expressions</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

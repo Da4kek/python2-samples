@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2.1 Matching Characters</TITLE>
+<META NAME="description" CONTENT="2.1 Matching Characters">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="up" HREF="node3.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html99"
+ HREF="node5.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html96"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html90"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html98"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html100"
+ HREF="node5.html">2.2 Repeating Things</A>
+<b>Up:</b> <A NAME="tex2html97"
+ HREF="node3.html">2. Simple Patterns</A>
+<b>Previous:</b> <A NAME="tex2html91"
+ HREF="node3.html">2. Simple Patterns</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000310000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Matching Characters</A>
+</H2>
+
+<P>
+Most letters and characters will simply match themselves.  For
+example, the regular expression <tt>test</tt> will match the string
+"<tt>test</tt>" exactly.  (You can enable a case-insensitive mode that
+would let this RE match "<tt>Test</tt>" or "<tt>TEST</tt>" as well; more
+about this later.)  
+
+<P>
+There are exceptions to this rule; some characters are
+special, and don't match themselves.  Instead, they signal that some
+out-of-the-ordinary thing should be matched, or they affect other
+portions of the RE by repeating them.  Much of this document is
+devoted to discussing various metacharacters and what they do.
+
+<P>
+Here's a complete list of the metacharacters; their meanings will be discussed 
+in the rest of this HOWTO.
+
+<P>
+<dl><dd><pre>
+. ^ $ * + ? { [ \ | ( )
+</pre></dl>
+The first metacharacter we'll look at is "<tt>[</tt>"; it's used for
+specifying a character class, which is a set of characters that you
+wish to match.  Characters can be listed individually, or a range of
+characters can be indicated by giving two characters and separating
+them by a "<tt>-</tt>".  For example, <tt>[abc]</tt> will match any
+of the characters "<tt>a</tt>", "<tt>b</tt>", or "<tt>c</tt>"; this is the same as
+<tt>[a-c]</tt>, which uses a range to express the same set of
+characters.  If you wanted to match only lowercase letters, your
+RE would be <tt>[a-z]</tt>.
+
+<P>
+Metacharacters are not active inside classes.  For example, <tt>[akm$]</tt>
+will match any of the characters "<tt>a</tt>", "<tt>k</tt>",
+"<tt>m</tt>", or "<tt>$</tt>"; "<tt>$</tt>" is usually a metacharacter, but inside a character class it's stripped
+of its special nature.
+
+<P>
+You can match the characters not within a range by <i>complementing</i>
+the set.  This is indicated by including a "<tt>^</tt>" as the first
+character of the class; "<tt>^</tt>" elsewhere will simply match the
+"<tt>^</tt>" character.  For example, <tt>[5]</tt> will match any
+character except "<tt>5</tt>".
+
+<P>
+Perhaps the most important metacharacter is the backslash, "<tt>&#92;</tt>".  
+As in Python string literals, the backslash can be followed by various
+characters to signal various special sequences.  It's also used to escape
+all the metacharacters so you can still match them in patterns; for
+example, if you need to match a "<tt>[</tt>" or 
+"<tt>&#92;</tt>", you can precede them with a backslash to remove their
+special meaning: <tt>&#92;[</tt> or <tt>&#92;&#92;</tt>.
+
+<P>
+Some of these special sequences represent predefined sets of
+characters that are often useful, such as the set of digits, or the
+set of letters, or the set of anything that isn't whitespace.  The
+following predefined special sequences are available:
+
+<P>
+<DL COMPACT>
+<DT><tt>&#92;d</tt>
+<DD>Matches any decimal digit; this is
+equivalent to the class <tt>[0-9]</tt>.
+<DT><tt>&#92;D</tt>
+<DD>Matches any non-digit character; this is
+equivalent to the class <tt>[0-9]</tt>.
+<DT><tt>&#92;s</tt>
+<DD>Matches any whitespace character; this is
+equivalent to the class <tt>[ &#92;t&#92;n&#92;r&#92;f&#92;v]</tt>.
+<DT><tt>&#92;S</tt>
+<DD>Matches any non-whitespace character; this is
+equivalent to the class <tt>[^ &#92;t&#92;n&#92;r&#92;f&#92;v]</tt>.
+<DT><tt>&#92;w</tt>
+<DD>Matches any alphanumeric character; this is equivalent to the class
+<tt>[a-zA-Z0-9_]</tt>.
+<DT><tt>&#92;W</tt>
+<DD>Matches any non-alphanumeric character; this is equivalent to the class
+<tt>[&#226;-zA-Z0-9_]</tt>.   
+</DL>
+
+<P>
+These sequences can be included inside a character class.  For
+example, <tt>[&#92;s,.]</tt> is a character class that will match any
+whitespace character, or "<tt>,</tt>" or "<tt>.</tt>".
+
+<P>
+The final metacharacter in this section is <tt>.</tt>.  It matches
+anything except a newline character, and there's an alternate mode
+(<tt>re.DOTALL</tt>) where it will match even a newline.  "<tt>.</tt>"
+is often used where you want to match ``any character''.  
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html99"
+ HREF="node5.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html96"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html90"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html98"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html100"
+ HREF="node5.html">2.2 Repeating Things</A>
+<b>Up:</b> <A NAME="tex2html97"
+ HREF="node3.html">2. Simple Patterns</A>
+<b>Previous:</b> <A NAME="tex2html91"
+ HREF="node3.html">2. Simple Patterns</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

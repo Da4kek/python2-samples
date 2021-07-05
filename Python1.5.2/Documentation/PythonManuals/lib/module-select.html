@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.3 select --
+Wait for I/O completion on multiple streams.</TITLE>
+<META NAME="description" CONTENT="7.3 select --
+Wait for I/O completion on multiple streams.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-thread.html">
+<LINK REL="previous" HREF="module-socket.html">
+<LINK REL="up" HREF="someos.html">
+<LINK REL="next" HREF="module-thread.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1829"
+ HREF="module-thread.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1825"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1819"
+ HREF="Socket_Example.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1827"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1828"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1830"
+ HREF="module-thread.html">7.4 thread  </A>
+<b>Up:</b> <A NAME="tex2html1826"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1820"
+ HREF="Socket_Example.html">7.2.2 Example</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009300000000000000000">
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>select</tt> --
+         Wait for I/O completion on multiple streams.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides access to the function <tt>select()</tt>
+available in most operating systems.  Note that on Windows, it only
+works for sockets; on other operating systems, it also works for other
+file types (in particular, on Unix, it works on pipes).  It cannot
+be used or regular files to determine whether a file has grown since
+it was last read.
+
+<P>
+The module defines the following:
+
+<P>
+<dl><dt><b><a name="l2h-11100"><tt>error</tt></a></b>
+<dd>
+The exception raised when an error occurs.  The accompanying value is
+a pair containing the numeric error code from <tt>errno</tt> and the
+corresponding string, as would be printed by the C function
+<tt>perror()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11134"><tt>select</tt></a></b> (<var>iwtd, owtd, ewtd</var><big>[</big><var>, timeout</var><big>]</big>)
+<dd>
+This is a straightforward interface to the Unix <tt>select()</tt>
+system call.  The first three arguments are lists of `waitable
+objects': either integers representing Unix file descriptors or
+objects with a parameterless method named <tt>fileno()</tt> returning
+such an integer.  The three lists of waitable objects are for input,
+output and `exceptional conditions', respectively.  Empty lists are
+allowed.  The optional <i>timeout</i> argument specifies a time-out as a
+floating point number in seconds.  When the <i>timeout</i> argument
+is omitted the function blocks until at least one file descriptor is
+ready.  A time-out value of zero specifies a poll and never blocks.
+
+<P>
+The return value is a triple of lists of objects that are ready:
+subsets of the first three arguments.  When the time-out is reached
+without a file descriptor becoming ready, three empty lists are
+returned.
+
+<P>
+Amongst the acceptable object types in the lists are Python file
+objects (e.g. <tt>sys.stdin</tt>, or objects returned by
+<tt>open()</tt> or <tt>os.popen()</tt>), socket objects
+returned by <tt>socket.socket()</tt>,<a name="l2h-11119"></a>
+<a name="l2h-11121"></a>
+<a name="l2h-11123"></a>
+and the module <tt>stdwin</tt><a name="l2h-"></a> which happens to
+define a function <tt>fileno()</tt>262
+<a name="l2h-11128"></a>
+for just this purpose.  You may
+also define a <i>wrapper</i> class yourself, as long as it has an
+appropriate <tt>fileno()</tt> method (that really returns a Unix
+file descriptor, not just a random integer).
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1829"
+ HREF="module-thread.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1825"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1819"
+ HREF="Socket_Example.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1827"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1828"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1830"
+ HREF="module-thread.html">7.4 thread  </A>
+<b>Up:</b> <A NAME="tex2html1826"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1820"
+ HREF="Socket_Example.html">7.2.2 Example</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

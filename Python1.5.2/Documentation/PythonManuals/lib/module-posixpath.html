@@ -1,0 +1,289 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8.2 posixpath --
+Common POSIX pathname manipulations.</TITLE>
+<META NAME="description" CONTENT="8.2 posixpath --
+Common POSIX pathname manipulations.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-pwd.html">
+<LINK REL="previous" HREF="module-posix.html">
+<LINK REL="up" HREF="unix.html">
+<LINK REL="next" HREF="module-pwd.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2046"
+ HREF="module-pwd.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2042"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2036"
+ HREF="module-posix.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2044"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2045"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2047"
+ HREF="module-pwd.html">8.3 pwd  </A>
+<b>Up:</b> <A NAME="tex2html2043"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2037"
+ HREF="module-posix.html">8.1 posix  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0010200000000000000000">
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>posixpath</tt> --
+         Common POSIX pathname manipulations.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module implements some useful functions on POSIX pathnames.
+
+<P>
+<b>Do not import this module directly.</b>  Instead, import the
+module <tt>os</tt><a name="l2h-"></a> and use <tt>os.path</tt>.
+
+<P>
+<a name="l2h-12922"></a>
+<P>
+<dl><dt><b><a name="l2h-12925"><tt>basename</tt></a></b> (<var>p</var>)
+<dd>
+Return the base name of pathname
+<i>p</i>.
+This is the second half of the pair returned by
+<tt>posixpath.split(<i>p</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12931"><tt>commonprefix</tt></a></b> (<var>list</var>)
+<dd>
+Return the longest string that is a prefix of all strings in
+<i>list</i>.
+If
+<i>list</i>
+is empty, return the empty string (<tt>''</tt>).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12938"><tt>exists</tt></a></b> (<var>p</var>)
+<dd>
+Return true if
+<i>p</i>
+refers to an existing path.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12943"><tt>expanduser</tt></a></b> (<var>p</var>)
+<dd>
+Return the argument with an initial component of "<tt>~</tt>" or
+"<tt>~<i>user</i></tt>" replaced by that <i>user</i>'s home directory.  An
+initial "<tt>~</tt>" is replaced by the environment variable
+<a name="l2h-12948">$HOME</a>; an initial "<tt>~<i>user</i></tt>" is looked up in the
+password directory through the built-in module
+<tt>pwd</tt><a name="l2h-"></a>.  If the expansion fails, or if the
+path does not begin with a tilde, the path is returned unchanged.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12955"><tt>expandvars</tt></a></b> (<var>p</var>)
+<dd>
+Return the argument with environment variables expanded.  Substrings
+of the form "<tt>$<i>name</i></tt>" or "<tt>${<i>name</i>}</tt>" are
+replaced by the value of environment variable <i>name</i>.  Malformed
+variable names and references to non-existing variables are left
+unchanged.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12962"><tt>getsize</tt></a></b> (<var>filename</var>)
+<dd>
+<b>New in version 1.5.2.</b><p>
+Return the size, in bytes, of <i>filename</i>.  Raise
+<tt>os.error</tt> if the file does not exist or is inaccessible.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12969"><tt>getmtime</tt></a></b> (<var>filename</var>)
+<dd>
+<b>New in version 1.5.2.</b><p>
+Return the time of last modification of <i>filename</i>.  The return
+value is integer giving the number of seconds since the epoch (see the 
+<tt>time</tt> module.  Raise <tt>os.error</tt> if the file does not
+exist or is inaccessible.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12977"><tt>getatime</tt></a></b> (<var>filename</var>)
+<dd>
+<b>New in version 1.5.2.</b><p>
+Return the time of last access of <i>filename</i>.  The return
+value is integer giving the number of seconds since the epoch (see the 
+<tt>time</tt> module.  Raise <tt>os.error</tt> if the file does not
+exist or is inaccessible.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12985"><tt>isabs</tt></a></b> (<var>p</var>)
+<dd>
+Return true if <i>p</i> is an absolute pathname (begins with a slash).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12990"><tt>isfile</tt></a></b> (<var>p</var>)
+<dd>
+Return true if <i>p</i> is an existing regular file.  This follows
+symbolic links, so both <tt>islink()</tt> and <tt>isfile()</tt>
+can be true for the same path.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12997"><tt>isdir</tt></a></b> (<var>p</var>)
+<dd>
+Return true if <i>p</i> is an existing directory.  This follows
+symbolic links, so both <tt>islink()</tt> and <tt>isdir()</tt> can
+be true for the same path.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13004"><tt>islink</tt></a></b> (<var>p</var>)
+<dd>
+Return true if
+<i>p</i>
+refers to a directory entry that is a symbolic link.
+Always false if symbolic links are not supported.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13009"><tt>ismount</tt></a></b> (<var>p</var>)
+<dd>
+Return true if pathname <i>p</i> is a <i>mount point</i>: a point in a
+file system where a different file system has been mounted.  The
+function checks whether <i>p</i>'s parent, "<tt><i>p</i>/..</tt>", is on a
+different device than <i>p</i>, or whether "<tt><i>p</i>/..</tt>" and
+<i>p</i> point to the same i-node on the same device -- this should
+detect mount points for all Unix and POSIX variants.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13116"><tt>join</tt></a></b> (<var>p</var><big>[</big><var>, q</var><big>[</big><var>, ...</var><big>]</big><big>]</big>)
+<dd>
+Joins one or more path components intelligently.  If any component is
+an absolute path, all previous components are thrown away, and joining
+continues.  The return value is the concatenation of <i>p</i>, and
+optionally <i>q</i>, etc., with exactly one slash (<tt>'/'</tt>) inserted
+between components, unless <i>p</i> is empty.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13030"><tt>normcase</tt></a></b> (<var>p</var>)
+<dd>
+Normalize the case of a pathname.  On Unix, this returns the path
+unchanged; on case-insensitive filesystems, it converts the path to
+lowercase.  On Windows, it also converts forward slashes to backward
+slashes.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13035"><tt>normpath</tt></a></b> (<var>p</var>)
+<dd>
+Normalize a pathname.  This collapses redundant separators and
+up-level references, e.g. <tt>A//B</tt>, <tt>A/./B</tt> and
+<tt>A/foo/../B</tt> all become <tt>A/B</tt>.  It does not normalize the
+case (use <tt>normcase()</tt> for that).  On Windows, it does
+converts forward slashes to backward slashes.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13044"><tt>samefile</tt></a></b> (<var>p, q</var>)
+<dd>
+Return true if both pathname arguments refer to the same file or
+directory (as indicated by device number and i-node number).
+Raise an exception if a <tt>os.stat()</tt> call on either pathname
+fails.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13049"><tt>split</tt></a></b> (<var>p</var>)
+<dd>
+Split the pathname <i>p</i> in a pair <tt>(<i>head</i>, <i>tail</i>)</tt>,
+where <i>tail</i> is the last pathname component and <i>head</i> is
+everything leading up to that.  The <i>tail</i> part will never contain
+a slash; if <i>p</i> ends in a slash, <i>tail</i> will be empty.  If
+there is no slash in <i>p</i>, <i>head</i> will be empty.  If <i>p</i> is
+empty, both <i>head</i> and <i>tail</i> are empty.  Trailing slashes are
+stripped from <i>head</i> unless it is the root (one or more slashes
+only).  In nearly all cases, <tt>join(<i>head</i>, <i>tail</i>)</tt>
+equals <i>p</i> (the only exception being when there were multiple
+slashes separating <i>head</i> from <i>tail</i>).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13072"><tt>splitext</tt></a></b> (<var>p</var>)
+<dd>
+Split the pathname <i>p</i> in a pair <tt>(<i>root</i>, <i>ext</i>)</tt>
+such that <tt><i>root</i> + <i>ext</i> == <i>p</i></tt>,
+and <i>ext</i> is empty or begins with a period and contains
+at most one period.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13083"><tt>walk</tt></a></b> (<var>p, visit, arg</var>)
+<dd>
+Calls the function <i>visit</i> with arguments
+<tt>(<i>arg</i>, <i>dirname</i>, <i>names</i>)</tt> for each directory in the
+directory tree rooted at <i>p</i> (including <i>p</i> itself, if it is a
+directory).  The argument <i>dirname</i> specifies the visited directory,
+the argument <i>names</i> lists the files in the directory (gotten from
+<tt>os.listdir(<i>dirname</i>)</tt>).
+The <i>visit</i> function may modify <i>names</i> to
+influence the set of directories visited below <i>dirname</i>, e.g., to
+avoid visiting certain parts of the tree.  (The object referred to by
+<i>names</i> must be modified in place, using <tt>del</tt> or slice
+assignment.)
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2046"
+ HREF="module-pwd.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2042"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2036"
+ HREF="module-posix.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2044"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2045"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2047"
+ HREF="module-pwd.html">8.3 pwd  </A>
+<b>Up:</b> <A NAME="tex2html2043"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2037"
+ HREF="module-posix.html">8.1 posix  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

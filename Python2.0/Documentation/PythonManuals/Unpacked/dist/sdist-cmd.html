@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>9.4 Creating a source distribution: the sdist command</title>
+<META NAME="description" CONTENT="9.4 Creating a source distribution: the sdist command">
+<META NAME="keywords" CONTENT="dist">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="dist.css">
+<LINK REL="next" href="bdist-cmds.html">
+<LINK REL="previous" href="clean-cmd.html">
+<LINK REL="up" href="reference.html">
+<LINK REL="next" href="bdist-cmds.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="clean-cmd.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="reference.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="bdist-cmds.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="clean-cmd.html">9.3 Cleaning up: the</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="reference.html">9 Reference</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="bdist-cmds.html">9.5 Creating a ``built''</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+9.4 Creating a source distribution: the <code>sdist</code> command
+</H2>
+
+<P>
+<b>** fragment moved down from above: needs context! **</b>
+
+<P>
+The manifest template commands are:
+<table border align="center" style="border-collapse: collapse">
+  <thead>
+    <tr class="tableheader">
+      <th align="left"><b>Command</b>&nbsp;</th>
+      <th><b>Description</b>&nbsp;</th>
+    </thead>
+  <tbody valign='baseline'>
+    <tr><td align="left" valign="baseline"><command>include <var>pat1</var> <var>pat2</var> ... </command></td>
+        <td>include all files matching any of the listed patterns</td>
+    <tr><td align="left" valign="baseline"><command>exclude <var>pat1</var> <var>pat2</var> ... </command></td>
+        <td>exclude all files matching any of the listed patterns</td>
+    <tr><td align="left" valign="baseline"><command>recursive-include <var>dir</var> <var>pat1</var> <var>pat2</var> ... </command></td>
+        <td>include all files under <var>dir</var> matching any of the listed patterns</td>
+    <tr><td align="left" valign="baseline"><command>recursive-exclude <var>dir</var> <var>pat1</var> <var>pat2</var> ...</command></td>
+        <td>exclude all files under <var>dir</var> matching any of the listed patterns</td>
+    <tr><td align="left" valign="baseline"><command>global-include <var>pat1</var> <var>pat2</var> ...</command></td>
+        <td>include all files anywhere in the source tree matching
+<BR>&amp;
+     any of the listed patterns</td>
+    <tr><td align="left" valign="baseline"><command>global-exclude <var>pat1</var> <var>pat2</var> ...</command></td>
+        <td>exclude all files anywhere in the source tree matching
+<BR>&amp;
+     any of the listed patterns</td>
+    <tr><td align="left" valign="baseline"><command>prune <var>dir</var></command></td>
+        <td>exclude all files under <var>dir</var></td>
+    <tr><td align="left" valign="baseline"><command>graft <var>dir</var></command></td>
+        <td>include all files under <var>dir</var></td></tbody>
+</table>
+The patterns here are Unix-style ``glob'' patterns: <code>*</code> matches any
+sequence of regular filename characters, <code>?</code> matches any single
+regular filename character, and <code>[<var>range</var>]</code> matches any of the
+characters in <var>range</var> (e.g., <code>a-z</code>, <code>a-zA-Z</code>,
+<code>a-f0-9_.</code>).  The definition of ``regular filename character'' is
+platform-specific: on Unix it is anything except slash; on Windows
+anything except backslash or colon; on Mac OS anything except colon.
+
+<P>
+<b>** Windows and Mac OS support not there yet **</b>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="clean-cmd.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="reference.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="bdist-cmds.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="clean-cmd.html">9.3 Cleaning up: the</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="reference.html">9 Reference</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="bdist-cmds.html">9.5 Creating a ``built''</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

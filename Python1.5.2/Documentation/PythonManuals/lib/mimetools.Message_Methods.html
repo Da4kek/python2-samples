@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.6.1 Additional Methods of Message objects</TITLE>
+<META NAME="description" CONTENT="12.6.1 Additional Methods of Message objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-mimetools.html">
+<LINK REL="up" HREF="module-mimetools.html">
+<LINK REL="next" HREF="module-multifile.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3002"
+ HREF="module-multifile.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2998"
+ HREF="module-mimetools.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2994"
+ HREF="module-mimetools.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3000"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3001"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3003"
+ HREF="module-multifile.html">12.7 multifile  </A>
+<b>Up:</b> <A NAME="tex2html2999"
+ HREF="module-mimetools.html">12.6 mimetools  </A>
+<b>Previous:</b> <A NAME="tex2html2995"
+ HREF="module-mimetools.html">12.6 mimetools  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0014610000000000000000">
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Additional Methods of Message objects</A>
+</H2>
+
+<P>
+The <tt>Message</tt> class defines the following methods in
+addition to the <tt>rfc822.Message</tt> methods:
+
+<P>
+<dl><dt><b><a name="l2h-19406"><tt>getplist</tt></a></b> ()
+<dd>
+Return the parameter list of the <tt>content-type</tt> header.  This is
+a list if strings.  For parameters of the form
+"<tt><i>key</i>=<i>value</i></tt>", <i>key</i> is converted to lower case but
+<i>value</i> is not.  For example, if the message contains the header
+"<tt>Content-type: text/html; spam=1; Spam=2; Spam</tt>" then
+<tt>getplist()</tt> will return the Python list <tt>['spam=1',
+'spam=2', 'Spam']</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19418"><tt>getparam</tt></a></b> (<var>name</var>)
+<dd>
+Return the <i>value</i> of the first parameter (as returned by
+<tt>getplist()</tt> of the form "<tt><i>name</i>=<i>value</i></tt>" for the
+given <i>name</i>.  If <i>value</i> is surrounded by quotes of the form
+`<tt>&lt;</tt>...<tt>&gt;</tt>' or `<tt>"</tt>...<tt>"</tt>', these are removed.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19432"><tt>getencoding</tt></a></b> ()
+<dd>
+Return the encoding specified in the <tt>content-transfer-encoding</tt>
+message header.  If no such header exists, return <tt>'7bit'</tt>.  The
+encoding is converted to lower case.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19438"><tt>gettype</tt></a></b> ()
+<dd>
+Return the message type (of the form "<tt><i>type</i>/<i>subtype</i></tt>")
+as specified in the <tt>content-type</tt> header.  If no such header
+exists, return <tt>'text/plain'</tt>.  The type is converted to lower
+case.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19446"><tt>getmaintype</tt></a></b> ()
+<dd>
+Return the main type as specified in the <tt>content-type</tt> header.
+If no such header exists, return <tt>'text'</tt>.  The main type is
+converted to lower case.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19452"><tt>getsubtype</tt></a></b> ()
+<dd>
+Return the subtype as specified in the <tt>content-type</tt> header.  If
+no such header exists, return <tt>'plain'</tt>.  The subtype is
+converted to lower case.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3002"
+ HREF="module-multifile.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2998"
+ HREF="module-mimetools.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2994"
+ HREF="module-mimetools.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3000"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3001"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3003"
+ HREF="module-multifile.html">12.7 multifile  </A>
+<b>Up:</b> <A NAME="tex2html2999"
+ HREF="module-mimetools.html">12.6 mimetools  </A>
+<b>Previous:</b> <A NAME="tex2html2995"
+ HREF="module-mimetools.html">12.6 mimetools  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4.2.3 Regular Expression Objects </TITLE>
+<META NAME="description" CONTENT="4.2.3 Regular Expression Objects ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="match-objects.html">
+<LINK REL="previous" HREF="Contents_of_Module_re.html">
+<LINK REL="up" HREF="module-re.html">
+<LINK REL="next" HREF="match-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1384"
+ HREF="match-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1380"
+ HREF="module-re.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1374"
+ HREF="Contents_of_Module_re.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1382"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1383"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1385"
+ HREF="match-objects.html">4.2.4 Match Objects</A>
+<b>Up:</b> <A NAME="tex2html1381"
+ HREF="module-re.html">4.2 re  </A>
+<b>Previous:</b> <A NAME="tex2html1375"
+ HREF="Contents_of_Module_re.html">4.2.2 Module Contents</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION006230000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Regular Expression Objects 
+</H2>
+
+<P>
+Compiled regular expression objects support the following methods and
+attributes:
+
+<P>
+<dl><dt><b><a name="l2h-6855"><tt>search</tt></a></b> (<var>string</var><big>[</big><var>, pos</var><big>]</big><big>[</big><var>,
+                                        endpos</var><big>]</big>)
+<dd>
+  Scan through <i>string</i> looking for a location where this regular
+  expression produces a match, and return a
+  corresponding <tt>MatchObject</tt> instance.  Return <tt>None</tt> if no
+  position in the string matches the pattern; note that this is
+  different from finding a zero-length match at some point in the string.
+  
+  The optional <i>pos</i> and <i>endpos</i> parameters have the same
+  meaning as for the <tt>match()</tt> method.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-6866"><tt>match</tt></a></b> (<var>string</var><big>[</big><var>, pos</var><big>]</big><big>[</big><var>,
+                                       endpos</var><big>]</big>)
+<dd>
+  If zero or more characters at the beginning of <i>string</i> match
+  this regular expression, return a corresponding
+  <tt>MatchObject</tt> instance.  Return <tt>None</tt> if the string does not
+  match the pattern; note that this is different from a zero-length
+  match.
+  
+  The optional second parameter <i>pos</i> gives an index in the string
+  where the search is to start; it defaults to <tt>0</tt>.  This is not
+  completely equivalent to slicing the string; the <tt>''</tt> pattern
+  character matches at the real beginning of the string and at positions
+  just after a newline, but not necessarily at the index where the search
+  is to start.
+
+<P>
+The optional parameter <i>endpos</i> limits how far the string will
+  be searched; it will be as if the string is <i>endpos</i> characters
+  long, so only the characters from <i>pos</i> to <i>endpos</i> will be
+  searched for a match.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-6881"><tt>split</tt></a></b> (<var>string, </var><big>[</big><var>,
+                                       maxsplit<tt> = 0</tt></var><big>]</big>)
+<dd>
+Identical to the <tt>split()</tt> function, using the compiled pattern.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-6886"><tt>findall</tt></a></b> (<var>string</var>)
+<dd>
+Identical to the <tt>findall()</tt> function, using the compiled pattern.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-6891"><tt>sub</tt></a></b> (<var>repl, string</var><big>[</big><var>, count<tt> = 0</tt></var><big>]</big>)
+<dd>
+Identical to the <tt>sub()</tt> function, using the compiled pattern.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-6896"><tt>subn</tt></a></b> (<var>repl, string</var><big>[</big><var>,
+                                      count<tt> = 0</tt></var><big>]</big>)
+<dd>
+Identical to the <tt>subn()</tt> function, using the compiled pattern.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>flags</tt></a></b>
+<dd>
+The flags argument used when the regex object was compiled, or
+<tt>0</tt> if no flags were provided.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>groupindex</tt></a></b>
+<dd>
+A dictionary mapping any symbolic group names defined by 
+<tt>(?P&lt;<i>id</i>&gt;)</tt> to group numbers.  The dictionary is empty if no
+symbolic groups were used in the pattern.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>pattern</tt></a></b>
+<dd>
+The pattern string from which the regex object was compiled.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1384"
+ HREF="match-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1380"
+ HREF="module-re.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1374"
+ HREF="Contents_of_Module_re.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1382"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1383"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1385"
+ HREF="match-objects.html">4.2.4 Match Objects</A>
+<b>Up:</b> <A NAME="tex2html1381"
+ HREF="module-re.html">4.2 re  </A>
+<b>Previous:</b> <A NAME="tex2html1375"
+ HREF="Contents_of_Module_re.html">4.2.2 Module Contents</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

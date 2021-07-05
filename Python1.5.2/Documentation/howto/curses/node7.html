@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4.1 Attributes and Colour</TITLE>
+<META NAME="description" CONTENT="4.1 Attributes and Colour">
+<META NAME="keywords" CONTENT="curses">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="curses.css">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html97"
+ HREF="node8.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html94"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html90"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Curses Programming with Python</b></td>
+<td align=right width="20%"><A NAME="tex2html96"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html98"
+ HREF="node8.html">5. User Input</A>
+<b>Up:</b> <A NAME="tex2html95"
+ HREF="node6.html">4. Displaying Text</A>
+<b>Previous:</b> <A NAME="tex2html91"
+ HREF="node6.html">4. Displaying Text</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000510000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Attributes and Colour</A>
+</H2>
+
+<P>
+Characters can be displayed in different ways.  Status lines in a
+text-based application are commonly shown in reverse video; a text
+viewer may need to highlight certain words.  curses supports this by
+allowing you to specify an attribute for each cell on the screen.
+
+<P>
+An attribute is a integer, each bit representing a different
+attribute.  You can try to display text with multiple attribute bits
+set, but curses doesn't guarantee that all the possible combinations
+are available, or that they're all visually distinct.  That depends on
+the ability of the terminal being used, so it's safest to stick to the
+most commonly available attributes, listed here.
+
+<P>
+<table border align=center>
+  <tr><th><b>Attribute</b></th>
+      <th><b>Description</b></th>
+<tr><td><constant>A_BLINK</constant></td>
+      <td align=center>Blinking text</td>
+<tr><td><constant>A_BOLD</constant></td>
+      <td align=center>Extra bright or bold text</td>
+<tr><td><constant>A_DIM</constant></td>
+      <td align=center>Half bright text</td>
+<tr><td><constant>A_REVERSE</constant></td>
+      <td align=center>Reverse-video text</td>
+<tr><td><constant>A_STANDOUT</constant></td>
+      <td align=center>The best highlighting mode available</td>
+<tr><td><constant>A_UNDERLINE</constant></td>
+      <td align=center>Underlined text</td>
+
+</table>
+
+<P>
+So, to display a reverse-video status line on the top line of the
+screen,
+you could code:
+
+<P>
+<dl><dd><pre>
+stdscr.addstr(0, 0, "Current mode: Typing mode",
+	      curses.A_REVERSE)
+stdscr.refresh()
+</pre></dl>
+
+<P>
+SVr4 curses also supports colour on those terminals that provide it,
+and Oliver Andrich's extended Python curses allows you to use the
+relevant functions.  The most common such terminal is probably the
+Linux console, followed by colour xterms.
+
+<P>
+To use colour, you must call the <tt>start_color()</tt> function
+soon after calling <tt>initscr()</tt>, to initialize the default
+colour set.  Once that's done, the <tt>has_colors()</tt> function
+returns TRUE if the terminal in use can actually display colour.
+(Note that curses uses the American spelling 'color', instead of the
+Canadian/British spelling 'colour'; if you're like me, you'll have to
+resign yourself to misspelling it for the sake of these functions.)
+
+<P>
+curses maintains a finite number of colour pairs, containing a
+foreground (or text) colour and a background colour.  You can get the
+attribute value corresponding to a colour pair with the
+<tt>COLOR_PAIR()</tt> function; this can be bitwise-OR'ed with other
+attributes such as <tt>A_REVERSE</tt>, but again, such combinations
+are not
+guaranteed to work on all terminals.
+
+<P>
+An example, which displays a line of text using colour pair 1:
+
+<P>
+<dl><dd><pre>
+stdscr.addstr( "Pretty text", curses.COLOR_PAIR(1) )
+stdscr.refresh()
+</pre></dl>
+
+<P>
+As I said before, a colour pair consists of a foreground and
+background colour.  <tt>start_color()</tt> initializes 8 basic
+colours when it activates colour mode.  They are: 0:black, 1:red,
+2:green, 3:yellow, 4:blue, 5:magenta, 6:cyan, and 7:white.  The curses
+module defines named constants for each of these colours:
+<tt>curses.COLOR_BLACK</tt>, <tt>curses.COLOR_RED</tt>, and so
+forth.
+
+<P>
+The <tt>init_pair(<i>n, f, b</i>)</tt> function changes the
+definition of colour pair <i>n</i>, to foreground colour f and
+background colour b.  Colour pair 0 is hard-wired to white on black,
+and cannot be changed.  
+
+<P>
+Let's put all this together. To change colour 1 to red
+text on a white background, you would call:
+
+<P>
+<dl><dd><pre>
+curses.init_pair(1, curses.COLOR_RED, curses.COLOR_WHITE)
+</pre></dl>
+
+<P>
+When you change a colour pair, any text already displayed using that
+colour pair will change to the new colours.  You can also display new
+text in this colour with:
+
+<P>
+<dl><dd><pre>
+stdscr.addstr(0,0, "RED ALERT!", curses.COLOR_PAIR(1) )
+</pre></dl>
+
+<P>
+Very fancy terminals can change the definitions of the actual colours
+to a given RGB value.  This lets you change colour 1, which is usually
+red, to purple or blue or any other colour you like.  Unfortunately,
+the Linux console doesn't support this, so I'm unable to try it out,
+and can't provide any examples.  You can check if your terminal can do
+this by calling <tt>can_change_color()</tt>, which returns TRUE if
+the capability is there.  If you're lucky enough to have such a
+talented terminal, consult your system's man pages for more
+information.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html97"
+ HREF="node8.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html94"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html90"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Curses Programming with Python</b></td>
+<td align=right width="20%"><A NAME="tex2html96"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html98"
+ HREF="node8.html">5. User Input</A>
+<b>Up:</b> <A NAME="tex2html95"
+ HREF="node6.html">4. Displaying Text</A>
+<b>Previous:</b> <A NAME="tex2html91"
+ HREF="node6.html">4. Displaying Text</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

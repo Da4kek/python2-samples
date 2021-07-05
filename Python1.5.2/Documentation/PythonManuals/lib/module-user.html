@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.24 user --
+A standard way to reference user-specific modules.</TITLE>
+<META NAME="description" CONTENT="3.24 user --
+A standard way to reference user-specific modules.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-builtin.html">
+<LINK REL="previous" HREF="module-site.html">
+<LINK REL="up" HREF="python.html">
+<LINK REL="next" HREF="module-builtin.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1286"
+ HREF="module-builtin.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1282"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1276"
+ HREF="module-site.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1284"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1285"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1287"
+ HREF="module-builtin.html">3.25 __builtin__  </A>
+<b>Up:</b> <A NAME="tex2html1283"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html1277"
+ HREF="module-site.html">3.23 site  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0052400000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">24</SPAN> <tt>user</tt> --
+         A standard way to reference user-specific modules.</A>
+</H1>
+
+
+<P>
+
+<P>
+<a name="l2h-6064"></a>
+<a name="l2h-"></a>
+
+<P>
+As a policy, Python doesn't run user-specified code on startup of
+Python programs.  (Only interactive sessions execute the script
+specified in the <a name="l2h-6069">$PYTHONSTARTUP</a> environment variable if it
+exists).
+
+<P>
+However, some programs or sites may find it convenient to allow users
+to have a standard customization file, which gets run when a program
+requests it.  This module implements such a mechanism.  A program
+that wishes to use the mechanism must execute the statement
+
+<P>
+<dl><dd><pre>
+import user
+</pre></dl>
+
+<P>
+The <tt>user</tt> module looks for a file "<tt>.pythonrc.py</tt>" in the user's
+home directory and if it can be opened, exececutes it (using
+<tt>execfile()</tt><a name="l2h-"></a>) in its own (i.e. the
+module <tt>user</tt>'s) global namespace.  Errors during this phase
+are not caught; that's up to the program that imports the
+<tt>user</tt> module, if it wishes.  The home directory is assumed to
+be named by the <a name="l2h-6078">$HOME</a> environment variable; if this is not set,
+the current directory is used.
+
+<P>
+The user's "<tt>.pythonrc.py</tt>" could conceivably test for
+<tt>sys.version</tt> if it wishes to do different things depending on
+the Python version.
+
+<P>
+A warning to users: be very conservative in what you place in your
+"<tt>.pythonrc.py</tt>" file.  Since you don't know which programs will
+use it, changing the behavior of standard modules or functions is
+generally not a good idea.
+
+<P>
+A suggestion for programmers who wish to use this mechanism: a simple
+way to let users specify options for your package is to have them
+define variables in their "<tt>.pythonrc.py</tt>" file that you test in
+your module.  For example, a module <tt>spam</tt> that has a verbosity
+level can look for a variable <tt>user.spam_verbose</tt>, as follows:
+
+<P>
+<dl><dd><pre>
+import user
+try:
+    verbose = user.spam_verbose  # user's verbosity preference
+except AttributeError:
+    verbose = 0                  # default verbosity
+</pre></dl>
+
+<P>
+Programs with extensive customization needs are better off reading a
+program-specific customization file.
+
+<P>
+Programs with security or privacy concerns should <i>not</i> import
+this module; a user can easily break into a a program by placing
+arbitrary code in the "<tt>.pythonrc.py</tt>" file.
+
+<P>
+Modules for general use should <i>not</i> import this module; it may
+interfere with the operation of the importing program.
+
+<P>
+<p><b>See Also:</b></p>
+
+<p>Module <tt><b><a href="module-site.html">site</a></b></tt>&nbsp;&nbsp;&nbsp;(site-wide customization mechanism)</p>
+<a name="l2h-"></a><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1286"
+ HREF="module-builtin.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1282"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1276"
+ HREF="module-site.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1284"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1285"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1287"
+ HREF="module-builtin.html">3.25 __builtin__  </A>
+<b>Up:</b> <A NAME="tex2html1283"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html1277"
+ HREF="module-site.html">3.23 site  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

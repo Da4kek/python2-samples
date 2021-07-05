@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.14.5 AST Objects</TITLE>
+<META NAME="description" CONTENT="3.14.5 AST Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="AST_Examples.html">
+<LINK REL="previous" HREF="AST_Errors.html">
+<LINK REL="up" HREF="module-parser.html">
+<LINK REL="next" HREF="AST_Examples.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1110"
+ HREF="AST_Examples.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1106"
+ HREF="module-parser.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1100"
+ HREF="AST_Errors.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1108"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1109"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1111"
+ HREF="AST_Examples.html">3.14.6 Examples</A>
+<b>Up:</b> <A NAME="tex2html1107"
+ HREF="module-parser.html">3.14 parser  </A>
+<b>Previous:</b> <A NAME="tex2html1101"
+ HREF="AST_Errors.html">3.14.4 Exceptions and Error</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0051450000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">5</SPAN> AST Objects
+</H2>
+
+<P>
+AST objects returned by <tt>expr()</tt>, <tt>suite()</tt> and
+<tt>sequence2ast()</tt> have no methods of their own.
+
+<P>
+Ordered and equality comparisons are supported between AST objects.
+Pickling of AST objects (using the <tt>pickle</tt> module) is also
+supported.
+
+<P>
+<dl><dt><b><a name="l2h-4574"><tt>ASTType</tt></a></b>
+<dd>
+The type of the objects returned by <tt>expr()</tt>,
+<tt>suite()</tt> and <tt>sequence2ast()</tt>.
+</dl>
+
+<P>
+AST objects have the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-4580"><tt>compile</tt></a></b> (<big>[</big><var>filename</var><big>]</big>)
+<dd>
+Same as <tt>compileast(<i>ast</i>, <i>filename</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-4586"><tt>isexpr</tt></a></b> ()
+<dd>
+Same as <tt>isexpr(<i>ast</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-4591"><tt>issuite</tt></a></b> ()
+<dd>
+Same as <tt>issuite(<i>ast</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-4596"><tt>tolist</tt></a></b> (<big>[</big><var>line_info</var><big>]</big>)
+<dd>
+Same as <tt>ast2list(<i>ast</i>, <i>line_info</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-4602"><tt>totuple</tt></a></b> (<big>[</big><var>line_info</var><big>]</big>)
+<dd>
+Same as <tt>ast2tuple(<i>ast</i>, <i>line_info</i>)</tt>.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1110"
+ HREF="AST_Examples.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1106"
+ HREF="module-parser.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1100"
+ HREF="AST_Errors.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1108"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1109"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1111"
+ HREF="AST_Examples.html">3.14.6 Examples</A>
+<b>Up:</b> <A NAME="tex2html1107"
+ HREF="module-parser.html">3.14 parser  </A>
+<b>Previous:</b> <A NAME="tex2html1101"
+ HREF="AST_Errors.html">3.14.4 Exceptions and Error</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

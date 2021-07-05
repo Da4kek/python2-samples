@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>9. Classes </TITLE>
+<META NAME="description" CONTENT="9. Classes ">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="tut.css">
+<LINK REL="next" HREF="whatNow.html">
+<LINK REL="previous" HREF="errors.html">
+<LINK REL="up" HREF="tut.html">
+<LINK REL="next" HREF="terminology.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html849"
+ HREF="terminology.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html846"
+ HREF="tut.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html840"
+ HREF="cleanup.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Tutorial</b></td>
+<td align=right width="20%"><A NAME="tex2html848"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html850"
+ HREF="terminology.html">9.1 A Word About</A>
+<b>Up:</b> <A NAME="tex2html847"
+ HREF="tut.html">Python Tutorial</A>
+<b>Previous:</b> <A NAME="tex2html841"
+ HREF="cleanup.html">8.6 Defining Clean-up Actions</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0011000000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>. Classes 
+</H1>
+
+<P>
+Python's class mechanism adds classes to the language with a minimum
+of new syntax and semantics.  It is a mixture of the class mechanisms
+found in C++ and Modula-3.  As is true for modules, classes in Python
+do not put an absolute barrier between definition and user, but rather
+rely on the politeness of the user not to ``break into the
+definition.''  The most important features of classes are retained
+with full power, however: the class inheritance mechanism allows
+multiple base classes, a derived class can override any methods of its
+base class or classes, a method can call the method of a base class with the
+same name.  Objects can contain an arbitrary amount of private data.
+
+<P>
+In C++ terminology, all class members (including the data members) are
+<i>public</i>, and all member functions are <i>virtual</i>.  There are
+no special constructors or destructors.  As in Modula-3, there are no
+shorthands for referencing the object's members from its methods: the
+method function is declared with an explicit first argument
+representing the object, which is provided implicitly by the call.  As
+in Smalltalk, classes themselves are objects, albeit in the wider
+sense of the word: in Python, all data types are objects.  This
+provides semantics for importing and renaming.  But, just like in C++
+or Modula-3, built-in types cannot be used as base classes for
+extension by the user.  Also, like in C++ but unlike in Modula-3, most
+built-in operators with special syntax (arithmetic operators,
+subscripting etc.) can be redefined for class instances.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html851"
+ HREF="terminology.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> A Word About Terminology </A>
+<LI><A NAME="tex2html852"
+ HREF="scopes.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> Python Scopes and Name Spaces </A>
+<LI><A NAME="tex2html853"
+ HREF="firstClasses.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN> A First Look at Classes </A>
+<UL>
+<LI><A NAME="tex2html854"
+ HREF="classDefinition.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Class Definition Syntax </A>
+<LI><A NAME="tex2html855"
+ HREF="classObjects.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Class Objects </A>
+<LI><A NAME="tex2html856"
+ HREF="instanceObjects.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN> Instance Objects </A>
+<LI><A NAME="tex2html857"
+ HREF="methodObjects.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> Method Objects </A>
+</UL>
+<LI><A NAME="tex2html858"
+ HREF="remarks.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">4</SPAN> Random Remarks </A>
+<LI><A NAME="tex2html859"
+ HREF="inheritance.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">5</SPAN> Inheritance </A>
+<UL>
+<LI><A NAME="tex2html860"
+ HREF="multiple.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Multiple Inheritance </A>
+</UL>
+<LI><A NAME="tex2html861"
+ HREF="private.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">6</SPAN> Private Variables </A>
+<LI><A NAME="tex2html862"
+ HREF="odds.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">7</SPAN> Odds and Ends </A>
+<UL>
+<LI><A NAME="tex2html863"
+ HREF="exceptionClasses.html"><SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Exceptions Can Be Classes </A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html849"
+ HREF="terminology.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html846"
+ HREF="tut.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html840"
+ HREF="cleanup.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Tutorial</b></td>
+<td align=right width="20%"><A NAME="tex2html848"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html850"
+ HREF="terminology.html">9.1 A Word About</A>
+<b>Up:</b> <A NAME="tex2html847"
+ HREF="tut.html">Python Tutorial</A>
+<b>Previous:</b> <A NAME="tex2html841"
+ HREF="cleanup.html">8.6 Defining Clean-up Actions</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

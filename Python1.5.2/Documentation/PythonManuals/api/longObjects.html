@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.4.2 Long Integer Objects</TITLE>
+<META NAME="description" CONTENT="7.4.2 Long Integer Objects">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="next" HREF="floatObjects.html">
+<LINK REL="previous" HREF="intObjects.html">
+<LINK REL="up" HREF="numericObjects.html">
+<LINK REL="next" HREF="floatObjects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html552"
+ HREF="floatObjects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html548"
+ HREF="numericObjects.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html542"
+ HREF="intObjects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html550"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html551"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html553"
+ HREF="floatObjects.html">7.4.3 Floating Point Objects</A>
+<b>Up:</b> <A NAME="tex2html549"
+ HREF="numericObjects.html">7.4 Numeric Objects</A>
+<b>Previous:</b> <A NAME="tex2html543"
+ HREF="intObjects.html">7.4.1 Plain Integer Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION009420000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Long Integer Objects
+</H2>
+
+<P>
+<dl><dt><b><a name="l2h-2010"><tt>PyLongObject</tt></a></b>
+<dd>
+This subtype of <tt>PyObject</tt> represents a Python long integer
+object.
+</dl>
+
+<P>
+<dl><dt>PyTypeObject <b><a name="l2h-2015"><tt>PyLong_Type</tt></a></b>
+<dd>
+This instance of <tt>PyTypeObject</tt> represents the Python long
+integer type.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-2020"><tt>PyLong_Check</tt></a></b>(<var>PyObject *p</var>)
+<dd>
+Returns true if its argument is a <tt>PyLongObject</tt>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-2026"><tt>PyLong_FromLong</tt></a></b>(<var>long v</var>)
+<dd>
+Returns a new <tt>PyLongObject</tt> object from <i>v</i>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-2033"><tt>PyLong_FromUnsignedLong</tt></a></b>(<var>unsigned long v</var>)
+<dd>
+Returns a new <tt>PyLongObject</tt> object from an unsigned C long.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-2040"><tt>PyLong_FromDouble</tt></a></b>(<var>double v</var>)
+<dd>
+Returns a new <tt>PyLongObject</tt> object from the integer part of <i>v</i>.
+</dl>
+
+<P>
+<dl><dt>long <b><a name="l2h-2047"><tt>PyLong_AsLong</tt></a></b>(<var>PyObject *pylong</var>)
+<dd>
+Returns a C <tt>long</tt> representation of the contents of <i>pylong</i>.  
+WHAT HAPPENS IF <i>pylong</i> is greater than <tt>LONG_MAX</tt>?
+</dl>
+
+<P>
+<dl><dt>unsigned long <b><a name="l2h-2057"><tt>PyLong_AsUnsignedLong</tt></a></b>(<var>PyObject *pylong</var>)
+<dd>
+Returns a C <tt>unsigned long</tt> representation of the contents of 
+<i>pylong</i>.  WHAT HAPPENS IF <i>pylong</i> is greater than
+<tt>ULONG_MAX</tt>?
+</dl>
+
+<P>
+<dl><dt>double <b><a name="l2h-2067"><tt>PyLong_AsDouble</tt></a></b>(<var>PyObject *pylong</var>)
+<dd>
+Returns a C <tt>double</tt> representation of the contents of <i>pylong</i>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-2075"><tt>PyLong_FromString</tt></a></b>(<var>char *str, char **pend,
+                                                int base</var>)
+<dd>
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html552"
+ HREF="floatObjects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html548"
+ HREF="numericObjects.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html542"
+ HREF="intObjects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html550"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html551"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html553"
+ HREF="floatObjects.html">7.4.3 Floating Point Objects</A>
+<b>Up:</b> <A NAME="tex2html549"
+ HREF="numericObjects.html">7.4 Numeric Objects</A>
+<b>Previous:</b> <A NAME="tex2html543"
+ HREF="intObjects.html">7.4.1 Plain Integer Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

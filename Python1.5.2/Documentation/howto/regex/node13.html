@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4.1 More Metacharacters</TITLE>
+<META NAME="description" CONTENT="4.1 More Metacharacters">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="next" HREF="node14.html">
+<LINK REL="previous" HREF="node12.html">
+<LINK REL="up" HREF="node12.html">
+<LINK REL="next" HREF="node14.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html203"
+ HREF="node14.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html200"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html194"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html202"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html204"
+ HREF="node14.html">4.2 Grouping</A>
+<b>Up:</b> <A NAME="tex2html201"
+ HREF="node12.html">4. More Pattern Power</A>
+<b>Previous:</b> <A NAME="tex2html195"
+ HREF="node12.html">4. More Pattern Power</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000510000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> More Metacharacters</A>
+</H2>
+
+<P>
+There are some metacharacters that we haven't covered yet.  Most of
+them will be covered in this section.
+
+<P>
+Some of the remaining metacharacters to be discussed are
+<i>zero-width assertions</i>.  They don't cause the engine to advance
+through the string at all; instead, they consume no characters at all,
+and simply succeed or fail.  For example, <tt>&#92;b</tt> is an
+assertion that the current position is located at a word boundary; the
+position isn't changed by the <tt>&#92;b</tt> at all.  This means that
+zero-width assertions should never be repeated, because if they match
+once at a given location, they can obviously be matched an infinite
+number of times.
+
+<P>
+
+<DT><tt>|</tt>
+
+<DL COMPACT><DD>Alternation, or the ``or'' operator.  
+If A and B are regular expressions, 
+<tt>A|B</tt> will match any string that matches either "<tt>A</tt>" or "<tt>B</tt>".
+<tt>|</tt> has very low precedence, in order to make it work reasonably when
+you're alternating multi-character strings.
+<tt>Crow|Servo</tt> will match either "<tt>Crow</tt>" or "<tt>Servo</tt>", not
+"<tt>Cro</tt>", a "<tt>w</tt>" or an "<tt>S</tt>", and "<tt>ervo</tt>".
+
+<P>
+To match a literal "<tt>|</tt>",
+use <tt>&#92;|</tt>, or enclose it inside a character class, as in  <tt>[|]</tt>.
+<DT><tt>^</tt>
+<DD>Matches at the beginning of lines.  Unless the
+<tt>MULTILINE</tt> flag has been set, this will only match at the
+beginning of the string.  In <tt>MULTILINE</tt> mode, this also
+matches immediately after each newline within the string.  
+
+<P>
+For example, if you wish to match the word "<tt>From</tt>" only at the
+beginning of a line, the RE to use is <tt>From</tt>.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; print re.match('^From', 'From Here to Eternity')
+&lt;re.MatchObject instance at 80c1520&gt;
+&gt;&gt;&gt; print re.match('^From', 'Reciting From Memory')
+None
+</pre></dl>
+
+<P>
+To match a literal "<tt>^</tt>",
+use <tt>&#92;^</tt>, or enclose it inside a character class, as in  <tt>[]</tt>.
+<DT><tt>$</tt>
+<DD>Matches at the end of lines, which is defined as
+either the end of the string, or any location followed by a newline
+character.    
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; print re.search('}$', '{block}')
+&lt;re.MatchObject instance at 80adfa8&gt;
+&gt;&gt;&gt; print re.search('}$', '{block} ')
+None
+&gt;&gt;&gt; print re.search('}$', '{block}\n')
+&lt;re.MatchObject instance at 80adfa8&gt;
+</pre></dl>
+To match a literal "<tt>$</tt>",
+use <tt>&#92;$</tt>, or enclose it inside a character class, as in  <tt>[$]</tt>.
+<DT><tt>&#92;A</tt>
+<DD>Matches only at the start of the string.  When not
+in <tt>MULTILINE</tt> mode, <tt>&#92;A</tt> and <tt>^</tt> are effectively
+the same.  In <tt>MULTILINE</tt> mode, however, they're different;
+<tt>&#92;A</tt> still matches only at the beginning of the string, but
+<tt>^</tt> may match at several locations inside the string (anywhere
+following a newline character).
+<DT><tt>&#92;Z</tt>
+<DD>Matches only at the end of the string.
+<DT><tt>&#92;b</tt>
+<DD>Word boundary.  
+This is a zero-width assertion that matches only at the
+beginning or end of a word.  A word is defined as a sequence of
+alphanumeric characters, as indicated by so the end of a word is indicated by
+whitespace or a non-alphanumeric character.  
+
+<P>
+The following example matches "<tt>class</tt>" only when it's a complete
+word; it won't match when it's containing inside another word.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; p = re.compile(r'\bclass\b')
+&gt;&gt;&gt; print p.search('no class at all')
+&lt;re.MatchObject instance at 80c8f28&gt;
+&gt;&gt;&gt; print p.search('the declassified algorithm')
+None
+&gt;&gt;&gt; print p.search('one subclass is')
+None
+</pre></dl>
+There are two subtleties you should remember when using this special
+sequence.  First, this is the worst collision between Python's string
+literals and regular expression sequences.  In Python's string
+literals, "<tt>&#92;b</tt>" is the backspace character, ASCII value 8.  If
+you're not using raw strings, then Python will convert the "<tt>&#92;b</tt>" to
+a backspace, and your RE won't match as you expect it to.  The
+following example looks the same as our previous RE, but omits
+the "<tt>r</tt>" in front of the RE string.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; p = re.compile('\bclass\b')
+&gt;&gt;&gt; print p.search('no class at all')
+None
+&gt;&gt;&gt; print p.search('\b' + 'class' + '\b')  
+&lt;re.MatchObject instance at 80c3ee0&gt;
+</pre></dl>
+Second, inside a character class, where there's no use for this
+assertion, <tt>&#92;b</tt> represents the backspace character, for
+compatibility with Python's string literals.
+<DT><tt>&#92;B</tt>
+<DD>Another zero-width assertion, this is the
+opposite of <tt>&#92;b</tt>, only matching when the current
+position is not at a word boundary.
+
+</DL>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html203"
+ HREF="node14.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html200"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html194"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html202"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html204"
+ HREF="node14.html">4.2 Grouping</A>
+<b>Up:</b> <A NAME="tex2html201"
+ HREF="node12.html">4. More Pattern Power</A>
+<b>Previous:</b> <A NAME="tex2html195"
+ HREF="node12.html">4. More Pattern Power</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

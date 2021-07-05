@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.10 zlib --
+Compression and decompression compatible with gzip.</TITLE>
+<META NAME="description" CONTENT="7.10 zlib --
+Compression and decompression compatible with gzip.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-gzip.html">
+<LINK REL="previous" HREF="module-whichdb.html">
+<LINK REL="up" HREF="someos.html">
+<LINK REL="next" HREF="module-gzip.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2000"
+ HREF="module-gzip.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1996"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1990"
+ HREF="module-whichdb.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1998"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1999"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2001"
+ HREF="module-gzip.html">7.11 gzip  </A>
+<b>Up:</b> <A NAME="tex2html1997"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1991"
+ HREF="module-whichdb.html">7.9 whichdb  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0091000000000000000000">
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">10</SPAN> <tt>zlib</tt> --
+         Compression and decompression compatible with <b>gzip</b>.</A>
+</H1>
+
+
+<P>
+
+<P>
+For applications that require data compression, the functions in this
+module allow compression and decompression, using the zlib library.
+The zlib library has its own home page at
+<a href="http://www.cdrom.com/pub/infozip/zlib/"><font face=sans-serif>http://www.cdrom.com/pub/infozip/zlib/</font></a>.  Version 1.0.4 is the
+most recent version as of December, 1997; use a later version if one
+is available.
+
+<P>
+The available exception and functions in this module are:
+
+<P>
+<dl><dt><b><a name="l2h-11992"><tt>error</tt></a></b>
+<dd>
+  Exception raised on compression and decompression errors.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12075"><tt>adler32</tt></a></b> (<var>string</var><big>[</big><var>, value</var><big>]</big>)
+<dd>
+   Computes a Adler-32 checksum of <i>string</i>.  (An Adler-32
+   checksum is almost as reliable as a CRC32 but can be computed much
+   more quickly.)  If <i>value</i> is present, it is used as the
+   starting value of the checksum; otherwise, a fixed default value is
+   used.  This allows computing a running checksum over the
+   concatenation of several input strings.  The algorithm is not
+   cryptographically strong, and should not be used for
+   authentication or digital signatures.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12076"><tt>compress</tt></a></b> (<var>string</var><big>[</big><var>, level</var><big>]</big>)
+<dd>
+  Compresses the data in <i>string</i>, returning a string contained
+  compressed data.  <i>level</i> is an integer from <tt>1</tt> to
+  <tt>9</tt> controlling the level of compression; <tt>1</tt> is fastest
+  and produces the least compression, <tt>9</tt> is slowest and produces
+  the most.  The default value is <tt>6</tt>.  Raises the
+  <tt>error</tt> exception if any error occurs.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12077"><tt>compressobj</tt></a></b> (<big>[</big><var>level</var><big>]</big>)
+<dd>
+  Returns a compression object, to be used for compressing data streams
+  that won't fit into memory at once.  <i>level</i> is an integer from
+  <tt>1</tt> to <tt>9</tt> controlling the level of compression; <tt>1</tt> is
+  fastest and produces the least compression, <tt>9</tt> is slowest and
+  produces the most.  The default value is <tt>6</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12078"><tt>crc32</tt></a></b> (<var>string</var><big>[</big><var>, value</var><big>]</big>)
+<dd>
+  Computes a CRC (Cyclic Redundancy Check)<a name="l2h-12025"></a>  <a name="l2h-12026"></a>  checksum of <i>string</i>. If
+  <i>value</i> is present, it is used as the starting value of the
+  checksum; otherwise, a fixed default value is used.  This allows
+  computing a running checksum over the concatenation of several
+  input strings.  The algorithm is not cryptographically strong, and
+  should not be used for authentication or digital signatures.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12082"><tt>decompress</tt></a></b> (<var>string</var><big>[</big><var>, wbits</var><big>[</big><var>, buffsize</var><big>]</big><big>]</big>)
+<dd>
+  Decompresses the data in <i>string</i>, returning a string containing
+  the uncompressed data.  The <i>wbits</i> parameter controls the size of
+  the window buffer.  If <i>buffsize</i> is given, it is used as the
+  initial size of the output buffer.  Raises the <tt>error</tt>
+  exception if any error occurs.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12080"><tt>decompressobj</tt></a></b> (<big>[</big><var>wbits</var><big>]</big>)
+<dd>
+  Returns a compression object, to be used for decompressing data
+  streams that won't fit into memory at once.  The <i>wbits</i>
+  parameter controls the size of the window buffer.
+</dl>
+
+<P>
+Compression objects support the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-12044"><tt>compress</tt></a></b> (<var>string</var>)
+<dd>
+Compress <i>string</i>, returning a string containing compressed data
+for at least part of the data in <i>string</i>.  This data should be
+concatenated to the output produced by any preceding calls to the
+<tt>compress()</tt> method.  Some input may be kept in internal buffers
+for later processing.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12051"><tt>flush</tt></a></b> ()
+<dd>
+All pending input is processed, and an string containing the remaining
+compressed output is returned.  After calling <tt>flush()</tt>, the
+<tt>compress()</tt> method cannot be called again; the only realistic
+action is to delete the object.
+</dl>
+
+<P>
+Decompression objects support the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-12057"><tt>decompress</tt></a></b> (<var>string</var>)
+<dd>
+Decompress <i>string</i>, returning a string containing the
+uncompressed data corresponding to at least part of the data in
+<i>string</i>.  This data should be concatenated to the output produced
+by any preceding calls to the
+<tt>decompress()</tt> method.  Some of the input data may be preserved
+in internal buffers for later processing.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12064"><tt>flush</tt></a></b> ()
+<dd>
+All pending input is processed, and a string containing the remaining
+uncompressed output is returned.  After calling <tt>flush()</tt>, the
+<tt>decompress()</tt> method cannot be called again; the only realistic
+action is to delete the object.
+</dl>
+
+<P>
+<p><b>See Also:</b></p>
+
+<p>Module <tt><b><a href="module-gzip.html">gzip</a></b></tt>&nbsp;&nbsp;&nbsp;(reading and writing <b>gzip</b>-format files)</p>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2000"
+ HREF="module-gzip.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1996"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1990"
+ HREF="module-whichdb.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1998"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1999"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2001"
+ HREF="module-gzip.html">7.11 gzip  </A>
+<b>Up:</b> <A NAME="tex2html1997"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1991"
+ HREF="module-whichdb.html">7.9 whichdb  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

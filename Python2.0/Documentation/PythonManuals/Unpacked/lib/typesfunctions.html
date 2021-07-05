@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>2.1.7.3 Functions </title>
+<META NAME="description" CONTENT="2.1.7.3 Functions ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="lib.css">
+<LINK REL="next" href="typesmethods.html">
+<LINK REL="previous" href="typesobjects.html">
+<LINK REL="up" href="typesother.html">
+<LINK REL="next" href="typesmethods.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="typesobjects.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="typesother.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="typesmethods.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="typesobjects.html">2.1.7.2 Classes and Class</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="typesother.html">2.1.7 Other Built-in Types</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="typesmethods.html">2.1.7.4 Methods</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H3>
+<BR>
+2.1.7.3 Functions 
+</H3>
+
+<P>
+Function objects are created by function definitions.  The only
+operation on a function object is to call it:
+<code><var>func</var>(<var>argument-list</var>)</code>.
+
+<P>
+There are really two flavors of function objects: built-in functions
+and user-defined functions.  Both support the same operation (to call
+the function), but the implementation is different, hence the
+different object types.
+
+<P>
+The implementation adds two special read-only attributes:
+<code><var>f</var>.func_code</code> is a function's <i class="dfn">code
+object</i> (see below) and <code><var>f</var>.func_globals</code> is
+the dictionary used as the function's global namespace (this is the
+same as <code><var>m</var>.__dict__</code> where <var>m</var> is the module in which
+the function <var>f</var> was defined).
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="typesobjects.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="typesother.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="typesmethods.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="typesobjects.html">2.1.7.2 Classes and Class</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="typesother.html">2.1.7 Other Built-in Types</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="typesmethods.html">2.1.7.4 Methods</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,129 @@
+.math {
+	FONT-FAMILY: "Century Schoolbook", serif
+}
+.math I {
+	FONT-FAMILY: "Century Schoolbook", serif; FONT-WEIGHT: bold
+}
+.boldmath {
+	FONT-FAMILY: "Century Schoolbook", serif; FONT-WEIGHT: bold
+}
+SMALL.xtiny {
+	FONT-SIZE: xx-small
+}
+SMALL.tiny {
+	FONT-SIZE: x-small
+}
+SMALL.scriptsize {
+	FONT-SIZE: smaller
+}
+SMALL.footnotesize {
+	FONT-SIZE: small
+}
+BIG.xlarge {
+	FONT-SIZE: large
+}
+BIG.xxlarge {
+	FONT-SIZE: x-large
+}
+BIG.huge {
+	FONT-SIZE: larger
+}
+BIG.xhuge {
+	FONT-SIZE: xx-large
+}
+BODY {
+	BACKGROUND-COLOR: #ffffff; COLOR: #000000
+}
+A:active {
+	COLOR: #ff0000
+}
+A:visited {
+	COLOR: #551a8b
+}
+A:link {
+	COLOR: #0000bb
+}
+H1 {
+	FONT-FAMILY: avantgarde, sans-serif; FONT-WEIGHT: bold
+}
+H2 {
+	FONT-FAMILY: avantgarde, sans-serif; FONT-WEIGHT: bold
+}
+H3 {
+	FONT-FAMILY: avantgarde, sans-serif; FONT-WEIGHT: bold
+}
+H4 {
+	FONT-FAMILY: avantgarde, sans-serif; FONT-WEIGHT: bold
+}
+H5 {
+	FONT-FAMILY: avantgarde, sans-serif; FONT-WEIGHT: bold
+}
+H6 {
+	FONT-FAMILY: avantgarde, sans-serif; FONT-WEIGHT: bold
+}
+H1 {
+	FONT-SIZE: 180%
+}
+H2 {
+	FONT-SIZE: 150%
+}
+H3 {
+	FONT-SIZE: 120%
+}
+H4 {
+	FONT-SIZE: 120%
+}
+CODE {
+	FONT-FAMILY: monospace
+}
+TT {
+	FONT-FAMILY: monospace
+}
+VAR {
+	FONT-FAMILY: serif; FONT-STYLE: italic; FONT-WEIGHT: normal
+}
+.navigation TD {
+	BACKGROUND-COLOR: #99ccff; FONT-FAMILY: avantgarde, sans-serif; FONT-SIZE: 110%; FONT-WEIGHT: bold
+}
+.titlegraphic {
+	VERTICAL-ALIGN: top
+}
+.verbatim {
+	COLOR: #00008b
+}
+.email {
+	FONT-FAMILY: avantgarde, sans-serif
+}
+.mimetype {
+	FONT-FAMILY: avantgarde, sans-serif
+}
+.newsgroup {
+	FONT-FAMILY: avantgarde, sans-serif
+}
+.url {
+	FONT-FAMILY: avantgarde, sans-serif
+}
+.file {
+	FONT-FAMILY: avantgarde, sans-serif
+}
+.tableheader TD {
+	BACKGROUND-COLOR: #99ccff
+}
+.tableheader TH {
+	BACKGROUND-COLOR: #99ccff; FONT-FAMILY: avantgarde, sans-serif
+}
+.refcount-info {
+	FONT-STYLE: italic
+}
+.refcount-info .value {
+	COLOR: #006600; FONT-WEIGHT: bold
+}
+.seealso {
+	BACKGROUND-COLOR: #fffaf0; BORDER-BOTTOM: black thin solid; BORDER-LEFT: black thin solid; BORDER-RIGHT: black thin solid; BORDER-TOP: black thin solid; PADDING-BOTTOM: 4pt; PADDING-LEFT: 4pt; PADDING-RIGHT: 4pt; PADDING-TOP: 4pt
+}
+.seealso .heading {
+	FONT-SIZE: 110%
+}
+.availability .platform {
+	FONT-WEIGHT: bold
+}

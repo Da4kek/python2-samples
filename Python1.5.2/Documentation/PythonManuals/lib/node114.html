@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.5.2 RLock Objects</TITLE>
+<META NAME="description" CONTENT="7.5.2 RLock Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="node115.html">
+<LINK REL="previous" HREF="node113.html">
+<LINK REL="up" HREF="module-threading.html">
+<LINK REL="next" HREF="node115.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1883"
+ HREF="node115.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1879"
+ HREF="module-threading.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1873"
+ HREF="node113.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1881"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1882"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1884"
+ HREF="node115.html">7.5.3 Condition Objects</A>
+<b>Up:</b> <A NAME="tex2html1880"
+ HREF="module-threading.html">7.5 threading  </A>
+<b>Previous:</b> <A NAME="tex2html1874"
+ HREF="node113.html">7.5.1 Lock Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION009520000000000000000">
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> RLock Objects</A>
+</H2>
+
+<P>
+A reentrant lock is a synchronization primitive that may be
+acquired multiple times by the same thread.  Internally, it uses
+the concepts of ``owning thread'' and ``recursion level'' in
+addition to the locked/unlocked state used by primitive locks.  In
+the locked state, some thread owns the lock; in the unlocked
+state, no thread owns it.
+
+<P>
+To lock the lock, a thread calls its <tt>acquire()</tt> method; this
+returns once the thread owns the lock.  To unlock the lock, a
+thread calls its <tt>release()</tt> method.  <tt>acquire()</tt>/<tt>release()</tt> call pairs
+may be nested; only the final <tt>release()</tt> (i.e. the <tt>release()</tt> of the
+outermost pair) resets the lock to unlocked and allows another
+thread blocked in <tt>acquire()</tt> to proceed.
+
+<P>
+<dl><dt><b><a name="l2h-11377"><tt>acquire</tt></a></b> (<var>blocking=1</var>)
+<dd>
+Acquire a lock, blocking or non-blocking.
+
+<P>
+When invoked without arguments: if this thread already owns
+the lock, increment the recursion level by one, and return
+immediately.  Otherwise, if another thread owns the lock,
+block until the lock is unlocked.  Once the lock is unlocked
+(not owned by any thread), then grab ownership, set the
+recursion level to one, and return.  If more than one thread
+is blocked waiting until the lock is unlocked, only one at a
+time will be able to grab ownership of the lock.  There is no
+return value in this case.
+
+<P>
+When invoked with the <i>blocking</i> argument set to true, do the
+same thing as when called without arguments, and return true.
+
+<P>
+When invoked with the <i>blocking</i> argument set to false, do not
+block.  If a call without an argument would block, return false
+immediately; otherwise, do the same thing as when called
+without arguments, and return true.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11383"><tt>release</tt></a></b> ()
+<dd>
+Release a lock, decrementing the recursion level.  If after the
+decrement it is zero, reset the lock to unlocked (not owned by any
+thread), and if any other threads are blocked waiting for the lock to
+become unlocked, allow exactly one of them to proceed.  If after the
+decrement the recursion level is still nonzero, the lock remains
+locked and owned by the calling thread.
+
+<P>
+Only call this method when the calling thread owns the lock.
+Do not call this method when the lock is unlocked.
+
+<P>
+There is no return value.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1883"
+ HREF="node115.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1879"
+ HREF="module-threading.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1873"
+ HREF="node113.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1881"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1882"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1884"
+ HREF="node115.html">7.5.3 Condition Objects</A>
+<b>Up:</b> <A NAME="tex2html1880"
+ HREF="module-threading.html">7.5 threading  </A>
+<b>Previous:</b> <A NAME="tex2html1874"
+ HREF="node113.html">7.5.1 Lock Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

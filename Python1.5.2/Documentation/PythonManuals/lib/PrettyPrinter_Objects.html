@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.19.1 PrettyPrinter Objects</TITLE>
+<META NAME="description" CONTENT="3.19.1 PrettyPrinter Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-pprint.html">
+<LINK REL="up" HREF="module-pprint.html">
+<LINK REL="next" HREF="module-pycompile.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1215"
+ HREF="module-pycompile.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1211"
+ HREF="module-pprint.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1207"
+ HREF="module-pprint.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1213"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1214"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1216"
+ HREF="module-pycompile.html">3.20 py_compile  </A>
+<b>Up:</b> <A NAME="tex2html1212"
+ HREF="module-pprint.html">3.19 pprint  </A>
+<b>Previous:</b> <A NAME="tex2html1208"
+ HREF="module-pprint.html">3.19 pprint  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0051910000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">19</SPAN>.<SPAN CLASS="arabic">1</SPAN> PrettyPrinter Objects
+</H2>
+
+<P>
+<tt>PrettyPrinter</tt> instances have the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-5109"><tt>pformat</tt></a></b> (<var>object</var>)
+<dd>
+Return the formatted representation of <i>object</i>.  This takes into
+Account the options passed to the <tt>PrettyPrinter</tt> constructor.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5115"><tt>pprint</tt></a></b> (<var>object</var>)
+<dd>
+Print the formatted representation of <i>object</i> on the configured
+stream, followed by a newline.
+</dl>
+
+<P>
+The following methods provide the implementations for the
+corresponding functions of the same names.  Using these methods on an
+instance is slightly more efficient since new <tt>PrettyPrinter</tt>
+objects don't need to be created.
+
+<P>
+<dl><dt><b><a name="l2h-5121"><tt>isreadable</tt></a></b> (<var>object</var>)
+<dd>
+Determine if the formatted representation of the object is
+``readable,'' or can be used to reconstruct the value using
+<tt>eval()</tt><a name="l2h-"></a>.  Note that this returns false for
+recursive objects.  If the <i>depth</i> parameter of the
+<tt>PrettyPrinter</tt> is set and the object is deeper than allowed,
+this returns false.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5129"><tt>isrecursive</tt></a></b> (<var>object</var>)
+<dd>
+Determine if the object requires a recursive representation.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1215"
+ HREF="module-pycompile.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1211"
+ HREF="module-pprint.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1207"
+ HREF="module-pprint.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1213"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1214"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1216"
+ HREF="module-pycompile.html">3.20 py_compile  </A>
+<b>Up:</b> <A NAME="tex2html1212"
+ HREF="module-pprint.html">3.19 pprint  </A>
+<b>Previous:</b> <A NAME="tex2html1208"
+ HREF="module-pprint.html">3.19 pprint  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>10. The Python Profiler</TITLE>
+<META NAME="description" CONTENT="10. The Python Profiler">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="internet.html">
+<LINK REL="previous" HREF="module-pdb.html">
+<LINK REL="up" HREF="lib.html">
+<LINK REL="next" HREF="Profiler_Introduction.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2306"
+ HREF="Profiler_Introduction.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2302"
+ HREF="lib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2296"
+ HREF="node149.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2304"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2305"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2307"
+ HREF="Profiler_Introduction.html">10.1 Introduction to the</A>
+<b>Up:</b> <A NAME="tex2html2303"
+ HREF="lib.html">Python Library Reference</A>
+<b>Previous:</b> <A NAME="tex2html2297"
+ HREF="node149.html">9.2 How It Works</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0012000000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">10</SPAN>. The Python Profiler
+</H1>
+
+<P>
+Copyright &#169; 1994, by InfoSeek Corporation, all rights reserved.
+<a name="l2h-14906"></a>
+<P>
+Written by James Roskind<a name="l2h-14907"></a>.<A NAME="tex2html14"
+ HREF="#foot14908"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A>
+<P>
+Permission to use, copy, modify, and distribute this Python software
+and its associated documentation for any purpose (subject to the
+restriction in the following sentence) without fee is hereby granted,
+provided that the above copyright notice appears in all copies, and
+that both that copyright notice and this permission notice appear in
+supporting documentation, and that the name of InfoSeek not be used in
+advertising or publicity pertaining to distribution of the software
+without specific, written prior permission.  This permission is
+explicitly restricted to the copying and modification of the software
+to remain in Python, compiled Python, or other languages (such as C)
+wherein the modified or derived code is exclusively imported into a
+Python module.
+
+<P>
+INFOSEEK CORPORATION DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS
+SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS. IN NO EVENT SHALL INFOSEEK CORPORATION BE LIABLE FOR ANY
+SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
+RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
+CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+<P>
+The profiler was written after only programming in Python for 3 weeks.
+As a result, it is probably clumsy code, but I don't know for sure yet
+'cause I'm a beginner :-).  I did work hard to make the code run fast,
+so that profiling would be a reasonable thing to do.  I tried not to
+repeat code fragments, but I'm sure I did some stuff in really awkward
+ways at times.  Please send suggestions for improvements to:
+<font face=sans-serif>jar@netscape.com</font>.  I won't promise <i>any</i> support.  ...but
+I'd appreciate the feedback.
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot14908">... James.340</A><A NAME="foot14908"
+ HREF="profile.html#tex2html14"><SUP><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A>
+<DD>
+Updated and converted to <SPAN CLASS="logo LaTeX">L<SUP><SMALL>A</SMALL></SUP>T<SMALL>E</SMALL>X</SPAN> by Guido van Rossum.  The references to
+the old profiler are left in the text, although it no longer exists.
+
+
+</DL>
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html2308"
+ HREF="Profiler_Introduction.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN> Introduction to the profiler</A>
+<LI><A NAME="tex2html2309"
+ HREF="Profiler_Changes.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN> How Is This Profiler Different From The Old Profiler?</A>
+<LI><A NAME="tex2html2310"
+ HREF="node153.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">3</SPAN> Instant Users Manual</A>
+<LI><A NAME="tex2html2311"
+ HREF="Deterministic_Profiling.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">4</SPAN> What Is Deterministic Profiling?</A>
+<LI><A NAME="tex2html2312"
+ HREF="module-profile.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">5</SPAN> Reference Manual</A>
+<UL>
+<LI><A NAME="tex2html2313"
+ HREF="node156.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> The <tt>Stats</tt> Class</A>
+</UL>
+<LI><A NAME="tex2html2314"
+ HREF="node157.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">6</SPAN> Limitations</A>
+<LI><A NAME="tex2html2315"
+ HREF="node158.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">7</SPAN> Calibration</A>
+<LI><A NAME="tex2html2316"
+ HREF="Profiler_Extensions.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">8</SPAN> Extensions -- Deriving Better Profilers</A>
+<UL>
+<LI><A NAME="tex2html2317"
+ HREF="node160.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> OldProfile Class</A>
+<LI><A NAME="tex2html2318"
+ HREF="node161.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> HotProfile Class</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2306"
+ HREF="Profiler_Introduction.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2302"
+ HREF="lib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2296"
+ HREF="node149.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2304"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2305"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2307"
+ HREF="Profiler_Introduction.html">10.1 Introduction to the</A>
+<b>Up:</b> <A NAME="tex2html2303"
+ HREF="lib.html">Python Library Reference</A>
+<b>Previous:</b> <A NAME="tex2html2297"
+ HREF="node149.html">9.2 How It Works</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

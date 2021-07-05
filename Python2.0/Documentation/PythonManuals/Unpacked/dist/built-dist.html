@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>6 Creating Built Distributions</title>
+<META NAME="description" CONTENT="6 Creating Built Distributions">
+<META NAME="keywords" CONTENT="dist">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="dist.css">
+<LINK REL="next" href="examples.html">
+<LINK REL="previous" href="source-dist.html">
+<LINK REL="up" HREF="dist.html">
+<LINK REL="next" href="creating-dumb.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="manifest-options.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A HREF="dist.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="creating-dumb.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="manifest-options.html">5.2 Manifest-related options</A>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="dist.html">Distributing Python Modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="creating-dumb.html">6.1 Creating dumb built</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1>
+<BR>
+6 Creating Built Distributions
+</H1>
+
+<P>
+A ``built distribution'' is what you're probably used to thinking of
+either as a ``binary package'' or an ``installer'' (depending on your
+background).  It's not necessarily binary, though, because it might
+contain only Python source code and/or byte-code; and we don't call it a
+package, because that word is already spoken for in Python.  (And
+``installer'' is a term specific to the Windows world.  <b>** do Mac
+  people use it? **</b>)
+
+<P>
+A built distribution is how you make life as easy as possible for
+installers of your module distribution: for users of RPM-based Linux
+systems, it's a binary RPM; for Windows users, it's an executable
+installer; for Debian-based Linux users, it's a Debian package; and so
+forth.  Obviously, no one person will be able to create built
+distributions for every platform under the sun, so the Distutils are
+designed to enable module developers to concentrate on their
+specialty--writing code and creating source distributions--while an
+intermediary species of <i>packager</i> springs up to turn source
+distributions into built distributions for as many platforms as there
+are packagers.
+
+<P>
+Of course, the module developer could be his own packager; or the
+packager could be a volunteer ``out there'' somewhere who has access to
+a platform which the original developer does not; or it could be
+software periodically grabbing new source distributions and turning them
+into built distributions for as many platforms as the software has
+access to.  Regardless of the nature of the beast, a packager uses the
+setup script and the <code>bdist</code> command family to generate built
+distributions.
+
+<P>
+As a simple example, if I run the following command in the Distutils
+source tree:
+<dl><dd><pre class="verbatim">
+python setup.py bdist
+</pre></dl>
+then the Distutils builds my module distribution (the Distutils itself
+in this case), does a ``fake'' installation (also in the <span class="file">build</span>
+directory), and creates the default type of built distribution for my
+platform.  The default format for built distributions is a ``dumb'' tar
+file on Unix, and an simple executable installer on Windows.  (That tar
+file is considered ``dumb'' because it has to be unpacked in a specific
+location to work.)
+
+<P>
+Thus, the above command on a Unix system creates
+<span class="file">Distutils-0.9.1.<font face="sans-serif"></i>plat</i></font>.tar.gz</span>; unpacking this tarball
+from the right place installs the Distutils just as though you had
+downloaded the source distribution and run <code>python setup.py
+  install</code>.  (The ``right place'' is either the root of the filesystem or 
+Python's <font face="sans-serif"></i>prefix</i></font> directory, depending on the options given to
+the <code>bdist_dumb</code> command; the default is to make dumb
+distributions relative to <font face="sans-serif"></i>prefix</i></font>.)  
+
+<P>
+Obviously, for pure Python distributions, this isn't a huge win--but
+for non-pure distributions, which include extensions that would need to
+be compiled, it can mean the difference between someone being able to
+use your extensions or not.  And creating ``smart'' built distributions,
+such as an RPM package or an executable installer for Windows, is a big
+win for users even if your distribution doesn't include any extensions.
+
+<P>
+The <code>bdist</code> command has a <b class="programopt">--formats</b> option,
+similar to the <code>sdist</code> command, which you can use to select the
+types of built distribution to generate: for example,
+<dl><dd><pre class="verbatim">
+python setup.py bdist --format=zip
+</pre></dl>
+would, when run on a Unix system, create
+<span class="file">Distutils-0.8.<font face="sans-serif"></i>plat</i></font>.zip</span>--again, this archive would be
+unpacked from the root directory to install the Distutils.
+
+<P>
+The available formats for built distributions are:
+<table border align="center" style="border-collapse: collapse">
+  <thead>
+    <tr>
+      <th align="left"><b>Format</b>&nbsp;</th>
+      <th align="left"><b>Description</b>&nbsp;</th>
+      <th align="center"><b>Notes</b>&nbsp;</th>
+    </thead>
+  <tbody valign='baseline'>
+    <tr><td align="left" valign="baseline"><command>gztar</command></td>
+        <td align="left">gzipped tar file (<span class="file">.tar.gz</span>)</td>
+        <td align="center">(1),(3)</td>
+    <tr><td align="left" valign="baseline"><command>ztar</command></td>
+        <td align="left">compressed tar file (<span class="file">.tar.Z</span>)</td>
+        <td align="center">(3)</td>
+    <tr><td align="left" valign="baseline"><command>tar</command></td>
+        <td align="left">tar file (<span class="file">.tar</span>)</td>
+        <td align="center">(3)</td>
+    <tr><td align="left" valign="baseline"><command>zip</command></td>
+        <td align="left">zip file (<span class="file">.zip</span>)</td>
+        <td align="center">(4)</td>
+    <tr><td align="left" valign="baseline"><command>rpm</command></td>
+        <td align="left">RPM</td>
+        <td align="center">(5)</td>
+    <tr><td align="left" valign="baseline"><command>srpm</command></td>
+        <td align="left">source RPM</td>
+        <td align="center">(5) <b>** to do! **</b></td>
+    <tr><td align="left" valign="baseline"><command>wininst</command></td>
+        <td align="left">self-extracting ZIP file for Windows</td>
+        <td align="center">(2),(6)</td>
+    </tbody>
+</table>
+
+<P>
+Notes:
+<DL>
+<DT><STRONG>(1)</STRONG></DT>
+<DD>default on Unix
+</DD>
+<DT><STRONG>(2)</STRONG></DT>
+<DD>default on Windows <b>** to-do! **</b>
+</DD>
+<DT><STRONG>(3)</STRONG></DT>
+<DD>requires external utilities: <b class="program">tar</b> and possibly one
+  of <b class="program">gzip</b>, <b class="program">bzip2</b>, or <b class="program">compress</b>
+</DD>
+<DT><STRONG>(4)</STRONG></DT>
+<DD>requires either external <b class="program">zip</b> utility or
+  <tt class="module">zipfile</tt> module (not part of the standard Python library)
+</DD>
+<DT><STRONG>(5)</STRONG></DT>
+<DD>requires external <b class="program">rpm</b> utility, version 3.0.4 or
+  better (use <code>rpm -version</code> to find out which version you have)
+</DD>
+<DT><STRONG>(6)</STRONG></DT>
+<DD><b>** requirements for <code>bdist_wininst</code>? **</b>
+</DD>
+</DL>
+
+<P>
+You don't have to use the <code>bdist</code> command with the
+<b class="programopt">--formats</b> option; you can also use the command that
+directly implements the format you're interested in.  Some of these
+<code>bdist</code> ``sub-commands'' actually generate several similar
+formats; for instance, the <code>bdist_dumb</code> command generates all
+the ``dumb'' archive formats (<code>tar</code>, <code>ztar</code>, <code>gztar</code>, and
+<code>zip</code>), and <code>bdist_rpm</code> generates both binary and source
+RPMs.  The <code>bdist</code> sub-commands, and the formats generated by
+each, are:
+<table border align="center" style="border-collapse: collapse">
+  <thead>
+    <tr class="tableheader">
+      <th align="left"><b>Command</b>&nbsp;</th>
+      <th align="left"><b>Formats</b>&nbsp;</th>
+    </thead>
+  <tbody valign='baseline'>
+    <tr><td align="left" valign="baseline"><command>bdist_dumb</command></td>
+        <td align="left">tar, ztar, gztar, zip</td>
+    <tr><td align="left" valign="baseline"><command>bdist_rpm</command></td>
+        <td align="left">rpm, srpm</td>
+    <tr><td align="left" valign="baseline"><command>bdist_wininst</command></td>
+        <td align="left">wininst</td>
+    </tbody>
+</table>
+
+<P>
+The following sections give details on the individual <code>bdist_*</code>
+commands.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html309"
+  href="creating-dumb.html">6.1 Creating dumb built distributions</A>
+<LI><A NAME="tex2html310"
+  href="creating-rpms.html">6.2 Creating RPM packages</A>
+<LI><A NAME="tex2html311"
+  href="creating-wininst.html">6.3 Creating Windows installers</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="manifest-options.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A HREF="dist.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="creating-dumb.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="manifest-options.html">5.2 Manifest-related options</A>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="dist.html">Distributing Python Modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="creating-dumb.html">6.1 Creating dumb built</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.2 urllib --
+Open an arbitrary object given by URL.</TITLE>
+<META NAME="description" CONTENT="11.2 urllib --
+Open an arbitrary object given by URL.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-httplib.html">
+<LINK REL="previous" HREF="module-cgi.html">
+<LINK REL="up" HREF="internet.html">
+<LINK REL="next" HREF="module-httplib.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2597"
+ HREF="module-httplib.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2593"
+ HREF="internet.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2587"
+ HREF="node172.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2595"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2596"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2598"
+ HREF="module-httplib.html">11.3 httplib  </A>
+<b>Up:</b> <A NAME="tex2html2594"
+ HREF="internet.html">11. Internet Protocols and</A>
+<b>Previous:</b> <A NAME="tex2html2588"
+ HREF="node172.html">11.1.9 Common problems and</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0013200000000000000000">
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>urllib</tt> --
+         Open an arbitrary object given by URL.</A>
+</H1>
+
+
+<P>
+
+<P>
+<a name="l2h-15781"></a><a name="l2h-15782"></a><a name="l2h-15783"></a>
+<P>
+This module provides a high-level interface for fetching data across
+the World-Wide Web.  In particular, the <tt>urlopen()</tt> function
+is similar to the built-in function <tt>open()</tt>, but accepts
+Universal Resource Locators (URLs) instead of filenames.  Some
+restrictions apply -- it can only open URLs for reading, and no seek
+operations are available.
+
+<P>
+It defines the following public functions:
+
+<P>
+<dl><dt><b><a name="l2h-15898"><tt>urlopen</tt></a></b> (<var>url</var><big>[</big><var>, data</var><big>]</big>)
+<dd>
+Open a network object denoted by a URL for reading.  If the URL does
+not have a scheme identifier, or if it has "<tt>file:</tt>" as its scheme
+identifier, this opens a local file; otherwise it opens a socket to a
+server somewhere on the network.  If the connection cannot be made, or
+if the server returns an error code, the <tt>IOError</tt> exception
+is raised.  If all went well, a file-like object is returned.  This
+supports the following methods: <tt>read()</tt>, <tt>readline()</tt>,
+<tt>readlines()</tt>, <tt>fileno()</tt>, <tt>close()</tt> and
+<tt>info()</tt>.
+
+<P>
+Except for the <tt>info()</tt> method,
+these methods have the same interface as for
+file objects -- see section <A HREF="bltin-file-objects.html#bltin-file-objects">2.1</A> in this
+manual.  (It is not a built-in file object, however, so it can't be
+used at those few places where a true built-in file object is
+required.)
+
+<P>
+The <tt>info()</tt> method returns an instance of the class
+<tt>mimetools.Message</tt> containing meta-information associated
+with the URL.  When the method is HTTP, these headers are those
+returned by the server at the head of the retrieved HTML page
+(including Content-Length and Content-Type).  When the method is FTP,
+a Content-Length header will be present if (as is now usual) the
+server passed back a file length in response to the FTP retrieval
+request.  When the method is local-file, returned headers will include
+a Date representing the file's last-modified time, a Content-Length
+giving file size, and a Content-Type containing a guess at the file's
+type. See also the description of the
+<tt>mimetools</tt><a name="l2h-"></a> module.
+
+<P>
+If the <i>url</i> uses the "<tt>http:</tt>" scheme identifier, the optional
+<i>data</i> argument may be given to specify a <tt>POST</tt> request
+(normally the request type is <tt>GET</tt>).  The <i>data</i> argument
+must in standard "<tt>application/x-www-form-urlencoded</tt>" format;
+see the <tt>urlencode()</tt> function below.
+
+<P>
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15899"><tt>urlretrieve</tt></a></b> (<var>url</var><big>[</big><var>, filename</var><big>]</big><big>[</big><var>, hook</var><big>]</big>)
+<dd>
+Copy a network object denoted by a URL to a local file, if necessary.
+If the URL points to a local file, or a valid cached copy of the
+object exists, the object is not copied.  Return a tuple
+<tt>(<i>filename</i>, <i>headers</i>)</tt> where <i>filename</i> is the
+local file name under which the object can be found, and <i>headers</i>
+is either <tt>None</tt> (for a local object) or whatever the
+<tt>info()</tt> method of the object returned by <tt>urlopen()</tt>
+returned (for a remote object, possibly cached).  Exceptions are the
+same as for <tt>urlopen()</tt>.
+
+<P>
+The second argument, if present, specifies the file location to copy
+to (if absent, the location will be a tempfile with a generated name).
+The third argument, if present, is a hook function that will be called
+once on establishment of the network connection and once after each
+block read thereafter.  The hook will be passed three arguments; a
+count of blocks transferred so far, a block size in bytes, and the
+total size of the file.  The third argument may be <tt>-1</tt> on older
+FTP servers which do not return a file size in response to a retrieval 
+request.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15828"><tt>urlcleanup</tt></a></b> ()
+<dd>
+Clear the cache that may have been built up by previous calls to
+<tt>urlretrieve()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15901"><tt>quote</tt></a></b> (<var>string</var><big>[</big><var>, safe</var><big>]</big>)
+<dd>
+Replace special characters in <i>string</i> using the "<tt>%xx</tt>" escape.
+Letters, digits, and the characters "<tt>_,.-</tt>" are never quoted.
+The optional <i>safe</i> parameter specifies additional characters
+that should not be quoted -- its default value is <tt>'/'</tt>.
+
+<P>
+Example: <tt>quote('/connolly/')</tt> yields <tt>'/%7econnolly/'</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15902"><tt>quote_plus</tt></a></b> (<var>string</var><big>[</big><var>, safe</var><big>]</big>)
+<dd>
+Like <tt>quote()</tt>, but also replaces spaces by plus signs, as
+required for quoting HTML form values.  Plus signs in the original
+string are escaped unless they are included in <i>safe</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15850"><tt>unquote</tt></a></b> (<var>string</var>)
+<dd>
+Replace "<tt>%xx</tt>" escapes by their single-character equivalent.
+
+<P>
+Example: <tt>unquote('/%7Econnolly/')</tt> yields <tt>'/connolly/'</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15857"><tt>unquote_plus</tt></a></b> (<var>string</var>)
+<dd>
+Like <tt>unquote()</tt>, but also replaces plus signs by spaces, as
+required for unquoting HTML form values.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15862"><tt>urlencode</tt></a></b> (<var>dict</var>)
+<dd>
+Convert a dictionary to a ``url-encoded'' string, suitable to pass to
+<tt>urlopen()</tt> above as the optional <i>data</i> argument.  This
+is useful to pass a dictionary of form fields to a <tt>POST</tt>
+request.  The resulting string is a series of
+<tt><i>key</i>=<i>value</i></tt> pairs separated by "<tt>&amp;</tt>"
+characters, where both <i>key</i> and <i>value</i> are quoted using
+<tt>quote_plus()</tt> above.
+</dl>
+
+<P>
+Restrictions:
+
+<P>
+
+<UL><LI>Currently, only the following protocols are supported: HTTP, (versions
+0.9 and 1.0), Gopher (but not Gopher-+), FTP, and local files.
+<a name="l2h-15874"></a>
+<a name="l2h-15876"></a>
+<a name="l2h-15878"></a>
+
+<P>
+
+<LI>The caching feature of <tt>urlretrieve()</tt> has been disabled
+until I find the time to hack proper processing of Expiration time
+headers.
+
+<P>
+
+<LI>There should be a function to query whether a particular URL is in
+the cache.
+
+<P>
+
+<LI>For backward compatibility, if a URL appears to point to a local file
+but the file can't be opened, the URL is re-interpreted using the FTP
+protocol.  This can sometimes cause confusing error messages.
+
+<P>
+
+<LI>The <tt>urlopen()</tt> and <tt>urlretrieve()</tt> functions can
+cause arbitrarily long delays while waiting for a network connection
+to be set up.  This means that it is difficult to build an interactive
+web client using these functions without using threads.
+
+<P>
+
+<LI>The data returned by <tt>urlopen()</tt> or <tt>urlretrieve()</tt>
+is the raw data returned by the server.  This may be binary data
+(e.g. an image), plain text or (for example) HTML.  The HTTP protocol
+provides type information in the reply header, which can be inspected
+by looking at the <tt>content-type</tt> header.  For the Gopher protocol,
+type information is encoded in the URL; there is currently no easy way
+to extract it.  If the returned data is HTML, you can use the module
+<tt>htmllib</tt><a name="l2h-"></a> to parse it.
+<a name="l2h-15888"></a><a name="l2h-15889"></a>
+<a name="l2h-15891"></a>
+
+<P>
+
+<LI>Although the <tt>urllib</tt> module contains (undocumented) routines
+to parse and unparse URL strings, the recommended interface for URL
+manipulation is in module <tt>urlparse</tt><a name="l2h-"></a>.
+
+<P>
+
+</UL><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2597"
+ HREF="module-httplib.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2593"
+ HREF="internet.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2587"
+ HREF="node172.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2595"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2596"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2598"
+ HREF="module-httplib.html">11.3 httplib  </A>
+<b>Up:</b> <A NAME="tex2html2594"
+ HREF="internet.html">11. Internet Protocols and</A>
+<b>Previous:</b> <A NAME="tex2html2588"
+ HREF="node172.html">11.1.9 Common problems and</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

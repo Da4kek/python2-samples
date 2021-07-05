@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8.12.2 Resource Usage</TITLE>
+<META NAME="description" CONTENT="8.12.2 Resource Usage">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="node140.html">
+<LINK REL="up" HREF="module-resource.html">
+<LINK REL="next" HREF="module-syslog.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2201"
+ HREF="module-syslog.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2197"
+ HREF="module-resource.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2193"
+ HREF="node140.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2199"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2200"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2202"
+ HREF="module-syslog.html">8.13 syslog  </A>
+<b>Up:</b> <A NAME="tex2html2198"
+ HREF="module-resource.html">8.12 resource  </A>
+<b>Previous:</b> <A NAME="tex2html2194"
+ HREF="node140.html">8.12.1 Resource Limits</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00101220000000000000000">
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">2</SPAN> Resource Usage</A>
+</H2>
+
+<P>
+These functiona are used to retrieve resource usage information:
+
+<P>
+<dl><dt><b><a name="l2h-13976"><tt>getrusage</tt></a></b> (<var>who</var>)
+<dd>
+  This function returns a large tuple that describes the resources
+  consumed by either the current process or its children, as specified
+  by the <i>who</i> parameter.  The <i>who</i> parameter should be
+  specified using one of the <tt>RUSAGE_*</tt> constants described
+  below.
+
+<P>
+The elements of the return value each
+  describe how a particular system resource has been used, e.g. amount
+  of time spent running is user mode or number of times the process was
+  swapped out of main memory. Some values are dependent on the clock
+  tick internal, e.g. the amount of memory the process is using.
+
+<P>
+The first two elements of the return value are floating point values
+  representing the amount of time spent executing in user mode and the
+  amount of time spent executing in system mode, respectively. The
+  remaining values are integers. Consult the <i>getrusage</i>(2)
+  man page for detailed information about these values. A brief
+  summary is presented here:
+
+<P>
+<table border align=center>
+  <tr><th align=right><b>Offset</b></th>
+      <th align=left><b>Resource</b></th>
+  <tr><td><code>0</code></td>
+      <td>time in user mode (float)</td>
+  <tr><td><code>1</code></td>
+      <td>time in system mode (float)</td>
+  <tr><td><code>2</code></td>
+      <td>maximum resident set size</td>
+  <tr><td><code>3</code></td>
+      <td>shared memory size</td>
+  <tr><td><code>4</code></td>
+      <td>unshared memory size</td>
+  <tr><td><code>5</code></td>
+      <td>unshared stack size</td>
+  <tr><td><code>6</code></td>
+      <td>page faults not requiring I/O</td>
+  <tr><td><code>7</code></td>
+      <td>page faults requiring I/O</td>
+  <tr><td><code>8</code></td>
+      <td>number of swap outs</td>
+  <tr><td><code>9</code></td>
+      <td>block input operations</td>
+  <tr><td><code>10</code></td>
+      <td>block output operations</td>
+  <tr><td><code>11</code></td>
+      <td>messages sent</td>
+  <tr><td><code>12</code></td>
+      <td>messages received</td>
+  <tr><td><code>13</code></td>
+      <td>signals received</td>
+  <tr><td><code>14</code></td>
+      <td>voluntary context switches</td>
+  <tr><td><code>15</code></td>
+      <td>involuntary context switches</td>
+
+</table>
+
+<P>
+This function will raise a <tt>ValueError</tt> if an invalid
+  <i>who</i> parameter is specified. It may also raise
+  <tt>error</tt> exception in unusual circumstances.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14026"><tt>getpagesize</tt></a></b> ()
+<dd>
+  Returns the number of bytes in a system page. (This need not be the
+  same as the hardware page size.) This function is useful for
+  determining the number of bytes of memory a process is using. The
+  third element of the tuple returned by <tt>getrusage()</tt> describes
+  memory usage in pages; multiplying by page size produces number of
+  bytes. 
+</dl>
+
+<P>
+The following <tt>RUSAGE_*</tt> symbols are passed to the
+<tt>getrusage()</tt> function to specify which processes information
+should be provided for.
+
+<P>
+<dl><dt><b><a name="l2h-14032"><tt>RUSAGE_SELF</tt></a></b>
+<dd>
+  <tt>RUSAGE_SELF</tt> should be used to
+  request information pertaining only to the process itself.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14036"><tt>RUSAGE_CHILDREN</tt></a></b>
+<dd>
+  Pass to <tt>getrusage()</tt> to request resource information for
+  child processes of the calling process.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14040"><tt>RUSAGE_BOTH</tt></a></b>
+<dd>
+  Pass to <tt>getrusage()</tt> to request resources consumed by both
+  the current process and child processes.  May not be available on all
+  systems.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2201"
+ HREF="module-syslog.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2197"
+ HREF="module-resource.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2193"
+ HREF="node140.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2199"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2200"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2202"
+ HREF="module-syslog.html">8.13 syslog  </A>
+<b>Up:</b> <A NAME="tex2html2198"
+ HREF="module-resource.html">8.12 resource  </A>
+<b>Previous:</b> <A NAME="tex2html2194"
+ HREF="node140.html">8.12.1 Resource Limits</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

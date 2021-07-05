@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>10. macostools --
+Convenience routines for file manipulation.</TITLE>
+<META NAME="description" CONTENT="10. macostools --
+Convenience routines for file manipulation.">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="module-findertools.html">
+<LINK REL="previous" HREF="module-MacOS.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="module-findertools.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html353"
+ HREF="module-findertools.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html349"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html343"
+ HREF="module-MacOS.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html351"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html352"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html354"
+ HREF="module-findertools.html">11. findertools  </A>
+<b>Up:</b> <A NAME="tex2html350"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html344"
+ HREF="module-MacOS.html">9. MacOS  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0021000000000000000000">
+<SPAN CLASS="arabic">10</SPAN>. <tt>macostools</tt> --
+         Convenience routines for file manipulation.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module contains some convenience routines for file-manipulation
+on the Macintosh.
+
+<P>
+The <tt>macostools</tt> module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-1281"><tt>copy</tt></a></b> (<var>src, dst</var><big>[</big><var>, createpath</var><big>[</big><var>, copytimes</var><big>]</big><big>]</big>)
+<dd>
+Copy file <i>src</i> to <i>dst</i>. The files can be specified as
+pathnames or FSSpec objects. If <i>createpath</i> is non-zero
+<i>dst</i> must be a pathname and the folders leading to the
+destination are created if necessary.  The method copies data and
+resource fork and some finder information (creator, type, flags) and
+optionally the creation, modification and backup times (default is to
+copy them). Custom icons, comments and icon position are not copied.
+
+<P>
+If the source is an alias the original to which the alias points is
+copied, not the aliasfile.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1210"><tt>copytree</tt></a></b> (<var>src, dst</var>)
+<dd>
+Recursively copy a file tree from <i>src</i> to <i>dst</i>, creating
+folders as needed. <i>src</i> and <i>dst</i> should be specified as
+pathnames.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1218"><tt>mkalias</tt></a></b> (<var>src, dst</var>)
+<dd>
+Create a finder alias <i>dst</i> pointing to <i>src</i>. Both may be
+specified as pathnames or FSSpec objects.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1225"><tt>touched</tt></a></b> (<var>dst</var>)
+<dd>
+Tell the finder that some bits of finder-information such as creator
+or type for file <i>dst</i> has changed. The file can be specified by
+pathname or fsspec. This call should prod the finder into redrawing the
+files icon.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1229"><tt>BUFSIZ</tt></a></b>
+<dd>
+The buffer size for <tt>copy</tt>, default 1 megabyte.
+</dl>
+
+<P>
+Note that the process of creating finder aliases is not specified in
+the Apple documentation. Hence, aliases created with <tt>mkalias()</tt>
+could conceivably have incompatible behaviour in some cases.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html353"
+ HREF="module-findertools.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html349"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html343"
+ HREF="module-MacOS.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html351"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html352"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html354"
+ HREF="module-findertools.html">11. findertools  </A>
+<b>Up:</b> <A NAME="tex2html350"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html344"
+ HREF="module-MacOS.html">9. MacOS  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

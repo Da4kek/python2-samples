@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.3.1 HTTP Objects</TITLE>
+<META NAME="description" CONTENT="11.3.1 HTTP Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="HTTP_Example.html">
+<LINK REL="previous" HREF="module-httplib.html">
+<LINK REL="up" HREF="module-httplib.html">
+<LINK REL="next" HREF="HTTP_Example.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2623"
+ HREF="HTTP_Example.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2619"
+ HREF="module-httplib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2613"
+ HREF="module-httplib.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2621"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2622"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2624"
+ HREF="HTTP_Example.html">11.3.2 Example</A>
+<b>Up:</b> <A NAME="tex2html2620"
+ HREF="module-httplib.html">11.3 httplib  </A>
+<b>Previous:</b> <A NAME="tex2html2614"
+ HREF="module-httplib.html">11.3 httplib  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0013310000000000000000">
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> HTTP Objects</A>
+</H2>
+
+<P>
+<tt>HTTP</tt> instances have the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-15993"><tt>set_debuglevel</tt></a></b> (<var>level</var>)
+<dd>
+Set the debugging level (the amount of debugging output printed).
+The default debug level is <tt>0</tt>, meaning no debugging output is
+printed.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15998"><tt>connect</tt></a></b> (<var>host</var><big>[</big><var>, port</var><big>]</big>)
+<dd>
+Connect to the server given by <i>host</i> and <i>port</i>.  See the
+intro for the default port.  This should be called directly only if
+the instance was instantiated without passing a host.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16004"><tt>send</tt></a></b> (<var>data</var>)
+<dd>
+Send data to the server.  This should be used directly only after the
+<tt>endheaders()</tt> method has been called and before
+<tt>getreply()</tt> has been called.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16010"><tt>putrequest</tt></a></b> (<var>request, selector</var>)
+<dd>
+This should be the first call after the connection to the server has
+been made.  It sends a line to the server consisting of the
+<i>request</i> string, the <i>selector</i> string, and the HTTP version
+(<tt>HTTP/1.0</tt>).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16017"><tt>putheader</tt></a></b> (<var>header, argument</var><big>[</big><var>, ...</var><big>]</big>)
+<dd>
+Send an <a name=>RFC 822</a> style header to the server.  It sends a line to the
+server consisting of the header, a colon and a space, and the first
+argument.  If more arguments are given, continuation lines are sent,
+each consisting of a tab and an argument.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16022"><tt>endheaders</tt></a></b> ()
+<dd>
+Send a blank line to the server, signalling the end of the headers.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16026"><tt>getreply</tt></a></b> ()
+<dd>
+Complete the request by shutting down the sending end of the socket,
+read the reply from the server, and return a triple
+<tt>(<i>replycode</i>, <i>message</i>, <i>headers</i>)</tt>.  Here,
+<i>replycode</i> is the integer reply code from the request (e.g. <tt>200</tt> if the request was handled properly); <i>message</i> is the
+message string corresponding to the reply code; and <i>headers</i> is
+an instance of the class <tt>mimetools.Message</tt> containing the
+headers received from the server.  See the description of the
+<tt>mimetools</tt><a name="l2h-"></a> module.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16040"><tt>getfile</tt></a></b> ()
+<dd>
+Return a file object from which the data returned by the server can be
+read, using the <tt>read()</tt>, <tt>readline()</tt> or
+<tt>readlines()</tt> methods.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2623"
+ HREF="HTTP_Example.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2619"
+ HREF="module-httplib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2613"
+ HREF="module-httplib.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2621"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2622"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2624"
+ HREF="HTTP_Example.html">11.3.2 Example</A>
+<b>Up:</b> <A NAME="tex2html2620"
+ HREF="module-httplib.html">11.3 httplib  </A>
+<b>Previous:</b> <A NAME="tex2html2614"
+ HREF="module-httplib.html">11.3 httplib  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

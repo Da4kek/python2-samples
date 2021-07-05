@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>14.6 imghdr --
+Determine the type of image contained in a file or byte stream.</TITLE>
+<META NAME="description" CONTENT="14.6 imghdr --
+Determine the type of image contained in a file or byte stream.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-rgbimg.html">
+<LINK REL="up" HREF="mmedia.html">
+<LINK REL="next" HREF="crypto.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3342"
+ HREF="crypto.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3338"
+ HREF="mmedia.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3334"
+ HREF="module-rgbimg.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3340"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3341"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3343"
+ HREF="crypto.html">15. Cryptographic Services</A>
+<b>Up:</b> <A NAME="tex2html3339"
+ HREF="mmedia.html">14. Multimedia Services</A>
+<b>Previous:</b> <A NAME="tex2html3335"
+ HREF="module-rgbimg.html">14.5 rgbimg  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0016600000000000000000">
+<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>imghdr</tt> --
+         Determine the type of image contained in a file or byte stream.</A>
+</H1>
+
+
+<P>
+
+<P>
+The <tt>imghdr</tt> module determines the type of image contained in a
+file or byte stream.
+
+<P>
+The <tt>imghdr</tt> module defines the following function:
+
+<P>
+<dl><dt><b><a name="l2h-21690"><tt>what</tt></a></b> (<var>filename</var><big>[</big><var>, h</var><big>]</big>)
+<dd>
+Tests the image data contained in the file named by <i>filename</i>,
+and returns a string describing the image type.  If optional <i>h</i>
+is provided, the <i>filename</i> is ignored and <i>h</i> is assumed to
+contain the byte stream to test.
+</dl>
+
+<P>
+The following image types are recognized, as listed below with the
+return value from <tt>what()</tt>:
+
+<P>
+<table border align=center>
+  <tr><th align=left><b>Value</b></th>
+      <th align=left><b>Image format</b></th>
+  <tr><td><code>'rgb'</code></td>
+      <td>SGI ImgLib Files</td>
+  <tr><td><code>'gif'</code></td>
+      <td>GIF 87a and 89a Files</td>
+  <tr><td><code>'pbm'</code></td>
+      <td>Portable Bitmap Files</td>
+  <tr><td><code>'pgm'</code></td>
+      <td>Portable Graymap Files</td>
+  <tr><td><code>'ppm'</code></td>
+      <td>Portable Pixmap Files</td>
+  <tr><td><code>'tiff'</code></td>
+      <td>TIFF Files</td>
+  <tr><td><code>'rast'</code></td>
+      <td>Sun Raster Files</td>
+  <tr><td><code>'xbm'</code></td>
+      <td>X Bitmap Files</td>
+  <tr><td><code>'jpeg'</code></td>
+      <td>JPEG data in JFIF format</td>
+  <tr><td><code>'bmp'</code></td>
+      <td>BMP files</td>
+  <tr><td><code>'png'</code></td>
+      <td>Portable Network Graphics</td>
+
+</table>
+
+<P>
+You can extend the list of file types <tt>imghdr</tt> can recognize by
+appending to this variable:
+
+<P>
+<dl><dt><b><a name="l2h-21682"><tt>tests</tt></a></b>
+<dd>
+A list of functions performing the individual tests.  Each function
+takes two arguments: the byte-stream and an open file-like object.
+When <tt>what()</tt> is called with a byte-stream, the file-like
+object will be <tt>None</tt>.
+
+<P>
+The test function should return a string describing the image type if
+the test succeeded, or <tt>None</tt> if it failed.
+</dl>
+
+<P>
+Example:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; import imghdr
+&gt;&gt;&gt; imghdr.what('/tmp/bass.gif')
+'gif'
+</pre></dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3342"
+ HREF="crypto.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3338"
+ HREF="mmedia.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3334"
+ HREF="module-rgbimg.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3340"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3341"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3343"
+ HREF="crypto.html">15. Cryptographic Services</A>
+<b>Up:</b> <A NAME="tex2html3339"
+ HREF="mmedia.html">14. Multimedia Services</A>
+<b>Previous:</b> <A NAME="tex2html3335"
+ HREF="module-rgbimg.html">14.5 rgbimg  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

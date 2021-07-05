@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>3.3.1 Extension names and packages</title>
+<META NAME="description" CONTENT="3.3.1 Extension names and packages">
+<META NAME="keywords" CONTENT="dist">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="dist.css">
+<LINK REL="next" HREF="node12.html">
+<LINK REL="previous" href="describing-extensions.html">
+<LINK REL="up" href="describing-extensions.html">
+<LINK REL="next" HREF="node12.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="describing-extensions.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="describing-extensions.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node12.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="describing-extensions.html">3.3 Describing extension modules</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="describing-extensions.html">3.3 Describing extension modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node12.html">3.3.2 Extension source files</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION000431000000000000000">
+3.3.1 Extension names and packages</A>
+</H3>
+
+<P>
+The first argument to the <tt class="class">Extension</tt> constructor is always the
+name of the extension, including any package names.  For example,
+<dl><dd><pre class="verbatim">
+Extension("foo", ["src/foo1.c", "src/foo2.c"])
+</pre></dl>
+describes an extension that lives in the root package, while
+<dl><dd><pre class="verbatim">
+Extension("pkg.foo", ["src/foo1.c", "src/foo2.c"])
+</pre></dl>
+describes the same extension in the <tt class="module">pkg</tt> package.  The source
+files and resulting object code are identical in both cases; the only
+difference is where in the filesystem (and therefore where in Python's
+namespace hierarchy) the resulting extension lives.
+
+<P>
+If you have a number of extensions all in the same package (or all under
+the same base package), use the <font face="sans-serif">ext_package</font> keyword argument
+to <tt class="function">setup()</tt>.  For example,
+<dl><dd><pre class="verbatim">
+setup(...
+      ext_package = "pkg",
+      ext_modules = [Extension("foo", ["foo.c"]),
+                     Extension("subpkg.bar", ["bar.c"])]
+     )
+</pre></dl>
+will compile <span class="file">foo.c</span> to the extension <tt class="module">pkg.foo</tt>, and
+<span class="file">bar.c</span> to <tt class="module">pkg.subpkg.bar</tt>.
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="describing-extensions.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="describing-extensions.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node12.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="describing-extensions.html">3.3 Describing extension modules</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="describing-extensions.html">3.3 Describing extension modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node12.html">3.3.2 Extension source files</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

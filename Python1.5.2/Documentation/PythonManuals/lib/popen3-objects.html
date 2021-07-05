@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8.15.1 Popen3 Objects</TITLE>
+<META NAME="description" CONTENT="8.15.1 Popen3 Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-popen2.html">
+<LINK REL="up" HREF="module-popen2.html">
+<LINK REL="next" HREF="module-commands.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2248"
+ HREF="module-commands.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2244"
+ HREF="module-popen2.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2240"
+ HREF="module-popen2.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2246"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2247"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2249"
+ HREF="module-commands.html">8.16 commands  </A>
+<b>Up:</b> <A NAME="tex2html2245"
+ HREF="module-popen2.html">8.15 popen2  </A>
+<b>Previous:</b> <A NAME="tex2html2241"
+ HREF="module-popen2.html">8.15 popen2  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00101510000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">1</SPAN> Popen3 Objects
+</H2>
+
+<P>
+Instances of the <tt>Popen3</tt> class have the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-14398"><tt>poll</tt></a></b> ()
+<dd>
+Returns <tt>-1</tt> if child process hasn't completed yet, or its return 
+code otherwise.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14403"><tt>wait</tt></a></b> ()
+<dd>
+Waits for and returns the return code of the child process.
+</dl>
+
+<P>
+The following attributes of <tt>Popen3</tt> objects are also available: 
+
+<P>
+<dl><dt><b><a name="l2h-14408"><tt>fromchild</tt></a></b>
+<dd>
+A file object that provides output from the child process.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14411"><tt>tochild</tt></a></b>
+<dd>
+A file object that provides input to the child process.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14414"><tt>childerr</tt></a></b>
+<dd>
+Where the standard error from the child process goes is
+<i>capturestderr</i> was true for the constructor, or <tt>None</tt>.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2248"
+ HREF="module-commands.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2244"
+ HREF="module-popen2.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2240"
+ HREF="module-popen2.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2246"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2247"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2249"
+ HREF="module-commands.html">8.16 commands  </A>
+<b>Up:</b> <A NAME="tex2html2245"
+ HREF="module-popen2.html">8.15 popen2  </A>
+<b>Previous:</b> <A NAME="tex2html2241"
+ HREF="module-popen2.html">8.15 popen2  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

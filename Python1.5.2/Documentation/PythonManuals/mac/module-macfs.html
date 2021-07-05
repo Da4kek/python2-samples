@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7. macfs --
+FSSpec, the Alias Manager, finder aliases,
+and the Standard File package.</TITLE>
+<META NAME="description" CONTENT="7. macfs --
+FSSpec, the Alias Manager, finder aliases,
+and the Standard File package.">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="module-ic.html">
+<LINK REL="previous" HREF="module-macdnr.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="fsspec-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html269"
+ HREF="fsspec-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html265"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html259"
+ HREF="dnr-result-object.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html267"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html268"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html270"
+ HREF="fsspec-objects.html">7.1 FSSpec objects</A>
+<b>Up:</b> <A NAME="tex2html266"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html260"
+ HREF="dnr-result-object.html">6.1 dnr result object</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002700000000000000000">
+<SPAN CLASS="arabic">7</SPAN>. <tt>macfs</tt> --
+         FSSpec, the Alias Manager, <b>finder</b> aliases,
+         and the Standard File package.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides access to Macintosh FSSpec handling, the Alias
+Manager, <b>finder</b> aliases and the Standard File package.
+<a name="l2h-648"></a><a name="l2h-649"></a><a name="l2h-650"></a>
+<P>
+Whenever a function or method expects a <i>file</i> argument, this
+argument can be one of three things: (1) a full or partial Macintosh
+pathname, (2) an FSSpec object or (3) a 3-tuple <tt>(<i>wdRefNum</i>,
+<i>parID</i>, <i>name</i>)</tt> as described in <i>Inside
+Macintosh: Files</i>. A description of aliases and the Standard File
+package can also be found there.
+
+<P>
+<dl><dt><b><a name="l2h-659"><tt>FSSpec</tt></a></b> (<var>file</var>)
+<dd>
+Create an FSSpec object for the specified file.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-664"><tt>RawFSSpec</tt></a></b> (<var>data</var>)
+<dd>
+Create an FSSpec object given the raw data for the C
+structure for the FSSpec as a string.  This is mainly useful
+if you have obtained an FSSpec structure over a network.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-672"><tt>RawAlias</tt></a></b> (<var>data</var>)
+<dd>
+Create an Alias object given the raw data for the C
+structure for the alias as a string.  This is mainly useful if you
+have obtained an FSSpec structure over a network.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-679"><tt>FInfo</tt></a></b> ()
+<dd>
+Create a zero-filled FInfo object.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-684"><tt>ResolveAliasFile</tt></a></b> (<var>file</var>)
+<dd>
+Resolve an alias file. Returns a 3-tuple <tt>(<i>fsspec</i>,
+<i>isfolder</i>, <i>aliased</i>)</tt> where <i>fsspec</i> is the resulting
+FSSpec object, <i>isfolder</i> is true if <i>fsspec</i> points
+to a folder and <i>aliased</i> is true if the file was an alias in the
+first place (otherwise the FSSpec object for the file itself
+is returned).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-853"><tt>StandardGetFile</tt></a></b> (<big>[</big><var>type, ...</var><big>]</big>)
+<dd>
+Present the user with a standard ``open input file''
+dialog. Optionally, you can pass up to four 4-character file types to limit
+the files the user can choose from. The function returns an FSSpec
+object and a flag indicating that the user completed the dialog
+without cancelling.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-854"><tt>PromptGetFile</tt></a></b> (<var>prompt</var><big>[</big><var>, type, ...</var><big>]</big>)
+<dd>
+Similar to <tt>StandardGetFile()</tt> but allows you to specify a
+prompt.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-855"><tt>StandardPutFile</tt></a></b> (<var>prompt, </var><big>[</big><var>default</var><big>]</big>)
+<dd>
+Present the user with a standard ``open output file''
+dialog. <i>prompt</i> is the prompt string, and the optional
+<i>default</i> argument initializes the output file name. The function
+returns an FSSpec object and a flag indicating that the user
+completed the dialog without cancelling.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-856"><tt>GetDirectory</tt></a></b> (<big>[</big><var>prompt</var><big>]</big>)
+<dd>
+Present the user with a non-standard ``select a directory''
+dialog. <i>prompt</i> is the prompt string, and the optional.
+Return an FSSpec object and a success-indicator.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-857"><tt>SetFolder</tt></a></b> (<big>[</big><var>fsspec</var><big>]</big>)
+<dd>
+Set the folder that is initially presented to the user when one of
+the file selection dialogs is presented. <i>fsspec</i> should point to
+a file in the folder, not the folder itself (the file need not exist,
+though). If no argument is passed the folder will be set to the
+current directory, i.e. what <tt>os.getcwd()</tt> returns.
+
+<P>
+Note that starting with system 7.5 the user can change Standard File
+behaviour with the ``general controls'' controlpanel, thereby making
+this call inoperative.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-726"><tt>FindFolder</tt></a></b> (<var>where, which, create</var>)
+<dd>
+Locates one of the ``special'' folders that MacOS knows about, such as
+the trash or the Preferences folder. <i>where</i> is the disk to
+search, <i>which</i> is the 4-character string specifying which folder to
+locate. Setting <i>create</i> causes the folder to be created if it
+does not exist. Returns a <tt>(<i>vrefnum</i>, <i>dirid</i>)</tt> tuple.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-735"><tt>NewAliasMinimalFromFullPath</tt></a></b> (<var>pathname</var>)
+<dd>
+Return a minimal alias object that points to the given file, which
+must be specified as a full pathname. This is the only way to create an
+Alias pointing to a non-existing file.
+
+<P>
+The constants for <i>where</i> and <i>which</i> can be obtained from the
+standard module <i>MACFS</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-744"><tt>FindApplication</tt></a></b> (<var>creator</var>)
+<dd>
+Locate the application with 4-char creator code <i>creator</i>. The
+function returns an FSSpec object pointing to the application.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html271"
+ HREF="fsspec-objects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> FSSpec objects</A>
+<LI><A NAME="tex2html272"
+ HREF="alias-objects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Alias Objects</A>
+<LI><A NAME="tex2html273"
+ HREF="finfo-objects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> FInfo Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html269"
+ HREF="fsspec-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html265"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html259"
+ HREF="dnr-result-object.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html267"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html268"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html270"
+ HREF="fsspec-objects.html">7.1 FSSpec objects</A>
+<b>Up:</b> <A NAME="tex2html266"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html260"
+ HREF="dnr-result-object.html">6.1 dnr result object</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

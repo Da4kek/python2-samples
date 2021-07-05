@@ -1,0 +1,326 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.1 sgmllib --
+Simple SGML parser.</TITLE>
+<META NAME="description" CONTENT="12.1 sgmllib --
+Simple SGML parser.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-htmllib.html">
+<LINK REL="previous" HREF="netdata.html">
+<LINK REL="up" HREF="netdata.html">
+<LINK REL="next" HREF="module-htmllib.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2857"
+ HREF="module-htmllib.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2853"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2847"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2855"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2856"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2858"
+ HREF="module-htmllib.html">12.2 htmllib  </A>
+<b>Up:</b> <A NAME="tex2html2854"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html2848"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0014100000000000000000">
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>sgmllib</tt> --
+         Simple SGML parser.</A>
+</H1>
+
+
+<P>
+
+<P>
+<a name="l2h-18044"></a>
+<P>
+This module defines a class <tt>SGMLParser</tt> which serves as the
+basis for parsing text files formatted in SGML (Standard Generalized
+Mark-up Language).  In fact, it does not provide a full SGML parser
+-- it only parses SGML insofar as it is used by HTML, and the module
+only exists as a base for the <tt>htmllib</tt><a name="l2h-"></a>module.
+
+<P>
+<dl><dt><b><a name="l2h-18050"><tt>SGMLParser</tt></a></b> ()
+<dd>
+The <tt>SGMLParser</tt> class is instantiated without arguments.
+The parser is hardcoded to recognize the following
+constructs:
+
+<P>
+
+<UL><LI>Opening and closing tags of the form
+"<tt>&lt;<i>tag</i> <i>attr</i>="<i>value</i>" ...&gt;</tt>" and
+"<tt>&lt;/<i>tag</i>&gt;</tt>", respectively.
+
+<P>
+
+<LI>Numeric character references of the form "<tt>&amp;#<i>name</i>;</tt>".
+
+<P>
+
+<LI>Entity references of the form "<tt>&amp;<i>name</i>;</tt>".
+
+<P>
+
+<LI>SGML comments of the form "<tt>&lt;!-<i>text</i>-&gt;</tt>".  Note that
+spaces, tabs, and newlines are allowed between the trailing
+"<tt>&gt;</tt>" and the immediately preceeding "<tt>-</tt>".
+
+<P>
+
+</UL>
+</dl>
+
+<P>
+<tt>SGMLParser</tt> instances have the following interface methods:
+
+<P>
+<dl><dt><b><a name="l2h-18066"><tt>reset</tt></a></b> ()
+<dd>
+Reset the instance.  Loses all unprocessed data.  This is called
+implicitly at instantiation time.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18070"><tt>setnomoretags</tt></a></b> ()
+<dd>
+Stop processing tags.  Treat all following input as literal input
+(CDATA).  (This is only provided so the HTML tag <tt>&lt;PLAINTEXT&gt;</tt>
+can be implemented.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18075"><tt>setliteral</tt></a></b> ()
+<dd>
+Enter literal mode (CDATA mode).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18079"><tt>feed</tt></a></b> (<var>data</var>)
+<dd>
+Feed some text to the parser.  It is processed insofar as it consists
+of complete elements; incomplete data is buffered until more data is
+fed or <tt>close()</tt> is called.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18084"><tt>close</tt></a></b> ()
+<dd>
+Force processing of all buffered data as if it were followed by an
+end-of-file mark.  This method may be redefined by a derived class to
+define additional processing at the end of the input, but the
+redefined version should always call <tt>close()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18089"><tt>handle_starttag</tt></a></b> (<var>tag, method, attributes</var>)
+<dd>
+This method is called to handle start tags for which either a
+<tt>start_<i>tag</i>()</tt> or <tt>do_<i>tag</i>()</tt> method has been
+defined.  The <i>tag</i> argument is the name of the tag converted to
+lower case, and the <i>method</i> argument is the bound method which
+should be used to support semantic interpretation of the start tag.
+The <i>attributes</i> argument is a list of <tt>(<i>name</i>, <i>value</i>)</tt>
+pairs containing the attributes found inside the tag's <tt>&lt;&gt;</tt>
+brackets.  The <i>name</i> has been translated to lower case and double
+quotes and backslashes in the <i>value</i> have been interpreted.  For
+instance, for the tag <tt>&lt;A HREF="http://www.cwi.nl/"&gt;</tt>, this
+method would be called as "<tt>unknown_starttag('a', [('href',
+'http://www.cwi.nl/')])</tt>".  The base implementation simply calls
+<i>method</i> with <i>attributes</i> as the only argument.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18107"><tt>handle_endtag</tt></a></b> (<var>tag, method</var>)
+<dd>
+This method is called to handle endtags for which an
+<tt>end_<i>tag</i>()</tt> method has been defined.  The <i>tag</i>
+argument is the name of the tag converted to lower case, and the
+<i>method</i> argument is the bound method which should be used to
+support semantic interpretation of the end tag.  If no
+<tt>end_<i>tag</i>()</tt> method is defined for the closing element,
+this handler is not called.  The base implementation simply calls
+<i>method</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18116"><tt>handle_data</tt></a></b> (<var>data</var>)
+<dd>
+This method is called to process arbitrary data.  It is intended to be
+overridden by a derived class; the base class implementation does
+nothing.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18120"><tt>handle_charref</tt></a></b> (<var>ref</var>)
+<dd>
+This method is called to process a character reference of the form
+"<tt>&amp;#<i>ref</i>;</tt>".  In the base implementation, <i>ref</i> must
+be a decimal number in the
+range 0-255.  It translates the character to ASCII and calls the
+method <tt>handle_data()</tt> with the character as argument.  If
+<i>ref</i> is invalid or out of range, the method
+<tt>unknown_charref(<i>ref</i>)</tt> is called to handle the error.  A
+subclass must override this method to provide support for named
+character entities.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18130"><tt>handle_entityref</tt></a></b> (<var>ref</var>)
+<dd>
+This method is called to process a general entity reference of the
+form "<tt>&amp;<i>ref</i>;</tt>" where <i>ref</i> is an general entity
+reference.  It looks for <i>ref</i> in the instance (or class)
+variable <tt>entitydefs</tt> which should be a mapping from entity
+names to corresponding translations.
+If a translation is found, it calls the method <tt>handle_data()</tt>
+with the translation; otherwise, it calls the method
+<tt>unknown_entityref(<i>ref</i>)</tt>.  The default <tt>entitydefs</tt>
+defines translations for <tt>&amp;amp;</tt>, <tt>&amp;apos</tt>, <tt>&amp;gt;</tt>,
+<tt>&amp;lt;</tt>, and <tt>&amp;quot;</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18146"><tt>handle_comment</tt></a></b> (<var>comment</var>)
+<dd>
+This method is called when a comment is encountered.  The
+<i>comment</i> argument is a string containing the text between the
+"<tt>&lt;!-</tt>" and "<tt>-&gt;</tt>" delimiters, but not the delimiters
+themselves.  For example, the comment "<tt>&lt;!-text-&gt;</tt>" will
+cause this method to be called with the argument <tt>'text'</tt>.  The
+default method does nothing.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18155"><tt>report_unbalanced</tt></a></b> (<var>tag</var>)
+<dd>
+This method is called when an end tag is found which does not
+correspond to any open element.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18159"><tt>unknown_starttag</tt></a></b> (<var>tag, attributes</var>)
+<dd>
+This method is called to process an unknown start tag.  It is intended
+to be overridden by a derived class; the base class implementation
+does nothing.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18163"><tt>unknown_endtag</tt></a></b> (<var>tag</var>)
+<dd>
+This method is called to process an unknown end tag.  It is intended
+to be overridden by a derived class; the base class implementation
+does nothing.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18167"><tt>unknown_charref</tt></a></b> (<var>ref</var>)
+<dd>
+This method is called to process unresolvable numeric character
+references.  Refer to <tt>handle_charref()</tt> to determine what is
+handled by default.  It is intended to be overridden by a derived
+class; the base class implementation does nothing.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-18172"><tt>unknown_entityref</tt></a></b> (<var>ref</var>)
+<dd>
+This method is called to process an unknown entity reference.  It is
+intended to be overridden by a derived class; the base class
+implementation does nothing.
+</dl>
+
+<P>
+Apart from overriding or extending the methods listed above, derived
+classes may also define methods of the following form to define
+processing of specific tags.  Tag names in the input stream are case
+independent; the <i>tag</i> occurring in method names must be in lower
+case:
+
+<P>
+<dl><dt><b>start_<i>tag</i></b> (<var>attributes</var>)
+<dd>
+This method is called to process an opening tag <i>tag</i>.  It has
+preference over <tt>do_<i>tag</i>()</tt>.  The <i>attributes</i>
+argument has the same meaning as described for
+<tt>handle_starttag()</tt> above.
+</dl>
+
+<P>
+<dl><dt><b>do_<i>tag</i></b> (<var>attributes</var>)
+<dd>
+This method is called to process an opening tag <i>tag</i> that does
+not come with a matching closing tag.  The <i>attributes</i> argument
+has the same meaning as described for <tt>handle_starttag()</tt> above.
+</dl>
+
+<P>
+<dl><dt><b>end_<i>tag</i></b> ()
+<dd>
+This method is called to process a closing tag <i>tag</i>.
+</dl>
+
+<P>
+Note that the parser maintains a stack of open elements for which no
+end tag has been found yet.  Only tags processed by
+<tt>start_<i>tag</i>()</tt> are pushed on this stack.  Definition of an
+<tt>end_<i>tag</i>()</tt> method is optional for these tags.  For tags
+processed by <tt>do_<i>tag</i>()</tt> or by <tt>unknown_tag()</tt>, no
+<tt>end_<i>tag</i>()</tt> method must be defined; if defined, it will not
+be used.  If both <tt>start_<i>tag</i>()</tt> and <tt>do_<i>tag</i>()</tt>
+methods exist for a tag, the <tt>start_<i>tag</i>()</tt> method takes
+precedence.
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2857"
+ HREF="module-htmllib.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2853"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2847"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2855"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2856"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2858"
+ HREF="module-htmllib.html">12.2 htmllib  </A>
+<b>Up:</b> <A NAME="tex2html2854"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html2848"
+ HREF="netdata.html">12. Internet Data Handling</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

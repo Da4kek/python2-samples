@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.5 Constructors</TITLE>
+<META NAME="description" CONTENT="6.5 Constructors">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="previous" HREF="mapping.html">
+<LINK REL="up" HREF="abstract.html">
+<LINK REL="next" HREF="concrete.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html375"
+ HREF="concrete.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html371"
+ HREF="abstract.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html367"
+ HREF="mapping.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html373"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html374"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html376"
+ HREF="concrete.html">7. Concrete Objects Layer</A>
+<b>Up:</b> <A NAME="tex2html372"
+ HREF="abstract.html">6. Abstract Objects Layer</A>
+<b>Previous:</b> <A NAME="tex2html368"
+ HREF="mapping.html">6.4 Mapping Protocol</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008500000000000000000">
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">5</SPAN> Constructors</A>
+</H1>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1432"><tt>PyFile_FromString</tt></a></b>(<var>char *file_name, char *mode</var>)
+<dd>
+On success, returns a new file object that is opened on the
+file given by <i>file_name</i>, with a file mode given by <i>mode</i>,
+where <i>mode</i> has the same semantics as the standard C routine
+<tt>fopen()</tt>.  On failure, return <tt>-1</tt>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1443"><tt>PyFile_FromFile</tt></a></b>(<var>FILE *fp, char *file_name, char *mode, int close_on_del</var>)
+<dd>
+Return a new file object for an already opened standard C file
+pointer, <i>fp</i>.  A file name, <i>file_name</i>, and open mode,
+<i>mode</i>, must be provided as well as a flag, <i>close_on_del</i>,
+that indicates whether the file is to be closed when the file object
+is destroyed.  On failure, return <tt>-1</tt>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1454"><tt>PyFloat_FromDouble</tt></a></b>(<var>double v</var>)
+<dd>
+Returns a new float object with the value <i>v</i> on success, and
+<tt>NULL</tt> on failure.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1461"><tt>PyInt_FromLong</tt></a></b>(<var>long v</var>)
+<dd>
+Returns a new int object with the value <i>v</i> on success, and
+<tt>NULL</tt> on failure.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1468"><tt>PyList_New</tt></a></b>(<var>int len</var>)
+<dd>
+Returns a new list of length <i>len</i> on success, and <tt>NULL</tt> on
+failure.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1475"><tt>PyLong_FromLong</tt></a></b>(<var>long v</var>)
+<dd>
+Returns a new long object with the value <i>v</i> on success, and
+<tt>NULL</tt> on failure.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1482"><tt>PyLong_FromDouble</tt></a></b>(<var>double v</var>)
+<dd>
+Returns a new long object with the value <i>v</i> on success, and
+<tt>NULL</tt> on failure.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1489"><tt>PyDict_New</tt></a></b>()
+<dd>
+Returns a new empty dictionary on success, and <tt>NULL</tt> on
+failure.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1495"><tt>PyString_FromString</tt></a></b>(<var>char *v</var>)
+<dd>
+Returns a new string object with the value <i>v</i> on success, and
+<tt>NULL</tt> on failure.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1502"><tt>PyString_FromStringAndSize</tt></a></b>(<var>char *v, int len</var>)
+<dd>
+Returns a new string object with the value <i>v</i> and length
+<i>len</i> on success, and <tt>NULL</tt> on failure.  If <i>v</i> is <tt>NULL</tt>,
+the contents of the string are uninitialized.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1512"><tt>PyTuple_New</tt></a></b>(<var>int len</var>)
+<dd>
+Returns a new tuple of length <i>len</i> on success, and <tt>NULL</tt> on
+failure.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html375"
+ HREF="concrete.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html371"
+ HREF="abstract.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html367"
+ HREF="mapping.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html373"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html374"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html376"
+ HREF="concrete.html">7. Concrete Objects Layer</A>
+<b>Up:</b> <A NAME="tex2html372"
+ HREF="abstract.html">6. Abstract Objects Layer</A>
+<b>Previous:</b> <A NAME="tex2html368"
+ HREF="mapping.html">6.4 Mapping Protocol</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

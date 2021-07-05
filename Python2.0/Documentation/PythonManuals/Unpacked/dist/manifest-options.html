@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>5.2 Manifest-related options</title>
+<META NAME="description" CONTENT="5.2 Manifest-related options">
+<META NAME="keywords" CONTENT="dist">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="dist.css">
+<LINK REL="previous" href="manifest.html">
+<LINK REL="up" href="source-dist.html">
+<LINK REL="next" href="built-dist.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="manifest.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="source-dist.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="built-dist.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="manifest.html">5.1 Specifying the files</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="source-dist.html">5 Creating a Source</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="built-dist.html">6 Creating Built Distributions</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+5.2 Manifest-related options
+</H2>
+
+<P>
+The normal course of operations for the <code>sdist</code> command is as
+follows:
+
+<UL>
+<LI>if the manifest file, <span class="file">MANIFEST</span> doesn't exist, read
+  <span class="file">MANIFEST.in</span> and create the manifest
+</LI>
+<LI>if neither <span class="file">MANIFEST</span> nor <span class="file">MANIFEST.in</span> exist, create a
+  manifest with just the default file set<A NAME="tex2html3"
+  HREF="#foot694"><SUP>3</SUP></A>
+</LI>
+<LI>if either <span class="file">MANIFEST.in</span> or the setup script (<span class="file">setup.py</span>)
+  are more recent than <span class="file">MANIFEST</span>, recreate <span class="file">MANIFEST</span> by
+  reading <span class="file">MANIFEST.in</span>
+</LI>
+<LI>use the list of files now in <span class="file">MANIFEST</span> (either just
+  generated or read in) to create the source distribution archive(s)
+</LI>
+</UL>
+There are a couple of options that modify this behaviour.  First, use
+the <b class="programopt">--no-defaults</b> and <b class="programopt">--no-prune</b> to
+disable the standard ``include'' and ``exclude'' sets.<A NAME="tex2html4"
+  HREF="#foot695"><SUP>4</SUP></A>
+<P>
+Second, you might want to force the manifest to be regenerated--for
+example, if you have added or removed files or directories that match an
+existing pattern in the manifest template, you should regenerate the
+manifest:
+<dl><dd><pre class="verbatim">
+python setup.py sdist --force-manifest
+</pre></dl>
+
+<P>
+Or, you might just want to (re)generate the manifest, but not create a
+source distribution:
+<dl><dd><pre class="verbatim">
+python setup.py sdist --manifest-only
+</pre></dl>
+<b class="programopt">--manifest-only</b> implies <b class="programopt">--force-manifest</b>.
+<b class="programopt">-o</b> is a shortcut for <b class="programopt">--manifest-only</b>, and
+<b class="programopt">-f</b> for <b class="programopt">--force-manifest</b>.
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot694">... set</A><A NAME="foot694"
+ href="manifest-options.html#tex2html3"><SUP>3</SUP></A>
+<DD>In versions of the
+    Distutils up to and including 0.9.2 (Python 2.0b1), this feature was
+    broken; use the <b class="programopt">-f</b> (<b class="programopt">--force-manifest</b>)
+    option to work around the bug.
+
+<DT><A NAME="foot695">... sets.</A><A NAME="foot695"
+ href="manifest-options.html#tex2html4"><SUP>4</SUP></A>
+<DD>Note
+  that if you have no manifest template, no manifest, and use the
+  <b class="programopt">--no-defaults</b>, you will get an empty manifest.  Another
+  bug in Distutils 0.9.2 and earlier causes an uncaught exception in
+  this case.  The workaround is: Don't Do That.
+
+</DL>
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="manifest.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="source-dist.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="built-dist.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="manifest.html">5.1 Specifying the files</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="source-dist.html">5 Creating a Source</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="built-dist.html">6 Creating Built Distributions</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

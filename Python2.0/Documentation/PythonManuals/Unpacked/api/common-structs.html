@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>10.1 Common Object Structures </title>
+<META NAME="description" CONTENT="10.1 Common Object Structures ">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="api.css">
+<LINK REL="next" href="mapping-structs.html">
+<LINK REL="previous" href="newTypes.html">
+<LINK REL="up" href="newTypes.html">
+<LINK REL="next" href="mapping-structs.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="newTypes.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="newTypes.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="mapping-structs.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="newTypes.html">10. Defining New Object</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="newTypes.html">10. Defining New Object</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="mapping-structs.html">10.2 Mapping Object Structures</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1>
+<BR>
+10.1 Common Object Structures 
+</H1>
+
+<P>
+PyObject, PyVarObject
+
+<P>
+PyObject_HEAD, PyObject_HEAD_INIT, PyObject_VAR_HEAD
+
+<P>
+Typedefs:
+unaryfunc, binaryfunc, ternaryfunc, inquiry, coercion, intargfunc,
+intintargfunc, intobjargproc, intintobjargproc, objobjargproc,
+destructor, printfunc, getattrfunc, getattrofunc, setattrfunc,
+setattrofunc, cmpfunc, reprfunc, hashfunc
+
+<P>
+<dl><dt><b><tt class='ctype'><a name='l2h-664'>PyCFunction</a></tt></b>
+<dd>
+Type of the functions used to implement most Python callables in C.
+</dl>
+
+<P>
+<dl><dt><b><tt class='ctype'><a name='l2h-665'>PyMethodDef</a></tt></b>
+<dd>
+Structure used to describe a method of an extension type.  This
+structure has four fields:
+
+<P>
+<table border align="center" style="border-collapse: collapse">
+  <thead>
+    <tr>
+      <th align="left"><b>Field</b>&nbsp;</th>
+      <th align="left"><b>C Type</b>&nbsp;</th>
+      <th align="left"><b>Meaning</b>&nbsp;</th>
+    </thead>
+  <tbody valign='baseline'>
+    <tr><td align="left" valign="baseline"><tt class="member">ml_name</tt></td>
+        <td align="left">char *</td>
+        <td align="left">name of the method</td>
+    <tr><td align="left" valign="baseline"><tt class="member">ml_meth</tt></td>
+        <td align="left">PyCFunction</td>
+        <td align="left">pointer to the C implementation</td>
+    <tr><td align="left" valign="baseline"><tt class="member">ml_flags</tt></td>
+        <td align="left">int</td>
+        <td align="left">flag bits indicating how the call should be
+                          constructed</td>
+    <tr><td align="left" valign="baseline"><tt class="member">ml_doc</tt></td>
+        <td align="left">char *</td>
+        <td align="left">points to the contents of the docstring</td></tbody>
+</table>
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-666'><tt class='cfunction'>Py_FindMethod</tt></a></b> (<var>PyMethodDef[] table,
+                                            PyObject *ob, char *name</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+Return a bound method object for an extension type implemented in C.
+This function also handles the special attribute <tt class="member">__methods__</tt>,
+returning a list of all the method names defined in <var>table</var>.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="newTypes.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="newTypes.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="mapping-structs.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="newTypes.html">10. Defining New Object</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="newTypes.html">10. Defining New Object</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="mapping-structs.html">10.2 Mapping Object Structures</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

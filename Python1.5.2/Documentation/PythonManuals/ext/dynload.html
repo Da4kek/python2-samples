@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3. Dynamic Loading</TITLE>
+<META NAME="description" CONTENT="3. Dynamic Loading">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ext.css">
+<LINK REL="next" HREF="about.html">
+<LINK REL="previous" HREF="embedding.html">
+<LINK REL="up" HREF="ext.html">
+<LINK REL="next" HREF="dynloadConfig.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html299"
+ HREF="dynloadConfig.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html296"
+ HREF="ext.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html290"
+ HREF="embeddingInCplusplus.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html298"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html300"
+ HREF="dynloadConfig.html">3.1 Configuring and Building</A>
+<b>Up:</b> <A NAME="tex2html297"
+ HREF="ext.html">Extending and Embedding the</A>
+<b>Previous:</b> <A NAME="tex2html291"
+ HREF="embeddingInCplusplus.html">2.1 Embedding Python in</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION005000000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>. Dynamic Loading
+</H1>
+
+<P>
+On most modern systems it is possible to configure Python to support
+dynamic loading of extension modules implemented in C.  When shared
+libraries are used dynamic loading is configured automatically;
+otherwise you have to select it as a build option (see below).  Once
+configured, dynamic loading is trivial to use: when a Python program
+executes <tt>import spam</tt>, the search for modules tries to find a
+file "<tt>spammodule.o</tt>" ("<tt>spammodule.so</tt>" when using shared
+libraries) in the module search path,<a name="l2h-"></a>
+and if one is found, it is loaded into the executing binary and
+executed.  Once loaded, the module acts just like a built-in extension
+module.
+
+<P>
+The advantages of dynamic loading are twofold: the ``core'' Python
+binary gets smaller, and users can extend Python with their own
+modules implemented in C without having to build and maintain their
+own copy of the Python interpreter.  There are also disadvantages:
+dynamic loading isn't available on all systems (this just means that
+on some systems you have to use static loading), and dynamically
+loading a module that was compiled for a different version of Python
+(e.g. with a different representation of objects) may dump core.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html301"
+ HREF="dynloadConfig.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Configuring and Building the Interpreter for Dynamic Loading</A>
+<UL>
+<LI><A NAME="tex2html302"
+ HREF="sharedlibs.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Shared Libraries</A>
+<LI><A NAME="tex2html303"
+ HREF="irixDynload.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> SGI IRIX 4 Dynamic Loading</A>
+<LI><A NAME="tex2html304"
+ HREF="gnuDynload.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> GNU Dynamic Loading</A>
+</UL>
+<LI><A NAME="tex2html305"
+ HREF="makedynload.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Building a Dynamically Loadable Module</A>
+<UL>
+<LI><A NAME="tex2html306"
+ HREF="linking.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Shared Libraries</A>
+<LI><A NAME="tex2html307"
+ HREF="irixLinking.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> SGI IRIX 4 Dynamic Loading</A>
+<LI><A NAME="tex2html308"
+ HREF="gnuLinking.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> GNU Dynamic Loading</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html299"
+ HREF="dynloadConfig.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html296"
+ HREF="ext.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html290"
+ HREF="embeddingInCplusplus.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html298"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html300"
+ HREF="dynloadConfig.html">3.1 Configuring and Building</A>
+<b>Up:</b> <A NAME="tex2html297"
+ HREF="ext.html">Extending and Embedding the</A>
+<b>Previous:</b> <A NAME="tex2html291"
+ HREF="embeddingInCplusplus.html">2.1 Embedding Python in</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

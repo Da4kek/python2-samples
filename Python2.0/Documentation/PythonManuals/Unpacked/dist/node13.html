@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>3.3.3 Preprocessor options</title>
+<META NAME="description" CONTENT="3.3.3 Preprocessor options">
+<META NAME="keywords" CONTENT="dist">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="dist.css">
+<LINK REL="next" HREF="node14.html">
+<LINK REL="previous" HREF="node12.html">
+<LINK REL="up" href="describing-extensions.html">
+<LINK REL="next" HREF="node14.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A HREF="node12.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="describing-extensions.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node14.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" HREF="node12.html">3.3.2 Extension source files</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="describing-extensions.html">3.3 Describing extension modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node14.html">3.3.4 Library options</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION000433000000000000000">
+3.3.3 Preprocessor options</A>
+</H3>
+
+<P>
+Three optional arguments to <tt class="class">Extension</tt> will help if you need to
+specify include directories to search or preprocessor macros to
+define/undefine: <code>include_dirs</code>, <code>define_macros</code>, and
+<code>undef_macros</code>.
+
+<P>
+For example, if your extension requires header files in the
+<span class="file">include</span> directory under your distribution root, use the
+<code>include_dirs</code> option:
+<dl><dd><pre class="verbatim">
+Extension("foo", ["foo.c"], include_dirs=["include"])
+</pre></dl>
+
+<P>
+You can specify absolute directories there; if you know that your
+extension will only be built on Unix systems with X11R6 installed to
+<span class="file">/usr</span>, you can get away with
+<dl><dd><pre class="verbatim">
+Extension("foo", ["foo.c"], include_dirs=["/usr/include/X11"])
+</pre></dl>
+You should avoid this sort of non-portable usage if you plan to
+distribute your code: it's probably better to write your code to include
+(e.g.) <code>&lt;X11/Xlib.h&gt;</code>.
+
+<P>
+If you need to include header files from some other Python extension,
+you can take advantage of the fact that the Distutils install extension
+header files in a consistent way.  For example, the Numerical Python
+header files are installed (on a standard Unix installation) to
+<span class="file">/usr/local/include/python1.5/Numerical</span>.  (The exact location will
+differ according to your platform and Python installation.)  Since the
+Python include directory--<span class="file">/usr/local/include/python1.5</span> in this
+case--is always included in the search path when building Python
+extensions, the best approach is to include (e.g.)
+<code>&lt;Numerical/arrayobject.h&gt;</code>.  If you insist on putting the
+<span class="file">Numerical</span> include directory right into your header search path,
+though, you can find that directory using the Distutils
+<tt class="module">sysconfig</tt> module:
+<dl><dd><pre class="verbatim">
+from distutils.sysconfig import get_python_inc
+incdir = os.path.join(get_python_inc(plat_specific=1), "Numerical")
+setup(...,
+      Extension(..., include_dirs=[incdir]))
+</pre></dl>
+Even though this is quite portable--it will work on any Python
+installation, regardless of platform--it's probably easier to just
+write your C code in the sensible way.
+
+<P>
+You can define and undefine pre-processor macros with the
+<code>define_macros</code> and <code>undef_macros</code> options.
+<code>define_macros</code> takes a list of <code>(name, value)</code> tuples, where
+<code>name</code> is the name of the macro to define (a string) and
+<code>value</code> is its value: either a string or <code>None</code>.  (Defining a
+macro <code>FOO</code> to <code>None</code> is the equivalent of a bare
+<code>#define FOO</code> in your C source: with most compilers, this sets
+<code>FOO</code> to the string <code>1</code>.)  <code>undef_macros</code> is just
+a list of macros to undefine.
+
+<P>
+For example:
+<dl><dd><pre class="verbatim">
+Extension(...,
+          define_macros=[('NDEBUG', '1')],
+                         ('HAVE_STRFTIME', None),
+          undef_macros=['HAVE_FOO', 'HAVE_BAR'])
+</pre></dl>
+is the equivalent of having this at the top of every C source file:
+<dl><dd><pre class="verbatim">
+#define NDEBUG 1
+#define HAVE_STRFTIME
+#undef HAVE_FOO
+#undef HAVE_BAR
+</pre></dl>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A HREF="node12.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="describing-extensions.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node14.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" HREF="node12.html">3.3.2 Extension source files</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="describing-extensions.html">3.3 Describing extension modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node14.html">3.3.4 Library options</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

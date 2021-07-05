@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>13.2 Bastion --
+Providing restricted access to objects.</TITLE>
+<META NAME="description" CONTENT="13.2 Bastion --
+Providing restricted access to objects.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-rexec.html">
+<LINK REL="up" HREF="restricted.html">
+<LINK REL="next" HREF="mmedia.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3260"
+ HREF="mmedia.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3256"
+ HREF="restricted.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3252"
+ HREF="node228.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3258"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3259"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3261"
+ HREF="mmedia.html">14. Multimedia Services</A>
+<b>Up:</b> <A NAME="tex2html3257"
+ HREF="restricted.html">13. Restricted Execution</A>
+<b>Previous:</b> <A NAME="tex2html3253"
+ HREF="node228.html">13.1.1 An example</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0015200000000000000000">
+<SPAN CLASS="arabic">13</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>Bastion</tt> --
+         Providing restricted access to objects.</A>
+</H1>
+
+
+<P>
+
+<P>
+According to the dictionary, a bastion is ``a fortified area or
+position'', or ``something that is considered a stronghold.''  It's a
+suitable name for this module, which provides a way to forbid access
+to certain attributes of an object.  It must always be used with the
+<tt>rexec</tt> module, in order to allow restricted-mode programs access
+to certain safe attributes of an object, while denying access to
+other, unsafe attributes.
+
+<P>
+<dl><dt><b><a name="l2h-20885"><tt>Bastion</tt></a></b> (<var>object</var><big>[</big><var>, filter</var><big>[</big><var>,
+                          name</var><big>[</big><var>, class</var><big>]</big><big>]</big><big>]</big>)
+<dd>
+Protect the object <i>object</i>, returning a bastion for the
+object.  Any attempt to access one of the object's attributes will
+have to be approved by the <i>filter</i> function; if the access is
+denied an <tt>AttributeError</tt> exception will be raised.
+
+<P>
+If present, <i>filter</i> must be a function that accepts a string
+containing an attribute name, and returns true if access to that
+attribute will be permitted; if <i>filter</i> returns false, the access
+is denied.  The default filter denies access to any function beginning
+with an underscore ("<tt>_</tt>").  The bastion's string representation
+will be "<tt>&lt;Bastion for <i>name</i>&gt;</tt>" if a value for
+<i>name</i> is provided; otherwise, "<tt>repr(<i>object</i>)</tt>" will be
+used.
+
+<P>
+<i>class</i>, if present, should be a subclass of <tt>BastionClass</tt>; 
+see the code in "<tt>bastion.py</tt>" for the details.  Overriding the
+default <tt>BastionClass</tt> will rarely be required.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-20873"><tt>BastionClass</tt></a></b> (<var>getfunc, name</var>)
+<dd>
+Class which actually implements bastion objects.  This is the default
+class used by <tt>Bastion()</tt>.  The <i>getfunc</i> parameter is a
+function which returns the value of an attribute which should be
+exposed to the restricted execution environment when called with the
+name of the attribute as the only parameter.  <i>name</i> is used to
+construct the <tt>repr()</tt> of the <tt>BastionClass</tt> instance.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3260"
+ HREF="mmedia.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3256"
+ HREF="restricted.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3252"
+ HREF="node228.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3258"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3259"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3261"
+ HREF="mmedia.html">14. Multimedia Services</A>
+<b>Up:</b> <A NAME="tex2html3257"
+ HREF="restricted.html">13. Restricted Execution</A>
+<b>Previous:</b> <A NAME="tex2html3253"
+ HREF="node228.html">13.1.1 An example</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

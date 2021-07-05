@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>2.2 General Python terminology</title>
+<META NAME="description" CONTENT="2.2 General Python terminology">
+<META NAME="keywords" CONTENT="dist">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="dist.css">
+<LINK REL="next" href="distutils-term.html">
+<LINK REL="previous" href="simple-example.html">
+<LINK REL="up" href="concepts.html">
+<LINK REL="next" href="distutils-term.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="simple-example.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="concepts.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="distutils-term.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="simple-example.html">2.1 A simple example</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="concepts.html">2 Concepts &amp; Terminology</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="distutils-term.html">2.3 Distutils-specific terminology</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+2.2 General Python terminology
+</H2>
+
+<P>
+If you're reading this document, you probably have a good idea of what
+modules, extensions, and so forth are.  Nevertheless, just to be sure
+that everyone is operating from a common starting point, we offer the
+following glossary of common Python terms:
+<DL>
+<DT><STRONG>module</STRONG></DT>
+<DD>the basic unit of code reusability in Python: a block of
+  code imported by some other code.  Three types of modules concern us
+  here: pure Python modules, extension modules, and packages.
+</DD>
+<DT><STRONG>pure Python module</STRONG></DT>
+<DD>a module written in Python and contained in a
+  single <span class="file">.py</span> file (and possibly associated <span class="file">.pyc</span> and/or
+  <span class="file">.pyo</span> files).  Sometimes referred to as a ``pure module.''
+</DD>
+<DT><STRONG>extension module</STRONG></DT>
+<DD>a module written in the low-level language of
+  the Python implemention: C/C++ for CPython, Java for JPython.
+  Typically contained in a single dynamically loadable pre-compiled
+  file, e.g. a shared object (<span class="file">.so</span>) file for CPython extensions on
+  Unix, a DLL (given the <span class="file">.pyd</span> extension) for CPython extensions
+  on Windows, or a Java class file for JPython extensions.  (Note that
+  currently, the Distutils only handles C/C++ extensions for CPython.)
+</DD>
+<DT><STRONG>package</STRONG></DT>
+<DD>a module that contains other modules; typically contained
+  in a directory in the filesystem and distinguished from other
+  directories by the presence of a file <span class="file">__init__.py</span>.
+</DD>
+<DT><STRONG>root package</STRONG></DT>
+<DD>the root of the hierarchy of packages.  (This isn't
+  really a package, since it doesn't have an <span class="file">__init__.py</span>
+  file.  But we have to call it something.)  The vast majority of the
+  standard library is in the root package, as are many small, standalone
+  third-party modules that don't belong to a larger module collection.
+  Unlike regular packages, modules in the root package can be found in
+  many directories: in fact, every directory listed in <code>sys.path</code>
+  can contribute modules to the root package.
+</DD>
+</DL>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="simple-example.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="concepts.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="distutils-term.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="simple-example.html">2.1 A simple example</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="concepts.html">2 Concepts &amp; Terminology</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="distutils-term.html">2.3 Distutils-specific terminology</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

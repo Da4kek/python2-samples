@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2. Built-in Types, Exceptions and Functions</TITLE>
+<META NAME="description" CONTENT="2. Built-in Types, Exceptions and Functions">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="python.html">
+<LINK REL="previous" HREF="intro.html">
+<LINK REL="up" HREF="lib.html">
+<LINK REL="next" HREF="types.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html528"
+ HREF="types.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html524"
+ HREF="lib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html518"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html526"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html527"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html529"
+ HREF="types.html">2.1 Built-in Types</A>
+<b>Up:</b> <A NAME="tex2html525"
+ HREF="lib.html">Python Library Reference</A>
+<b>Previous:</b> <A NAME="tex2html519"
+ HREF="intro.html">1. Introduction</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION004000000000000000000">
+<SPAN CLASS="arabic">2</SPAN>. Built-in Types, Exceptions and Functions</A>
+</H1>
+
+<P>
+Names for built-in exceptions and functions are found in a separate
+symbol table.  This table is searched last when the interpreter looks
+up the meaning of a name, so local and global
+user-defined names can override built-in names.  Built-in types are
+described together here for easy reference.<A NAME="tex2html1"
+ HREF="#foot92"><SUP><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A><a name="l2h-93"></a>
+<a name="l2h-95"></a>
+<a name="l2h-97"></a>
+<a name="l2h-99"></a>
+<P>
+The tables in this chapter document the priorities of operators by
+listing them in order of ascending priority (within a table) and
+grouping operators that have the same priority in the same box.
+Binary operators of the same priority group from left to right.
+(Unary operators group from right to left, but there you have no real
+choice.)  See Chapter 5 of the <i>Python Reference Manual</i> for the
+complete picture on operator priorities.
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot92">...11</A><A NAME="foot92"
+ HREF="builtin.html#tex2html1"><SUP><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A>
+<DD>Most descriptions sorely lack explanations of the exceptions
+	that may be raised -- this will be fixed in a future version of
+	this manual.
+
+</DL>
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html530"
+ HREF="types.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Built-in Types </A>
+<UL>
+<LI><A NAME="tex2html531"
+ HREF="truth.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Truth Value Testing </A>
+<LI><A NAME="tex2html532"
+ HREF="boolean.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Boolean Operations </A>
+<LI><A NAME="tex2html533"
+ HREF="comparisons.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Comparisons </A>
+<LI><A NAME="tex2html534"
+ HREF="typesnumeric.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN> Numeric Types </A>
+<LI><A NAME="tex2html535"
+ HREF="typesseq.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN> Sequence Types </A>
+<LI><A NAME="tex2html536"
+ HREF="typesmapping.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN> Mapping Types </A>
+<LI><A NAME="tex2html537"
+ HREF="typesother.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN> Other Built-in Types </A>
+<LI><A NAME="tex2html538"
+ HREF="specialattrs.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">8</SPAN> Special Attributes </A>
+</UL>
+<LI><A NAME="tex2html539"
+ HREF="module-exceptions.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Built-in Exceptions</A>
+<LI><A NAME="tex2html540"
+ HREF="built-in-funcs.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> Built-in Functions </A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html528"
+ HREF="types.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html524"
+ HREF="lib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html518"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html526"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html527"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html529"
+ HREF="types.html">2.1 Built-in Types</A>
+<b>Up:</b> <A NAME="tex2html525"
+ HREF="lib.html">Python Library Reference</A>
+<b>Previous:</b> <A NAME="tex2html519"
+ HREF="intro.html">1. Introduction</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

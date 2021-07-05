@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2. Embedding Python in another application</TITLE>
+<META NAME="description" CONTENT="2. Embedding Python in another application">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ext.css">
+<LINK REL="next" HREF="dynload.html">
+<LINK REL="previous" HREF="intro.html">
+<LINK REL="up" HREF="ext.html">
+<LINK REL="next" HREF="embeddingInCplusplus.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html278"
+ HREF="embeddingInCplusplus.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html275"
+ HREF="ext.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html269"
+ HREF="cplusplus.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html277"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html279"
+ HREF="embeddingInCplusplus.html">2.1 Embedding Python in</A>
+<b>Up:</b> <A NAME="tex2html276"
+ HREF="ext.html">Extending and Embedding the</A>
+<b>Previous:</b> <A NAME="tex2html270"
+ HREF="cplusplus.html">1.11 Writing Extensions in</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION004000000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>. Embedding Python in another application
+</H1>
+
+<P>
+Embedding Python is similar to extending it, but not quite.  The
+difference is that when you extend Python, the main program of the
+application is still the Python interpreter, while if you embed
+Python, the main program may have nothing to do with Python --
+instead, some parts of the application occasionally call the Python
+interpreter to run some Python code.
+
+<P>
+So if you are embedding Python, you are providing your own main
+program.  One of the things this main program has to do is initialize
+the Python interpreter.  At the very least, you have to call the
+function <tt>Py_Initialize()</tt>.  There are optional calls to
+pass command line arguments to Python.  Then later you can call the
+interpreter from any part of the application.
+
+<P>
+There are several different ways to call the interpreter: you can pass
+a string containing Python statements to
+<tt>PyRun_SimpleString()</tt>, or you can pass a stdio file pointer
+and a file name (for identification in error messages only) to
+<tt>PyRun_SimpleFile()</tt>.  You can also call the lower-level
+operations described in the previous chapters to construct and use
+Python objects.
+
+<P>
+A simple demo of embedding Python can be found in the directory
+"<tt>Demo/embed</tt>".
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html280"
+ HREF="embeddingInCplusplus.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Embedding Python in C++</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html278"
+ HREF="embeddingInCplusplus.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html275"
+ HREF="ext.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html269"
+ HREF="cplusplus.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html277"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html279"
+ HREF="embeddingInCplusplus.html">2.1 Embedding Python in</A>
+<b>Up:</b> <A NAME="tex2html276"
+ HREF="ext.html">Extending and Embedding the</A>
+<b>Previous:</b> <A NAME="tex2html270"
+ HREF="cplusplus.html">1.11 Writing Extensions in</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

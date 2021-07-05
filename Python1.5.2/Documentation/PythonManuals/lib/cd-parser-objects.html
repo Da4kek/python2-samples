@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>16.3.2 Parser Objects</TITLE>
+<META NAME="description" CONTENT="16.3.2 Parser Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="player-objects.html">
+<LINK REL="up" HREF="module-cd.html">
+<LINK REL="next" HREF="module-fl2.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3484"
+ HREF="module-fl2.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3480"
+ HREF="module-cd.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3476"
+ HREF="player-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3482"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3483"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3485"
+ HREF="module-fl2.html">16.4 fl  </A>
+<b>Up:</b> <A NAME="tex2html3481"
+ HREF="module-cd.html">16.3 cd  </A>
+<b>Previous:</b> <A NAME="tex2html3477"
+ HREF="player-objects.html">16.3.1 Player Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0018320000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Parser Objects
+</H2>
+
+<P>
+Parser objects (returned by <tt>createparser()</tt>) have the
+following methods:
+
+<P>
+<dl><dt><b><a name="l2h-22456"><tt>addcallback</tt></a></b> (<var>type, func, arg</var>)
+<dd>
+Adds a callback for the parser.  The parser has callbacks for eight
+different types of data in the digital audio data stream.  Constants
+for these types are defined at the <tt>cd</tt> module level (see above).
+The callback is called as follows: <tt><i>func</i>(<i>arg</i>, type,
+data)</tt>, where <i>arg</i> is the user supplied argument, <i>type</i> is
+the particular type of callback, and <i>data</i> is the data returned
+for this <i>type</i> of callback.  The type of the data depends on the
+<i>type</i> of callback as follows:
+
+<P>
+<table border align=center>
+  <tr><th align=left><b>Type</b></th>
+      <th><b>Value</b></th>
+  <tr><td><code>audio</code></td>
+      <td>String which can be passed unmodified to
+<tt>al.writesamps()</tt>.</td>
+  <tr><td><code>pnum</code></td>
+      <td>Integer giving the program (track) number.</td>
+  <tr><td><code>index</code></td>
+      <td>Integer giving the index number.</td>
+  <tr><td><code>ptime</code></td>
+      <td>Tuple consisting of the program time in minutes,
+seconds, and frames.</td>
+  <tr><td><code>atime</code></td>
+      <td>Tuple consisting of the absolute time in minutes,
+seconds, and frames.</td>
+  <tr><td><code>catalog</code></td>
+      <td>String of 13 characters, giving the catalog number
+of the CD.</td>
+  <tr><td><code>ident</code></td>
+      <td>String of 12 characters, giving the ISRC
+identification number of the recording.  The string consists of two
+characters country code, three characters owner code, two characters
+giving the year, and five characters giving a serial number.</td>
+  <tr><td><code>control</code></td>
+      <td>Integer giving the control bits from the CD
+subcode data</td>
+
+</table>
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22490"><tt>deleteparser</tt></a></b> ()
+<dd>
+Deletes the parser and frees the memory it was using.  The object
+should not be used after this call.  This call is done automatically
+when the last reference to the object is removed.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22494"><tt>parseframe</tt></a></b> (<var>frame</var>)
+<dd>
+Parses one or more frames of digital audio data from a CD such as
+returned by <tt>readda()</tt>.  It determines which subcodes are
+present in the data.  If these subcodes have changed since the last
+frame, then <tt>parseframe()</tt> executes a callback of the
+appropriate type passing to it the subcode data found in the frame.
+Unlike the C function, more than one frame of digital audio data
+can be passed to this method.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22501"><tt>removecallback</tt></a></b> (<var>type</var>)
+<dd>
+Removes the callback for the given <i>type</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-22506"><tt>resetparser</tt></a></b> ()
+<dd>
+Resets the fields of the parser used for tracking subcodes to an
+initial state.  <tt>resetparser()</tt> should be called after the disc
+has been changed.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3484"
+ HREF="module-fl2.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3480"
+ HREF="module-cd.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3476"
+ HREF="player-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3482"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3483"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3485"
+ HREF="module-fl2.html">16.4 fl  </A>
+<b>Up:</b> <A NAME="tex2html3481"
+ HREF="module-cd.html">16.3 cd  </A>
+<b>Previous:</b> <A NAME="tex2html3477"
+ HREF="player-objects.html">16.3.1 Player Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

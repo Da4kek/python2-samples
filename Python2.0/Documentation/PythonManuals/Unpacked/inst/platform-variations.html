@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>2.1 Platform variations</title>
+<META NAME="description" CONTENT="2.1 Platform variations">
+<META NAME="keywords" CONTENT="inst">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="inst.css">
+<LINK REL="next" href="splitting-up.html">
+<LINK REL="previous" href="standard-install.html">
+<LINK REL="up" href="standard-install.html">
+<LINK REL="next" href="splitting-up.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="standard-install.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="standard-install.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="splitting-up.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="standard-install.html">2 Standard Build and</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="standard-install.html">2 Standard Build and</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="splitting-up.html">2.2 Splitting the job</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+2.1 Platform variations
+</H2>
+
+<P>
+You should always run the setup command from the distribution root
+directory, i.e. the top-level subdirectory that the module source
+distribution unpacks into.  For example, if you've just downloaded a
+module source distribution <span class="file">foo-1.0.tar.gz</span> onto a Unix system, the
+normal thing to do is:
+<dl><dd><pre class="verbatim">
+gunzip -c foo-1.0.tar.gz | tar xf -    # unpacks into directory foo-1.0
+cd foo-1.0
+python setup.py install
+</pre></dl>
+
+<P>
+On Windows, you'd probably download <span class="file">foo-1.0.zip</span>.  If you
+downloaded the archive file to <span class="file">C:&#92;Temp</span>, then it
+would unpack into <span class="file">C:&#92;Temp&#92;foo-1.0</span>;
+you can use either a GUI archive manipulator (such as WinZip) or a
+command-line tool (such as <b class="program">unzip</b> or <b class="program">pkunzip</b>) to
+unpack the archive.  Then, open a command prompt window (``DOS box''),
+and run:
+<dl><dd><pre class="verbatim">
+cd c:\Temp\foo-1.0
+python setup.py install
+</pre></dl>
+
+<P>
+On Mac&nbsp;OS, you have to go through a bit more effort to supply
+command-line arguments to the setup script:
+
+<UL>
+<LI>hit option-double-click on the script's icon (or option-drop it
+  onto the Python interpreter's icon)
+</LI>
+<LI>press the ``Set unix-style command line'' button
+</LI>
+<LI>set the ``Keep stdio window open on termination'' if you're
+  interested in seeing the output of the setup script (which is usually
+  voluminous and often useful)
+</LI>
+<LI>when the command-line dialog pops up, enter ``install'' (you
+  can, of course, enter any Distutils command-line as described in this
+  document or in the ``Distributing Python Modules'' document: just
+  leave of the initial <code>python setup.py</code> and you'll be fine)
+</LI>
+</UL>
+<b>** this should change: every Distutils setup script will need
+  command-line arguments for every run (and should probably keep stdout
+  around), so all this should happen automatically for setup scripts **</b>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="standard-install.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="standard-install.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="splitting-up.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="standard-install.html">2 Standard Build and</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="standard-install.html">2 Standard Build and</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="splitting-up.html">2.2 Splitting the job</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2.1.4 Numeric Types </TITLE>
+<META NAME="description" CONTENT="2.1.4 Numeric Types ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="typesseq.html">
+<LINK REL="previous" HREF="comparisons.html">
+<LINK REL="up" HREF="types.html">
+<LINK REL="next" HREF="Bit-string_Operations.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html620"
+ HREF="Bit-string_Operations.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html616"
+ HREF="types.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html610"
+ HREF="comparisons.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html618"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html619"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html621"
+ HREF="Bit-string_Operations.html">2.1.4.1 Bit-string Operations on</A>
+<b>Up:</b> <A NAME="tex2html617"
+ HREF="types.html">2.1 Built-in Types</A>
+<b>Previous:</b> <A NAME="tex2html611"
+ HREF="comparisons.html">2.1.3 Comparisons</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION004140000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN> Numeric Types 
+</H2>
+
+<P>
+There are four numeric types: <i>plain integers</i>, <i>long integers</i>, 
+<i>floating point numbers</i>, and <i>complex numbers</i>.
+Plain integers (also just called <i>integers</i>)
+are implemented using <tt>long</tt> in C, which gives them at least 32
+bits of precision.  Long integers have unlimited precision.  Floating
+point numbers are implemented using <tt>double</tt> in C.  All bets on
+their precision are off unless you happen to know the machine you are
+working with.
+<a name="l2h-257"></a>
+<a name="l2h-259"></a>
+<a name="l2h-261"></a>
+<a name="l2h-"></a>
+<a name="l2h-266"></a>
+<a name="l2h-268"></a>
+<a name="l2h-1112"></a>
+
+<P>
+Complex numbers have a real and imaginary part, which are both
+implemented using <tt>double</tt> in C.  To extract these parts from
+a complex number <i>z</i>, use <tt><i>z</i>.real</tt> and <tt><i>z</i>.imag</tt>.  
+
+<P>
+Numbers are created by numeric literals or as the result of built-in
+functions and operators.  Unadorned integer literals (including hex
+and octal numbers) yield plain integers.  Integer literals with an "<tt>L</tt>"
+or "<tt>l</tt>" suffix yield long integers
+("<tt>L</tt>" is preferred because "<tt>1l</tt>" looks too much like eleven!).
+Numeric literals containing a decimal point or an exponent sign yield
+floating point numbers.  Appending "<tt>j</tt>" or "<tt>J</tt>" to a numeric
+literal yields a complex number.
+<a name="l2h-283"></a>
+<a name="l2h-285"></a>
+<a name="l2h-"></a>
+<a name="l2h-290"></a>
+<a name="l2h-292"></a>
+<a name="l2h-294"></a>
+<a name="l2h-296"></a>
+
+<P>
+Python fully supports mixed arithmetic: when a binary arithmetic
+operator has operands of different numeric types, the operand with the
+``smaller'' type is converted to that of the other, where plain
+integer is smaller than long integer is smaller than floating point is
+smaller than complex.
+Comparisons between numbers of mixed type use the same rule.<A NAME="tex2html2"
+ HREF="#foot1115"><SUP><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A>The functions <tt>int()</tt>, <tt>long()</tt>, <tt>float()</tt>,
+and <tt>complex()</tt> can be used
+to coerce numbers to a specific type.
+<a name="l2h-304"></a><a name="l2h-"></a><a name="l2h-"></a><a name="l2h-"></a><a name="l2h-"></a>
+<P>
+All numeric types support the following operations, sorted by
+ascending priority (operations in the same box have the same
+priority; all numeric operations have a higher priority than
+comparison operations):
+
+<P>
+<table border align=center>
+  <tr><th><b>Operation</b></th>
+      <th align=left><b>Result</b></th>
+      <th><b>Notes</b></th>
+  <tr><td align=center><code><i>x</i> + <i>y</i></code></td>
+      <td>sum of <i>x</i> and <i>y</i></td>
+      
+  <tr><td align=center><code><i>x</i> - <i>y</i></code></td>
+      <td>difference of <i>x</i> and <i>y</i></td>
+      
+  
+  <tr><td align=center><code><i>x</i> * <i>y</i></code></td>
+      <td>product of <i>x</i> and <i>y</i></td>
+      
+  <tr><td align=center><code><i>x</i> / <i>y</i></code></td>
+      <td>quotient of <i>x</i> and <i>y</i></td>
+      <td align=center>(1)</td>
+  <tr><td align=center><code><i>x</i> % <i>y</i></code></td>
+      <td>remainder of <tt><i>x</i> / <i>y</i></tt></td>
+      
+  
+  <tr><td align=center><code>-<i>x</i></code></td>
+      <td><i>x</i> negated</td>
+      
+  <tr><td align=center><code>+<i>x</i></code></td>
+      <td><i>x</i> unchanged</td>
+      
+  
+  <tr><td align=center><code>abs(<i>x</i>)</code></td>
+      <td>absolute value or magnitude of <i>x</i></td>
+      
+  <tr><td align=center><code>int(<i>x</i>)</code></td>
+      <td><i>x</i> converted to integer</td>
+      <td align=center>(2)</td>
+  <tr><td align=center><code>long(<i>x</i>)</code></td>
+      <td><i>x</i> converted to long integer</td>
+      <td align=center>(2)</td>
+  <tr><td align=center><code>float(<i>x</i>)</code></td>
+      <td><i>x</i> converted to floating point</td>
+      
+  <tr><td align=center><code>complex(<i>re</i>,<i>im</i>)</code></td>
+      <td>a complex number with real part <i>re</i>, imaginary part <i>im</i>.  <i>im</i> defaults to zero.</td>
+      
+  <tr><td align=center><code>divmod(<i>x</i>, <i>y</i>)</code></td>
+      <td>the pair <tt>(<i>x</i> / <i>y</i>, <i>x</i> % <i>y</i>)</tt></td>
+      <td align=center>(3)</td>
+  <tr><td align=center><code>pow(<i>x</i>, <i>y</i>)</code></td>
+      <td><i>x</i> to the power <i>y</i></td>
+      
+  <tr><td align=center><code><i>x</i> ** <i>y</i></code></td>
+      <td><i>x</i> to the power <i>y</i></td>
+      
+
+</table>
+<a name="l2h-"></a>
+
+<P>
+Notes:
+<DL>
+<DD><P>
+<DT><STRONG>(1)</STRONG>
+<DD>For (plain or long) integer division, the result is an integer.
+The result is always rounded towards minus infinity: 1/2 is 0, 
+(-1)/2 is -1, 1/(-2) is -1, and (-1)/(-2) is 0.
+<a name="l2h-388"></a>
+<a name="l2h-"></a>
+
+<P>
+<DT><STRONG>(2)</STRONG>
+<DD>Conversion from floating point to (long or plain) integer may round or
+truncate as in C; see functions <tt>floor()</tt> and <tt>ceil()</tt> in
+module <tt>math</tt> for well-defined conversions.
+<a name="l2h-"></a><a name="l2h-"></a><a name="l2h-399"></a>
+<a name="l2h-"></a><a name="l2h-1146"></a>
+
+<P>
+<DT><STRONG>(3)</STRONG>
+<DD>See the section on built-in functions for an exact definition.
+
+<P>
+</DL>
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot1115">...14</A><A NAME="foot1115"
+ HREF="typesnumeric.html#tex2html2"><SUP><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A>
+<DD>As a consequence, the list <tt>[1, 2]</tt> is considered equal
+	to <tt>[1.0, 2.0]</tt>, and similar for tuples.
+
+</DL>
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html622"
+ HREF="Bit-string_Operations.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Bit-string Operations on Integer Types</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html620"
+ HREF="Bit-string_Operations.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html616"
+ HREF="types.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html610"
+ HREF="comparisons.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html618"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html619"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html621"
+ HREF="Bit-string_Operations.html">2.1.4.1 Bit-string Operations on</A>
+<b>Up:</b> <A NAME="tex2html617"
+ HREF="types.html">2.1 Built-in Types</A>
+<b>Previous:</b> <A NAME="tex2html611"
+ HREF="comparisons.html">2.1.3 Comparisons</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

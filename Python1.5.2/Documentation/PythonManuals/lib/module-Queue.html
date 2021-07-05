@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.6 Queue --
+A synchronized queue class.</TITLE>
+<META NAME="description" CONTENT="7.6 Queue --
+A synchronized queue class.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-anydbm.html">
+<LINK REL="previous" HREF="module-threading.html">
+<LINK REL="up" HREF="someos.html">
+<LINK REL="next" HREF="QueueObjects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1941"
+ HREF="QueueObjects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1937"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1931"
+ HREF="node118.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1939"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1940"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1942"
+ HREF="QueueObjects.html">7.6.1 Queue Objects</A>
+<b>Up:</b> <A NAME="tex2html1938"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1932"
+ HREF="node118.html">7.5.6 Thread Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009600000000000000000">
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>Queue</tt> --
+         A synchronized queue class.</A>
+</H1>
+
+
+<P>
+
+<P>
+The <tt>Queue</tt> module implements a multi-producer, multi-consumer
+FIFO queue.  It is especially useful in threads programming when
+information must be exchanged safely between multiple threads.  The
+<tt>Queue</tt> class in this module implements all the required locking
+semantics.  It depends on the availability of thread support in
+Python.
+
+<P>
+The <tt>Queue</tt> module defines the following class and exception:
+
+<P>
+<dl><dt><b><a name="l2h-11803"><tt>Queue</tt></a></b> (<var>maxsize</var>)
+<dd>
+Constructor for the class.  <i>maxsize</i> is an integer that sets the
+upperbound limit on the number of items that can be placed in the
+queue.  Insertion will block once this size has been reached, until
+queue items are consumed.  If <i>maxsize</i> is less than or equal to
+zero, the queue size is infinite.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11808"><tt>Empty</tt></a></b>
+<dd>
+Exception raised when non-blocking get (e.g. <tt>get_nowait()</tt>) is
+called on a <tt>Queue</tt> object which is empty, or for which the
+emptyiness cannot be determined (i.e. because the appropriate locks
+cannot be acquired).
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html1943"
+ HREF="QueueObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Queue Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1941"
+ HREF="QueueObjects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1937"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1931"
+ HREF="node118.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1939"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1940"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1942"
+ HREF="QueueObjects.html">7.6.1 Queue Objects</A>
+<b>Up:</b> <A NAME="tex2html1938"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1932"
+ HREF="node118.html">7.5.6 Thread Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

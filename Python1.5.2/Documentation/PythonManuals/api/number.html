@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.2 Number Protocol</TITLE>
+<META NAME="description" CONTENT="6.2 Number Protocol">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="next" HREF="sequence.html">
+<LINK REL="previous" HREF="object.html">
+<LINK REL="up" HREF="abstract.html">
+<LINK REL="next" HREF="sequence.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html341"
+ HREF="sequence.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html337"
+ HREF="abstract.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html331"
+ HREF="object.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html339"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html340"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html342"
+ HREF="sequence.html">6.3 Sequence Protocol</A>
+<b>Up:</b> <A NAME="tex2html338"
+ HREF="abstract.html">6. Abstract Objects Layer</A>
+<b>Previous:</b> <A NAME="tex2html332"
+ HREF="object.html">6.1 Object Protocol</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008200000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> Number Protocol
+</H1>
+
+<P>
+<dl><dt>int <b><a name="l2h-967"><tt>PyNumber_Check</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Returns <tt>1</tt> if the object <i>o</i> provides numeric protocols, and
+false otherwise. 
+This function always succeeds.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-974"><tt>PyNumber_Add</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+Returns the result of adding <i>o1</i> and <i>o2</i>, or <tt>NULL</tt> on
+failure.  This is the equivalent of the Python expression
+"<tt><i>o1</i> + <i>o2</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-984"><tt>PyNumber_Subtract</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+Returns the result of subtracting <i>o2</i> from <i>o1</i>, or <tt>NULL</tt>
+on failure.  This is the equivalent of the Python expression
+"<tt><i>o1</i> - <i>o2</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-994"><tt>PyNumber_Multiply</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+Returns the result of multiplying <i>o1</i> and <i>o2</i>, or <tt>NULL</tt> on
+failure.  This is the equivalent of the Python expression
+"<tt><i>o1</i> * <i>o2</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1004"><tt>PyNumber_Divide</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+Returns the result of dividing <i>o1</i> by <i>o2</i>, or <tt>NULL</tt> on
+failure. 
+This is the equivalent of the Python expression "<tt><i>o1</i> /
+<i>o2</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1014"><tt>PyNumber_Remainder</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+Returns the remainder of dividing <i>o1</i> by <i>o2</i>, or <tt>NULL</tt> on
+failure.  This is the equivalent of the Python expression
+"<tt><i>o1</i> % <i>o2</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1024"><tt>PyNumber_Divmod</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+See the built-in function <tt>divmod()</tt><a name="l2h-"></a>.
+Returns <tt>NULL</tt> on failure.  This is the equivalent of the Python
+expression "<tt>divmod(<i>o1</i>, <i>o2</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1034"><tt>PyNumber_Power</tt></a></b>(<var>PyObject *o1, PyObject *o2, PyObject *o3</var>)
+<dd>
+See the built-in function <tt>pow()</tt><a name="l2h-"></a>.  Returns
+<tt>NULL</tt> on failure. This is the equivalent of the Python expression
+"<tt>pow(<i>o1</i>, <i>o2</i>, <i>o3</i>)</tt>", where <i>o3</i> is optional.
+If <i>o3</i> is to be ignored, pass <tt>Py_None</tt> in its place.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1048"><tt>PyNumber_Negative</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Returns the negation of <i>o</i> on success, or <tt>NULL</tt> on failure.
+This is the equivalent of the Python expression "<tt>-<i>o</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1056"><tt>PyNumber_Positive</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Returns <i>o</i> on success, or <tt>NULL</tt> on failure.
+This is the equivalent of the Python expression "<tt>+<i>o</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1064"><tt>PyNumber_Absolute</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Returns the absolute value of <i>o</i>, or <tt>NULL</tt> on failure.  This is
+the equivalent of the Python expression "<tt>abs(<i>o</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1072"><tt>PyNumber_Invert</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Returns the bitwise negation of <i>o</i> on success, or <tt>NULL</tt> on
+failure.  This is the equivalent of the Python expression
+"<tt>~<i>o</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1080"><tt>PyNumber_Lshift</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+Returns the result of left shifting <i>o1</i> by <i>o2</i> on success,
+or <tt>NULL</tt> on failure.  This is the equivalent of the Python
+expression "<tt><i>o1</i> &lt;&lt; <i>o2</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1090"><tt>PyNumber_Rshift</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+Returns the result of right shifting <i>o1</i> by <i>o2</i> on success,
+or <tt>NULL</tt> on failure.  This is the equivalent of the Python
+expression "<tt><i>o1</i> &gt;&gt; <i>o2</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1100"><tt>PyNumber_And</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+Returns the result of ``anding'' <i>o2</i> and <i>o2</i> on success and
+<tt>NULL</tt> on failure. This is the equivalent of the Python
+expression "<tt><i>o1</i> and <i>o2</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1110"><tt>PyNumber_Xor</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+Returns the bitwise exclusive or of <i>o1</i> by <i>o2</i> on success,
+or <tt>NULL</tt> on failure.  This is the equivalent of the Python
+expression "<tt><i>o1</i> ^ <i>o2</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1121"><tt>PyNumber_Or</tt></a></b>(<var>PyObject *o1, PyObject *o2</var>)
+<dd>
+Returns the result of <i>o1</i> and <i>o2</i> on success, or <tt>NULL</tt> on
+failure.  This is the equivalent of the Python expression
+"<tt><i>o1</i> or <i>o2</i></tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1131"><tt>PyNumber_Coerce</tt></a></b>(<var>PyObject **p1, PyObject **p2</var>)
+<dd>
+This function takes the addresses of two variables of type
+<tt>PyObject*</tt>.
+
+<P>
+If the objects pointed to by <tt>*<i>p1</i></tt> and <tt>*<i>p2</i></tt>
+have the same type, increment their reference count and return
+<tt>0</tt> (success). If the objects can be converted to a common
+numeric type, replace <tt>*p1</tt> and <tt>*p2</tt> by their converted
+value (with 'new' reference counts), and return <tt>0</tt>.
+If no conversion is possible, or if some other error occurs,
+return <tt>-1</tt> (failure) and don't increment the reference counts.
+The call <tt>PyNumber_Coerce(&amp;o1, &amp;o2)</tt> is equivalent to the
+Python statement "<tt><i>o1</i>, <i>o2</i> = coerce(<i>o1</i>,
+<i>o2</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1149"><tt>PyNumber_Int</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Returns the <i>o</i> converted to an integer object on success, or
+<tt>NULL</tt> on failure.  This is the equivalent of the Python
+expression "<tt>int(<i>o</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1157"><tt>PyNumber_Long</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Returns the <i>o</i> converted to a long integer object on success,
+or <tt>NULL</tt> on failure.  This is the equivalent of the Python
+expression "<tt>long(<i>o</i>)</tt>".
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1165"><tt>PyNumber_Float</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Returns the <i>o</i> converted to a float object on success, or <tt>NULL</tt>
+on failure.  This is the equivalent of the Python expression
+"<tt>float(<i>o</i>)</tt>".
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html341"
+ HREF="sequence.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html337"
+ HREF="abstract.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html331"
+ HREF="object.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html339"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html340"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html342"
+ HREF="sequence.html">6.3 Sequence Protocol</A>
+<b>Up:</b> <A NAME="tex2html338"
+ HREF="abstract.html">6. Abstract Objects Layer</A>
+<b>Previous:</b> <A NAME="tex2html332"
+ HREF="object.html">6.1 Object Protocol</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

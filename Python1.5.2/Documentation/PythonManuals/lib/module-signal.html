@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.1 signal --
+Set handlers for asynchronous events.</TITLE>
+<META NAME="description" CONTENT="7.1 signal --
+Set handlers for asynchronous events.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-socket.html">
+<LINK REL="previous" HREF="someos.html">
+<LINK REL="up" HREF="someos.html">
+<LINK REL="next" HREF="Signal_Example.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1770"
+ HREF="Signal_Example.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1766"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1760"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1768"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1769"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1771"
+ HREF="Signal_Example.html">7.1.1 Example</A>
+<b>Up:</b> <A NAME="tex2html1767"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1761"
+ HREF="someos.html">7. Optional Operating System</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009100000000000000000">
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>signal</tt> --
+         Set handlers for asynchronous events.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides mechanisms to use signal handlers in Python.
+Some general rules for working with signals and their handlers:
+
+<P>
+
+<UL><LI>A handler for a particular signal, once set, remains installed until
+it is explicitly reset (i.e. Python emulates the BSD style interface
+regardless of the underlying implementation), with the exception of
+the handler for <tt>SIGCHLD</tt>, which follows the underlying
+implementation.
+
+<P>
+
+<LI>There is no way to ``block'' signals temporarily from critical
+sections (since this is not supported by all Unix flavors).
+
+<P>
+
+<LI>Although Python signal handlers are called asynchronously as far as
+the Python user is concerned, they can only occur between the
+``atomic'' instructions of the Python interpreter.  This means that
+signals arriving during long calculations implemented purely in C
+(e.g. regular expression matches on large bodies of text) may be
+delayed for an arbitrary amount of time.
+
+<P>
+
+<LI>When a signal arrives during an I/O operation, it is possible that the
+I/O operation raises an exception after the signal handler returns.
+This is dependent on the underlying Unix system's semantics regarding
+interrupted system calls.
+
+<P>
+
+<LI>Because the C signal handler always returns, it makes little sense to
+catch synchronous errors like <tt>SIGFPE</tt> or <tt>SIGSEGV</tt>.
+
+<P>
+
+<LI>Python installs a small number of signal handlers by default:
+<tt>SIGPIPE</tt> is ignored (so write errors on pipes and sockets can be
+reported as ordinary Python exceptions), <tt>SIGINT</tt> is translated
+into a <tt>KeyboardInterrupt</tt> exception, and <tt>SIGTERM</tt> is
+caught so that necessary cleanup (especially <tt>sys.exitfunc</tt>) can
+be performed before actually terminating.  All of these can be
+overridden.
+
+<P>
+
+<LI>Some care must be taken if both signals and threads are used in the
+same program.  The fundamental thing to remember in using signals and
+threads simultaneously is: always perform <tt>signal()</tt> operations
+in the main thread of execution.  Any thread can perform an
+<tt>alarm()</tt>, <tt>getsignal()</tt>, or <tt>pause()</tt>;
+only the main thread can set a new signal handler, and the main thread
+will be the only one to receive signals (this is enforced by the
+Python <tt>signal</tt> module, even if the underlying thread
+implementation supports sending signals to individual threads).  This
+means that signals can't be used as a means of interthread
+communication.  Use locks instead.
+
+<P>
+
+</UL>
+
+<P>
+The variables defined in the <tt>signal</tt> module are:
+
+<P>
+<dl><dt><b><a name="l2h-10534"><tt>SIG_DFL</tt></a></b>
+<dd>
+  This is one of two standard signal handling options; it will simply
+  perform the default function for the signal.  For example, on most
+  systems the default action for <tt>SIGQUIT</tt> is to dump core
+  and exit, while the default action for <tt>SIGCLD</tt> is to
+  simply ignore it.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-10539"><tt>SIG_IGN</tt></a></b>
+<dd>
+  This is another standard signal handler, which will simply ignore
+  the given signal.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-10542"><tt>SIG*</tt></a></b>
+<dd>
+  All the signal numbers are defined symbolically.  For example, the
+  hangup signal is defined as <tt>signal.SIGHUP</tt>; the variable names
+  are identical to the names used in C programs, as found in
+  <tt>&lt;signal.h&gt;</tt>.
+  The Unix man page for `<tt>signal()</tt>' lists the existing
+  signals (on some systems this is <i>signal</i>(2), on others the
+  list is in <i>signal</i>(7)).
+  Note that not all systems define the same set of signal names; only
+  those names defined by the system are defined by this module.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-10553"><tt>NSIG</tt></a></b>
+<dd>
+  One more than the number of the highest signal number.
+</dl>
+
+<P>
+The <tt>signal</tt> module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-10558"><tt>alarm</tt></a></b> (<var>time</var>)
+<dd>
+  If <i>time</i> is non-zero, this function requests that a
+  <tt>SIGALRM</tt> signal be sent to the process in <i>time</i> seconds.
+  Any previously scheduled alarm is canceled (i.e. only one alarm can
+  be scheduled at any time).  The returned value is then the number of
+  seconds before any previously set alarm was to have been delivered.
+  If <i>time</i> is zero, no alarm id scheduled, and any scheduled
+  alarm is canceled.  The return value is the number of seconds
+  remaining before a previously scheduled alarm.  If the return value
+  is zero, no alarm is currently scheduled.  (See the Unix man page
+  <i>alarm</i>(2).)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-10569"><tt>getsignal</tt></a></b> (<var>signalnum</var>)
+<dd>
+  Return the current signal handler for the signal <i>signalnum</i>.
+  The returned value may be a callable Python object, or one of the
+  special values <tt>signal.SIG_IGN</tt>, <tt>signal.SIG_DFL</tt> or
+  <tt>None</tt>.  Here, <tt>signal.SIG_IGN</tt> means that the
+  signal was previously ignored, <tt>signal.SIG_DFL</tt> means that the
+  default way of handling the signal was previously in use, and
+  <tt>None</tt> means that the previous signal handler was not installed
+  from Python.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-10580"><tt>pause</tt></a></b> ()
+<dd>
+  Cause the process to sleep until a signal is received; the
+  appropriate handler will then be called.  Returns nothing.  (See the
+  Unix man page <i>signal</i>(2).)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-10587"><tt>signal</tt></a></b> (<var>signalnum, handler</var>)
+<dd>
+  Set the handler for signal <i>signalnum</i> to the function
+  <i>handler</i>.  <i>handler</i> can be a callable Python object
+  taking two arguments (see below), or
+  one of the special values <tt>signal.SIG_IGN</tt> or
+  <tt>signal.SIG_DFL</tt>.  The previous signal handler will be returned
+  (see the description of <tt>getsignal()</tt> above).  (See the
+  Unix man page <i>signal</i>(2).)
+
+<P>
+When threads are enabled, this function can only be called from the
+  main thread; attempting to call it from other threads will cause a
+  <tt>ValueError</tt> exception to be raised.
+
+<P>
+The <i>handler</i> is called with two arguments: the signal number
+  and the current stack frame (<tt>None</tt> or a frame object; see the
+  reference manual for a description of frame objects).
+<a name="l2h-"></a></dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html1772"
+ HREF="Signal_Example.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Example</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1770"
+ HREF="Signal_Example.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1766"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1760"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1768"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1769"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1771"
+ HREF="Signal_Example.html">7.1.1 Example</A>
+<b>Up:</b> <A NAME="tex2html1767"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1761"
+ HREF="someos.html">7. Optional Operating System</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

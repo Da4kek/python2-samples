@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>16.8 gl --
+Functions from the Silicon Graphics Graphics Library.</TITLE>
+<META NAME="description" CONTENT="16.8 gl --
+Functions from the Silicon Graphics Graphics Library.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-DEVICE.html">
+<LINK REL="previous" HREF="module-fm.html">
+<LINK REL="up" HREF="sgi.html">
+<LINK REL="next" HREF="module-DEVICE.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3581"
+ HREF="module-DEVICE.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3577"
+ HREF="sgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3571"
+ HREF="module-fm.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3579"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3580"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3582"
+ HREF="module-DEVICE.html">16.9 DEVICE  </A>
+<b>Up:</b> <A NAME="tex2html3578"
+ HREF="sgi.html">16. SGI IRIX Specific</A>
+<b>Previous:</b> <A NAME="tex2html3572"
+ HREF="module-fm.html">16.7 fm  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0018800000000000000000">
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>gl</tt> --
+         Functions from the Silicon Graphics <i>Graphics Library</i>.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides access to the Silicon Graphics
+<i>Graphics Library</i>.
+It is available only on Silicon Graphics machines.
+
+<P>
+<b>Warning:</b>
+Some illegal calls to the GL library cause the Python interpreter to dump
+core.
+In particular, the use of most GL calls is unsafe before the first
+window is opened.
+
+<P>
+The module is too large to document here in its entirety, but the
+following should help you to get started.
+The parameter conventions for the C functions are translated to Python as
+follows:
+
+<P>
+
+<UL><LI>All (short, long, unsigned) int values are represented by Python
+integers.
+
+<LI>All float and double values are represented by Python floating point
+numbers.
+In most cases, Python integers are also allowed.
+
+<LI>All arrays are represented by one-dimensional Python lists.
+In most cases, tuples are also allowed.
+
+<LI>All string and character arguments are represented by Python strings,
+for instance,
+<tt>winopen('Hi There!')</tt>
+and
+<tt>rotate(900, 'z')</tt>.
+
+<LI>All (short, long, unsigned) integer arguments or return values that are
+only used to specify the length of an array argument are omitted.
+For example, the C call
+
+<P>
+<dl><dd><pre>
+lmdef(deftype, index, np, props)
+</pre></dl>
+is translated to Python as
+
+<P>
+<dl><dd><pre>
+lmdef(deftype, index, props)
+</pre></dl>
+
+<LI>Output arguments are omitted from the argument list; they are
+transmitted as function return values instead.
+If more than one value must be returned, the return value is a tuple.
+If the C function has both a regular return value (that is not omitted
+because of the previous rule) and an output argument, the return value
+comes first in the tuple.
+Examples: the C call
+
+<P>
+<dl><dd><pre>
+getmcolor(i, &amp;red, &amp;green, &amp;blue)
+</pre></dl>
+is translated to Python as
+
+<P>
+<dl><dd><pre>
+red, green, blue = getmcolor(i)
+</pre></dl>
+</UL>
+
+<P>
+The following functions are non-standard or have special argument
+conventions:
+
+<P>
+<dl><dt><b><a name="l2h-23410"><tt>varray</tt></a></b> (<var>argument</var>)
+<dd>
+Equivalent to but faster than a number of
+<tt>v3d()</tt>
+calls.
+The <i>argument</i> is a list (or tuple) of points.
+Each point must be a tuple of coordinates
+<tt>(<i>x</i>, <i>y</i>, <i>z</i>)</tt> or <tt>(<i>x</i>, <i>y</i>)</tt>.
+The points may be 2- or 3-dimensional but must all have the
+same dimension.
+Float and int values may be mixed however.
+The points are always converted to 3D double precision points
+by assuming <tt><i>z</i> = 0.0</tt> if necessary (as indicated in the man page),
+and for each point
+<tt>v3d()</tt>
+is called.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23423"><tt>nvarray</tt></a></b> ()
+<dd>
+Equivalent to but faster than a number of
+<tt>n3f</tt>
+and
+<tt>v3f</tt>
+calls.
+The argument is an array (list or tuple) of pairs of normals and points.
+Each pair is a tuple of a point and a normal for that point.
+Each point or normal must be a tuple of coordinates
+<tt>(<i>x</i>, <i>y</i>, <i>z</i>)</tt>.
+Three coordinates must be given.
+Float and int values may be mixed.
+For each pair,
+<tt>n3f()</tt>
+is called for the normal, and then
+<tt>v3f()</tt>
+is called for the point.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23434"><tt>vnarray</tt></a></b> ()
+<dd>
+Similar to 
+<tt>nvarray()</tt>
+but the pairs have the point first and the normal second.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23439"><tt>nurbssurface</tt></a></b> (<var>s_k, t_k, ctl, s_ord, t_ord, type</var>)
+<dd>
+Defines a nurbs surface.
+The dimensions of
+<tt><i>ctl</i>[][]</tt>
+are computed as follows:
+<tt>[len(<i>s_k</i>) - <i>s_ord</i>]</tt>,
+<tt>[len(<i>t_k</i>) - <i>t_ord</i>]</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23448"><tt>nurbscurve</tt></a></b> (<var>knots, ctlpoints, order, type</var>)
+<dd>
+Defines a nurbs curve.
+The length of ctlpoints is
+<tt>len(<i>knots</i>) - <i>order</i></tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23454"><tt>pwlcurve</tt></a></b> (<var>points, type</var>)
+<dd>
+Defines a piecewise-linear curve.
+<i>points</i>
+is a list of points.
+<i>type</i>
+must be
+<tt>N_ST</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23461"><tt>pick</tt></a></b> (<var>n</var>)
+<dd>
+<dt><b><a name="l2h-23463"><tt>select</tt></a></b> (<var>n</var>)
+<dd>
+The only argument to these functions specifies the desired size of the
+pick or select buffer.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23467"><tt>endpick</tt></a></b> ()
+<dd>
+<dt><b><a name="l2h-23469"><tt>endselect</tt></a></b> ()
+<dd>
+These functions have no arguments.
+They return a list of integers representing the used part of the
+pick/select buffer.
+No method is provided to detect buffer overrun.
+</dl>
+
+<P>
+Here is a tiny but complete example GL program in Python:
+
+<P>
+<dl><dd><pre>
+import gl, GL, time
+
+def main():
+    gl.foreground()
+    gl.prefposition(500, 900, 500, 900)
+    w = gl.winopen('CrissCross')
+    gl.ortho2(0.0, 400.0, 0.0, 400.0)
+    gl.color(GL.WHITE)
+    gl.clear()
+    gl.color(GL.RED)
+    gl.bgnline()
+    gl.v2f(0.0, 0.0)
+    gl.v2f(400.0, 400.0)
+    gl.endline()
+    gl.bgnline()
+    gl.v2f(400.0, 0.0)
+    gl.v2f(0.0, 400.0)
+    gl.endline()
+    time.sleep(5)
+
+main()
+</pre></dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3581"
+ HREF="module-DEVICE.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3577"
+ HREF="sgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3571"
+ HREF="module-fm.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3579"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3580"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3582"
+ HREF="module-DEVICE.html">16.9 DEVICE  </A>
+<b>Up:</b> <A NAME="tex2html3578"
+ HREF="sgi.html">16. SGI IRIX Specific</A>
+<b>Previous:</b> <A NAME="tex2html3572"
+ HREF="module-fm.html">16.7 fm  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

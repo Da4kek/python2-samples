@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2. Installing the XML Toolkit</TITLE>
+<META NAME="description" CONTENT="2. Installing the XML Toolkit">
+<META NAME="keywords" CONTENT="xml-howto">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="xml-howto.css">
+<LINK REL="next" HREF="SAX.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="up" HREF="xml-howto.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html75"
+ HREF="node5.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html72"
+ HREF="xml-howto.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html66"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/XML HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html74"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html76"
+ HREF="node5.html">2.1 Related Links</A>
+<b>Up:</b> <A NAME="tex2html73"
+ HREF="xml-howto.html">Python/XML HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html67"
+ HREF="node3.html">1.1 Related Links</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000300000000000000000">
+<SPAN CLASS="arabic">2</SPAN>. Installing the XML Toolkit</A>
+</H1>
+
+<P>
+Windows users should get the precompiled version at <a href="XXX"><font face=sans-serif>XXX</font></a>; Mac
+users will use the corresponding precompiled version at <a href="XXX"><font face=sans-serif>XXX</font></a>.
+Linux users may wish to use either the Debian package from <a href="XXX"><font face=sans-serif>XXX</font></a>,
+or the RPM from <a href="XXX"><font face=sans-serif>XXX</font></a>.  To compile from source on a Unix platform,
+simply perform the following steps.
+
+<P>
+<DL COMPACT>
+<DT>1.
+<DD>Get a copy of the source distribution from <a href="http://www.python.org/topics/xml/download.html"><font face=sans-serif>http://www.python.org/topics/xml/download.html</font></a>.  Unpack it with the following command.
+<P>
+<dl><dd><pre>
+gzip -dc xml-package.tgz | tar -xvf -
+</pre></dl>
+
+<P>
+<DT>2.
+<DD>Run:
+<dl><dd><pre>
+make -f Makefile.pre.in boot
+</pre></dl>
+
+<P>
+This creates the "<tt>Makefile</tt>"
+and
+"<tt>config.c</tt>" (producing various other intermediate files in the process), incorporating the values for <tt>sys.prefix</tt>, <tt>sys.exec_prefix</tt>
+and <tt>sys.version</tt> from the installed Python binary.  For this to work,
+the Python interpreter must be on your path.  If this fails, try
+
+<P>
+<dl><dd><pre>
+   make -f Makefile.pre.in Makefile VERSION=1.5 installdir=&lt;prefix&gt;
+</pre></dl>
+
+<P>
+where "<tt>&lt;prefix&gt;</tt>" is the value of "<tt>installdir</tt>" used when
+installing Python.  You may possibly have to also set
+"<tt>exec_installdir</tt>" to the value of "<tt>exec_prefix</tt>".
+
+<P>
+<DT>3.
+<DD>Once the Makefile has been constructed, just run "<tt>make</tt>" to
+ compile the C modules.  There's no test suite yet, but there will be
+ one someday.
+
+<P>
+<DT>4.
+<DD>To install the code, run "<tt>make install</tt>".
+ The code will be installed under the "<tt>site-packages/</tt>" directory
+ as a package named "<tt>xml/</tt>".  
+
+<P>
+</DL>
+
+<P>
+If you have difficulty installing this software, send a problem report
+to &lt;xml-sig@python.org&gt; describing the problem.
+
+<P>
+There are various demonstration programs in the "<tt>demo/</tt>" directory
+of the source distribution.  You may wish to look at them next to get
+an impression of what's possible with the XML tools, and as a source
+of example code.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html77"
+ HREF="node5.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Related Links</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html75"
+ HREF="node5.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html72"
+ HREF="xml-howto.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html66"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/XML HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html74"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html76"
+ HREF="node5.html">2.1 Related Links</A>
+<b>Up:</b> <A NAME="tex2html73"
+ HREF="xml-howto.html">Python/XML HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html67"
+ HREF="node3.html">1.1 Related Links</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

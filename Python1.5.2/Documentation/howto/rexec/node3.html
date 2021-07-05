@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2. Frequently Asked Questions</TITLE>
+<META NAME="description" CONTENT="2. Frequently Asked Questions">
+<META NAME="keywords" CONTENT="rexec">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="rexec.css">
+<LINK REL="next" HREF="node4.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="up" HREF="rexec.html">
+<LINK REL="next" HREF="node4.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html53"
+ HREF="node4.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html50"
+ HREF="rexec.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html44"
+ HREF="node2.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Restricted Execution HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html52"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html54"
+ HREF="node4.html">3. Customizing The Restricted</A>
+<b>Up:</b> <A NAME="tex2html51"
+ HREF="rexec.html">Restricted Execution HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html45"
+ HREF="node2.html">1. Basic use of</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000300000000000000000">
+<SPAN CLASS="arabic">2</SPAN>. Frequently Asked Questions</A>
+</H1>
+
+<P>
+[I want more questions to be answered in this section;
+please send them to <tt>akuchling@acm.org</tt>.]
+
+<P>
+<i>How do I guard against denial-of-service attacks?  Or, how do I
+keep restricted code from consuming a lot of memory?</i>
+
+<P>
+Even if restricted code can't open sockets or write files, it can still
+cause problems by entering an infinite loop or consuming lots of memory;
+this is as easy as coding <tt>while 1: pass</tt> or <tt>'a' *
+12345678901</tt>.  Unfortunately, there's no way at present to prevent
+restricted code from doing this.  The Python process may therefore
+encounter a <tt>MemoryError</tt> exception, loop forever, or be killed by
+the operating system.  
+
+<P>
+One solution would be to perform <tt>os.fork()</tt> to get a child process
+running the interpreter.  The child could then use the <tt>resource</tt>
+module to set limits on the amount of memory, stack space, and CPU time
+it can consume, and run the restricted code.  In the meantime, the
+parent process can set a timeout and wait for the child to return its
+results; if the child takes too long, the parent can conclude that the
+restricted code looped forever, and kill the child process.
+
+<P>
+<i>If restricted code returns a class instance via <tt>r_eval()</tt>,
+can that class instance do nasty things if unrestricted code calls its
+methods?</i>
+
+<P>
+You might be worried about the handling of values returned by
+<tt>r_eval()</tt>.  For example, let's say your program does this:
+
+<P>
+<dl><dd><pre>
+value = r_env.r_eval( expression )
+print str(value)
+</pre></dl>
+
+<P>
+If <tt>value</tt> is a class instance, and has a <tt>__str__</tt> method,
+that method will get called by the <tt>str()</tt> function.  Is it
+possible for the restricted code to return a class instance where the
+<tt>__str__</tt> function does something nasty?  Does this provide a way
+for restricted code to smuggle out code that gets run without
+restrictions?
+
+<P>
+The answer is no.  If restricted code returns a class instance, or a
+function, then, despite being called by unrestricted code, those
+functions will always be executed in the restricted environment.  You
+can see why if you follow this little exercise.  Run the interpreter in
+interactive mode, and create a sample class with a single method.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; class C:
+....   def f(self): print "Hi!"
+....
+</pre></dl>
+
+<P>
+Now, look at the attributes of the unbound method <tt>C.f</tt>:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; dir(C.f)
+['__doc__', '__name__', 'im_class', 'im_func', 'im_self']
+</pre></dl>
+
+<P>
+<tt>im_func</tt> is the attribute we're interested in; it contains the
+actual function for the method.  Look at the function's attributes using
+the <tt>dir()</tt> built-in function, and then look at the
+<tt>func_globals</tt> attribute.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; dir(C.f.im_func)
+['__doc__', '__name__', 'func_code', 'func_defaults', 'func_doc', 
+ 'func_globals', 'func_name']
+&gt;&gt;&gt; C.f.im_func.func_globals
+{'__doc__': None, '__name__': '__main__', 
+ '__builtins__': &lt;module '__builtin__'&gt;, 
+ 'f': &lt;function f at 1201a68b0&gt;, 
+ 'C': &lt;class __main__.C at 1201b35e0&gt;, 
+ 'a': &lt;__main__.C instance at 1201a6b10&gt;}
+</pre></dl>
+
+<P>
+See how the function contains attributes for its <tt>__builtins__</tt>
+module?  This means that, wherever it goes, the function will always use
+the same <tt>__builtin__</tt> module, namely the one provided by the
+restricted environment.  
+
+<P>
+This means that the function's module scope is limited to that of the
+restricted environment; it has no way to access any variables or
+methods in the unrestricted environment that is calling into the
+restricted environment.  
+
+<P>
+<dl><dd><pre>
+r_env.r_exec('def f(): g()\n')
+f = r_env.r_eval('f')
+def g(): print "I'm unrestricted."
+</pre></dl>
+
+<P>
+If you execute the <tt>f()</tt> function in the unrestricted module, it
+will fail with a <tt>NameError</tt> exception, because <tt>f()</tt> doesn't
+have access to the unrestricted namespace.  To make this work, you'd
+must insert <tt>g</tt> into the restricted namespace.  Be careful when
+doing this, since <tt>g</tt> will be executed without restrictions; you
+have to be sure that <tt>g</tt> is a function that can't be used to do
+any damage.  (Or an instance with no methods that do anything
+dangerous.  Or a module containing no dangerous functions.  You get
+the idea.)  
+
+<P>
+<i>What happens if restricted code raises an exception?</i>
+
+<P>
+The <tt>rexec</tt> module doesn't do anything special for exceptions
+raised by restricted code; they'll be propagated up the call stack
+until a <tt>try...except</tt> statement is found that catches it.  If
+none is found, the interpreter will print a traceback and exit, which
+is its usual behaviour.  To prevent untrusted code from terminating
+the program, you should surround calls to <tt>r_exec()</tt>,
+<tt>r_execfile()</tt>, etc. with a <tt>try...except</tt> statement.
+
+<P>
+Python 1.5 introduced exceptions that could be classes; for more
+information about this new feature, consult
+<a href="http://www.python.org/doc/essays/stdexceptions.html"><font face=sans-serif>http://www.python.org/doc/essays/stdexceptions.html</font></a>.  
+Class-based exceptions present a problem; the separation between
+restricted and unrestricted namespaces may cause confusion.  Consider
+this example code, suggested by Jeff Rush.
+
+<P>
+t1.py:
+<dl><dd><pre>
+# t1.py
+
+from rexec import RHooks, RExec
+from t2 import MyException
+r= RExec( )
+
+print 'MyException class:', repr(MyException)
+try:
+    r.r_execfile('t3.py')
+except MyException, args:
+    print 'Got MyException in t3.py'
+except:
+    print 'Missed MyException "%s" in t3.py' % repr(MyException)
+</pre></dl>
+
+<P>
+t2.py
+<dl><dd><pre>
+#t2.py
+
+class MyException(Exception): pass
+def myfunc():
+    print 'Raising', `MyException`
+    raise MyException, 5
+
+print 't2 module initialized'
+</pre></dl>
+
+<P>
+t3.py:
+<dl><dd><pre>
+#t3.py
+import sys
+from t2 import MyException, myfunc
+myfunc()
+</pre></dl>
+
+<P>
+So, "<tt>t1.py</tt>" imports the <tt>MyException</tt> class from
+"<tt>t2.py</tt>", and then executes some restricted code that also imports
+"<tt>t2.py</tt>" and raises <tt>MyException</tt>.  However, because of the
+separation between restricted and unrestricted code, <tt>t2.py</tt> is
+actually imported twice, once in each mode.  Therefore two distinct
+class objects are created for <tt>MyException</tt>, and the
+<tt>except</tt> statement doesn't catch the exception because it seems
+to be of the wrong class.
+
+<P>
+The solution is to modify "<tt>t1.py</tt>" to pluck the class object out
+of the restricted environment, instead of importing it.  The following
+code will do the job, if added to <tt>t1.py</tt>:
+
+<P>
+<dl><dd><pre>
+module = r.add_module('__main__')
+mod_dict = module.__dict__
+MyException = mod_dict['MyException']
+</pre></dl>
+
+<P>
+The first two lines simply get the dictionary for the <tt>__main__</tt>
+module; this is a usage pattern discussed above.  The last line simply
+gets the value corresponding to 'MyException', which will be the class
+object for <tt>MyException</tt>.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html53"
+ HREF="node4.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html50"
+ HREF="rexec.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html44"
+ HREF="node2.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Restricted Execution HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html52"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html54"
+ HREF="node4.html">3. Customizing The Restricted</A>
+<b>Up:</b> <A NAME="tex2html51"
+ HREF="rexec.html">Restricted Execution HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html45"
+ HREF="node2.html">1. Basic use of</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

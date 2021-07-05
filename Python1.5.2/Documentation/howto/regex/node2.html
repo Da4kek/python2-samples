@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1. Introduction</TITLE>
+<META NAME="description" CONTENT="1. Introduction">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="next" HREF="node3.html">
+<LINK REL="previous" HREF="contents.html">
+<LINK REL="up" HREF="regex.html">
+<LINK REL="next" HREF="node3.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html75"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html72"
+ HREF="regex.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html66"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html74"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html76"
+ HREF="node3.html">2. Simple Patterns</A>
+<b>Up:</b> <A NAME="tex2html73"
+ HREF="regex.html">Regular Expression HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html67"
+ HREF="contents.html">Contents</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000200000000000000000">
+<SPAN CLASS="arabic">1</SPAN>. Introduction</A>
+</H1>
+
+<P>
+The <tt>re</tt> module was added in Python 1.5, and provides
+Perl-style regular expressions.  Earlier versions of Python provided
+the <tt>regex</tt> module, which provides Emacs-style expressions.
+Emacs-style is slightly less readable, and doesn't provide as many
+features, so there's not much reason to use the <tt>regex</tt> module
+when writing new code, though you should be aware of it in order to
+read older code.
+
+<P>
+Regular expressions (or REs) are essentially a tiny, highly
+specialized programming language embedded inside Python and made
+available through the <tt>re</tt> module.  Using this little language,
+you specify the rules for the set of possible strings that you want to
+match; this set might contain English sentences, or e-mail addresses,
+or TeX commands, or anything you like.  You can then ask questions
+such as ``Does this string match the pattern?'', or ``Is there a match
+for the pattern anywhere in this string?''.  You can also use REs to
+modify a string, or to split it apart in various ways.
+
+<P>
+Regular expression patterns are compiled into a series of bytecodes,
+which are then executed by a matching engine written in C.  For
+advanced use, it may be necessary to pay careful attention to how the
+engine will execute a given RE, and optimize the RE in order to
+produce bytecode that runs faster.  Optimization isn't really covered
+in this document, because it requires that you have a good
+understanding of the matching engine's internals.
+
+<P>
+The regular expression language is relatively small and restricted, so
+not all possible string processing tasks can be done using regular
+expressions.  There are also tasks that <i>can</i> be done with
+regular expressions, but the expressions turn out to be very
+complicated.  In these cases, you may be better off writing Python
+code to do the processing; while Python code will be slower than an
+elaborate regular expression, it will also probably be more understandable.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html75"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html72"
+ HREF="regex.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html66"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html74"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html76"
+ HREF="node3.html">2. Simple Patterns</A>
+<b>Up:</b> <A NAME="tex2html73"
+ HREF="regex.html">Regular Expression HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html67"
+ HREF="contents.html">Contents</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

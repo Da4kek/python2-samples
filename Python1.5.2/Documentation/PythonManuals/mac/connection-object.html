@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4.1 connection object</TITLE>
+<META NAME="description" CONTENT="4.1 connection object">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="previous" HREF="module-ctb.html">
+<LINK REL="up" HREF="module-ctb.html">
+<LINK REL="next" HREF="module-macconsole.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html198"
+ HREF="module-macconsole.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html194"
+ HREF="module-ctb.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html190"
+ HREF="module-ctb.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html196"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html197"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html199"
+ HREF="module-macconsole.html">5. macconsole  </A>
+<b>Up:</b> <A NAME="tex2html195"
+ HREF="module-ctb.html">4. ctb  </A>
+<b>Previous:</b> <A NAME="tex2html191"
+ HREF="module-ctb.html">4. ctb  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION002410000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> connection object
+</H2>
+
+<P>
+For all connection methods that take a <i>timeout</i> argument, a value
+of <tt>-1</tt> is indefinite, meaning that the command runs to completion.
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>callback</tt></a></b>
+<dd>
+If this member is set to a value other than <tt>None</tt> it should point
+to a function accepting a single argument (the connection
+object). This will make all connection object methods work
+asynchronously, with the callback routine being called upon
+completion.
+
+<P>
+<i>Note:</i> for reasons beyond my understanding the callback routine
+is currently never called. You are advised against using asynchronous
+calls for the time being.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-217"><tt>Open</tt></a></b> (<var>timeout</var>)
+<dd>
+Open an outgoing connection, waiting at most <i>timeout</i> seconds for
+the connection to be established.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-222"><tt>Listen</tt></a></b> (<var>timeout</var>)
+<dd>
+Wait for an incoming connection. Stop waiting after <i>timeout</i>
+seconds. This call is only meaningful to some tools.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-227"><tt>accept</tt></a></b> (<var>yesno</var>)
+<dd>
+Accept (when <i>yesno</i> is non-zero) or reject an incoming call after
+<tt>Listen()</tt> returned.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-233"><tt>Close</tt></a></b> (<var>timeout, now</var>)
+<dd>
+Close a connection. When <i>now</i> is zero, the close is orderly
+(i.e. outstanding output is flushed, etc.) with a timeout of
+<i>timeout</i> seconds. When <i>now</i> is non-zero the close is
+immediate, discarding output.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-240"><tt>Read</tt></a></b> (<var>len, chan, timeout</var>)
+<dd>
+Read <i>len</i> bytes, or until <i>timeout</i> seconds have passed, from 
+the channel <i>chan</i> (which is one of <tt>cmData</tt>,
+<tt>cmCntl</tt> or <tt>cmAttn</tt>). Return a 2-tuple: the data
+read and the end-of-message flag, <tt>cmFlagsEOM</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-251"><tt>Write</tt></a></b> (<var>buf, chan, timeout, eom</var>)
+<dd>
+Write <i>buf</i> to channel <i>chan</i>, aborting after <i>timeout</i>
+seconds. When <i>eom</i> has the value <tt>cmFlagsEOM</tt>, an
+end-of-message indicator will be written after the data (if this
+concept has a meaning for this communication tool). The method returns
+the number of bytes written.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-260"><tt>Status</tt></a></b> ()
+<dd>
+Return connection status as the 2-tuple <tt>(<i>sizes</i>,
+<i>flags</i>)</tt>. <i>sizes</i> is a 6-tuple giving the actual buffer sizes used
+(see <tt>CMNew()</tt>), <i>flags</i> is a set of bits describing the state
+of the connection.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-269"><tt>GetConfig</tt></a></b> ()
+<dd>
+Return the configuration string of the communication tool. These
+configuration strings are tool-dependent, but usually easily parsed
+and modified.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-273"><tt>SetConfig</tt></a></b> (<var>str</var>)
+<dd>
+Set the configuration string for the tool. The strings are parsed
+left-to-right, with later values taking precedence. This means
+individual configuration parameters can be modified by simply appending
+something like <tt>'baud 4800'</tt> to the end of the string returned by
+<tt>GetConfig()</tt> and passing that to this method. The method returns
+the number of characters actually parsed by the tool before it
+encountered an error (or completed successfully).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-279"><tt>Choose</tt></a></b> ()
+<dd>
+Present the user with a dialog to choose a communication tool and
+configure it. If there is an outstanding connection some choices (like
+selecting a different tool) may cause the connection to be
+aborted. The return value (one of the <tt>choose*</tt> constants) will
+indicate this.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-284"><tt>Idle</tt></a></b> ()
+<dd>
+Give the tool a chance to use the processor. You should call this
+method regularly.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-288"><tt>Abort</tt></a></b> ()
+<dd>
+Abort an outstanding asynchronous <tt>Open()</tt> or <tt>Listen()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-294"><tt>Reset</tt></a></b> ()
+<dd>
+Reset a connection. Exact meaning depends on the tool.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-298"><tt>Break</tt></a></b> (<var>length</var>)
+<dd>
+Send a break. Whether this means anything, what it means and
+interpretation of the <i>length</i> parameter depends on the tool in
+use.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html198"
+ HREF="module-macconsole.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html194"
+ HREF="module-ctb.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html190"
+ HREF="module-ctb.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html196"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html197"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html199"
+ HREF="module-macconsole.html">5. macconsole  </A>
+<b>Up:</b> <A NAME="tex2html195"
+ HREF="module-ctb.html">4. ctb  </A>
+<b>Previous:</b> <A NAME="tex2html191"
+ HREF="module-ctb.html">4. ctb  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

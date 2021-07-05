@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.7.1 MultiFile Objects </TITLE>
+<META NAME="description" CONTENT="12.7.1 MultiFile Objects ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="multifile-example.html">
+<LINK REL="previous" HREF="module-multifile.html">
+<LINK REL="up" HREF="module-multifile.html">
+<LINK REL="next" HREF="multifile-example.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3028"
+ HREF="multifile-example.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3024"
+ HREF="module-multifile.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3018"
+ HREF="module-multifile.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3026"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3027"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3029"
+ HREF="multifile-example.html">12.7.2 MultiFile Example</A>
+<b>Up:</b> <A NAME="tex2html3025"
+ HREF="module-multifile.html">12.7 multifile  </A>
+<b>Previous:</b> <A NAME="tex2html3019"
+ HREF="module-multifile.html">12.7 multifile  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0014710000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> MultiFile Objects 
+</H2>
+
+<P>
+A <tt>MultiFile</tt> instance has the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-19524"><tt>push</tt></a></b> (<var>str</var>)
+<dd>
+Push a boundary string.  When an appropriately decorated version of
+this boundary is found as an input line, it will be interpreted as a
+section-divider or end-marker.  All subsequent
+reads will return the empty string to indicate end-of-file, until a
+call to <tt>pop()</tt> removes the boundary a or <tt>next()</tt> call
+reenables it.
+
+<P>
+It is possible to push more than one boundary.  Encountering the
+most-recently-pushed boundary will return EOF; encountering any other
+boundary will raise an error.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19530"><tt>readline</tt></a></b> (<var>str</var>)
+<dd>
+Read a line.  If the line is data (not a section-divider or end-marker
+or real EOF) return it.  If the line matches the most-recently-stacked
+boundary, return <tt>''</tt> and set <tt>self.last</tt> to 1 or 0 according as
+the match is or is not an end-marker.  If the line matches any other
+stacked boundary, raise an error.  On encountering end-of-file on the
+underlying stream object, the method raises <tt>Error</tt> unless
+all boundaries have been popped.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19537"><tt>readlines</tt></a></b> (<var>str</var>)
+<dd>
+Return all lines remaining in this part as a list of strings.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19541"><tt>read</tt></a></b> ()
+<dd>
+Read all lines, up to the next section.  Return them as a single
+(multiline) string.  Note that this doesn't take a size argument!
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19545"><tt>next</tt></a></b> ()
+<dd>
+Skip lines to the next section (that is, read lines until a
+section-divider or end-marker has been consumed).  Return true if
+there is such a section, false if an end-marker is seen.  Re-enable
+the most-recently-pushed boundary.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19549"><tt>pop</tt></a></b> ()
+<dd>
+Pop a section boundary.  This boundary will no longer be interpreted
+as EOF.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19553"><tt>seek</tt></a></b> (<var>pos</var><big>[</big><var>, whence</var><big>]</big>)
+<dd>
+Seek.  Seek indices are relative to the start of the current section.
+The <i>pos</i> and <i>whence</i> arguments are interpreted as for a file
+seek.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19559"><tt>tell</tt></a></b> ()
+<dd>
+Return the file position relative to the start of the current section.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19563"><tt>is_data</tt></a></b> (<var>str</var>)
+<dd>
+Return true if <i>str</i> is data and false if it might be a section
+boundary.  As written, it tests for a prefix other than <tt>'-'</tt> at
+start of line (which all MIME boundaries have) but it is declared so
+it can be overridden in derived classes.
+
+<P>
+Note that this test is used intended as a fast guard for the real
+boundary tests; if it always returns false it will merely slow
+processing, not cause it to fail.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19569"><tt>section_divider</tt></a></b> (<var>str</var>)
+<dd>
+Turn a boundary into a section-divider line.  By default, this
+method prepends <tt>'-'</tt> (which MIME section boundaries have) but
+it is declared so it can be overridden in derived classes.  This
+method need not append LF or CR-LF, as comparison with the result
+ignores trailing whitespace. 
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19574"><tt>end_marker</tt></a></b> (<var>str</var>)
+<dd>
+Turn a boundary string into an end-marker line.  By default, this
+method prepends <tt>'-'</tt> and appends <tt>'-'</tt> (like a
+MIME-multipart end-of-message marker) but it is declared so it can be
+be overridden in derived classes.  This method need not append LF or
+CR-LF, as comparison with the result ignores trailing whitespace.
+</dl>
+
+<P>
+Finally, <tt>MultiFile</tt> instances have two public instance variables:
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>level</tt></a></b>
+<dd>
+Nesting depth of the current part.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>last</tt></a></b>
+<dd>
+True if the last end-of-file was for an end-of-message marker. 
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3028"
+ HREF="multifile-example.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3024"
+ HREF="module-multifile.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3018"
+ HREF="module-multifile.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3026"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3027"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3029"
+ HREF="multifile-example.html">12.7.2 MultiFile Example</A>
+<b>Up:</b> <A NAME="tex2html3025"
+ HREF="module-multifile.html">12.7 multifile  </A>
+<b>Previous:</b> <A NAME="tex2html3019"
+ HREF="module-multifile.html">12.7 multifile  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

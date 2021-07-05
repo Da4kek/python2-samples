@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.1.2 Using the cgi module</TITLE>
+<META NAME="description" CONTENT="11.1.2 Using the cgi module">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="node166.html">
+<LINK REL="previous" HREF="cgi-intro.html">
+<LINK REL="up" HREF="module-cgi.html">
+<LINK REL="next" HREF="node166.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2503"
+ HREF="node166.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2499"
+ HREF="module-cgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2493"
+ HREF="cgi-intro.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2501"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2502"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2504"
+ HREF="node166.html">11.1.3 Old classes</A>
+<b>Up:</b> <A NAME="tex2html2500"
+ HREF="module-cgi.html">11.1 cgi  </A>
+<b>Previous:</b> <A NAME="tex2html2494"
+ HREF="cgi-intro.html">11.1.1 Introduction</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0013120000000000000000">
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Using the cgi module</A>
+</H2>
+
+<P>
+Begin by writing "<tt>import cgi</tt>".  Do not use "<tt>from cgi import
+*</tt>" -- the module defines all sorts of names for its own use or for
+backward compatibility that you don't want in your namespace.
+
+<P>
+It's best to use the <tt>FieldStorage</tt> class.  The other classes
+defined in this module are provided mostly for backward compatibility.
+Instantiate it exactly once, without arguments.  This reads the form
+contents from standard input or the environment (depending on the
+value of various environment variables set according to the CGI
+standard).  Since it may consume standard input, it should be
+instantiated only once.
+
+<P>
+The <tt>FieldStorage</tt> instance can be accessed as if it were a Python 
+dictionary.  For instance, the following code (which assumes that the 
+<tt>content-type</tt> header and blank line have already been printed)
+checks that the fields <tt>name</tt> and <tt>addr</tt> are both set to a
+non-empty string:
+
+<P>
+<dl><dd><pre>
+form = cgi.FieldStorage()
+form_ok = 0
+if form.has_key("name") and form.has_key("addr"):
+    if form["name"].value != "" and form["addr"].value != "":
+        form_ok = 1
+if not form_ok:
+    print "&lt;H1&gt;Error&lt;/H1&gt;"
+    print "Please fill in the name and addr fields."
+    return
+...further form processing here...
+</pre></dl>
+
+<P>
+Here the fields, accessed through "<tt>form[<i>key</i>]</tt>", are
+themselves instances of <tt>FieldStorage</tt> (or
+<tt>MiniFieldStorage</tt>, depending on the form encoding).
+
+<P>
+If the submitted form data contains more than one field with the same
+name, the object retrieved by "<tt>form[<i>key</i>]</tt>" is not a
+<tt>FieldStorage</tt> or <tt>MiniFieldStorage</tt>
+instance but a list of such instances.  If you expect this possibility
+(i.e., when your HTML form comtains multiple fields with the same
+name), use the <tt>type()</tt> function to determine whether you
+have a single instance or a list of instances.  For example, here's
+code that concatenates any number of username fields, separated by
+commas:
+
+<P>
+<dl><dd><pre>
+username = form["username"]
+if type(username) is type([]):
+    # Multiple username fields specified
+    usernames = ""
+    for item in username:
+        if usernames:
+            # Next item -- insert comma
+            usernames = usernames + "," + item.value
+        else:
+            # First item -- don't insert comma
+            usernames = item.value
+else:
+    # Single username field specified
+    usernames = username.value
+</pre></dl>
+
+<P>
+If a field represents an uploaded file, the value attribute reads the
+entire file in memory as a string.  This may not be what you want.
+You can test for an uploaded file by testing either the filename
+attribute or the file attribute.  You can then read the data at
+leasure from the file attribute:
+
+<P>
+<dl><dd><pre>
+fileitem = form["userfile"]
+if fileitem.file:
+    # It's an uploaded file; count lines
+    linecount = 0
+    while 1:
+        line = fileitem.file.readline()
+        if not line: break
+        linecount = linecount + 1
+</pre></dl>
+
+<P>
+The file upload draft standard entertains the possibility of uploading
+multiple files from one field (using a recursive
+<font face=sans-serif>multipart/*</font> encoding).  When this occurs, the item will be
+a dictionary-like <tt>FieldStorage</tt> item.  This can be determined
+by testing its <tt>type</tt> attribute, which should be
+<font face=sans-serif>multipart/form-data</font> (or perhaps another MIME type matching
+<font face=sans-serif>multipart/*</font>).  It this case, it can be iterated over
+recursively just like the top-level form object.
+
+<P>
+When a form is submitted in the ``old'' format (as the query string or
+as a single data part of type
+<font face=sans-serif>application/x-www-form-urlencoded</font>), the items will actually
+be instances of the class <tt>MiniFieldStorage</tt>.  In this case, the
+list, file and filename attributes are always <tt>None</tt>.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2503"
+ HREF="node166.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2499"
+ HREF="module-cgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2493"
+ HREF="cgi-intro.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2501"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2502"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2504"
+ HREF="node166.html">11.1.3 Old classes</A>
+<b>Up:</b> <A NAME="tex2html2500"
+ HREF="module-cgi.html">11.1 cgi  </A>
+<b>Previous:</b> <A NAME="tex2html2494"
+ HREF="cgi-intro.html">11.1.1 Introduction</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

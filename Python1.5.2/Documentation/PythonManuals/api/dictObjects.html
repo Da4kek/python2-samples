@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.3.1 Dictionary Objects</TITLE>
+<META NAME="description" CONTENT="7.3.1 Dictionary Objects">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="previous" HREF="mapObjects.html">
+<LINK REL="up" HREF="mapObjects.html">
+<LINK REL="next" HREF="numericObjects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html512"
+ HREF="numericObjects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html508"
+ HREF="mapObjects.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html504"
+ HREF="mapObjects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html510"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html511"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html513"
+ HREF="numericObjects.html">7.4 Numeric Objects</A>
+<b>Up:</b> <A NAME="tex2html509"
+ HREF="mapObjects.html">7.3 Mapping Objects</A>
+<b>Previous:</b> <A NAME="tex2html505"
+ HREF="mapObjects.html">7.3 Mapping Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION009310000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Dictionary Objects
+</H2>
+
+<P>
+<dl><dt><b><a name="l2h-1848"><tt>PyDictObject</tt></a></b>
+<dd>
+This subtype of <tt>PyObject</tt> represents a Python dictionary object.
+</dl>
+
+<P>
+<dl><dt>PyTypeObject <b><a name="l2h-1853"><tt>PyDict_Type</tt></a></b>
+<dd>
+This instance of <tt>PyTypeObject</tt> represents the Python dictionary type.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1858"><tt>PyDict_Check</tt></a></b>(<var>PyObject *p</var>)
+<dd>
+Returns true if its argument is a <tt>PyDictObject</tt>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1864"><tt>PyDict_New</tt></a></b>()
+<dd>
+Returns a new empty dictionary.
+</dl>
+
+<P>
+<dl><dt>void <b><a name="l2h-1869"><tt>PyDict_Clear</tt></a></b>(<var>PyDictObject *p</var>)
+<dd>
+Empties an existing dictionary of all key/value pairs.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1874"><tt>PyDict_SetItem</tt></a></b>(<var>PyDictObject *p,
+            PyObject *key,
+            PyObject *val</var>)
+<dd>
+Inserts <i>value</i> into the dictionary with a key of <i>key</i>.  Both
+<i>key</i> and <i>value</i> should be PyObjects, and <i>key</i> should be
+hashable.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1884"><tt>PyDict_SetItemString</tt></a></b>(<var>PyDictObject *p,
+            char *key,
+            PyObject *val</var>)
+<dd>
+Inserts <i>value</i> into the dictionary using <i>key</i>
+as a key. <i>key</i> should be a <tt>char *</tt>.  The key object is
+created using <tt>PyString_FromString(<i>key</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1894"><tt>PyDict_DelItem</tt></a></b>(<var>PyDictObject *p, PyObject *key</var>)
+<dd>
+Removes the entry in dictionary <i>p</i> with key <i>key</i>.
+<i>key</i> is a PyObject.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1902"><tt>PyDict_DelItemString</tt></a></b>(<var>PyDictObject *p, char *key</var>)
+<dd>
+Removes the entry in dictionary <i>p</i> which has a key
+specified by the <tt>char *</tt><i>key</i>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1910"><tt>PyDict_GetItem</tt></a></b>(<var>PyDictObject *p, PyObject *key</var>)
+<dd>
+Returns the object from dictionary <i>p</i> which has a key
+<i>key</i>.  Returns <tt>NULL</tt> if the key <i>key</i> is not present, but
+without (!) setting an exception.  <b>Note:</b>  this function
+returns a ``borrowed'' reference.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1920"><tt>PyDict_GetItemString</tt></a></b>(<var>PyDictObject *p, char *key</var>)
+<dd>
+This is the same as <tt>PyDict_GetItem()</tt>, but <i>key</i> is
+specified as a <tt>char *</tt>, rather than a <tt>PyObject *</tt>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1929"><tt>PyDict_Items</tt></a></b>(<var>PyDictObject *p</var>)
+<dd>
+Returns a <tt>PyListObject</tt> containing all the items 
+from the dictionary, as in the dictinoary method <tt>items()</tt> (see
+the <i>Python Library Reference</i>).
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1937"><tt>PyDict_Keys</tt></a></b>(<var>PyDictObject *p</var>)
+<dd>
+Returns a <tt>PyListObject</tt> containing all the keys 
+from the dictionary, as in the dictionary method <tt>keys()</tt> (see the
+<i>Python Library Reference</i>).
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1945"><tt>PyDict_Values</tt></a></b>(<var>PyDictObject *p</var>)
+<dd>
+Returns a <tt>PyListObject</tt> containing all the values 
+from the dictionary <i>p</i>, as in the dictionary method
+<tt>values()</tt> (see the <i>Python Library Reference</i>).
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1954"><tt>PyDict_Size</tt></a></b>(<var>PyDictObject *p</var>)
+<dd>
+Returns the number of items in the dictionary.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1959"><tt>PyDict_Next</tt></a></b>(<var>PyDictObject *p,
+            int ppos,
+            PyObject **pkey,
+            PyObject **pvalue</var>)
+<dd>
+
+<P>
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html512"
+ HREF="numericObjects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html508"
+ HREF="mapObjects.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html504"
+ HREF="mapObjects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html510"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html511"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html513"
+ HREF="numericObjects.html">7.4 Numeric Objects</A>
+<b>Up:</b> <A NAME="tex2html509"
+ HREF="mapObjects.html">7.3 Mapping Objects</A>
+<b>Previous:</b> <A NAME="tex2html505"
+ HREF="mapObjects.html">7.3 Mapping Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

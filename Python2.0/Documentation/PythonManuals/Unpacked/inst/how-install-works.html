@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>2.4 How installation works</title>
+<META NAME="description" CONTENT="2.4 How installation works">
+<META NAME="keywords" CONTENT="inst">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="inst.css">
+<LINK REL="previous" href="how-build-works.html">
+<LINK REL="up" href="standard-install.html">
+<LINK REL="next" href="building-ext.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="how-build-works.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="standard-install.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="building-ext.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="how-build-works.html">2.3 How building works</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="standard-install.html">2 Standard Build and</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="building-ext.html">3 Building Extensions: Tips</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+2.4 How installation works
+</H2>
+
+<P>
+After the <code>build</code> command runs (whether you run it explicitly,
+or the <code>install</code> command does it for you), the work of the
+<code>install</code> command is relatively simple: all it has to do is copy
+everything under <span class="file">build/lib</span> (or <span class="file">build/lib.<font face="sans-serif"></i>plat</i></font></span>)
+to your chosen installation directory.
+
+<P>
+If you don't choose an installation directory--i.e., if you just run
+<code>setup.py install</code>--then the <code>install</code> command installs to
+the standard location for third-party Python modules.  This location
+varies by platform and by how you built/installed Python itself.  On
+Unix and Mac OS, it also depends on whether the module distribution
+being installed is pure Python or contains extensions (``non-pure''):
+<table border align="center" style="border-collapse: collapse">
+  <thead>
+    <tr>
+      <th align="left"><b>Platform</b>&nbsp;</th>
+      <th align="left"><b>Standard installation location</b>&nbsp;</th>
+      <th align="left"><b>Default value</b>&nbsp;</th>
+      <th align="center"><b>Notes</b>&nbsp;</th>
+    </thead>
+  <tbody valign='baseline'>
+    <tr><td align="left" valign="baseline">Unix (pure)</td>
+        <td align="left"><span class="file"><font face="sans-serif"></i>prefix</i></font>/lib/python2.0/site-packages</span></td>
+        <td align="left"><span class="file">/usr/local/lib/python2.0/site-packages</span></td>
+        <td align="center">(1)</td>
+    <tr><td align="left" valign="baseline">Unix (non-pure)</td>
+        <td align="left"><span class="file"><font face="sans-serif"></i>exec-prefix</i></font>/lib/python2.0/site-packages</span></td>
+        <td align="left"><span class="file">/usr/local/lib/python2.0/site-packages</span></td>
+        <td align="center">(1)</td>
+    <tr><td align="left" valign="baseline">Windows</td>
+        <td align="left"><span class="file"><font face="sans-serif"></i>prefix</i></font></span></td>
+        <td align="left"><span class="file">C:&#92;Python</span></td>
+        <td align="center">(2)</td>
+    <tr><td align="left" valign="baseline">Mac&nbsp;OS (pure)</td>
+        <td align="left"><span class="file"><font face="sans-serif"></i>prefix</i></font>:Lib</span></td>
+        <td align="left"><span class="file">Python:Lib</span>  <b>** ??? **</b></td>
+        <td align="center">&nbsp;</td>
+    <tr><td align="left" valign="baseline">Mac&nbsp;OS (non-pure)</td>
+        <td align="left"><font face="sans-serif"></i>prefix</i></font>:Mac:PlugIns</td>
+        <td align="left"><span class="file">Python:Mac:PlugIns</span><b>** ??? **</b></td>
+        <td align="center">&nbsp;</td></tbody>
+</table>
+
+<P>
+Notes:
+<DL>
+<DT><STRONG>(1)</STRONG></DT>
+<DD>Most Linux distributions include Python as a standard part of
+  the system, so <font face="sans-serif"></i>prefix</i></font> and <font face="sans-serif"></i>exec-prefix</i></font> are usually
+  both <span class="file">/usr</span> on Linux.  If you build Python yourself on Linux (or
+  any Unix-like system), the default <font face="sans-serif"></i>prefix</i></font> and
+  <font face="sans-serif"></i>exec-prefix</i></font> are <span class="file">/usr/local</span>.
+</DD>
+<DT><STRONG>(2)</STRONG></DT>
+<DD>The default installation directory on Windows was
+  <span class="file">C:&#92;Program Files&#92;Python</span> under
+  Python 1.6a1, 1.5.2, and earlier.
+</DD>
+</DL>
+
+<P>
+<font face="sans-serif"></i>prefix</i></font> and <font face="sans-serif"></i>exec-prefix</i></font> stand for the directories
+that Python is installed to, and where it finds its libraries at
+run-time.  They are always the same under Windows and Mac&nbsp;OS, and very
+often the same under Unix.  You can find out what your Python
+installation uses for <font face="sans-serif"></i>prefix</i></font> and <font face="sans-serif"></i>exec-prefix</i></font> by
+running Python in interactive mode and typing a few simple commands.
+Under Unix, just type <code>python</code> at the shell prompt; under Windows,
+run ``Python 2.0 (interpreter)'' <b>** right? **</b>; under Mac&nbsp;OS, <b>** ??? **</b>.
+Once the interpreter is started, you type Python code at the
+"<tt class="samp">&#187;&gt; </tt>" prompt.  For example, on my Linux system, I type the three
+Python statements shown below, and get the output as shown, to find
+out my <font face="sans-serif"></i>prefix</i></font> and <font face="sans-serif"></i>exec-prefix</i></font>:
+
+<P>
+<dl><dd><pre class="verbatim">
+Python 1.5.2 (#1, Apr 18 1999, 16:03:16)  [GCC pgcc-2.91.60 19981201 (egcs-1.1.1  on linux2
+Copyright 1991-1995 Stichting Mathematisch Centrum, Amsterdam
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.prefix
+'/usr'
+&gt;&gt;&gt; sys.exec_prefix
+'/usr'
+</pre></dl>
+
+<P>
+If you don't want to install to the standard location, or if you don't
+have permission to write there, then you need to read about alternate
+installations in the next section.
+
+<P>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="how-build-works.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="standard-install.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="building-ext.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="how-build-works.html">2.3 How building works</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="standard-install.html">2 Standard Build and</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="building-ext.html">3 Building Extensions: Tips</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

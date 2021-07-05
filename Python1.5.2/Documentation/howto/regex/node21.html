@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.1 Know About the string Module</TITLE>
+<META NAME="description" CONTENT="6.1 Know About the string Module">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="next" HREF="node22.html">
+<LINK REL="previous" HREF="node20.html">
+<LINK REL="up" HREF="node20.html">
+<LINK REL="next" HREF="node22.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html293"
+ HREF="node22.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html290"
+ HREF="node20.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html284"
+ HREF="node20.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html292"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html294"
+ HREF="node22.html">6.2 match() versus search()</A>
+<b>Up:</b> <A NAME="tex2html291"
+ HREF="node20.html">6. Common Problems</A>
+<b>Previous:</b> <A NAME="tex2html285"
+ HREF="node20.html">6. Common Problems</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000710000000000000000">
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Know About the string Module</A>
+</H2>
+
+<P>
+Sometimes, using the <tt>re</tt> module at all is a mistake.  If
+you're matching a fixed string, or a single character class, 
+and you're not using any <tt>re</tt> features such as the
+<tt>IGNORECASE</tt> flag, then the full power of regular expressions
+may not be required.  The <tt>string</tt> module has several functions
+for performing operations with fixed strings and it's usually much
+faster, because the implementation is a single small C loop that's
+been optimized for the purpose, instead of the large, more generalized
+regular expression engine.
+
+<P>
+One example might be replacing a single fixed string with another
+one; for example, you might replace "<tt>word</tt>"
+with "<tt>deed</tt>".  <tt>re.sub()</tt> seems like the function to use for
+this, but consider <tt>string.replace()</tt>.  Note that 
+<tt>string.replace()</tt> will also replace "<tt>word</tt>" inside
+words, turning "<tt>swordfish</tt>" into "<tt>sdeedfish</tt>", but the na&#239;ve RE <tt>word</tt> would have done that, too.  (To avoid performing
+the substitution on parts of words, the pattern would have to be
+<tt>&#92;bword&#92;b</tt>, in order to require that "<tt>word</tt>" have a
+word boundary on either side.  This takes the job beyond the
+<tt>string</tt> module's abilities.)
+
+<P>
+Another common task is deleting every occurrence of a single character
+from a string, or replacing it with another single character.  You
+might do this with something like <tt>re.sub('&#92;n', ' ', S)</tt>, but
+<tt>string.translate()</tt> is capable of doing both these tasks,
+and will be much faster that any regular expression operation can ever
+be.
+
+<P>
+In short, before turning to the <tt>re</tt> module, consider whether
+your problem can be solved with the faster and simpler <tt>string</tt>
+module.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html293"
+ HREF="node22.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html290"
+ HREF="node20.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html284"
+ HREF="node20.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html292"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html294"
+ HREF="node22.html">6.2 match() versus search()</A>
+<b>Up:</b> <A NAME="tex2html291"
+ HREF="node20.html">6. Common Problems</A>
+<b>Previous:</b> <A NAME="tex2html285"
+ HREF="node20.html">6. Common Problems</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

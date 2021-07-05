@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1.1 The Python curses module</TITLE>
+<META NAME="description" CONTENT="1.1 The Python curses module">
+<META NAME="keywords" CONTENT="curses">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="curses.css">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node4.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html54"
+ HREF="node4.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html51"
+ HREF="node2.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html47"
+ HREF="node2.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Curses Programming with Python</b></td>
+<td align=right width="20%"><A NAME="tex2html53"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html55"
+ HREF="node4.html">2. Starting and ending</A>
+<b>Up:</b> <A NAME="tex2html52"
+ HREF="node2.html">1. What is curses?</A>
+<b>Previous:</b> <A NAME="tex2html48"
+ HREF="node2.html">1. What is curses?</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000210000000000000000">
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> The Python curses module</A>
+</H2>
+
+<P>
+The original Python curses module was written by Lance Ellinghouse,
+and is included with the Python source distribution, version 1.5 or
+earlier.  It supports all the basic operations of displaying text, but
+doesn't support System V features such as colour.  Later, Oliver
+Andrich enhanced this module by adding support for many of the missing
+features.
+
+<P>
+Both modules are a fairly simple wrapper over the C functions provided
+by curses; if you're already familiar with curses programming in C,
+it's really easy to transfer that knowledge to Python.  The biggest
+difference is that the Python interface makes things simpler, by
+merging different C functions such as <tt>addstr</tt>,
+<tt>mvaddstr</tt>, <tt>mvwaddstr</tt>, into a single
+<tt>addstr()</tt> method.  You'll see this covered in more detail
+later.
+
+<P>
+This HOWTO is simply an introduction to writing text-mode programs
+with curses and Python, and doesn't even attempt to be a complete
+guide to the curses API.  It will, however, give you the basic ideas.
+This documentation doesn't even cover every single curses function
+available in the Python modules; that would make this a very long
+HOWTO, and would duplicate much of the information in the curses
+documentation.  You should consult the documentation for your curses
+implementation to learn about its quirks.
+
+<P>
+To install the regular curses extension, you only have to uncomment
+the corresponding line of Modules/Setup in your Python source tree,
+and recompile.  You may have to tweak the required libraries, as
+described in the comment:
+
+<P>
+<dl><dd><pre>
+# Lance's curses module.  This requires the System V version of
+# curses, sometimes known as ncurses (e.g. on Linux, link with
+# -lncurses instead of -lcurses; on SunOS 4.1.3, insert
+# -I/usr/5include -L/usr/5lib before -lcurses).
+
+curses cursesmodule.c -lcurses -ltermcap
+</pre></dl>
+
+<P>
+To install the newer module, fetch the most recent version from
+<a href="http://andrich.net/python/selfmade.html#ncursesmodule"><font face=sans-serif>http://andrich.net/python/selfmade.html#ncursesmodule</font></a>, unpack
+it, and simply run <tt>make</tt>.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html54"
+ HREF="node4.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html51"
+ HREF="node2.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html47"
+ HREF="node2.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Curses Programming with Python</b></td>
+<td align=right width="20%"><A NAME="tex2html53"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html55"
+ HREF="node4.html">2. Starting and ending</A>
+<b>Up:</b> <A NAME="tex2html52"
+ HREF="node2.html">1. What is curses?</A>
+<b>Previous:</b> <A NAME="tex2html48"
+ HREF="node2.html">1. What is curses?</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

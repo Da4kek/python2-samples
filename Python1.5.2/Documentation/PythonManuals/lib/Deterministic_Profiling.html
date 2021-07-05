@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>10.4 What Is Deterministic Profiling?</TITLE>
+<META NAME="description" CONTENT="10.4 What Is Deterministic Profiling?">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-profile.html">
+<LINK REL="previous" HREF="node153.html">
+<LINK REL="up" HREF="profile.html">
+<LINK REL="next" HREF="module-profile.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2365"
+ HREF="module-profile.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2361"
+ HREF="profile.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2355"
+ HREF="node153.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2363"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2364"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2366"
+ HREF="module-profile.html">10.5 Reference Manual</A>
+<b>Up:</b> <A NAME="tex2html2362"
+ HREF="profile.html">10. The Python Profiler</A>
+<b>Previous:</b> <A NAME="tex2html2356"
+ HREF="node153.html">10.3 Instant Users Manual</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0012400000000000000000">
+<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">4</SPAN> What Is Deterministic Profiling?</A>
+</H1>
+
+<P>
+<i>Deterministic profiling</i> is meant to reflect the fact that all
+<i>function call</i>, <i>function return</i>, and <i>exception</i> events
+are monitored, and precise timings are made for the intervals between
+these events (during which time the user's code is executing).  In
+contrast, <i>statistical profiling</i> (which is not done by this
+module) randomly samples the effective instruction pointer, and
+deduces where time is being spent.  The latter technique traditionally
+involves less overhead (as the code does not need to be instrumented),
+but provides only relative indications of where time is being spent.
+
+<P>
+In Python, since there is an interpreter active during execution, the
+presence of instrumented code is not required to do deterministic
+profiling.  Python automatically provides a <i>hook</i> (optional
+callback) for each event.  In addition, the interpreted nature of
+Python tends to add so much overhead to execution, that deterministic
+profiling tends to only add small processing overhead in typical
+applications.  The result is that deterministic profiling is not that
+expensive, yet provides extensive run time statistics about the
+execution of a Python program.
+
+<P>
+Call count statistics can be used to identify bugs in code (surprising
+counts), and to identify possible inline-expansion points (high call
+counts).  Internal time statistics can be used to identify ``hot
+loops'' that should be carefully optimized.  Cumulative time
+statistics should be used to identify high level errors in the
+selection of algorithms.  Note that the unusual handling of cumulative
+times in this profiler allows statistics for recursive implementations
+of algorithms to be directly compared to iterative implementations.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2365"
+ HREF="module-profile.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2361"
+ HREF="profile.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2355"
+ HREF="node153.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2363"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2364"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2366"
+ HREF="module-profile.html">10.5 Reference Manual</A>
+<b>Up:</b> <A NAME="tex2html2362"
+ HREF="profile.html">10. The Python Profiler</A>
+<b>Previous:</b> <A NAME="tex2html2356"
+ HREF="node153.html">10.3 Instant Users Manual</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

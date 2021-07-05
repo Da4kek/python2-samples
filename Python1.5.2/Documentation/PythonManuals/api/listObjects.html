@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.2.3 List Objects</TITLE>
+<META NAME="description" CONTENT="7.2.3 List Objects">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="previous" HREF="tupleObjects.html">
+<LINK REL="up" HREF="sequenceObjects.html">
+<LINK REL="next" HREF="mapObjects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html489"
+ HREF="mapObjects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html485"
+ HREF="sequenceObjects.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html481"
+ HREF="tupleObjects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html487"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html488"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html490"
+ HREF="mapObjects.html">7.3 Mapping Objects</A>
+<b>Up:</b> <A NAME="tex2html486"
+ HREF="sequenceObjects.html">7.2 Sequence Objects</A>
+<b>Previous:</b> <A NAME="tex2html482"
+ HREF="tupleObjects.html">7.2.2 Tuple Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION009230000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">3</SPAN> List Objects
+</H2>
+
+<P>
+<dl><dt><b><a name="l2h-1725"><tt>PyListObject</tt></a></b>
+<dd>
+This subtype of <tt>PyObject</tt> represents a Python list object.
+</dl>
+
+<P>
+<dl><dt>PyTypeObject <b><a name="l2h-1730"><tt>PyList_Type</tt></a></b>
+<dd>
+This instance of <tt>PyTypeObject</tt> represents the Python list type.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1735"><tt>PyList_Check</tt></a></b>(<var>PyObject *p</var>)
+<dd>
+Returns true if its argument is a <tt>PyListObject</tt>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1741"><tt>PyList_New</tt></a></b>(<var>int size</var>)
+<dd>
+Returns a new list of length <i>len</i> on success, and <tt>NULL</tt> on
+failure.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1748"><tt>PyList_Size</tt></a></b>(<var>PyObject *list</var>)
+<dd>
+Returns the length of the list object in <i>list</i>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1754"><tt>PyList_GetItem</tt></a></b>(<var>PyObject *list, int index</var>)
+<dd>
+Returns the object at position <i>pos</i> in the list pointed
+to by <i>p</i>.  If <i>pos</i> is out of bounds, returns <tt>NULL</tt> and
+sets an <tt>IndexError</tt> exception.  <b>Note:</b> this
+function returns a ``borrowed'' reference.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1765"><tt>PyList_SetItem</tt></a></b>(<var>PyObject *list, int index,
+                                       PyObject *item</var>)
+<dd>
+Sets the item at index <i>index</i> in list to <i>item</i>.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1772"><tt>PyList_Insert</tt></a></b>(<var>PyObject *list, int index,
+                                      PyObject *item</var>)
+<dd>
+Inserts the item <i>item</i> into list <i>list</i> in front of index
+<i>index</i>.  Returns 0 if successful; returns -1 and sets an
+exception if unsuccessful.  Analogous to <tt>list.insert(index, item)</tt>.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1781"><tt>PyList_Append</tt></a></b>(<var>PyObject *list, PyObject *item</var>)
+<dd>
+Appends the object <i>item</i> at the end of list <i>list</i>.  Returns
+0 if successful; returns -1 and sets an exception if unsuccessful.
+Analogous to <tt>list.append(item)</tt>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1789"><tt>PyList_GetSlice</tt></a></b>(<var>PyObject *list,
+                                              int low, int high</var>)
+<dd>
+Returns a list of the objects in <i>list</i> containing the objects 
+<i>between</i> <i>low</i> and <i>high</i>.  Returns NULL and sets an
+exception if unsuccessful.
+Analogous to <tt>list[low:high]</tt>.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1799"><tt>PyList_SetSlice</tt></a></b>(<var>PyObject *list,
+                                        int low, int high,
+                                        PyObject *itemlist</var>)
+<dd>
+Sets the slice of <i>list</i> between <i>low</i> and <i>high</i> to the contents
+of <i>itemlist</i>.  Analogous to <tt>list[low:high]=itemlist</tt>.  Returns 0
+on success, -1 on failure.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1809"><tt>PyList_Sort</tt></a></b>(<var>PyObject *list</var>)
+<dd>
+Sorts the items of <i>list</i> in place.  Returns 0 on success, -1 on failure.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1815"><tt>PyList_Reverse</tt></a></b>(<var>PyObject *list</var>)
+<dd>
+Reverses the items of <i>list</i> in place.  Returns 0 on success, -1 on failure.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1821"><tt>PyList_AsTuple</tt></a></b>(<var>PyObject *list</var>)
+<dd>
+Returns a new tuple object containing the contents of <i>list</i>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1827"><tt>PyList_GET_ITEM</tt></a></b>(<var>PyObject *list, int i</var>)
+<dd>
+Macro form of <tt>PyList_GetItem()</tt> without error checking.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1833"><tt>PyList_SET_ITEM</tt></a></b>(<var>PyObject *list, int i,
+                                              PyObject *o</var>)
+<dd>
+Macro form of <tt>PyList_SetItem()</tt> without error checking.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1839"><tt>PyList_GET_SIZE</tt></a></b>(<var>PyObject *list</var>)
+<dd>
+Macro form of <tt>PyList_GetSize()</tt> without error checking.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html489"
+ HREF="mapObjects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html485"
+ HREF="sequenceObjects.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html481"
+ HREF="tupleObjects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html487"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html488"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html490"
+ HREF="mapObjects.html">7.3 Mapping Objects</A>
+<b>Up:</b> <A NAME="tex2html486"
+ HREF="sequenceObjects.html">7.2 Sequence Objects</A>
+<b>Previous:</b> <A NAME="tex2html482"
+ HREF="tupleObjects.html">7.2.2 Tuple Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

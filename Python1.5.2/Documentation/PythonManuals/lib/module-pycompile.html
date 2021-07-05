@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.20 py_compile --
+Compile Python source files.</TITLE>
+<META NAME="description" CONTENT="3.20 py_compile --
+Compile Python source files.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-compileall.html">
+<LINK REL="previous" HREF="module-pprint.html">
+<LINK REL="up" HREF="python.html">
+<LINK REL="next" HREF="module-compileall.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1227"
+ HREF="module-compileall.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1223"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1217"
+ HREF="PrettyPrinter_Objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1225"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1226"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1228"
+ HREF="module-compileall.html">3.21 compileall  </A>
+<b>Up:</b> <A NAME="tex2html1224"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html1218"
+ HREF="PrettyPrinter_Objects.html">3.19.1 PrettyPrinter Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0052000000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">20</SPAN> <tt>py_compile</tt> --
+         Compile Python source files.</A>
+</H1>
+
+<P>
+
+
+<P>
+
+<P>
+<a name="l2h-5185"></a>
+The <tt>py_compile</tt> module provides a single function to generate
+a byte-code file from a source file.
+
+<P>
+Though not often needed, this function can be useful when installing
+modules for shared use, especially if some of the users may not have
+permission to write the byte-code cache files in the directory
+containing the source code.
+
+<P>
+<dl><dt><b><a name="l2h-5206"><tt>compile</tt></a></b> (<var>file</var><big>[</big><var>, cfile</var><big>[</big><var>, dfile</var><big>]</big><big>]</big>)
+<dd>
+  Compile a source file to byte-code and write out the byte-code cache 
+  file.  The source code is loaded from the file name <i>file</i>.  The 
+  byte-code is written to <i>cfile</i>, which defaults to <i>file</i>
+  <tt>+</tt> <tt>'c'</tt> (<tt>'o'</tt> if optimization is enabled in the
+  current interpreter).  If <i>dfile</i> is specified, it is used as
+  the name of the source file in error messages instead of <i>file</i>. 
+</dl>
+
+<P>
+<p><b>See Also:</b></p>
+
+  <p>Module <tt><b><a href="module-compileall.html">compileall</a></b></tt>&nbsp;&nbsp;&nbsp;(Utilities to compile all Python source files
+                         in a directory tree.)</p>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1227"
+ HREF="module-compileall.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1223"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1217"
+ HREF="PrettyPrinter_Objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1225"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1226"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1228"
+ HREF="module-compileall.html">3.21 compileall  </A>
+<b>Up:</b> <A NAME="tex2html1224"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html1218"
+ HREF="PrettyPrinter_Objects.html">3.19.1 PrettyPrinter Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

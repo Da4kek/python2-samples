@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0038)http://www.cwi.nl/~jack/macpython.html -->
+<HTML><HEAD><TITLE>Jack's MacPython page</TITLE>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2614.3500" name=GENERATOR></HEAD>
+<BODY>
+<H1>Jack's MacPython Page</H1>
+<HR>
+
+<H2>What is MacPython?</H2>MacPython is the port of Guido van Rossum's Python 
+high-level object-oriented language to the Mac. Python is freely distributable 
+and available in source form too. The motherlode of information on Python is the 
+website, <A href="http://www.python.org/">http://www.python.org/</A>, and the 
+ftp site, <A href="ftp://ftp.python.org/">ftp://ftp.python.org/</A>. There you 
+will also find information on the Python newsgroup <A 
+href="news:comp.lang.python">comp.lang.python</A> and the associated mailing 
+list, the Python Software Activity, Python Special Interest Groups and much 
+more. 
+<P>The only Special Interest Group I will mention here is the <A 
+href="http://www.python.org/sigs/pythonmac-sig/">PythonMac SIG</A>, which has 
+discussions on Macintosh-specific aspects of Python. 
+<P>Aside from the numerous extension modules available on most platforms 
+(include the Tk windowing toolkit, sockets and many others) MacPython has a 
+number of extension modules specifically for MacOS. MacPython programmers have 
+access to QuickDraw, QuickTime, the Sound manager and various third party 
+toolkits like Internet Config and Waste, to name but a few. 
+<P>Also included is an integrated development environment by Just van Rossum, 
+which includes an editor, debugger and class browser all closely integrated. 
+<P>The full distributions below contain examples and some documentation on 
+Mac-specific aspects of using Python. Documentation on the language and the 
+standard library can be obtained at the <A href="http://www.python.org/">Python 
+website.</A> As of the 2.0 distribution this is also the home for the 
+documentation of the mac-specific modules. 
+<P>
+<HR>
+
+<H2>Current distribution</H2>The current stable distribution is 2.0. As of 2.0 
+MacPython is distributed as a PPC-only application, 68k users should get release 
+1.5.2 from the <A href="http://www.cwi.nl/ftp/jack/python/mac/old">old 
+distributions</A> section. It can optionally install NumPy (libraries for 
+numeric calculations), Tkinter (for platform-independent GUI-building), PIL (for 
+imaging) and img (another package for imaging) and the developer addon, files 
+needed for creating your own C extension modules for Python with CodeWarrior. 
+<P>The installer is available in <A 
+href="http://www.cwi.nl/ftp/jack/python/mac/MacPython20.bin">MacBinary 
+format</A> (about 7Mb) and <A 
+href="http://www.cwi.nl/ftp/jack/python/mac/MacPython20.hqx">BinHex format</A> 
+(about 9Mb). Use the latter installer if your browser mistreats MacBinary files 
+(as many appear to do). 
+<P>If you need to download with FTP in stead of HTTP go to <A 
+href="ftp://ftp.cwi.nl/pub/jack/python/mac">ftp://ftp.cwi.nl/pub/jack/python/mac</A>. 
+
+<P><EM>Note:</EM>When running the installer the "finishing installation" dialog 
+will be shown for a long time, especially on slower systems. The installer is 
+now telling the finder about icon positions for each individual file (sigh). 
+Apparently you can abort this with little ill effect. 
+<P><EM>Note 2:</EM> some problems have been reported reported when installing 
+MacPython on iMacs if you have the Virex antivirus software running. Disabling 
+Virex should help here. 
+<P>
+<H2>Documentation</H2>You need the standard Python documentation (tutorial, 
+reference manual, library reference) available at <A 
+href="http://www.python.org/">http://www.python.org/</A>. In addition you need 
+the Mac addendum to the library reference, also available there. 
+<P>Tambien, si puede leer espanol, <A href="http://www.idg.es/macworld">MacWorld 
+Espana</A> tiene un curso de programacion en Python sobre el Mac. Esta seria 
+comenza en el numero de julio/agosto 1998. 
+<P>And if you don't read spanish you can safely ignore the paragraph above:-) 
+<P>
+<H2>Source distributions</H2>A MacPython 2.0 source distribution is also 
+available, at <A 
+href="http://www.cwi.nl/ftp/jack/python/mac/MacPython20src.sit">ftp://ftp.cwi.nl/pub/jack/python/mac/MacPython20src.sit</A>. 
+This distribution needs a specialised version of GUSI 2.1.1, which is available 
+as <A 
+href="http://www.cwi.nl/ftp/jack/python/mac/GUSI211-for-MacPython.sit">ftp://ftp.cwi.nl/pub/jack/python/mac/GUSI211-for-MacPython.sit</A>. 
+
+<P>The source distribution has built with CodeWarrior Pro 5.3, but it should 
+work fine with CW Pro 6 (after converting the projects). However, for CW Pro 6 
+you will need GUSI 2.1.3, for which a specialised verion is available at <A 
+href="http://www.cwi.nl/ftp/jack/python/mac/GUSI213-for-MacPython.sit">ftp://ftp.cwi.nl/pub/jack/python/mac/GUSI213-for-MacPython.sit</A>. 
+
+<P>It is, however, strongly suggested that if you want to contribute actively to 
+MacPython development you get source access through the public CVS repository 
+(see below), as this will ensure that you are always working with the most 
+recent version of the sources. 
+<P>
+<H2>Miscellaneous</H2><A name=ftpprobs>The installers</A> live in <A 
+href="ftp://ftp.cwi.nl/pub/jack/python/mac">ftp://ftp.cwi.nl/pub/jack/python/mac</A>, 
+by the way. Our ftp-server is rather picky about IP-addresses (reverse name 
+lookup should work), if you have trouble accessing any of the links here you can 
+also get at the files via the http-server, at url <A 
+href="http://www.cwi.nl/ftp/jack/python/mac/">http://www.cwi.nl/ftp/jack/python/mac/</A>. 
+
+<P>As Corran Webster, cwebster@nevada.edu, reported recently it is not necessary 
+to buy the CodeWarrior C compiler to write MacPython extension modules: in many 
+case Apple's free MPW tools work just fine. See his <A 
+href="http://www.nevada.edu/~cwebster/Python/MPWHOWTO/MPWHOWTO.html">Compiling 
+Python modules with MPW</A> page for details. 
+<P>
+<H2>CVS Source access</H2><EM>Note:</EM>the information in this section is for 
+people who have read the <CODE>building.html</CODE> document in the source 
+distribution and decide they want CVS access. You are not expected to understand 
+it (or be interested in it) if you haven't read that document. 
+<P>The MacPython sources are also accessible through remote CVS, at 
+<BLOCKQUOTE><CODE>CVSROOT: 
+  ropython@pythoncvs.oratrix.nl:/hosts/mm/CVSREMOTE<BR>Password: 
+  geheim<BR>Authentication: pserver<BR>Module: python/Mac </CODE></BLOCKQUOTE>As 
+stated in the building.html document: please use MacCVS from <A 
+href="http://www.wincvs.org/">http://www.wincvs.org/</A>, <EM>not</EM> MacCVS 
+Pro, which does not appear to work with the Python CVS archives. 
+<P>If you start using the CVS archive please send me a mail at <A 
+href="mailto:jack@cwi.nl">jack@cwi.nl</A> so I have some idea of how many people 
+use it. It is also suggested that you subscribe to the <A 
+href="http://www.oratrix.nl/mailman/listinfo/pythonmac-checkins">MacPython CVS 
+checkin mailing list</A>. 
+<P>The CVS repository for the libraries used by MacPython is currently in a 
+flux, it is suggested you just download these in source form, as explained in 
+<CODE>building.html</CODE>. </P>
+<H2>MacOS X</H2>For MacOS X Server you are probably better off with the Unix 
+distribution of Python, get it through <A href="http://www.python.org/">the 
+Python website</A>. It is reported to run out of the box, with only some modules 
+(like Tkinter) not working. 
+<P>And, if you don't have the developer option for MacOS X, Tony Lownds has 
+compiled everything and packaged it. Check his <A 
+href="http://tony.lownds.com/macosx/">MacOS X Python page</A>. 
+<P>
+<H2>Older distributions</H2>Older distributions are still available in <A 
+href="ftp://ftp.cwi.nl/pub/jack/python/mac">ftp://ftp.cwi.nl/pub/jack/python/mac</A>. 
+
+<P>
+<H2>Alternative locations</H2>If for some reason you cannot download stuff from 
+here try at the general Python site, <A 
+href="http://www.python.org/">http://www.python.org/</A>. Everything should be 
+available there too. 
+<P>
+<H2>JPython</H2>Another way to run Python programs on your Macintosh is to use 
+JPython, the Python interpreter written in Java. Here is what Bill Dozier, 
+dozier@abs.net, had to say on the subject for Python 1.5. Please let me know 
+whether this information is still up-to-date if you try it. 
+<BLOCKQUOTE>Using JPython now is really very easy. To install, just drop 
+  JPython1.1beta4.class onto the JBindery icon (you need the MRJ SDK to do 
+  this). They now have it set up so that you can just take the defaults to get 
+  InstallAnywhere going. Unfortunately, the save dialog that pops up to ask for 
+  the installation location is a little wierd. First of all, it defaults to your 
+  Preferences folder. Next, you have to tell it to "open" a file (any file) in 
+  the directory where you want JPython installed. 
+  <P>Once you have JPython installed, you will want to make a JBindery app to 
+  have double-clickable file for starting the interpreter. Drop the jpython.jar 
+  file (from your chosen install directory) onto JBindery. Choose 
+  "org.python.core.jpython" for the "Class name" in the first panel. Set both 
+  stdin and stdout to be "message window." Click on "Classpath" and make sure 
+  jpython.jar is there. If not, you can either drag it in or use the "add .zip 
+  file" button to add it to the list. Click on "save settings...", choose "save 
+  as application" and you will have an icon that you can double-click to start 
+  the JPython interpreter. 
+  <P>To run a script, drop the JPython app you made from the instructions in the 
+  previous paragraph onto JBindery. Put the name of the file that you want to 
+  run in the "optional parameters" list and make sure that the folder containing 
+  your ".py" file is in the classpath (you can just drag your script file onto 
+  the list to get it there). Do the "save as application" again and you have a 
+  double-clickable icon that will run your script. I do this and then cycle 
+  through editing the script with the IDE or CodeWarrior or Alpha and 
+  double-clicking this icon to test my code. </P></BLOCKQUOTE>
+<H2>Other MacPython resources</H2>There is an <A 
+href="http://dmoz.org/Computers/Systems/Macintosh/Development/Languages/Python/">Open 
+Directory page on MacPython</A>, please submit your links there if they are not 
+on the page yet. 
+<P>And of course there is always <A 
+href="http://www.python.org/">http://www.python.org/</A>.... 
+<HR>
+
+<CENTER><B><A href="http://www.cwi.nl/~jack/macsoftware.html">[Back to Macintosh 
+software page]</A></B> </CENTER><BR>
+<CENTER><B><A href="http://www.cwi.nl/~jack/index.html">[Back to Jack's 
+homepage]</A></B> </CENTER><BR>
+<HR>
+
+<ADDRESS>Jack Jansen, 28-Nov-00</ADDRESS></BODY></HTML>

@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0029)http://numpy.sourceforge.net/ -->
+<HTML><HEAD><TITLE>Numerical Python</TITLE>
+<META content="text/html; charset=iso-8859-1" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2614.3500" name=GENERATOR></HEAD>
+<BODY background=doc-NumericalPython_files/Gray_Textured.gif 
+bgColor=#ffffff>&nbsp; 
+<CENTER>
+<TABLE border=3 cellPadding=3 cellSpacing=3 cols=2 width="85%" NOSAVE>
+  <TBODY>
+  <TR align=middle NOSAVE>
+    <TD NOSAVE><IMG alt="Stop, Dave." height=180 
+      src="doc-NumericalPython_files/hal.jpg" width=71></TD>
+    <TD>
+      <H1>Numerical Python</H1><I>How fast do you want to go today?</I> 
+      <P><A href="http://sourceforge.net/"><IMG alt="SourceForge Home" height=31 
+      src="doc-NumericalPython_files/sflogo.png" width=88 
+  NOSAVE></A></P></TD></TR></TBODY></TABLE></CENTER>
+<H1>Purpose</H1>Numerical Python adds a fast, compact multidimensional array 
+language facility to Python. 
+<H2>Availability</H2>
+<P>The <A href="http://sourceforge.net/projects/numpy">Numerical Python Project 
+Page </A>has releases, links to the FTP site, a bug tracking system, and a 
+browser for the source repository plus instructions on how to use CVS 
+anonymously. </P>
+<H2>Documentation</H2>
+<P>(Last updated 12/29/2000) </P>
+<P><A href="http://numpy.sourceforge.net/numdoc/numdoc.pdf">Numerical Python</A> 
+(Adobe Acrobat). </P>
+<P><A href="http://numpy.sourceforge.net/numdoc/HTML/numdoc.htm">Numerical 
+Python</A> (HTML). </P>
+<P><A href="http://numpy.sourceforge.net/doc/index.html">Some HTML Documentation 
+generated from the Python sources. </A>(Using <A 
+href="http://happydoc.sourceforge.net/">HappyDoc</A>). </P>
+<H2>Related Sites</H2>
+<UL>
+  <LI>For Travis Oliphant's packages of Numerical Python software, see: <A 
+  href="http://oliphant.netpedia.net/">Multipack Home Page</A>. 
+  <LI>Pyfort, a Python / Fortran connection tool. See <A 
+  href="http://pyfortran.sourceforge.net/">Pyfort Home Page</A>. 
+  <LI>FPIG, a Python / Fortran connection tool. See <A 
+  href="http://cens.ioc.ee/projects/f2py2e">FPIG Home Page</A>. 
+  <LI>CXX, the C++ toolkit for writing Python extensions. See <A 
+  href="http://cxx.sourceforge.net/">CXX Project Page</A>. 
+  <LI>Frequently asked questions about Python including Numerical Python are at 
+  <A href="http://python.faqts.com/">Python FAQTS</A> 
+  <LI>Many other packages that work with Numerical Python are available. Try the 
+  <A href="http://www.vex.net/parnassus/">Vaults of Parnassus</A>, particularly 
+  the "math" section. </LI></UL>
+<H2>MiniFAQ</H2>
+<H3>Why Numerical Python?</H3>If x and y are Numerical Python arrays, then the 
+speed of the operation x + y is close to the speed of doing it in C if the 
+arrays are big enough. Thus, Python can be extended with a full scientific array 
+language with sophisticated indexing and shaping operations and yet be closer to 
+the speed of a compiled language than to the speed of Python itself. 
+<H3>Assignment doesn't make a copy?</H3>
+<P>Right. The statement y=x just creates a new name for the same array object. 
+While consistent with Python, this is upsetting to users of other array 
+languages. Likewise, x[i:j] is not a copy. Please read the manual. </P>
+<H3>I get an error message about n32 / o32 on SGI </H3>
+<P>A numpy user who ran into this consulted Martin von Loewe. The user said, "It 
+is indeed an SGI thing, two different (perhaps n/o for new/old) binary formats 
+for files, libraries, etc; both formats are supported by IRIX64. The KEY hint 
+from Martin von Loewe (for installing Python2.0) was that usually all libraries 
+are installed in both versions, so all I had to do was to find "siblings" of 
+those libs that did not work, and link them to the names that python expected. " 
+</P>
+<H3>What about dealing with missing observations? </H3>
+<P>An optional package "MA", distributed with Numpy and documented in the 
+manual, is designed to be a drop-in replacement for Numeric, allowing you to do 
+operations and function calls without involving array entries that are invalid, 
+including sums, averages, division, etc. </P>
+<H3>How do I become a "developer"?</H3>Write to one of the current developers 
+and describe your experience and interests. The current developers act as a 
+committee of equal peers and will discuss your request. Paul Dubois (dubois at 
+users.sourceforge.net) serves as the chairperson of this group and has veto 
+power over requests for enhancements. 
+<P>There are different communities of users with different goals and 
+aspirations. To keep Numerical as useful as possible to as many people as 
+possible, we are taking a conservative approach to growth, applying Bertrand 
+Meyer's famous hope for Eiffel that it would "grow no faster than the rate of 
+inflation." 
+<H3>Who made that neat HAL graphic? </H3>
+<P>The "HAL 9000" graphic is by Steven Russell, Menlo Park, CA. 
+</P></BODY></HTML>

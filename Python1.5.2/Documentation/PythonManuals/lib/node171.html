@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.1.8 Debugging CGI scripts</TITLE>
+<META NAME="description" CONTENT="11.1.8 Debugging CGI scripts">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="node172.html">
+<LINK REL="previous" HREF="node170.html">
+<LINK REL="up" HREF="module-cgi.html">
+<LINK REL="next" HREF="node172.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2575"
+ HREF="node172.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2571"
+ HREF="module-cgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2565"
+ HREF="node170.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2573"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2574"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2576"
+ HREF="node172.html">11.1.9 Common problems and</A>
+<b>Up:</b> <A NAME="tex2html2572"
+ HREF="module-cgi.html">11.1 cgi  </A>
+<b>Previous:</b> <A NAME="tex2html2566"
+ HREF="node170.html">11.1.7 Testing your CGI</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0013180000000000000000">
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">8</SPAN> Debugging CGI scripts</A>
+</H2>
+
+<P>
+First of all, check for trivial installation errors -- reading the
+section above on installing your CGI script carefully can save you a
+lot of time.  If you wonder whether you have understood the
+installation procedure correctly, try installing a copy of this module
+file ("<tt>cgi.py</tt>") as a CGI script.  When invoked as a script, the file
+will dump its environment and the contents of the form in HTML form.
+Give it the right mode etc, and send it a request.  If it's installed
+in the standard "<tt>cgi-bin</tt>" directory, it should be possible to send it a
+request by entering a URL into your browser of the form:
+
+<P>
+<dl><dd><pre>
+http://yourhostname/cgi-bin/cgi.py?name=Joe+Blow&amp;addr=At+Home
+</pre></dl>
+
+<P>
+If this gives an error of type 404, the server cannot find the script
+- perhaps you need to install it in a different directory.  If it
+gives another error (e.g.  500), there's an installation problem that
+you should fix before trying to go any further.  If you get a nicely
+formatted listing of the environment and form content (in this
+example, the fields should be listed as ``addr'' with value ``At Home''
+and ``name'' with value ``Joe Blow''), the "<tt>cgi.py</tt>" script has been
+installed correctly.  If you follow the same procedure for your own
+script, you should now be able to debug it.
+
+<P>
+The next step could be to call the <tt>cgi</tt> module's
+<tt>test()</tt> function from your script: replace its main code
+with the single statement
+
+<P>
+<dl><dd><pre>
+cgi.test()
+</pre></dl>
+
+<P>
+This should produce the same results as those gotten from installing
+the "<tt>cgi.py</tt>" file itself.
+
+<P>
+When an ordinary Python script raises an unhandled exception
+(e.g. because of a typo in a module name, a file that can't be opened,
+etc.), the Python interpreter prints a nice traceback and exits.
+While the Python interpreter will still do this when your CGI script
+raises an exception, most likely the traceback will end up in one of
+the HTTP server's log file, or be discarded altogether.
+
+<P>
+Fortunately, once you have managed to get your script to execute
+<i>some</i> code, it is easy to catch exceptions and cause a traceback
+to be printed.  The <tt>test()</tt> function below in this module is
+an example.  Here are the rules:
+
+<P>
+<DL COMPACT>
+<DT>1.
+<DD>Import the traceback module before entering the <tt>try</tt>
+... <tt>except</tt> statement
+
+<P>
+<DT>2.
+<DD>Assign <tt>sys.stderr</tt> to be <tt>sys.stdout</tt>
+
+<P>
+<DT>3.
+<DD>Make sure you finish printing the headers and the blank line
+   early
+
+<P>
+<DT>4.
+<DD>Wrap all remaining code in a <tt>try</tt> ... <tt>except</tt>
+   statement
+
+<P>
+<DT>5.
+<DD>In the except clause, call <tt>traceback.print_exc()</tt>
+</DL>
+
+<P>
+For example:
+
+<P>
+<dl><dd><pre>
+import sys
+import traceback
+print "Content-type: text/html"
+print
+sys.stderr = sys.stdout
+try:
+    ...your code here...
+except:
+    print "\n\n&lt;PRE&gt;"
+    traceback.print_exc()
+</pre></dl>
+
+<P>
+Notes: The assignment to <tt>sys.stderr</tt> is needed because the
+traceback prints to <tt>sys.stderr</tt>.
+The <tt>print "&#92;n&#92;n&lt;PRE&gt;"</tt> statement is necessary to
+disable the word wrapping in HTML.
+
+<P>
+If you suspect that there may be a problem in importing the traceback
+module, you can use an even more robust approach (which only uses
+built-in modules):
+
+<P>
+<dl><dd><pre>
+import sys
+sys.stderr = sys.stdout
+print "Content-type: text/plain"
+print
+...your code here...
+</pre></dl>
+
+<P>
+This relies on the Python interpreter to print the traceback.  The
+content type of the output is set to plain text, which disables all
+HTML processing.  If your script works, the raw HTML will be displayed
+by your client.  If it raises an exception, most likely after the
+first two lines have been printed, a traceback will be displayed.
+Because no HTML interpretation is going on, the traceback will
+readable.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2575"
+ HREF="node172.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2571"
+ HREF="module-cgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2565"
+ HREF="node170.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2573"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2574"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2576"
+ HREF="node172.html">11.1.9 Common problems and</A>
+<b>Up:</b> <A NAME="tex2html2572"
+ HREF="module-cgi.html">11.1 cgi  </A>
+<b>Previous:</b> <A NAME="tex2html2566"
+ HREF="node170.html">11.1.7 Testing your CGI</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

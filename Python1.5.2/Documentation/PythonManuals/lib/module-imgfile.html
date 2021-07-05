@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>16.11 imgfile --
+Support for SGI imglib files.</TITLE>
+<META NAME="description" CONTENT="16.11 imgfile --
+Support for SGI imglib files.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-gl2.html">
+<LINK REL="up" HREF="sgi.html">
+<LINK REL="next" HREF="sunos.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3615"
+ HREF="sunos.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3611"
+ HREF="sgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3607"
+ HREF="module-gl2.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3613"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3614"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3616"
+ HREF="sunos.html">17. SunOS Specific Services</A>
+<b>Up:</b> <A NAME="tex2html3612"
+ HREF="sgi.html">16. SGI IRIX Specific</A>
+<b>Previous:</b> <A NAME="tex2html3608"
+ HREF="module-gl2.html">16.10 GL  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00181100000000000000000">
+<SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">11</SPAN> <tt>imgfile</tt> --
+         Support for SGI imglib files.</A>
+</H1>
+
+
+<P>
+
+<P>
+The <tt>imgfile</tt> module allows Python programs to access SGI imglib image
+files (also known as "<tt>.rgb</tt>" files).  The module is far from
+complete, but is provided anyway since the functionality that there is
+is enough in some cases.  Currently, colormap files are not supported.
+
+<P>
+The module defines the following variables and functions:
+
+<P>
+<dl><dt><b><a name="l2h-23558"><tt>error</tt></a></b>
+<dd>
+This exception is raised on all errors, such as unsupported file type, etc.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23562"><tt>getsizes</tt></a></b> (<var>file</var>)
+<dd>
+This function returns a tuple <tt>(<i>x</i>, <i>y</i>, <i>z</i>)</tt> where
+<i>x</i> and <i>y</i> are the size of the image in pixels and
+<i>z</i> is the number of
+bytes per pixel. Only 3 byte RGB pixels and 1 byte greyscale pixels
+are currently supported.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23572"><tt>read</tt></a></b> (<var>file</var>)
+<dd>
+This function reads and decodes the image on the specified file, and
+returns it as a Python string. The string has either 1 byte greyscale
+pixels or 4 byte RGBA pixels. The bottom left pixel is the first in
+the string. This format is suitable to pass to <tt>gl.lrectwrite()</tt>,
+for instance.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23607"><tt>readscaled</tt></a></b> (<var>file, x, y, filter</var><big>[</big><var>, blur</var><big>]</big>)
+<dd>
+This function is identical to read but it returns an image that is
+scaled to the given <i>x</i> and <i>y</i> sizes. If the <i>filter</i> and
+<i>blur</i> parameters are omitted scaling is done by
+simply dropping or duplicating pixels, so the result will be less than
+perfect, especially for computer-generated images.
+
+<P>
+Alternatively, you can specify a filter to use to smoothen the image
+after scaling. The filter forms supported are <tt>'impulse'</tt>,
+<tt>'box'</tt>, <tt>'triangle'</tt>, <tt>'quadratic'</tt> and
+<tt>'gaussian'</tt>. If a filter is specified <i>blur</i> is an optional
+parameter specifying the blurriness of the filter. It defaults to <tt>1.0</tt>.
+
+<P>
+<tt>readscaled()</tt> makes no attempt to keep the aspect ratio
+correct, so that is the users' responsibility.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23593"><tt>ttob</tt></a></b> (<var>flag</var>)
+<dd>
+This function sets a global flag which defines whether the scan lines
+of the image are read or written from bottom to top (flag is zero,
+compatible with SGI GL) or from top to bottom(flag is one,
+compatible with X).  The default is zero.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23597"><tt>write</tt></a></b> (<var>file, data, x, y, z</var>)
+<dd>
+This function writes the RGB or greyscale data in <i>data</i> to image
+file <i>file</i>. <i>x</i> and <i>y</i> give the size of the image,
+<i>z</i> is 1 for 1 byte greyscale images or 3 for RGB images (which are
+stored as 4 byte values of which only the lower three bytes are used).
+These are the formats returned by <tt>gl.lrectread()</tt>.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3615"
+ HREF="sunos.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3611"
+ HREF="sgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3607"
+ HREF="module-gl2.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3613"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3614"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3616"
+ HREF="sunos.html">17. SunOS Specific Services</A>
+<b>Up:</b> <A NAME="tex2html3612"
+ HREF="sgi.html">16. SGI IRIX Specific</A>
+<b>Previous:</b> <A NAME="tex2html3608"
+ HREF="module-gl2.html">16.10 GL  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

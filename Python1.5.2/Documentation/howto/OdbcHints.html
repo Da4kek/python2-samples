@@ -1,0 +1,242 @@
+<pre>
+From dellaq2@pdq.net Thu Feb 12 11:14:09 1998
+Date: Wed, 11 Feb 1998 19:47:10 -0600
+From: <a href="mailto:jbd@alum.mit.edu">John Dell'Aquila &lt;jbd@alum.mit.edu&gt;</a>
+To: python-list@cwi.nl
+Subject: Repost: ODBC Note (Windows only)
+Newsgroups: comp.lang.python
+
+Python ODBC Note (Windows only)
+
+<a href="http://www.microsoft.com/data/odbc/default.htm">Open Database Connectivity (ODBC)</a> is an API that provides a uniform
+method for SQL based data access across a wide variety of database
+systems. This feat is accomplished using installable drivers for each
+type of database. ODBC is not a "least common denominator" solution,
+though. The API provides extensive facilities for discovering and
+using advanced features of the target databases, such as locking,
+outer joins, scrollable cursors, stored procedures, and so on. If your
+Python application needs to communicate with different backends,
+particularly relational servers like Oracle, Sybase or SQL Server,
+ODBC is a reasonable solution.
+
+There are (at least) three ways to access ODBC from Python on the
+Windows platform:
+   I. DB API    - Python Database API
+  II. calldll   - Sam Rushing's calldll module
+ III. DAO       - Microsoft Data Access Objects
+
+We'll only be discusssing the first two options here. Option III, DAO,
+is a COM interface to the Microsoft Jet Engine that can also access
+ODBC databases, but the API looks nothing like ODBC, and COM is beyond
+the scope of this Note. However, if Jet/Access is your primary
+database, or you happen to like that interface, DAO may be a good
+choice for ODBC connectivity.
+
+I. ODBC using Python Database API
+
+The Python Database API is an effort by the db-sig to provide a
+uniform interface for tabular data access in Python (see the db-sig
+page, <a href="http://www.python.org/sigs/db-sig">http://www.python.org/sigs/db-sig/</a>, for more information).  Mark
+Hammond's win32 extensions contain an ODBC implementation of this API
+- odbc.pyd. The DB API only exposes limited ODBC functionality (that
+isn't its purpose), but it is simple to use and comes free with win32.
+
+To set up odbc.pyd:
+  1. Install the Python windows binary:
+     <a href="http://www.python.org/ftp/python/win32/python15.exe">http://www.python.org/ftp/python/win32/python15.exe</a>
+  2. Install Mark Hammond's win32 extensions:
+     <a href="http://www.python.org/windows/win32/win32.exe">http://www.python.org/windows/win32/win32.exe</a>
+  3. Install any necessary ODBC drivers and configure a datasource for
+     your target database(s) using the ODBC Administrator.
+
+Your aplication will need to import two modules:
+  dbi.dll  - support classes for various SQL data types, e.g. dates
+  odbc.pyd - the compiled ODBC interface
+
+Here is an example:
+   import dbi, odbc     # ODBC modules
+   import time          # standard time module
+
+   dbc = odbc.odbc(     # open a database connection
+       'sample/monty/spam'  # 'datasource/user/password'
+       )
+   crsr = dbc.cursor()  # create a cursor
+   crsr.execute(        # execute some SQL
+       """
+       SELECT country_id, name, insert_change_date
+       FROM country
+       ORDER BY name
+       """
+       )
+   print 'Column descriptions:'  # show column descriptions
+   for col in crsr.description:
+       print ' ', col
+   result = crsr.fetchall()      # fetch the results all at once
+   print '\nFirst result row:\n ', result[0]  # show first result row
+   print '\nDate conversions:'   # play with dbiDate object
+   date = result[0][-1]
+   fmt = '  %-25s%-20s'
+   print fmt % ('standard string:', str(date))
+   print fmt % ('seconds since epoch:', float(date))
+   timeTuple = time.localtime(date)
+   print fmt % ('time tuple:', timeTuple)
+   print fmt % ('user defined:', time.strftime('%d %B %Y', timeTuple))
+   -------------------------------output--------------------------------
+
+   Column descriptions:
+     ('country_id', 'NUMBER', 12, 10, 10, 0, 0)
+     ('name', 'STRING', 45, 45, 0, 0, 0)
+     ('insert_change_date', 'DATE', 19, 19, 0, 0, 1)
+
+   First result row:
+     (24L, 'ARGENTINA', &lt;DbiDate object at 7f1c80&gt;)
+
+   Date conversions:
+     standard string:         Fri Dec 19 01:51:53 1997
+     seconds since epoch:     882517913.0
+     time tuple:              (1997, 12, 19, 1, 51, 53, 4, 353, 0)
+     user defined:            19 December 1997
+
+See also <a href="http://www.python.org/windows/win32/odbc.html">http://www.python.org/windows/win32/odbc.html</a> for sample
+code and notes by Hirendra Hindocha.
+
+Notice that result values are converted to Python objects. Dates in
+particular are returned as dbiDate objects. This can be a serious
+limitation, because dbiDate can not represent dates prior to the UNIX
+epoch (1 Jan 1970 00:00:00 GMT). If you try to retrieve earlier dates,
+you'll get garbage and may even provoke a crash.
+
+You'll want to download the win32 source and examine odbc.cpp to see
+which features are currently provided. For example, transaction
+facilities (setautocommit, commit and rollback) are available, but
+SQLDriverConnect (needed to supply extra parameters to the driver) is
+not.
+
+If you don't need any of these facilities, you're set. Otherwise, read
+on.
+
+II. ODBC using calldll
+
+<a href="mailto:rushing@squrl.nightmare.com">Sam Rushing</a>'s calldll module lets Python call any function in any
+DLL. In particular, you can get at ODBC by directly calling functions
+in odbc32.dll, and Sam has provided a wrapper module, odbc.py, to do
+just that. There is also code for managing data sources, installing
+ODBC itself, and creating and maintaining Jet (Microsoft Access)
+databases. Poke through the demos and sample code. There are some
+amazing things, like cbdemo.py, which has a message loop and window
+procedure implemented as Python functions!
+
+[You can find links to the calldll package on Sam's <a href="http://nightmare.com/software.html">Python Software</a>
+page.]
+
+To set up calldll as a package:
+  1. Install python 1.5 (not 1.4!) as above
+  2. Get calldll.zip:
+     ftp://squirl.nightmare.com/pub/python/python-ext/calldll.zip
+  3. Create a new directory, calldll, under the lib directory, e.g.
+     c:\Program Files\Python\lib\caldll\
+  4. Unpack calldll.zip into this directory using WinZip, pkunzip, etc.
+  5. Move all the files in the calldll\lib\ subdirectory (created by
+     the unzip) up to the parent (calldll) directory and delete the lib
+     subdirectory
+  6. Create the file __init__.py in the calldll directory and put
+     a suitable comment in it:
+     # File to allow this directory to be treated as a python 1.5
+package.
+  7. Edit calldll\odbc.py to fix a bug in the get_info facility:
+     In the functions "get_info_word" and "get_info_long", change
+     "calldll.membuf" to "windll.membuf"
+
+Here is an example using calldll:
+   from calldll import odbc
+
+   dbc = odbc.environment().connection()   # create connection
+   dbc.connect('sample', 'monty', 'spam')  # connect to db
+   # alternatively, use full connect string:
+   # dbc.driver_connect('DSN=sample;UID=monty;PWD=spam')
+   print 'DBMS: %s %s\n' % (    # show DB information
+       dbc.get_info(odbc.SQL_DBMS_NAME),
+       dbc.get_info(odbc.SQL_DBMS_VER)
+       )
+   result = dbc.query(          # execute query & return results
+       """
+       SELECT country_id, name, insert_change_date
+       FROM country
+       ORDER BY name
+       """
+       )
+   print 'Column descriptions:' # show column descriptions
+   for col in result[0]:
+       print ' ', col
+   print '\nFirst result row:\n ', result[1]  # show first result row
+   -------------------------------output--------------------------------
+
+   DBMS: Oracle 07.30.0000
+
+   Column descriptions:
+     ('COUNTRY_ID', 3, 10, 0, 0)
+     ('NAME', 12, 45, 0, 0)
+     ('INSERT_CHANGE_DATE', 11, 19, 0, 1)
+
+   First result row:
+     ['24', 'ARGENTINA', '1997-12-19 01:51:53']
+
+Notice that result values are returned as strings, so dates aren't a
+problem, and you have access to SQLDriverConnect in case you need to
+supply a connect string. You'll want to examine odbc.py to discover
+all the available features. And if you need some facility that isn't
+provided, you can easily add it *without* firing up a C compiler.
+
+Suppose, for example, that you need to handle transactions. This
+requires the ability to turn off autocommit mode and execute a commit
+or a rollback. First, figure out which ODBC functions you need to
+call, then add the wrappers to odbc.py, using the existing functions
+as guides. When in doubt, experiment! You'll obviously need ODBC
+documentation for this. You can download the ODBC 3.0 Programmer's
+Reference (in Help file format) or the whole SDK, for free, from
+Microsoft: <a href="http://www.microsoft.com/data/odbc/download.htm">http://www.microsoft.com/data/odbc/download.htm</a>
+
+To handle transactions, we can add the following methods to the
+connection class:
+    def autocommit(self, value=1):
+        if value:
+            value = 1  # SQL_AUTOCOMMIT_ON
+        else:
+            value = 0  # SQL_AUTOCOMMIT_OFF
+        return odbc.SQLSetConnectAttr(
+            self,  # connection
+            102,   # attribute = SQL_ATTR_AUTOCOMMMIT
+            value, # ptr or value
+            -5     # len = SQL_IS_UINTEGER
+            )
+
+    def commit(self):
+        return odbc.SQLEndTran(
+            2,     # handle type = SQL_Handle_DBC
+            self,  # handle
+            0      # SQL_Commit
+            )
+
+    def rollback(self):
+        return odbc.SQLEndTran(
+            2,     # handle type = SQL_Handle_DBC
+            self,  # handle
+            1      # SQL_Rollback
+            )
+
+Notes: 1. SQLSetConnectAttr and SQLEndTran are ODBC 3.0 functions, so
+you'll need an ODBC 3.0 Driver Manager (2.x drivers are OK though);
+2. The literals are meant to keep the example self-contained, in
+practice you should define the appropriate constants in odbc.py
+
+With this code you can now handle transactions:
+    dbc.autocommit(0)    # turn off autocommit
+    dbc.commit()         # commit or rollback as required
+    dbc.rolback()
+
+Good luck, and if you make any significant extensions to odbc.py, be
+sure to share them!
+--
+<a href="mailto:jbd@alum.mit.edu">John Dell'Aquila &lt;jbd@alum.mit.edu&gt;</a>
+
+</pre>

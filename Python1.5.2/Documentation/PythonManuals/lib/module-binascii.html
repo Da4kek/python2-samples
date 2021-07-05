@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.10 binascii --
+Convert between binary and various ascii-encoded representations.</TITLE>
+<META NAME="description" CONTENT="12.10 binascii --
+Convert between binary and various ascii-encoded representations.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-xdrlib.html">
+<LINK REL="previous" HREF="module-uu.html">
+<LINK REL="up" HREF="netdata.html">
+<LINK REL="next" HREF="module-xdrlib.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3085"
+ HREF="module-xdrlib.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3081"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3075"
+ HREF="module-uu.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3083"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3084"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3086"
+ HREF="module-xdrlib.html">12.11 xdrlib  </A>
+<b>Up:</b> <A NAME="tex2html3082"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html3076"
+ HREF="module-uu.html">12.9 uu  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00141000000000000000000">
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">10</SPAN> <tt>binascii</tt> --
+         Convert between binary and various ascii-encoded representations.</A>
+</H1>
+
+
+<P>
+
+<P>
+The <tt>binascii</tt> module contains a number of methods to convert
+between binary and various ASCII-encoded binary
+representations. Normally, you will not use these modules directly but
+use wrapper modules like <tt>uu</tt><a name="l2h-"></a> or
+<tt>hexbin</tt><a name="l2h-"></a> instead, this module solely
+exists because bit-manipuation of large amounts of data is slow in
+Python.
+
+<P>
+The <tt>binascii</tt> module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-19750"><tt>a2b_uu</tt></a></b> (<var>string</var>)
+<dd>
+Convert a single line of uuencoded data back to binary and return the
+binary data. Lines normally contain 45 (binary) bytes, except for the
+last line. Line data may be followed by whitespace.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19754"><tt>b2a_uu</tt></a></b> (<var>data</var>)
+<dd>
+Convert binary data to a line of ASCII characters, the return value
+is the converted line, including a newline char. The length of
+<i>data</i> should be at most 45.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19760"><tt>a2b_base64</tt></a></b> (<var>string</var>)
+<dd>
+Convert a block of base64 data back to binary and return the
+binary data. More than one line may be passed at a time.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19764"><tt>b2a_base64</tt></a></b> (<var>data</var>)
+<dd>
+Convert binary data to a line of ASCII characters in base64 coding.
+The return value is the converted line, including a newline char.
+The length of <i>data</i> should be at most 57 to adhere to the base64
+standard.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19770"><tt>a2b_hqx</tt></a></b> (<var>string</var>)
+<dd>
+Convert binhex4 formatted ASCII data to binary, without doing
+RLE-decompression. The string should contain a complete number of
+binary bytes, or (in case of the last portion of the binhex4 data)
+have the remaining bits zero.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19775"><tt>rledecode_hqx</tt></a></b> (<var>data</var>)
+<dd>
+Perform RLE-decompression on the data, as per the binhex4
+standard. The algorithm uses <tt>0x90</tt> after a byte as a repeat
+indicator, followed by a count. A count of <tt>0</tt> specifies a byte
+value of <tt>0x90</tt>. The routine returns the decompressed data,
+unless data input data ends in an orphaned repeat indicator, in which
+case the <tt>Incomplete</tt> exception is raised.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19783"><tt>rlecode_hqx</tt></a></b> (<var>data</var>)
+<dd>
+Perform binhex4 style RLE-compression on <i>data</i> and return the
+result.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19788"><tt>b2a_hqx</tt></a></b> (<var>data</var>)
+<dd>
+Perform hexbin4 binary-to-ASCII translation and return the
+resulting string. The argument should already be RLE-coded, and have a
+length divisible by 3 (except possibly the last fragment).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19793"><tt>crc_hqx</tt></a></b> (<var>data, crc</var>)
+<dd>
+Compute the binhex4 crc value of <i>data</i>, starting with an initial
+<i>crc</i> and returning the result.
+</dl>
+ 
+<dl><dt><b><a name="l2h-19798"><tt>Error</tt></a></b>
+<dd>
+Exception raised on errors. These are usually programming errors.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19801"><tt>Incomplete</tt></a></b>
+<dd>
+Exception raised on incomplete data. These are usually not programming
+errors, but may be handled by reading a little more data and trying
+again.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3085"
+ HREF="module-xdrlib.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3081"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3075"
+ HREF="module-uu.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3083"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3084"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3086"
+ HREF="module-xdrlib.html">12.11 xdrlib  </A>
+<b>Up:</b> <A NAME="tex2html3082"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html3076"
+ HREF="module-uu.html">12.9 uu  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

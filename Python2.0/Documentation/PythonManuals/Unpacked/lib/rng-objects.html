@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>5.3.1 The Random Number Generator Interface </title>
+<META NAME="description" CONTENT="5.3.1 The Random Number Generator Interface ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="lib.css">
+<LINK REL="previous" href="module-random.html">
+<LINK REL="up" href="module-random.html">
+<LINK REL="next" href="module-whrandom.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-random.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="module-random.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="module-whrandom.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-random.html">5.3 random  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="module-random.html">5.3 random  </A>
+<b class="navlabel">Next:</b> <a class="sectref" href="module-whrandom.html">5.4 whrandom  </A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+5.3.1 The Random Number Generator Interface
+            
+</H2>
+
+<P>
+The <i class="dfn">Random Number Generator</i> interface describes the methods
+which are available for all random number generators.  This will be
+enhanced in future releases of Python.
+
+<P>
+In this release of Python, the modules <tt class='module'><a href='module-random.html'>random</a></tt>,
+<tt class='module'><a href='module-whrandom.html'>whrandom</a></tt>, and instances of the
+<tt class="class">whrandom.whrandom</tt> class all conform to this interface.
+
+<P>
+<dl><dt><b><a name='l2h-741'><tt class='function'>choice</tt></a></b> (<var>seq</var>)
+<dd>
+Chooses a random element from the non-empty sequence <var>seq</var> and
+returns it.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-742'><tt class='function'>randint</tt></a></b> (<var>a, b</var>)
+<dd>
+<b>Deprecated since release 2.0.</b>
+Use <tt class="function">randrange()</tt> instead.<p>
+Returns a random integer <var>N</var> such that
+<code><var>a</var> &lt;= <var>N</var> &lt;= <var>b</var></code>.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-743'><tt class='function'>random</tt></a></b> ()
+<dd>
+Returns the next random floating point number in the range [0.0
+... 1.0).
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-744'><tt class='function'>randrange</tt></a></b> (<big>[</big><var>start,</var><big>]</big><var> stop</var><big>[</big><var>, step</var><big>]</big>)
+<dd>
+Return a randomly selected element from <code>range(<var>start</var>,
+<var>stop</var>, <var>step</var>)</code>.  This is equivalent to
+<code>choice(range(<var>start</var>, <var>stop</var>, <var>step</var>))</code>.
+
+New in version 1.5.2.
+
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-745'><tt class='function'>uniform</tt></a></b> (<var>a, b</var>)
+<dd>
+Returns a random real number <var>N</var> such that
+<code><var>a</var> &lt;= <var>N</var> &lt; <var>b</var></code>.
+</dl>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-random.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="module-random.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="module-whrandom.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-random.html">5.3 random  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="module-random.html">5.3 random  </A>
+<b class="navlabel">Next:</b> <a class="sectref" href="module-whrandom.html">5.4 whrandom  </A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

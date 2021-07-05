@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.11.3 Exceptions </TITLE>
+<META NAME="description" CONTENT="12.11.3 Exceptions ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="xdr-unpacker-objects.html">
+<LINK REL="up" HREF="module-xdrlib.html">
+<LINK REL="next" HREF="module-mailcap.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3134"
+ HREF="module-mailcap.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3130"
+ HREF="module-xdrlib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3126"
+ HREF="xdr-unpacker-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3132"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3133"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3135"
+ HREF="module-mailcap.html">12.12 mailcap  </A>
+<b>Up:</b> <A NAME="tex2html3131"
+ HREF="module-xdrlib.html">12.11 xdrlib  </A>
+<b>Previous:</b> <A NAME="tex2html3127"
+ HREF="xdr-unpacker-objects.html">12.11.2 Unpacker Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00141130000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">3</SPAN> Exceptions 
+</H2>
+
+<P>
+Exceptions in this module are coded as class instances:
+
+<P>
+<dl><dt><b><a name="l2h-20016"><tt>Error</tt></a></b>
+<dd>
+The base exception class.  <tt>Error</tt> has a single public data
+member <tt>msg</tt> containing the description of the error.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-20021"><tt>ConversionError</tt></a></b>
+<dd>
+Class derived from <tt>Error</tt>.  Contains no additional instance
+variables.
+</dl>
+
+<P>
+Here is an example of how you would catch one of these exceptions:
+
+<P>
+<dl><dd><pre>
+import xdrlib
+p = xdrlib.Packer()
+try:
+    p.pack_double(8.01)
+except xdrlib.ConversionError, instance:
+    print 'packing the double failed:', instance.msg
+</pre></dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3134"
+ HREF="module-mailcap.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3130"
+ HREF="module-xdrlib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3126"
+ HREF="xdr-unpacker-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3132"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3133"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3135"
+ HREF="module-mailcap.html">12.12 mailcap  </A>
+<b>Up:</b> <A NAME="tex2html3131"
+ HREF="module-xdrlib.html">12.11 xdrlib  </A>
+<b>Previous:</b> <A NAME="tex2html3127"
+ HREF="xdr-unpacker-objects.html">12.11.2 Unpacker Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

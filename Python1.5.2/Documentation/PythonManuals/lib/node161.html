@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>10.8.2 HotProfile Class</TITLE>
+<META NAME="description" CONTENT="10.8.2 HotProfile Class">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="node160.html">
+<LINK REL="up" HREF="Profiler_Extensions.html">
+<LINK REL="next" HREF="internet.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2446"
+ HREF="internet.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2442"
+ HREF="Profiler_Extensions.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2438"
+ HREF="node160.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2444"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2445"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2447"
+ HREF="internet.html">11. Internet Protocols and</A>
+<b>Up:</b> <A NAME="tex2html2443"
+ HREF="Profiler_Extensions.html">10.8 Extensions  </A>
+<b>Previous:</b> <A NAME="tex2html2439"
+ HREF="node160.html">10.8.1 OldProfile Class</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0012820000000000000000">
+<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> HotProfile Class</A>
+</H2>
+
+<P>
+This profiler is the fastest derived profile example.  It does not
+calculate caller-callee relationships, and does not calculate
+cumulative time under a function.  It only calculates time spent in a
+function, so it runs very quickly (re: very low overhead).  In truth,
+the basic profiler is so fast, that is probably not worth the savings
+to give up the data, but this class still provides a nice example.
+
+<P>
+<dl><dd><pre>
+class HotProfile(Profile):
+
+    def trace_dispatch_exception(self, frame, t):
+        rt, rtt, rfn, rframe, rcur = self.cur
+        if rcur and not rframe is frame:
+            return self.trace_dispatch_return(rframe, t)
+        return 0
+
+    def trace_dispatch_call(self, frame, t):
+        self.cur = (t, 0, frame, self.cur)
+        return 1
+
+    def trace_dispatch_return(self, frame, t):
+        rt, rtt, frame, rcur = self.cur
+
+        rfn = `frame.f_code`
+
+        pt, ptt, pframe, pcur = rcur
+        self.cur = pt, ptt+rt, pframe, pcur
+
+        if self.timings.has_key(rfn):
+            nc, tt = self.timings[rfn]
+            self.timings[rfn] = nc + 1, rt + rtt + tt
+        else:
+            self.timings[rfn] =      1, rt + rtt
+
+        return 1
+
+
+    def snapshot_stats(self):
+        self.stats = {}
+        for func in self.timings.keys():
+            nc, tt = self.timings[func]
+            nor_func = self.func_normalize(func)
+            self.stats[nor_func] = nc, nc, tt, 0, {}
+</pre></dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2446"
+ HREF="internet.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2442"
+ HREF="Profiler_Extensions.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2438"
+ HREF="node160.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2444"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2445"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2447"
+ HREF="internet.html">11. Internet Protocols and</A>
+<b>Up:</b> <A NAME="tex2html2443"
+ HREF="Profiler_Extensions.html">10.8 Extensions  </A>
+<b>Previous:</b> <A NAME="tex2html2439"
+ HREF="node160.html">10.8.1 OldProfile Class</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

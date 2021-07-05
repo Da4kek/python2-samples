@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2. mac --
+Similar interfaces to the posix module.</TITLE>
+<META NAME="description" CONTENT="2. mac --
+Similar interfaces to the posix module.">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="module-macpath.html">
+<LINK REL="previous" HREF="intro.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="module-macpath.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html163"
+ HREF="module-macpath.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html159"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html153"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html161"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html162"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html164"
+ HREF="module-macpath.html">3. macpath  </A>
+<b>Up:</b> <A NAME="tex2html160"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html154"
+ HREF="intro.html">1. Introduction</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002200000000000000000">
+<SPAN CLASS="arabic">2</SPAN>. <tt>mac</tt> --
+         Similar interfaces to the <tt>posix</tt> module.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides a subset of the operating system dependent
+functionality provided by the optional built-in module <tt>posix</tt>.
+It is best accessed through the more portable standard module
+<tt>os</tt>.
+<a name="l2h-"></a><a name="l2h-"></a>
+<P>
+The following functions are available in this module:
+<tt>chdir()</tt>,
+<tt>close()</tt>,
+<tt>dup()</tt>,
+<tt>fdopen()</tt>,
+<tt>getcwd()</tt>,
+<tt>lseek()</tt>,
+<tt>listdir()</tt>,
+<tt>mkdir()</tt>,
+<tt>open()</tt>,
+<tt>read()</tt>,
+<tt>rename()</tt>,
+<tt>rmdir()</tt>,
+<tt>stat()</tt>,
+<tt>sync()</tt>,
+<tt>unlink()</tt>,
+<tt>write()</tt>,
+as well as the exception <tt>error</tt>. Note that the times
+returned by <tt>stat()</tt> are floating-point values, like all time
+values in MacPython.
+
+<P>
+One additional function is available: <tt>xstat()</tt>. This function
+returns the same information as <tt>stat()</tt>, but with three extra
+values appended: the size of the resource fork of the file and its
+4-character creator and type.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html163"
+ HREF="module-macpath.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html159"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html153"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html161"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html162"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html164"
+ HREF="module-macpath.html">3. macpath  </A>
+<b>Up:</b> <A NAME="tex2html160"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html154"
+ HREF="intro.html">1. Introduction</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

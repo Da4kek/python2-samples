@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1. Basic use of rexec.py</TITLE>
+<META NAME="description" CONTENT="1. Basic use of rexec.py">
+<META NAME="keywords" CONTENT="rexec">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="rexec.css">
+<LINK REL="next" HREF="node3.html">
+<LINK REL="previous" HREF="contents.html">
+<LINK REL="up" HREF="rexec.html">
+<LINK REL="next" HREF="node3.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html42"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html39"
+ HREF="rexec.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html33"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Restricted Execution HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html41"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html43"
+ HREF="node3.html">2. Frequently Asked Questions</A>
+<b>Up:</b> <A NAME="tex2html40"
+ HREF="rexec.html">Restricted Execution HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html34"
+ HREF="contents.html">Contents</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000200000000000000000">
+<SPAN CLASS="arabic">1</SPAN>. Basic use of rexec.py</A>
+</H1>
+
+<P>
+For some applications, it's desirable to execute chunks of Python code
+that come from an outside source.  The most obvious example is a Web
+browser such as Grail, which can download and execute applets written in
+Python.
+
+<P>
+An obvious danger of downloading and running code from anywhere is that
+someone might write a malicious applet that appears to be harmless, but
+silently erases files, makes copies of sensitive data, or gives the
+applet's author a back door into your system.  The solution is to run
+the code in a restricted environment, where it's prevented from
+performing any operations that could be used maliciously.  
+
+<P>
+Java does this by using the Java Virtual Machine, which executes Java
+bytecode.  The virtual machine, or VM, has complete control over the
+running applet, and any dangerous operations must go through the VM in
+order to be performed.  The VM can therefore trap suspicious activity,
+and stop the applet's execution, if a strict security policy is used, or
+ask the user if the operation should be permitted, if the policy is
+somewhat looser.
+
+<P>
+Python already has a virtual machine that executes Python byte codes, so
+creating a restricted execution environment simply requires sealing off
+dangerous built-in functions such as <tt>open()</tt>, and dangerous
+modules, such as the <tt>socket</tt> module.  This can be done by creating
+new namespaces, removing any dangerous functions, and forcing code to be
+executed in those namespaces.  While a simple idea, in practice it's
+fairly complicated to implement.  Luckily, the required features have
+been present in Python for a while, and it's already been implemented
+for you as a standard module.
+
+<P>
+Code for using a restricted execution environment is in the "<tt>rexec</tt>"
+module.  The base class is called <tt>RExec</tt>; in a later section of
+this HOWTO, we'll show you how to create your own subclasses of
+<tt>RExec</tt> to customize the functions and modules that are available.
+Here's the documentation for creating a new <tt>RExec</tt> instance:
+
+<P>
+<dl><dt><b><a name="l2h-223"><tt>RExec</tt></a></b> (<var>[<i>hooks</i>], [<i>verbose</i>] </var>)
+<dd>
+Returns a <tt>RExec</tt> instance.  The <i>verbose</i> parameter is a
+Boolean value, defaulting to false.  If true, the <tt>RExec</tt> instance
+will execute in verbose mode, which will print a debugging message when
+modules are imported, as if the <tt>-v</tt> option was given to the Python
+interpreter.
+
+<P>
+The <i>hooks</i> parameter can be an instance of the <tt>RHooks</tt>
+class, or of some subclass of <tt>RHooks</tt>; a default instance will
+be used if the parameter is omitted.  This is only required when
+creating particularly exotic restricted environments that import
+modules in new ways.  If you need to use this, you'll have to
+consult the source code (or Guido) for a complete picture of what's
+going on.   
+</dl>
+
+<P>
+The <tt>RExec</tt> instance has <tt>r_exec()</tt>, <tt>r_eval()</tt>, and
+<tt>r_execfile()</tt> functions, which do the same thing as Python's
+built-in <tt>exec()</tt>, <tt>eval()</tt>, and <tt>execfile()</tt> functions,
+performing them in the restricted environment.  (There are also
+<tt>s_exec()</tt>, <tt>s_eval()</tt>, and <tt>s_execfile()</tt> methods which
+replace the restricted environment's standard input, output, and error
+files with <tt>StringIO</tt> objects that allow you to control the input
+and capture any output generated.)
+
+<P>
+Here's a sample usage of a restricted environment.  First, the
+<tt>RExec</tt> instance has to be created.
+
+<P>
+<dl><dd><pre>
+r_env = rexec.RExec()
+</pre></dl>
+
+<P>
+Now, we can execute code and evaluate expressions 
+in the environment:
+
+<P>
+<dl><dd><pre>
+r_env.r_exec('import string')
+expr = 'string.upper("This is a test")'
+print r_env.r_eval( expr )
+</pre></dl>
+
+<P>
+The first line executes a statement, importing the <tt>string</tt> module.
+Since it's considered a safe module, the operation succeeds.  The second
+and third lines create a string containing an expression, and evaluates
+the expression in the restricted environment; it prints out "<tt>THIS
+IS A TEST</tt>", as you'd expect.
+
+<P>
+Unsafe operations trigger an exception.  For example:
+
+<P>
+<dl><dd><pre>
+r_env.r_exec('import socket')
+</pre></dl>
+
+<P>
+The previous line will cause an <tt>ImportError</tt> exception to be
+raised, with an associated string value that reads "untrusted dynamic
+module: socket".  Trying to open a file for writing is also forbidden:
+
+<P>
+<dl><dd><pre>
+r_env.r_exec('file = open("/tmp/a.out", "w")')
+</pre></dl>
+
+<P>
+This will raise an <tt>IOError</tt> exception, with an assocated string
+value that reads "can't open files for writing in restricted mode".  The
+restricted code can catch the exception in a <tt>try...except</tt> block
+and continue running; this is useful for writing code which works in
+both restricted and unrestricted mode.  Opening files for reading will
+work, however.
+
+<P>
+Exactly what restrictions does the base <tt>RExec</tt> impose?  It limits
+the modules that can be imported to the following safe list:
+
+<P>
+<dl><dd><pre>
+audioop, array, binascii, cmath, errno, imageop,
+marshal, math, md5, operator, parser, regex, 
+pcre, rotor, select, strop, struct, time
+</pre></dl>
+
+<P>
+In general, these are modules that can't affect anything outside of the
+executing code; they allow various forms of computation, but don't allow
+operations that change the filesystem or use network connections to
+other machines.  (The <tt>pcre</tt> module may be unfamiliar; it's an
+internal module used by the <tt>re</tt> module; this means that restricted
+code can still perform regular expression matches.)
+
+<P>
+It also restricts the variables and functions that are available from
+the <tt>sys</tt> and <tt>os</tt> modules.  The <tt>sys</tt> module only
+contains the following symbols:
+
+<P>
+<dl><dd><pre>
+ps1, ps2, copyright, version, platform, exit, maxint
+</pre></dl>
+
+<P>
+The <tt>os</tt> module is reduced to the following functions:
+
+<P>
+<dl><dd><pre>
+error, fstat, listdir, lstat, readlink,
+stat, times, uname, getpid, getppid,
+getcwd, getuid, getgid, geteuid, getegid
+</pre></dl>
+
+<P>
+Note that restricted code has some read-only access to the filesystem
+via functions like <tt>os.stat</tt> and <tt>os.readlink</tt>; if you wish to
+forbid all access to the filename, these functions must be removed.
+
+<P>
+In restricted mode, there are various attributes of function and class
+objects that are no longer accessible: the <tt>__dict__</tt> attribute of
+class, instance and module objects; the <tt>__self__</tt> attribute of
+method objects; and most of the attributes of function objects, namely
+<tt>func_code</tt>, <tt>func_defaults</tt>, <tt>func_doc</tt>,
+<tt>func_globals</tt>, and <tt>func_name</tt>.
+
+<P>
+The <tt>__import__()</tt> and <tt>reload()</tt> functions are replaced by
+versions which implement the above restrictions.  Finally, Python's
+usual <tt>open()</tt> function is removed and replaced by a restricted
+version that only allows opening files for reading.
+
+<P>
+To change any of these policies, whether to be stricter or looser, see
+the section below on customizing the restricted environment.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html42"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html39"
+ HREF="rexec.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html33"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Restricted Execution HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html41"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html43"
+ HREF="node3.html">2. Frequently Asked Questions</A>
+<b>Up:</b> <A NAME="tex2html40"
+ HREF="rexec.html">Restricted Execution HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html34"
+ HREF="contents.html">Contents</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

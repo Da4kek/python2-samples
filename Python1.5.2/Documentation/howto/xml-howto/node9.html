@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.3 Searching Element Content</TITLE>
+<META NAME="description" CONTENT="3.3 Searching Element Content">
+<META NAME="keywords" CONTENT="xml-howto">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="xml-howto.css">
+<LINK REL="next" HREF="node10.html">
+<LINK REL="previous" HREF="node8.html">
+<LINK REL="up" HREF="SAX.html">
+<LINK REL="next" HREF="node10.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html133"
+ HREF="node10.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html130"
+ HREF="SAX.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html124"
+ HREF="node8.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/XML HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html132"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html134"
+ HREF="node10.html">3.4 Related Links</A>
+<b>Up:</b> <A NAME="tex2html131"
+ HREF="SAX.html">3. SAX: The Simple</A>
+<b>Previous:</b> <A NAME="tex2html125"
+ HREF="node8.html">3.2 Error Handling</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000430000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN> Searching Element Content</A>
+</H2>
+
+<P>
+Let's tackle a slightly more complicated task, printing out all issues
+written by a certain author.  This now requires looking at element
+content, because the writer's name is inside a <tt>writer</tt>
+element: <tt>&lt;writer&gt;Peter Milligan&lt;/writer&gt;</tt>.
+
+<P>
+The search will be performed using the following algorithm:
+
+<P>
+<DL COMPACT>
+<DT>1.
+<DD>The <tt>startElement</tt> method will be more complicated.  For
+<tt>comic</tt> elements, the handler has to save the title and
+number, in case this comic is later found to match the search
+criterion.  For <tt>writer</tt> elements, it sets a
+<tt>inWriterContent</tt> flag to true, and sets a <tt>writerName</tt>
+attribute to the empty string.
+<P>
+<DT>2.
+<DD>Characters outside of XML tags must be processed.  When
+<tt>inWriterContent</tt> is true, these characters must be added to the
+<tt>writerName</tt> string.
+
+<P>
+<DT>3.
+<DD>When the <tt>writer</tt> element is finished, we've now
+collected all of the element's content in the <tt>writerName</tt>
+attribute, so we can check if the name matches the one we're searching 
+for, and if so, print the information about this comic.  We must also
+set <tt>inWriterContent</tt> back to false.
+</DL>
+
+<P>
+Here's the first part of the code; this implements step 1.
+
+<P>
+<dl><dd><pre>
+from xml.sax import saxlib
+import string
+
+def normalize_whitespace(text):
+    "Remove redundant whitespace from a string"
+    return string.join( string.split(text), ' ')
+
+class FindWriter(saxlib.HandlerBase):
+    def __init__(self, search_name):
+        # Save the name we're looking for
+        self.search_name = normalize_whitespace( search_name )
+
+        # Initialize the flag to false
+        self.inWriterContent = 0
+
+    def startElement(self, name, attrs):
+        # If it's a comic element, save the title and issue
+        if name == 'comic':
+            title = normalize_whitespace( attrs.get('title', "") )
+            number = normalize_whitespace( attrs.get('number', "") )
+            self.this_title = title
+            self.this_number = number
+
+        # If it's the start of a writer element, set flag
+        elif name == 'writer':
+            self.inWriterContent = 1
+            self.writerName = ""
+</pre></dl>
+
+<P>
+The <tt>startElement()</tt> method has been discussed previously.  Now
+we have to look at how the content of elements is processed.  
+
+<P>
+The <tt>normalize_whitespace()</tt> function is important, and
+you'll probably use it in your own code.  XML treats whitespace very
+flexibly; you can include extra spaces or newlines wherever you like.
+This means that you must normalize the whitespace before comparing
+attribute values or element content; otherwise the comparision might
+produce a wrong result due to the content of two elements having
+different amounts of whitespace.
+
+<P>
+<dl><dd><pre>
+    def characters(self, ch, start, length):
+        if self.inWriterContent:
+            self.writerName = self.writerName + ch[start:start+length]
+</pre></dl>
+
+<P>
+The <tt>characters()</tt> method is called for characters that aren't
+inside XML tags.  <i>ch</i> is a string of characters, and <i>start</i>
+is the point in the string where the characters
+start.  <i>length</i> is the length of the character data.  You should
+not assume that <i>start</i> is equal to 0, or that all of <i>ch</i> is
+the character data.  An XML parser could be implemented to read the
+entire document into memory as a string, and then operate by indexing
+into the string.   This would mean that <i>ch</i> would always contain
+the entire document, and only the values of <i>start</i> and
+<i>length</i> would be changed.  
+
+<P>
+You also shouldn't assume that all the characters are passed in a
+single function call.  In the example above, there might be only one
+call to <tt>characters()</tt> for the string "<tt>Peter Milligan</tt>", or
+it might call <tt>characters()</tt> once for each character.  More
+realistically, if the content contains an entity reference, as in
+"<tt>Wagner
+&amp;amp; Seagle</tt>", the parser might call the method three times; once for 
+"<tt>Wagner </tt>", once for "<tt>&amp;</tt>", represented by the entity
+reference, and again for "<tt> Seagle</tt>".
+
+<P>
+For step 2 of <tt>FindWriter</tt>, <tt>characters()</tt> only has to
+check <tt>inWriterContent</tt>, and if it's true, add the characters to
+the string being built up.
+
+<P>
+Finally, when the <tt>writer</tt> element ends, the entire name has
+been collected, so we can compare it to the name we're searching for.
+
+<P>
+<dl><dd><pre>
+    def endElement(self, name):
+        if name == 'writer':
+            self.inWriterContent = 0
+            self.writerName = normalize_whitespace(self.writerName)
+            if self.search_name == self.writerName:
+                print 'Found:', self.this_title, self.this_number
+</pre></dl>
+
+<P>
+This is an unrealistically stupid comparison function that will be
+fooled by differing whitespace, but it's good enough for an example.
+
+<P>
+End tags can't have attributes on them, so there's no <i>attrs</i>
+parameter.  Empty elements with attributes, such as "<tt>&lt;arc
+name="Season of Mists"/&gt;</tt>", will result in a call to
+<tt>startElement()</tt>, followed immediately by a call to <tt>endElement()</tt>.
+
+<P>
+XXX how are external entities handled?  Anything special need to be
+done for them?
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html133"
+ HREF="node10.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html130"
+ HREF="SAX.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html124"
+ HREF="node8.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/XML HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html132"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html134"
+ HREF="node10.html">3.4 Related Links</A>
+<b>Up:</b> <A NAME="tex2html131"
+ HREF="SAX.html">3. SAX: The Simple</A>
+<b>Previous:</b> <A NAME="tex2html125"
+ HREF="node8.html">3.2 Error Handling</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

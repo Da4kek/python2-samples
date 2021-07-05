@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>10. Defining New Object Types </title>
+<META NAME="description" CONTENT="10. Defining New Object Types ">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="api.css">
+<LINK REL="next" href="reporting-bugs.html">
+<LINK REL="previous" href="memory.html">
+<LINK REL="up" HREF="api.html">
+<LINK REL="next" href="common-structs.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="memoryExamples.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A HREF="api.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="common-structs.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="memoryExamples.html">9.3 Examples</A>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="api.html">Python/C API Reference Manual</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="common-structs.html">10.1 Common Object Structures</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1>
+<BR>
+10. Defining New Object Types 
+</H1>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-653'><tt class='cfunction'>_PyObject_New</tt></a></b> (<var>PyTypeObject *type</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+</dl>
+
+<P>
+<dl><dt>PyVarObject* <b><a name='l2h-654'><tt class='cfunction'>_PyObject_NewVar</tt></a></b> (<var>PyTypeObject *type, int size</var>)
+<dd>
+</dl>
+
+<P>
+<dl><dt>void <b><a name='l2h-655'><tt class='cfunction'>_PyObject_Del</tt></a></b> (<var>PyObject *op</var>)
+<dd>
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-656'><tt class='cfunction'>PyObject_Init</tt></a></b> (<var>PyObject *op,
+						PyTypeObject *type</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">Borrowed reference.</span>
+</div>
+</dl>
+
+<P>
+<dl><dt>PyVarObject* <b><a name='l2h-657'><tt class='cfunction'>PyObject_InitVar</tt></a></b> (<var>PyVarObject *op,
+						PyTypeObject *type, int size</var>)
+<dd>
+</dl>
+
+<P>
+<dl><dt><var>TYPE</var>* <b><a name='l2h-658'><tt class='cfunction'>PyObject_New</tt></a></b> (<var>TYPE, PyTypeObject *type</var>)
+<dd>
+</dl>
+
+<P>
+<dl><dt><var>TYPE</var>* <b><a name='l2h-659'><tt class='cfunction'>PyObject_NewVar</tt></a></b> (<var>TYPE, PyTypeObject *type,
+                                                int size</var>)
+<dd>
+</dl>
+
+<P>
+<dl><dt>void <b><a name='l2h-660'><tt class='cfunction'>PyObject_Del</tt></a></b> (<var>PyObject *op</var>)
+<dd>
+</dl>
+
+<P>
+<dl><dt><var>TYPE</var>* <b><a name='l2h-661'><tt class='cfunction'>PyObject_NEW</tt></a></b> (<var>TYPE, PyTypeObject *type</var>)
+<dd>
+</dl>
+
+<P>
+<dl><dt><var>TYPE</var>* <b><a name='l2h-662'><tt class='cfunction'>PyObject_NEW_VAR</tt></a></b> (<var>TYPE, PyTypeObject *type,
+                                                int size</var>)
+<dd>
+</dl>
+
+<P>
+<dl><dt>void <b><a name='l2h-663'><tt class='cfunction'>PyObject_DEL</tt></a></b> (<var>PyObject *op</var>)
+<dd>
+</dl>
+
+<P>
+Py_InitModule (!!!)
+
+<P>
+PyArg_ParseTupleAndKeywords, PyArg_ParseTuple, PyArg_Parse
+
+<P>
+Py_BuildValue
+
+<P>
+DL_IMPORT
+
+<P>
+Py*_Check
+
+<P>
+_Py_NoneStruct
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html835"
+  href="common-structs.html">10.1 Common Object Structures </A>
+<LI><A NAME="tex2html836"
+  href="mapping-structs.html">10.2 Mapping Object Structures </A>
+<LI><A NAME="tex2html837"
+  href="number-structs.html">10.3 Number Object Structures </A>
+<LI><A NAME="tex2html838"
+  href="sequence-structs.html">10.4 Sequence Object Structures </A>
+<LI><A NAME="tex2html839"
+  href="buffer-structs.html">10.5 Buffer Object Structures </A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="memoryExamples.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A HREF="api.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="common-structs.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="memoryExamples.html">9.3 Examples</A>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="api.html">Python/C API Reference Manual</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="common-structs.html">10.1 Common Object Structures</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

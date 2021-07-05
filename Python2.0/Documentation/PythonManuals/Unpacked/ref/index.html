@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Python Reference Manual</title>
+<META NAME="description" CONTENT="Python Reference Manual">
+<META NAME="keywords" CONTENT="ref">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="ref.css">
+<LINK REL="next" href="front.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A HREF="../index.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="front.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="../index.html">Document Index</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="front.html">Front Matter</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<P>
+
+<div class="titlepage">
+<table border="0" width="100%"><tr>
+<td class="titlegraphic" width="30%"><img width="121" height="110"
+  src="../icons/labslogo.gif"></td>
+<td>
+<h1>Python Reference Manual</h1>
+<p><b><font size='+2'>Guido van Rossum
+<BR>
+Fred L. Drake, Jr., editor</font></b></p>
+<p>
+	BeOpen PythonLabs
+<BR>
+E-mail: <span class="email">python-docs@python.org</span>
+</p>
+<p><strong>October 16, 2000</strong><br><strong>Release 2.0</strong></p>
+<p></td></tr>
+</table>
+</div>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html12"
+  href="front.html">Front Matter</A>
+<LI><A NAME="tex2html13"
+  href="contents.html">Contents</A>
+<LI><A NAME="tex2html14"
+  href="introduction.html">1. Introduction</A>
+<UL>
+<LI><A NAME="tex2html15"
+  href="notation.html">1.1 Notation</A>
+</UL>
+<LI><A NAME="tex2html16"
+  href="lexical.html">2. Lexical analysis</A>
+<UL>
+<LI><A NAME="tex2html17"
+  href="line-structure.html">2.1 Line structure</A>
+<UL>
+<LI><A NAME="tex2html18"
+  href="logical.html">2.1.1 Logical lines</A>
+<LI><A NAME="tex2html19"
+  href="physical.html">2.1.2 Physical lines</A>
+<LI><A NAME="tex2html20"
+  href="comments.html">2.1.3 Comments</A>
+<LI><A NAME="tex2html21"
+  href="explicit-joining.html">2.1.4 Explicit line joining</A>
+<LI><A NAME="tex2html22"
+  href="implicit-joining.html">2.1.5 Implicit line joining</A>
+<LI><A NAME="tex2html23"
+  href="blank-lines.html">2.1.6 Blank lines </A>
+<LI><A NAME="tex2html24"
+  href="indentation.html">2.1.7 Indentation</A>
+<LI><A NAME="tex2html25"
+  href="whitespace.html">2.1.8 Whitespace between tokens</A>
+</UL>
+<LI><A NAME="tex2html26"
+  href="other-tokens.html">2.2 Other tokens</A>
+<LI><A NAME="tex2html27"
+  href="identifiers.html">2.3 Identifiers and keywords</A>
+<UL>
+<LI><A NAME="tex2html28"
+  href="keywords.html">2.3.1 Keywords</A>
+<LI><A NAME="tex2html29"
+  href="id-classes.html">2.3.2 Reserved classes of identifiers</A>
+</UL>
+<LI><A NAME="tex2html30"
+  href="literals.html">2.4 Literals</A>
+<UL>
+<LI><A NAME="tex2html31"
+  href="strings.html">2.4.1 String literals</A>
+<LI><A NAME="tex2html32"
+  href="string-catenation.html">2.4.2 String literal concatenation</A>
+<LI><A NAME="tex2html33"
+  href="numbers.html">2.4.3 Numeric literals</A>
+<LI><A NAME="tex2html34"
+  href="integers.html">2.4.4 Integer and long integer literals</A>
+<LI><A NAME="tex2html35"
+  href="floating.html">2.4.5 Floating point literals</A>
+<LI><A NAME="tex2html36"
+  href="imaginary.html">2.4.6 Imaginary literals</A>
+</UL>
+<LI><A NAME="tex2html37"
+  href="operators.html">2.5 Operators</A>
+<LI><A NAME="tex2html38"
+  href="delimiters.html">2.6 Delimiters</A>
+</UL>
+<LI><A NAME="tex2html39"
+  href="datamodel.html">3. Data model</A>
+<UL>
+<LI><A NAME="tex2html40"
+  href="objects.html">3.1 Objects, values and types</A>
+<LI><A NAME="tex2html41"
+  href="types.html">3.2 The standard type hierarchy</A>
+<LI><A NAME="tex2html42"
+  href="specialnames.html">3.3 Special method names</A>
+<UL>
+<LI><A NAME="tex2html43"
+  href="customization.html">3.3.1 Basic customization</A>
+<LI><A NAME="tex2html44"
+  href="attribute-access.html">3.3.2 Customizing attribute access</A>
+<LI><A NAME="tex2html45"
+  href="callable-types.html">3.3.3 Emulating callable objects</A>
+<LI><A NAME="tex2html46"
+  href="sequence-types.html">3.3.4 Emulating sequence and mapping types</A>
+<LI><A NAME="tex2html47"
+  href="sequence-methods.html">3.3.5 Additional methods for emulation of sequence types
+  </A>
+<LI><A NAME="tex2html48"
+  href="numeric-types.html">3.3.6 Emulating numeric types</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html49"
+  href="execmodel.html">4. Execution model </A>
+<UL>
+<LI><A NAME="tex2html50"
+  href="execframes.html">4.1 Code blocks, execution frames, and namespaces </A>
+<LI><A NAME="tex2html51"
+  href="exceptions.html">4.2 Exceptions </A>
+</UL>
+<LI><A NAME="tex2html52"
+  href="expressions.html">5. Expressions</A>
+<UL>
+<LI><A NAME="tex2html53"
+  href="conversions.html">5.1 Arithmetic conversions</A>
+<LI><A NAME="tex2html54"
+  href="atoms.html">5.2 Atoms</A>
+<UL>
+<LI><A NAME="tex2html55"
+  href="atom-identifiers.html">5.2.1 Identifiers (Names)</A>
+<LI><A NAME="tex2html56"
+  href="atom-literals.html">5.2.2 Literals</A>
+<LI><A NAME="tex2html57"
+  href="parenthesized.html">5.2.3 Parenthesized forms</A>
+<LI><A NAME="tex2html58"
+  href="lists.html">5.2.4 List displays</A>
+<LI><A NAME="tex2html59"
+  href="dict.html">5.2.5 Dictionary displays</A>
+<LI><A NAME="tex2html60"
+  href="string-conversions.html">5.2.6 String conversions</A>
+</UL>
+<LI><A NAME="tex2html61"
+  href="primaries.html">5.3 Primaries</A>
+<UL>
+<LI><A NAME="tex2html62"
+  href="attribute-references.html">5.3.1 Attribute references</A>
+<LI><A NAME="tex2html63"
+  href="subscriptions.html">5.3.2 Subscriptions</A>
+<LI><A NAME="tex2html64"
+  href="slicings.html">5.3.3 Slicings</A>
+<LI><A NAME="tex2html65"
+  href="calls.html">5.3.4 Calls</A>
+</UL>
+<LI><A NAME="tex2html66"
+  href="power.html">5.4 The power operator</A>
+<LI><A NAME="tex2html67"
+  href="unary.html">5.5 Unary arithmetic operations </A>
+<LI><A NAME="tex2html68"
+  href="binary.html">5.6 Binary arithmetic operations</A>
+<LI><A NAME="tex2html69"
+  href="shifting.html">5.7 Shifting operations</A>
+<LI><A NAME="tex2html70"
+  href="bitwise.html">5.8 Binary bit-wise operations</A>
+<LI><A NAME="tex2html71"
+  href="comparisons.html">5.9 Comparisons</A>
+<LI><A NAME="tex2html72"
+  href="lambda.html">5.10 Boolean operations</A>
+<LI><A NAME="tex2html73"
+  href="exprlists.html">5.11 Expression lists</A>
+<LI><A NAME="tex2html74"
+  href="summary.html">5.12 Summary</A>
+</UL>
+<LI><A NAME="tex2html75"
+  href="simple.html">6. Simple statements </A>
+<UL>
+<LI><A NAME="tex2html76"
+  href="exprstmts.html">6.1 Expression statements </A>
+<LI><A NAME="tex2html77"
+  href="assert.html">6.2 Assert statements </A>
+<LI><A NAME="tex2html78"
+  href="assignment.html">6.3 Assignment statements </A>
+<UL>
+<LI><A NAME="tex2html79"
+  href="augassign.html">6.3.1 Augmented Assignment statements </A>
+</UL>
+<LI><A NAME="tex2html80"
+  href="pass.html">6.4 The <tt class="keyword">pass</tt> statement </A>
+<LI><A NAME="tex2html81"
+  href="del.html">6.5 The <tt class="keyword">del</tt> statement </A>
+<LI><A NAME="tex2html82"
+  href="print.html">6.6 The <tt class="keyword">print</tt> statement </A>
+<LI><A NAME="tex2html83"
+  href="return.html">6.7 The <tt class="keyword">return</tt> statement </A>
+<LI><A NAME="tex2html84"
+  href="raise.html">6.8 The <tt class="keyword">raise</tt> statement </A>
+<LI><A NAME="tex2html85"
+  href="break.html">6.9 The <tt class="keyword">break</tt> statement </A>
+<LI><A NAME="tex2html86"
+  href="continue.html">6.10 The <tt class="keyword">continue</tt> statement </A>
+<LI><A NAME="tex2html87"
+  href="import.html">6.11 The <tt class="keyword">import</tt> statement </A>
+<LI><A NAME="tex2html88"
+  href="global.html">6.12 The <tt class="keyword">global</tt> statement </A>
+<LI><A NAME="tex2html89"
+  href="exec.html">6.13 The <tt class="keyword">exec</tt> statement </A>
+</UL>
+<LI><A NAME="tex2html90"
+  href="compound.html">7. Compound statements</A>
+<UL>
+<LI><A NAME="tex2html91"
+  href="if.html">7.1 The <tt class="keyword">if</tt> statement</A>
+<LI><A NAME="tex2html92"
+  href="while.html">7.2 The <tt class="keyword">while</tt> statement</A>
+<LI><A NAME="tex2html93"
+  href="for.html">7.3 The <tt class="keyword">for</tt> statement</A>
+<LI><A NAME="tex2html94"
+  href="try.html">7.4 The <tt class="keyword">try</tt> statement</A>
+<LI><A NAME="tex2html95"
+  href="function.html">7.5 Function definitions</A>
+<LI><A NAME="tex2html96"
+  href="class.html">7.6 Class definitions</A>
+</UL>
+<LI><A NAME="tex2html97"
+  href="top-level.html">8. Top-level components</A>
+<UL>
+<LI><A NAME="tex2html98"
+  href="programs.html">8.1 Complete Python programs</A>
+<LI><A NAME="tex2html99"
+  href="file-input.html">8.2 File input</A>
+<LI><A NAME="tex2html100"
+  href="interactive.html">8.3 Interactive input</A>
+<LI><A NAME="tex2html101"
+  href="expression-input.html">8.4 Expression input</A>
+</UL>
+<LI><A NAME="tex2html102"
+  href="genindex.html">Index</A>
+<LI><A NAME="tex2html103"
+  href="about.html">About this document ...</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A HREF="../index.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="front.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="../index.html">Document Index</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="front.html">Front Matter</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

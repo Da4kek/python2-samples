@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2.2 Repeating Things</TITLE>
+<META NAME="description" CONTENT="2.2 Repeating Things">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="up" HREF="node3.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html108"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html105"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html101"
+ HREF="node4.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html107"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html109"
+ HREF="node6.html">3. Using Regular Expressions</A>
+<b>Up:</b> <A NAME="tex2html106"
+ HREF="node3.html">2. Simple Patterns</A>
+<b>Previous:</b> <A NAME="tex2html102"
+ HREF="node4.html">2.1 Matching Characters</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000320000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Repeating Things</A>
+</H2>
+
+<P>
+Being able to match varying sets of characters is the first thing
+regular expressions can do that isn't already possible with Python's
+<tt>string</tt> module.  However, if that was the only additional
+capability of regexes, they wouldn't be much of an advance over
+<tt>string</tt>.  The second capability is that you can specify that
+portions of the RE must be repeated a certain number of times.
+
+<P>
+The first metacharacter for repeating things that we'll look at it is
+<tt>*</tt>.  <tt>*</tt> doesn't match the literal character "<tt>*</tt>";
+instead, it specifies that the previous character can be matched zero
+or more times, instead of exactly once.
+
+<P>
+For example, <tt>ca*t</tt> will match "<tt>ct</tt>" (0 "<tt>a</tt>"
+characters), "<tt>cat</tt>" (1 "<tt>a</tt>"), "<tt>caaat</tt>" (3 "<tt>a</tt>"
+characters), and so forth.  The RE  engine has various internal
+limitations, stemming from the size of C's <tt>int</tt> type, that will
+prevent it from matching over 2 billion "<tt>a</tt>" characters; you
+probably don't have enough memory to construct a string that large,  so you
+shouldn't run into that limit.
+
+<P>
+Repetitions such as <tt>*</tt> are <i>greedy</i>; when repeating a RE,
+the matching engine will try to repeat it as many times as possible.
+If later portions of the pattern don't match, the matching engine will
+then back up and try again with few repetitions.
+
+<P>
+A step-by-step example will make this more obvious.  Let's consider
+the expression <tt>a[bcd]*b</tt>.  This matches the letter
+"<tt>a</tt>", zero or more letters from the class <tt>[bcd]</tt>, and
+finally ends with a "<tt>b</tt>".  Now imagine matching this RE
+against the string "<tt>abcbd</tt>".  
+
+<P>
+<table border align=center>
+  <tr><th><b>Step</b></th>
+      <th align=left><b>Matched</b></th>
+      <th align=left><b>Explanation</b></th>
+<tr><td align=center>1</td>
+      <td><tt>a</tt></td>
+      <td>The <tt>a</tt> in the RE matches.</td>
+<tr><td align=center>2</td>
+      <td><tt>abcbd</tt></td>
+      <td>The engine matches <tt>[bcd]*</tt>, going as far as
+it can, which is to the end of the string.</td>
+<tr><td align=center>3</td>
+      <td><i>Failure</i></td>
+      <td>The engine tries to match <tt>b</tt>, but the
+current position is at the end of the string, so it fails.</td>
+<tr><td align=center>4</td>
+      <td><tt>abcb</tt></td>
+      <td>Back up, so that  <tt>[bcd]*</tt> matches
+one less character.</td>
+<tr><td align=center>5</td>
+      <td><i>Failure</i></td>
+      <td>Try <tt>b</tt> again, but the
+current position is at the last character, which is a "<tt>d</tt>".</td>
+<tr><td align=center>6</td>
+      <td><tt>abc</tt></td>
+      <td>Back up again, so that  <tt>[bcd]*</tt> is
+only matching "<tt>bc</tt>".</td>
+<tr><td align=center>6</td>
+      <td><tt>abcb</tt></td>
+      <td>Try <tt>b</tt> again.  This time 
+but the character at the current position is "<tt>b</tt>", so it succeeds.</td>
+
+</table>
+
+<P>
+The end of the RE has now been reached, and it has matched
+"<tt>abcb</tt>".  This demonstrates how the matching engine goes as far as
+it can at first, and if no match is found, it will then progressively
+back up and retry the rest of the RE again and again.  It will back up
+until it's tried zero matches for <tt>[bcd]*</tt>, and if that
+subsequently fails, it will conclude that the string doesn't match the
+RE at all.
+
+<P>
+Another repeating metacharacter is <tt>+</tt>, which matches one or
+more times.  Pay careful attention to the difference between
+<tt>*</tt> and 
+<BR>
+regexp+; <tt>*</tt> matches <i>zero</i> or more
+times, so whatever's being repeated may not be present at all, while
+<tt>+</tt> requires at least <i>one</i> occurrence.  To use a similar
+example, <tt>ca+t</tt> will match "<tt>cat</tt>" (1 "<tt>a</tt>"),
+"<tt>caaat</tt>" (3 "<tt>a</tt>"'s), but won't match "<tt>ct</tt>".
+
+<P>
+There are two more repeating qualifiers.  The question mark character,
+<tt>?</tt>, matches either once or zero times; you can think of it as
+marking something as being optional.  For example, <tt>home-?brew</tt>
+matches either "<tt>homebrew</tt>" or "<tt>home-brew</tt>".  
+
+<P>
+The most complicated repeated qualifier is
+<tt>{<i>m</i>,<i>n</i>}</tt>, where <i>m</i> and <i>n</i> are decimal
+numbers.  This means there must be at least <i>m</i> repetitions, and
+at most <i>n</i>.  For example, <tt>a/{1,3}b</tt> 
+will match "<tt>a/b</tt>", "<tt>a//b</tt>", and "<tt>a///b</tt>".  
+It won't match "<tt>ab</tt>", which has no slashes, or "<tt>a////b</tt>",
+which has four.
+
+<P>
+You can omit <i>n</i> (but not <i>m</i>); omitting <i>n</i> results in an
+upper bound of infinity -- actually, the 2 billion limit mentioned
+earlier, but that might as well be infinity.
+
+<P>
+Readers of a reductionist bent may notice that the 3 other qualifiers
+can all be expressed using this notation.  
+<tt>{0,}</tt> is the same as <tt>*</tt>,
+<tt>{1,}</tt> is equivalent to <tt>+</tt>,
+and <tt>{0,1}</tt> is the same as <tt>?</tt>.  It's better to use
+<tt>*</tt>, <tt>+</tt>, or <tt>?</tt>, simply because they're shorter
+and easier to read.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html108"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html105"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html101"
+ HREF="node4.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html107"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html109"
+ HREF="node6.html">3. Using Regular Expressions</A>
+<b>Up:</b> <A NAME="tex2html106"
+ HREF="node3.html">2. Simple Patterns</A>
+<b>Previous:</b> <A NAME="tex2html102"
+ HREF="node4.html">2.1 Matching Characters</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

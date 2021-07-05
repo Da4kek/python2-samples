@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>2.10 mactcp -- The MacTCP interfaces</title>
+<META NAME="description" CONTENT="2.10 mactcp -- The MacTCP interfaces">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="mac.css">
+<LINK REL="next" href="module-macspeech.html">
+<LINK REL="previous" href="module-findertools.html">
+<LINK REL="up" href="macpython-modules.html">
+<LINK REL="next" HREF="node41.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-findertools.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="macpython-modules.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node41.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Macintosh Library Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-findertools.html">2.9 findertools  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="macpython-modules.html">2. MacPython Modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node41.html">2.10.1 TCP Stream Objects</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0041000000000000000000">
+2.10 <tt class="module">mactcp</tt> --
+         The MacTCP interfaces</A>
+</H1>
+
+<P>
+  
+<p class='availability'>Availability: <span
+ class='platform'>Macintosh</span>.</p>
+
+<P>
+This module provides an interface to the Macintosh TCP/IP driver MacTCP. There is an accompanying module,
+<tt class='module'><a href='module-macdnr.html'>macdnr</a></tt>, which provides an interface
+to the name-server (allowing you to translate hostnames to IP
+addresses), a module <tt class="module">MACTCPconst</tt>
+which has symbolic names for constants constants used by MacTCP. Since
+the built-in module <tt class="module">socket</tt> is also
+available on the Macintosh it is usually easier to use sockets instead
+of the Macintosh-specific MacTCP API.
+
+<P>
+A complete description of the MacTCP interface can be found in the
+Apple MacTCP API documentation.
+
+<P>
+<dl><dt><b><a name='l2h-130'><tt class='function'>MTU</tt></a></b> ()
+<dd>
+Return the Maximum Transmit Unit (the packet size) of the network
+interface.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-131'><tt class='function'>IPAddr</tt></a></b> ()
+<dd>
+Return the 32-bit integer IP address of the network interface.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-132'><tt class='function'>NetMask</tt></a></b> ()
+<dd>
+Return the 32-bit integer network mask of the interface.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-133'><tt class='function'>TCPCreate</tt></a></b> (<var>size</var>)
+<dd>
+Create a TCP Stream object. <var>size</var> is the size of the receive
+buffer, <code>4096</code> is suggested by various sources.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-134'><tt class='function'>UDPCreate</tt></a></b> (<var>size, port</var>)
+<dd>
+Create a UDP Stream object. <var>size</var> is the size of the receive
+buffer (and, hence, the size of the biggest datagram you can receive
+on this port). <var>port</var> is the UDP port number you want to receive
+datagrams on, a value of zero will make MacTCP select a free port.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html684"
+  HREF="node41.html">2.10.1 TCP Stream Objects</A>
+<LI><A NAME="tex2html685"
+  HREF="node42.html">2.10.2 TCP Status Objects</A>
+<LI><A NAME="tex2html686"
+  HREF="node43.html">2.10.3 UDP Stream Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-findertools.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="macpython-modules.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node41.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Macintosh Library Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-findertools.html">2.9 findertools  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="macpython-modules.html">2. MacPython Modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node41.html">2.10.1 TCP Stream Objects</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

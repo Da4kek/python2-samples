@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2.1 Built-in Types </TITLE>
+<META NAME="description" CONTENT="2.1 Built-in Types ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-exceptions.html">
+<LINK REL="previous" HREF="builtin.html">
+<LINK REL="up" HREF="builtin.html">
+<LINK REL="next" HREF="truth.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html551"
+ HREF="truth.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html547"
+ HREF="builtin.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html541"
+ HREF="builtin.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html549"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html550"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html552"
+ HREF="truth.html">2.1.1 Truth Value Testing</A>
+<b>Up:</b> <A NAME="tex2html548"
+ HREF="builtin.html">2. Built-in Types, Exceptions</A>
+<b>Previous:</b> <A NAME="tex2html542"
+ HREF="builtin.html">2. Built-in Types, Exceptions</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION004100000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Built-in Types 
+</H1>
+
+<P>
+The following sections describe the standard types that are built into
+the interpreter.  These are the numeric types, sequence types, and
+several others, including types themselves.  There is no explicit
+Boolean type; use integers instead.
+<a name="l2h-108"></a>
+<a name="l2h-110"></a>
+
+<P>
+Some operations are supported by several object types; in particular,
+all objects can be compared, tested for truth value, and converted to
+a string (with the <tt>`...`</tt> notation).  The latter conversion is
+implicitly used when an object is written by the <tt>print</tt> statement.
+<a name="l2h-"></a>
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html553"
+ HREF="truth.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Truth Value Testing </A>
+<LI><A NAME="tex2html554"
+ HREF="boolean.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Boolean Operations </A>
+<LI><A NAME="tex2html555"
+ HREF="comparisons.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Comparisons </A>
+<LI><A NAME="tex2html556"
+ HREF="typesnumeric.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN> Numeric Types </A>
+<UL>
+<LI><A NAME="tex2html557"
+ HREF="Bit-string_Operations.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Bit-string Operations on Integer Types</A>
+</UL>
+<LI><A NAME="tex2html558"
+ HREF="typesseq.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN> Sequence Types </A>
+<UL>
+<LI><A NAME="tex2html559"
+ HREF="node12.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> More String Operations</A>
+<LI><A NAME="tex2html560"
+ HREF="node13.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Mutable Sequence Types</A>
+</UL>
+<LI><A NAME="tex2html561"
+ HREF="typesmapping.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN> Mapping Types </A>
+<LI><A NAME="tex2html562"
+ HREF="typesother.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN> Other Built-in Types </A>
+<UL>
+<LI><A NAME="tex2html563"
+ HREF="node16.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Modules</A>
+<LI><A NAME="tex2html564"
+ HREF="Classes_and_Instances.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Classes and Class Instances</A>
+<LI><A NAME="tex2html565"
+ HREF="node18.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> Functions</A>
+<LI><A NAME="tex2html566"
+ HREF="node19.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> Methods</A>
+<LI><A NAME="tex2html567"
+ HREF="bltin-code-objects.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> Code Objects </A>
+<LI><A NAME="tex2html568"
+ HREF="bltin-type-objects.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">6</SPAN> Type Objects </A>
+<LI><A NAME="tex2html569"
+ HREF="bltin-null-object.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">7</SPAN> The Null Object </A>
+<LI><A NAME="tex2html570"
+ HREF="bltin-ellipsis-object.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">8</SPAN> The Ellipsis Object </A>
+<LI><A NAME="tex2html571"
+ HREF="bltin-file-objects.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">9</SPAN> File Objects </A>
+<LI><A NAME="tex2html572"
+ HREF="node25.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">10</SPAN> Internal Objects</A>
+</UL>
+<LI><A NAME="tex2html573"
+ HREF="specialattrs.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">8</SPAN> Special Attributes </A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html551"
+ HREF="truth.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html547"
+ HREF="builtin.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html541"
+ HREF="builtin.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html549"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html550"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html552"
+ HREF="truth.html">2.1.1 Truth Value Testing</A>
+<b>Up:</b> <A NAME="tex2html548"
+ HREF="builtin.html">2. Built-in Types, Exceptions</A>
+<b>Previous:</b> <A NAME="tex2html542"
+ HREF="builtin.html">2. Built-in Types, Exceptions</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

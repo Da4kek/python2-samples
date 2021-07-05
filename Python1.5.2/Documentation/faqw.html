@@ -1,0 +1,938 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+   "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<title>The Whole CGI FAQ</title>
+</head>
+<body background="http://www.python.org/pics/BlueShort.gif" bgcolor="#FFFFFF"
+text="#000000" link="#0000aa" vlink="#6A6A90">
+
+<h1>The Whole CGI FAQ</h1>
+<p>
+</p>
+<hr>
+
+
+<h2>1. Server Configuration and CGI Alternatives</h2>
+<ul>
+<li>
+<a href="#1.1">1.1. How do I configure the web server to run my scripts?</a>
+</li>
+<li>
+<a href="#1.2">1.2. How do I debug my scripts?</a>
+</li>
+<li>
+<a href="#1.3">1.3. Using Python for CGI on Microsoft Windows</a>
+</li>
+<li>
+<a href="#1.4">1.4. Can I use FastCGI with Python?</a>
+</li>
+<li>
+<a href="#1.5">1.5. Can I write Netscape WAI apps in Python?</a>
+</li>
+<li>
+<a href="#1.6">1.6. What's this Bobo thing i've heard about?</a>
+</li>
+<li>
+<a href="#1.7">1.7. Can I write Python CGI scripts for Apache/Win32?</a>
+</li>
+<li>
+<a href="#1.8">1.8. How to run .pyc files as CGI</a>
+</li>
+<li>
+<a href="#1.9">1.9. Problems with shared libraries and CGI scripts</a>
+</li>
+</ul>
+<p>
+</p>
+<hr>
+
+
+<h2>2. CGI Issues</h2>
+<ul>
+<li>
+<a href="#2.1">2.1. How do I write a CGI "Hello, World?"</a>
+</li>
+<li>
+<a href="#2.2">2.2. What are templates and how can I use them?</a>
+</li>
+<li>
+<a href="#2.3">2.3. What are cookies and how can I use them in my scripts?</a>
+</li>
+<li>
+<a href="#2.4">2.4. My CGI script doesn't work; from the command line it runs
+fine</a>
+</li>
+<li>
+<a href="#2.5">2.5. How do I run a delayed command from a CGI script?</a>
+</li>
+<li>
+<a href="#2.6">2.6. Is there a CGI tutorial?</a>
+</li>
+<li>
+<a href="#2.7">2.7. How can I validate an email address in my script?</a>
+</li>
+<li>
+<a href="#2.8">2.8. How do I upload files via CGI?</a>
+</li>
+<li>
+<a href="#2.9">2.9. How does a CGI script figure out (the browser name / IP
+address)?</a>
+</li>
+<li>
+<a href="#2.10">2.10. How can a CGI script output graphics, such as a GIF
+file?</a>
+</li>
+<li>
+<a href="#2.11">2.11.</a>
+</li>
+</ul>
+<hr>
+
+
+<h1>1. Server Configuration and CGI Alternatives</h1>
+<hr>
+
+
+<h2><a name="1.1">1.1. How do I configure the web server to run my
+scripts?</a></h2>
+
+You have two choices for running your Python scripts- either you can configure
+the server to run them ONLY from the cgi-bin directory, or you can set the
+server to run them from ANY location. There are definitely reasons for
+choosing either configuration, but I'll leave it at that for now. These
+instructions are specifically for the Apache 1.1.bx server.
+<p>
+A) If you want them to ONLY be run from the cgi-bin directory, change the line
+in access.conf from:</p>
+<p>
+&lt;Directory /usr/local/etc/httpd/cgi-bin> Options Indexes FollowSymLinks
+&lt;/Directory></p>
+<p>
+to:</p>
+<p>
+&lt;Directory /usr/local/etc/httpd/cgi-bin> Options FollowSymLinks ExecCGI
+&lt;/Directory> (substituting the REAL path to your cgi-bin directory
+here)</p>
+<p>
+B) If you want scripts to be run from any location in the html tree, comment
+out the above section from the access.conf file and put in a section that
+looks like:</p>
+<p>
+&lt;Directory /usr/local/etc/httpd/htdocs> Options All &lt;/Directory></p>
+<p>
+(again, replacing the path with your document root path)</p>
+<p>
+Also, add the line:</p>
+<p>
+AddHandler cgi-script .py</p>
+<p>
+to your srm.conf file.</p>
+<p>
+Finally, make sure your script has the world-executable and world-readable
+bits set! To do this, do a chmod ugo+rx myfile.py.</p>
+<p>
+Last changed on Mon Mar  2 20:21:43 1998 by <a
+href="mailto:davem@magnet.com">dave mitchell</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="1.2">1.2. How do I debug my scripts?</a></h2>
+
+I personally use two main methods -
+<p>
+Do a "tail -f" on the file logs/error_log. This gives you a
+continuously-updated view of your error log, which is where all the output
+from your calls to sys.stderr.write() goes.</p>
+<p>
+Try to run your script from the shell-prompt. Many times it is easier to find
+the location of a syntax error by running the script directly, as opposed to
+trying to find it from the error log. You may need to set several CGI
+environment variables in order for your script to run as far as the error.
+Your program should have the above</p>
+<p>
+</p>
+<pre> if (__name__ == "__main__"): 
+   main()</pre>
+
+bit of code in it, so that you can import your module and test it
+interactively. Oftentimes trying to run your script manually will expose
+errors like your script trying to import a module that isn't in the scripts
+library path.
+<p>
+If your script uses the cgi.FieldStorage class for form input, you'll need to
+set the environment variables REQUEST_METHOD and QUERY_STRING appropriately
+before running your script from the command line. Otherwise your script will
+appear to hang if you try to run it interactively, but when you hit control-c,
+it will give something like the following traceback:</p>
+<p>
+</p>
+<pre> Traceback (innermost last):
+   File "./letter.py", line 93, in ?
+     main()
+   File "./letter.py", line 23, in main
+     form = cgi.FieldStorage()
+   File "/usr/local/lib/python1.4/cgi.py", line 822, in __init__
+     self.read_single()
+   File "/usr/local/lib/python1.4/cgi.py", line 901, in read_single
+     self.read_lines()
+   File "/usr/local/lib/python1.4/cgi.py", line 925, in read_lines
+     self.read_lines_to_eof()
+   File "/usr/local/lib/python1.4/cgi.py", line 930, in read_lines_to_eof
+     line = self.fp.readline()
+ KeyboardInterrupt</pre>
+
+For example, if your script is expecting a form called "page" to be submitted,
+and you want it set to "info", set the environment like this:
+<p>
+</p>
+<pre>  setenv REQUEST_METHOD "GET"
+  setenv QUERY_STRING "page=info"</pre>
+
+This is of course under unix only. (sorry!)
+<p>
+See also question 2.4 for what to do if you don't even get this far...</p>
+<p>
+Last changed on Mon Mar 30 15:19:46 1998 by <a
+href="mailto:guido@python.org">GvR</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="1.3">1.3. Using Python for CGI on Microsoft Windows</a></h2>
+
+[Due to Aaron Watters] On the Microsoft IIS server or on the Win95 MS Personal
+Web Server you set up python in the same way that you would set up any other
+scripting engine.
+<p>
+Run regedt32 and go to:</p>
+<p>
+</p>
+<pre>  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W3SVC\Parameters\ScriptMap </pre>
+
+and enter the following line (making any specific changes that your system may
+need)
+<p>
+</p>
+<pre>  .py :REG_SZ: c:\&lt;path to python>\python.exe -u %s %s </pre>
+
+This line will allow you to call your script with a simple reference like:
+http://yourserver/scripts/yourscript.py provided "scripts" is an "executable"
+directory for your server (which it usually is by default). The "-u" flag
+specifies unbuffered and binary mode for stdin - needed when working with
+binary data
+<p>
+In addition, it is recommended by people who would know that using ".py" may
+not be a good idea for the file extensions when used in this context (you
+might want to reserve *.py for support modules and use *.cgi or *.cgp for
+"main program" scripts). However, that issue is beyond this Windows FAQ
+entry.</p>
+<p>
+Netscape Servers: Information on this topic exists at: <a
+href="http://home.netscape.com/comprod/server_central/support/fasttrack_man/programs.htm#1010870">http://home.netscape.com/comprod/server_central/support/fasttrack_man/programs.htm#1010870</a></p>
+<p>
+</p>
+<p>
+------------------------------------------------------------------------</p>
+<p>
+[addendum contributed by Carl Feynmann]</p>
+<p>
+If you are using the Personal Web Server under Windows 95, you may be using a
+version that does not support running CGI scripts. There are actually two
+versions of Personal Web Server: the Front Page Personal Web Server, and the
+Microsoft Personal Web Server. The former will not run files from the
+'scripts' directory; it fails with an obscure message about the directory
+being unreadable. You can tell whether you are running the good version of the
+server by looking in the task bar, in the little tray next to the clock. If it
+contains an icon that says 'Personal Web Server' when you slide the mouse over
+it, you have the good one.</p>
+<p>
+There are two ways you might have gotten the bad server: either you installed
+version 1.1 or earlier of Front Page, or, when installing, you did not check
+the boxes in the installer for 'Server Extensions'. The first case can
+supposedly be fixed by getting a Front Page 98 CD-ROM and looking in the
+directory \PWS\UPGRADE for lengthly directions. I have verified the directions
+were there, but haven't tried following them. The second case can be fixed by
+reinstalling Front Page 98, choosing a custom installation, and checking the
+boxes for 'Server Extensions Resource Kit' and 'Server Extensions
+Administration Pages'.</p>
+<p>
+Last changed on Wed Jul 15 11:20:37 1998 by <a
+href="mailto:davem@magnet.com">Dave Mitchell</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="1.4">1.4. Can I use FastCGI with Python?</a></h2>
+
+Yes. The best place to go for Python FastCGI support is at <a
+href="http://www.digicool.com/releases/fcgi">http://www.digicool.com/releases/fcgi</a>/.
+<p>
+If you're not sure what FastCGI is, see <a
+href="http://www.fastcgi.com">http://www.fastcgi.com</a>.</p>
+<p>
+There is also an all Python (no extension module required) implementation of
+the FastCGI application interface located at <a
+href="http://starship.skyport.net/crew/robind/python">http://starship.skyport.net/crew/robind/python</a>/.</p>
+<p>
+Last changed on Thu Apr  9 23:47:23 1998 by <a
+href="mailto:robind@eathling.net">Robin Dunn</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="1.5">1.5. Can I write Netscape WAI apps in Python?</a></h2>
+
+Yes! Try the Netscape WAI module for Python, which you can get from python.org
+at <a
+href="http://www.python.org/ftp/python/contrib/Web/waimodule-0.1.tar.gz">http://www.python.org/ftp/python/contrib/Web/waimodule-0.1.tar.gz</a>
+<p>
+WAI is Netscape's hopeful successor to their NSAPI server extension mechanism.
+It allows server apps to be run either internally or externally to the server
+process, and to be either started manually or automatically by the server when
+needed.</p>
+<p>
+Two cool features about WAI apps are:</p>
+<pre>  1- apps can be run on separate machines from the web server</pre>
+
+(subject to security concerns of course. netscape doesn't recommend this
+unless you've thought it out well). I used this feature to run "snoop" apps on
+SGI Indys around Magnet so I could look out each of four different cameras
+located on those boxes, all through urls on the same web server.
+<p>
+</p>
+<pre>  2- through the "osagent" tool, multiple apps can be started,</pre>
+
+supporting app redundancy. If one goes down, requests will be automatically
+rerouted to another instance. I haven't personally tried this, but I assume
+you'd assume responsibility in your code for making sure the state between all
+running apps is consistent.
+<p>
+Netscape has included C, C++, and Java bindings with Enterprise-3.0. The
+Python WAI interface provides a binding nearly identical to the Java one,
+implemented in C. Unfortunately, i've not been able to compile a functional
+shared module version of this, so the included Makefile gives you a new python
+interpreter with a statically bound version of the module. If someone manages
+to get a shared version working I would be very grateful to hear about it!</p>
+<p>
+The basic idea behind writing a WAI app is you subclass from
+wai.WebApplicationInterface, and provide a Run() method in your class. This
+method is called for each incoming web request, and receives a
+HTTPServiceRequest object, containing the various request information, such as
+headers and cgi variables. A WAIFieldStorage object is provided in the
+waicgi.py module which can parse submitted form information into a real
+cgi.FieldStorage object which you can handle in the same old cgi fashion.</p>
+<p>
+Thus, converting a cgi program to a (much much faster) WAI application is
+usually just a matter of moving initialization calls into your app class's
+__init__() method, and calling your old main() method from the app class's
+Run() method after creating the new WAIFieldStorage object.</p>
+<p>
+So far unfortunately i've had trouble in trying to change the WAI app's http
+result code to anything but 200. If I set it to anything else, via the
+HTTPServiceRequest.setResponseStatus() method, the server goes haywire,
+starting new wai processes for EACH request, until a dozen or so appear, at
+which time the server basically quits responding. I looked into the problem,
+but didn't solve anything. A test program using the C interface worked
+properly, yet the Python one did not.. :( Again, if anyone gets this to work
+properly, I would appreciate hearing about it!</p>
+<p>
+Last changed on Mon Mar 30 14:51:43 1998 by <a
+href="mailto:davem@magnet.com">davem</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="1.6">1.6. What's this Bobo thing i've heard about?</a></h2>
+
+(stolen from a post to the python list)
+<p>
+Bobo has been incorporated into Zope, available on this CDROM. See
+Applications/Zope for both the</p>
+<p>
+Windows95/NT and Unix versions. </p>
+<p>
+</p>
+<p>
+We now return you to the FAQ entry:</p>
+<p>
+</p>
+<p>
+> Has anyone got any experience of using Bobo or Persistant CGI from > Digital
+Creations (<a href="http://www.digicool.com">http://www.digicool.com</a>). Any
+thoughts? - danny.</p>
+<p>
+I have been using Bobo for over a year for commercial projects and I can
+safely say that it has changed my life ;-) Bobo is simple and powerful and
+provides a brilliant antidote to clumsy, convoluted, and brittle CGI
+programming. Bobo allows you to focus on object-oriented programming without
+worrying much about the details of CGI plumbing.</p>
+<p>
+If you've ever written a CGI program in python that's more than 25 lines of
+code, you owe it to yourself to check out Bobo. A great place to start is the
+Introduction to Bobo written for Ken McDonald's forthcoming Quick Python Book
+from Manning Publications. (<a
+href="http://www.digicool.com/releases/bobo/intro">http://www.digicool.com/releases/bobo/intro</a>/)</p>
+<p>
+After that, take a look at Jim Fulton's tutorial (<a
+href="http://www.digicool.com/releases/bobo/Tutorial">http://www.digicool.com/releases/bobo/Tutorial</a>/).
+An important thing to remember as you start exploring Bobo is that it is
+actually an ORB, not a CGI program framework.</p>
+<p>
+Bobo starts simple, but you can get pretty complex if you want, especially if
+you choose to use DocumentTemplate (a very complete facility for generating
+HTML), BoboPOS (a flexible object store), or long running processes.</p>
+<p>
+That said, there are a few gotchas that are pretty well documented, but should
+be pointed out. Apache has a little trouble with Bobo's authentication scheme,
+this is fixed in apache 1.3, but requires a patch for earlier versions (you
+don't need the patch if you don't want to do authentication). The patch can be
+found at <a
+href="ftp://ftp.digicool.com/pub/releases/ServerPatches">ftp://ftp.digicool.com/pub/releases/ServerPatches</a>/
+Also, Bobo requires a small bit of tweaking to work with windows since Bobo
+normally uses symbolic links. However there are a couple simple solutions to
+this problem. (<a
+href="http://www.digicool.com/releases/bobo/Win32">http://www.digicool.com/releases/bobo/Win32</a>/)</p>
+<p>
+A good source of timely information on Bobo is the Bobo mailing list which is
+archived by findmail (<a
+href="http://www.findmail.com/listsaver/bobo">http://www.findmail.com/listsaver/bobo</a>/)</p>
+<p>
+(posted by Amos Latteier 3/5/1998)</p>
+<p>
+Last changed on Mon Sep 28 01:54:43 1998 by <a
+href="mailto:michaelo@dnai.com">Michael Olivier</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="1.7">1.7. Can I write Python CGI scripts for
+Apache/Win32?</a></h2>
+
+Yes, a short description is available at:
+<p>
+</p>
+<pre>  <a href="http://starship.skyport.net/crew/jbauer/apachenotes">http://starship.skyport.net/crew/jbauer/apachenotes</a>/</pre>
+
+Of utmost importance is to make certain that you're using Python in unbuffered
+mode (SetEnv PYTHONUNBUFFERED 1) and to set (or pass) PYTHONPATH as a system
+environment variable. Forgetting to set either of these parameters is the most
+common reason for "premature end of header" errors.
+<p>
+Last changed on
+Thu Apr  9 09:13:48 1998 by <a href="mailto:jeffbauer@bigfoot.com">Jeff
+Bauer</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="1.8">1.8. How to run .pyc files as CGI</a></h2>
+
+I configured my local Apache server to run ".pyc" files as CGI scripts. This
+is quite handy, since you don't need to make .py files executable. They are
+simply files which don't run.
+<p>
+The runnable version is the ".pyc" file.</p>
+<p>
+Advantages: You are forced to compile your .py file before with something like
+...: python -c "import mymodule" and the code in the .pyc is at least
+guaranteed syntactically ok. Execution speed might be a bit better when you
+have large main scripts. It becomes easier to have readable and executable
+files in the same directory.</p>
+<p>
+Furthermore you can extend the script below to do various additional checks
+before running the actual script.</p>
+<p>
+Modifications for Apache:</p>
+<p>
+</p>
+<pre> 1) In /httpd/conf/mime.types, insert a line which reads</pre>
+<pre> application/x-python-compiled  pyc</pre>
+<pre> 2) In /httpd/conf/srm.conf, insert a line like this:</pre>
+<pre> Action application/x-python-compiled /cgi-bin/pyc_exec</pre>
+
+This tells to start the script "pyc_exec" always when a .pyc file is
+requested. This script could be a shell script which calls Python with the
+.pyc as command line parameter, but I found it nicer and more efficient to
+load the .pyc from a Python script. As the default action when the script
+should give an error, I print out all the environment variables. Perhaps this
+should be enhanced to print a traceback as well. Comments are welcome.
+<p>
+Here is the "pyc_exec" python script which goes into cgi-bin:</p>
+<p>
+</p>
+<pre> ------------------------------------------------------------
+ #! /usr/local/bin/python</pre>
+<pre> import os, imp
+ try :
+        _script_ = "no script given"
+        _script_ = os.environ["PATH_TRANSLATED"]
+        try :
+                _mode_ = "rb"
+                _file_ = open(_script_, _mode_)
+                imp.load_module("__main__", _file_, _script_, \
+                        ("pyc", _mode_, imp.PY_COMPILED) )
+        finally :
+                _file_.close()
+ except :
+        print "Content-type: text/html\n"
+        print "&lt;html>&lt;title>Error encountered during Script execution&lt;/title>"
+        print "&lt;body>"
+        print "&lt;H2>Script = '%s'&lt;/H2>" % _script_
+        print "&lt;pre>"
+        for name, value in os.environ.items():
+                print "%s\t= %s" % (name, value)
+        print "&lt;/pre>&lt;/body>&lt;/html>"
+ ------------------------------------------------------------</pre>
+<p>
+Last changed on Mon Apr 20 10:01:40 1998 by <a
+href="mailto:tismer@appliedbiometrics.com">Christian Tismer</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="1.9">1.9. Problems with shared libraries and CGI scripts</a></h2>
+
+Occasionally, people run into problems with Python CGIs using modules which
+require a specific shared library. Usually the problem manifests as a script
+unable to find the shared library (the .so or .sl file).
+<p>
+After some newsgroup discussion, it was concluded that a simple shell script
+which set some environment variables for the linker (most commonly,
+LD_LIBRARY_PATH) and then started the Python script was the easiest
+solution.</p>
+<p>
+Note that it might also be possible to set environment variables using some
+directives in you httpd setup. For Apache, the env module supports this;
+consult the documentation at <a
+href="http://www.apache.org/docs/mod/mod_env.html">http://www.apache.org/docs/mod/mod_env.html</a>
+for details.</p>
+<p>
+Last changed on Mon Jan 11 11:19:15 1999 by <a
+href="mailto:akuchling@acm.org">A.M. Kuchling</a></p>
+<p>
+</p>
+<hr>
+
+
+<h1>2. CGI Issues</h1>
+<hr>
+
+
+<h2><a name="2.1">2.1. How do I write a CGI "Hello, World?"</a></h2>
+
+The following CGI script will output "Hello, World!" on your browser window.
+<p>
+</p>
+<pre> #!/usr/local/bin/python
+ # for unix of course</pre>
+<pre> def main():
+   print "Content-type: text/html"
+   print
+   print "&lt;TITLE> Hello, World!&lt;/TITLE>"
+   print "Hello, World!"</pre>
+<pre> if (__name__ == "__main__"):
+   main()</pre>
+<p>
+Last changed on Sat Mar 28 11:44:41 1998 by <a
+href="mailto:guido@python.org">GvR</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="2.2">2.2. What are templates and how can I use them?</a></h2>
+
+HTML templates are a way to take all the HTML out of your program and put it
+into a separate file.
+<p>
+(thanks to Skip Montanaro for the inspiration)</p>
+<p>
+Probably the easiest way to use html templates with your Python CGI's is to
+use Python's built-in dictionary key substitution mechanism for strings.</p>
+<p>
+The way to do this is to use the % operator for strings, which works much like
+printf() syntax does in C. The documentation for this can be found at  <a
+href="http://www.python.org/doc/tut/node45.html#SECTION008100000000000000000">../documentation/tut/node45.html</a></p>
+<p>
+In short, your template file, called maybe "template.txt" will look something
+like:</p>
+<p>
+</p>
+<p>
+</p>
+<pre>     &lt;pre>
+      Dear %(name)s,
+        We really like your %(feature)s, and have awarded you the 
+      %(feature)s-of-the-month award for %(month)s %(year)s. From all 
+      of us here at Acme Awards, Congratulations!</pre>
+<pre>                                              %(closing)s,
+                                              Dave Mitchell
+     &lt;/pre></pre>
+<p>
+And your dictionary will look like this:</p>
+<p>
+</p>
+<pre>        def_dict = {'name': 'J.Q. Studmeyer',\
+                      'feature': 'long nose',\
+                      'month':        'April',\
+                      'year':         '1996',\
+                      'closing':      'very truly yours'}</pre>
+<p>
+So later in your code, when you say</p>
+<p>
+</p>
+<pre>  templ = open("template.txt").read()
+  print templ%(def_dict)</pre>
+
+Your program will spit out:
+<p>
+</p>
+<pre>     &lt;pre>
+      Dear J.Q. Studmeyer,
+        We really like your long nose, and have awarded you the 
+      long nose-of-the-month award for April 1996. From all 
+      of us here at Acme Awards, Congratulations!</pre>
+<pre>                                              very truly yours,
+                                              Dave Mitchell
+     &lt;/pre></pre>
+
+Cool? Cool.
+<p>
+Last changed on
+Tue Nov 24 11:51:12 1998 by <a href="mailto:davem@magnet.com">davem</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="2.3">2.3. What are cookies and how can I use them in my
+scripts?</a></h2>
+
+Cookies, or netscape-cookies as they are sometimes called, implement a scheme
+for web applications to store program state in the web client.
+<p>
+Each cookie contains several bits of information such as a variable name, a
+value, an expiration date, and a path.</p>
+<p>
+The way the cookie works is whenever you request a url from a site, any cookie
+that your browser is holding that is applicable is sent to the server along
+with the request. This allows the server-side program to do things like track
+a user's path through a site, or to provide authentication information such as
+a user-id. Of course there are security concerns, so you don't want to be
+storing things in a cookie that you really want to keep secret.</p>
+<p>
+The variable name and value are what you'd expect. There are limits on the
+size of the name and value as well. I believe the value must be shorter than
+2k in length, and the size of all cookies from one site must be shorter than
+20k total. (please correct me if this is wrong).</p>
+<p>
+The path determines the locations on the site for while your cookie is valid.
+For example, if your application lives at the url "/cgi-bin/myapp/myapp.cgi",
+and it sets a cookie whose path is "/", then that cookie will be sent when you
+visit any url on the whole site.</p>
+<p>
+The expiration date determines how long the cookie is valid for (or at least
+the maximum lifetime for it).</p>
+<p>
+For a fuller explanation of the cookie protocol and uses, see Netscape's
+documentation at <a
+href="http://devedge.netscape.com/library/documentation/communicator/jsguide4/cookies.htm">http://devedge.netscape.com/library/documentation/communicator/jsguide4/cookies.htm</a></p>
+<p>
+To use cookies in your Python CGI scripts, Tim O'Malley maintains the module
+"Cookie.py", which you can get from <a
+href="ftp://ftp.bbn.com/pub/timo/python/Cookie.py">ftp://ftp.bbn.com/pub/timo/python/Cookie.py</a></p>
+<p>
+Using Cookie.py is pretty easy. In it, cookies work somewhat like python
+dictionaries or the cgi FieldStorage class. To create a new cookie, you just
+do something like</p>
+<p>
+>>> x = Cookie.Cookie()</p>
+<p>
+To set values in your new cookie, you just assign them, like</p>
+<p>
+>>> x['dave'] = "great"</p>
+<p>
+To get these cookies sent to the user's browser, you just "print" them before
+your initial "Content-type" header. If you do it after this point, they won't
+stick, and they'll likely appear in the browser window along with your script
+output. If this happens you know it didn't work ;)</p>
+<p>
+>>> print C</p>
+<p>
+Set-Cookie: dave="great";</p>
+<p>
+Finally, a word of advice about cookies: the public has been scared by
+alarmist articles in the news about how cookies are "stealing" your privacy
+and credit card numbers and waist size, etc.. This just isn't true. Cookies
+can only contain information that is otherwise known to the server or that you
+entered into a form yourself. It can't just pull your credit card number and
+waist size down from thin air. Another thing to know, many people actually do
+turn on cookie warnings on their browsers, at least for a few days until they
+get so sick of having to click "confirm" that they either enable or disable
+them completely. You can't count on cookies to store your state. Unless you
+have to, either don't use them, or use them only for a shortcut to information
+that you could get some other way.</p>
+<p>
+Last changed on
+Wed May 13 16:51:20 1998 by <a href="mailto:jeffbauer@bigfoot.com">Jeff
+Bauer</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="2.4">2.4. My CGI script doesn't work; from the command line it
+runs fine</a></h2>
+
+(See also question 1.2 on debugging.)
+<p>
+In other words, the same command or the same script works when you test it out
+manually, but when you install it as a CGI script, nothing happens.</p>
+<p>
+Some possible causes:</p>
+<p>
+- Your CGI script is run as user "nobody". This user generally has minimal
+permissions.  If you are reading or writing files, the files or directories
+may not have the needed permissions.</p>
+<p>
+- Your ISP is running CGI scripts on a different machine than where you log in
+to access the shell, and Python is not installed correctly there.</p>
+<p>
+To debug this situation, it helps tremendously if you have access to the http
+server's error_log file (for apache servers, this is often in
+/usr/local/etc/httpd/logs/error_log, or a similar name).</p>
+<p>
+Also make sure to read the section on debugging in the library manual section
+for the cgi module, or in the doc string in cgi.py; it contains some hints
+about systematic debugging of CGI scripts.</p>
+<p>
+Last changed on
+Mon Mar 30 14:48:05 1998 by <a href="mailto:guido@python.org">GvR</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="2.5">2.5. How do I run a delayed command from a CGI
+script?</a></h2>
+
+For example, say you want to run a command that updates a database after
+you've verified the user input, but it's slow so you want the CGI script to
+complete and continue the database update in the background.
+<p>
+If you try this naively, e.g. using</p>
+<p>
+</p>
+<pre>    os.system("some_command &amp;")</pre>
+
+you will find that some web servers wait until the command completes, thereby
+defeating the purpose!
+<p>
+The reason is that the background command still has stdout and stderr open. 
+The solution is to close these after the fork.  In the above example, this
+should work (using Unix Bourne shell syntax):</p>
+<pre>    os.system(" some_command >/dev/null 2>&amp;1 &amp; ")</pre>
+
+If you're using os.fork() yourself, try os.close(1); os.close(2).
+<p>
+Last changed on Mon Mar 30 14:49:17 1998 by <a
+href="mailto:guido@python.org">GvR</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="2.6">2.6. Is there a CGI tutorial?</a></h2>
+
+There are a few sample scripts at <a
+href="http://www.vex.net/py_examples">http://www.vex.net/py_examples</a>/ that
+show Python being used for some simple applications including a forms handler
+modeled on the the perl script mailer.cgi by Matt Kruse (<a
+href="mailto:mkruse@saunix.sau.edu">&lt;mkruse@saunix.sau.edu></a>).  The
+following sites also have info on general CGI programming.
+<p>
+</p>
+<pre>   <a href="http://hoohoo.ncsa.uiuc.edu/cgi">http://hoohoo.ncsa.uiuc.edu/cgi</a>/
+   <a href="http://www.cgi-resources.com">http://www.cgi-resources.com</a>/ - resources, docs, books, examples
+   <a href="http://www.worldwidemart.com/scripts">http://www.worldwidemart.com/scripts</a>/ - a good deal of scripts
+   <a href="http://nswt.tuwien.ac.at">http://nswt.tuwien.ac.at</a>/
+   <a href="http://nswt.tuwien.ac.at/htdocs">http://nswt.tuwien.ac.at/htdocs</a>/
+   <a href="http://nswt.tuwien.ac.at/htdocs/www-security-faq">http://nswt.tuwien.ac.at/htdocs/www-security-faq</a>/</pre>
+<p>
+Last changed on
+Mon Apr 13 11:25:33 1998 by <a href="mailto:darcy@vex.net">D'Arcy J.M.
+Cain</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="2.7">2.7. How can I validate an email address in my
+script?</a></h2>
+
+This is a bit of a sticky wicket.. If you're looking to know for sure whether
+or not you've got a real and valid email address, the only way to know for
+sure is to send a mail and see if you get a response!
+<p>
+On the other hand, if you just want to make sure that the address isn't
+obviously malformed, and at least "looks" like a valid email address, you're
+in better shape.</p>
+<p>
+For this task, i've written module called email.py, which uses a carefully
+written regex to try and match the useful part out of the raw and usually
+bogus address that a clueless web user will input as "their email address".
+There's not much you can do when they enter</p>
+<p>
+</p>
+<pre>  <a href="http://members.aol.com/clueless/newbie.html">http://members.aol.com/clueless/newbie.html</a></pre>
+
+as their email, but when it's something a little more reasonable like
+<p>
+</p>
+<pre>  in%"<a href="mailto:davem@magnet.com">&lt;davem@magnet.com></a>"</pre>
+
+as it might appear on a VAX, this program can do that just fine.
+<p>
+Until I can upload it on python.org, you can get it from my home page at <a
+href="http://people.magnet.com/~davem/python/email.py">http://people.magnet.com/~davem/python/email.py</a></p>
+<p>
+Using it is simple. All you do is something like:</p>
+<p>
+</p>
+<pre>  >>> import email
+  >>> email.validate_email_addr('in%"<a href="mailto:davem@magnet.com">&lt;davem@magnet.com></a>"')
+  '<a href="mailto:davem@magnet.com">&lt;davem@magnet.com></a>'
+  >>> email.validate_email_addr("<a href="mailto:bogus@aol">&lt;bogus@aol></a>")
+  ''  </pre>
+
+In other words, if it can make sense of the email address, it returns the
+cleaned up one. Otherwise it returns the null string.
+<p>
+Last changed on
+Tue Apr  7 11:15:14 1998 by <a href="mailto:davem@magnet.com">davem</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="2.8">2.8. How do I upload files via CGI?</a></h2>
+
+A short description with code is available at:
+<p>
+</p>
+<pre>  <a href="http://starship.skyport.net/crew/jbauer/cgiupload">http://starship.skyport.net/crew/jbauer/cgiupload</a>/</pre>
+
+Bobo also provides a mechanism to perform CGI file uploads.
+<p>
+Last changed on
+Thu Apr  9 09:22:20 1998 by <a href="mailto:jeffbauer@bigfoot.com">Jeff
+Bauer</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="2.9">2.9. How does a CGI script figure out (the browser name / IP
+address)?</a></h2>
+
+CGI scripts get such information through environment variables, so you have to
+look for values in the os.environ dictionary. Try running the following as a
+CGI script to see a complete list of what your server provides.
+<p>
+</p>
+<pre>    #!/usr/local/bin/python
+    import os
+    print 'Content-type: text/plain\n\n'
+    for k,v in os.environ.items():
+        print k, v</pre>
+
+Some of the output from this CGI looks like:
+<p>
+</p>
+<pre>    SERVER_PORT 80
+    REMOTE_ADDR 10.27.10.38
+    SERVER_SOFTWARE Apache/1.3.1 (Unix)
+    GATEWAY_INTERFACE CGI/1.1
+    HTTP_ACCEPT_LANGUAGE en
+    REMOTE_PORT 54319
+    HTTP_USER_AGENT Mozilla/4.5 [en] (X11; I; SunOS 5.6 sun4u)
+    SERVER_PROTOCOL HTTP/1.0
+    SCRIPT_NAME /cgi-bin/t.cgi
+      ...</pre>
+
+So, for the browser, you need to examine os.environ['HTTP_USER_AGENT'], and
+for the remote IP address, you want os.environ['REMOTE_ADDR'].
+<p>
+(Note that someone may be running a weird browser that doesn't send a
+User-Agent HTTP header, so you may not be able to count on
+os.environ['HTTP_USER_AGENT'] always being there; code defensively,
+particularly when writing CGI scripts...</p>
+<p>
+Last changed on
+Mon Jan  4 09:52:03 1999 by <a href="mailto:akuchling@acm.org">A.M.
+Kuchling</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="2.10">2.10. How can a CGI script output graphics, such as a GIF
+file?</a></h2>
+
+Just tell the browser that you're sending an image by specifying the correct
+MIME-type:
+<p>
+</p>
+<pre>    import sys
+    image = open('my.gif','rb').read()
+    # HTTP Headers
+    sys.stdout.write('Content-type: image/gif\r\n')
+    # End-of-headers
+    sys.stdout.write('\r\n')
+    # Start of content
+    sys.stdout.write(image)</pre>
+
+Note that you can't use 'print image' since it would append a newline or a
+blank (in case you use 'print image,') which the browser might not like.
+<p>
+This examples reads the GIF from a file; it's also possible to produce
+graphics images through Python code, using a package such as the Python
+Imaging Library (<a
+href="http://www.python.org/sigs/image-sig/Imaging.html">http://www.python.org/sigs/image-sig/Imaging.html</a>).</p>
+<p>
+(Text from M.A. Lemburg.)</p>
+<p>
+Last changed on
+Tue Jan  5 14:34:30 1999 by <a href="mailto:akuchling@acm.org">A.M.
+Kuchling</a></p>
+<p>
+</p>
+<hr>
+
+
+<h2><a name="2.11">2.11.</a></h2>
+
+How can I kill an executing CGI?
+<p>
+Last changed on
+Fri Jan 22 04:23:33 1999 by <a
+href="mailto:andy@nilgiri.ltindia.com">Anand</a></p>
+<p>
+</p>
+<hr>
+
+
+<a href="http://www.python.org">Python home</a> / Feedback to <a
+href="mailto:davem@magnet.com">davem</a>
+</body>
+</html>

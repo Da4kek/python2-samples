@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1. Introduction</TITLE>
+<META NAME="description" CONTENT="1. Introduction">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="next" HREF="veryhigh.html">
+<LINK REL="previous" HREF="contents.html">
+<LINK REL="up" HREF="api.html">
+<LINK REL="next" HREF="includes.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html116"
+ HREF="includes.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html112"
+ HREF="api.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html106"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html114"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html115"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html117"
+ HREF="includes.html">1.1 Include Files</A>
+<b>Up:</b> <A NAME="tex2html113"
+ HREF="api.html">Python/C API Reference Manual</A>
+<b>Previous:</b> <A NAME="tex2html107"
+ HREF="contents.html">Contents</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION003000000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>. Introduction
+</H1>
+
+<P>
+The Application Programmer's Interface to Python gives C and C++
+programmers access to the Python interpreter at a variety of levels.
+The API is equally usable from C++, but for brevity it is generally
+referred to as the Python/C API.  There are two fundamentally
+different reasons for using the Python/C API.  The first reason is
+to write <i>extension modules</i> for specific purposes; these are
+C modules that extend the Python interpreter.  This is probably the
+most common use.  The second reason is to use Python as a component in
+a larger application; this technique is generally referred to as
+<i>embedding</i> Python in an application.
+
+<P>
+Writing an extension module is a relatively well-understood process, 
+where a ``cookbook'' approach works well.  There are several tools 
+that automate the process to some extent.  While people have embedded 
+Python in other applications since its early existence, the process of 
+embedding Python is less straightforward that writing an extension.  
+Python 1.5 introduces a number of new API functions as well as some 
+changes to the build process that make embedding much simpler.  
+This manual describes the 1.5.2 state of affairs.
+
+<P>
+Many API functions are useful independent of whether you're embedding 
+or extending Python; moreover, most applications that embed Python 
+will need to provide a custom extension as well, so it's probably a 
+good idea to become familiar with writing an extension before 
+attempting to embed Python in a real application.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html118"
+ HREF="includes.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Include Files</A>
+<LI><A NAME="tex2html119"
+ HREF="objects.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Objects, Types and Reference Counts</A>
+<UL>
+<LI><A NAME="tex2html120"
+ HREF="refcounts.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Reference Counts</A>
+<LI><A NAME="tex2html121"
+ HREF="types.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Types</A>
+</UL>
+<LI><A NAME="tex2html122"
+ HREF="exceptions.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Exceptions</A>
+<LI><A NAME="tex2html123"
+ HREF="embedding.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN> Embedding Python</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html116"
+ HREF="includes.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html112"
+ HREF="api.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html106"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html114"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html115"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html117"
+ HREF="includes.html">1.1 Include Files</A>
+<b>Up:</b> <A NAME="tex2html113"
+ HREF="api.html">Python/C API Reference Manual</A>
+<b>Previous:</b> <A NAME="tex2html107"
+ HREF="contents.html">Contents</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

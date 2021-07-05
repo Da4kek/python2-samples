@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4. ctb --
+Interface to the Communications Tool Box.</TITLE>
+<META NAME="description" CONTENT="4. ctb --
+Interface to the Communications Tool Box.">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="module-macconsole.html">
+<LINK REL="previous" HREF="module-macpath.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="connection-object.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html187"
+ HREF="connection-object.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html183"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html177"
+ HREF="module-macpath.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html185"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html186"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html188"
+ HREF="connection-object.html">4.1 connection object</A>
+<b>Up:</b> <A NAME="tex2html184"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html178"
+ HREF="module-macpath.html">3. macpath  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002400000000000000000">
+<SPAN CLASS="arabic">4</SPAN>. <tt>ctb</tt> --
+         Interface to the Communications Tool Box.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides a partial interface to the Macintosh
+Communications Toolbox. Currently, only Connection Manager tools are
+supported.  It may not be available in all Mac Python versions.
+<a name="l2h-167"></a><a name="l2h-168"></a><a name="l2h-169"></a>
+<P>
+<dl><dt><b><a name="l2h-171"><tt>error</tt></a></b>
+<dd>
+The exception raised on errors.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-174"><tt>cmData</tt></a></b>
+<dd>
+<dt><b><a name="l2h-175"><tt>cmCntl</tt></a></b><dd>
+<dt><b><a name="l2h-176"><tt>cmAttn</tt></a></b><dd>
+Flags for the <i>channel</i> argument of the <tt>Read()</tt> and
+<tt>Write()</tt> methods.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-182"><tt>cmFlagsEOM</tt></a></b>
+<dd>
+End-of-message flag for <tt>Read()</tt> and <tt>Write()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-187"><tt>choose*</tt></a></b>
+<dd>
+Values returned by <tt>Choose()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-191"><tt>cmStatus*</tt></a></b>
+<dd>
+Bits in the status as returned by <tt>Status()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-196"><tt>available</tt></a></b> ()
+<dd>
+Return <tt>1</tt> if the Communication Toolbox is available, zero otherwise.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-201"><tt>CMNew</tt></a></b> (<var>name, sizes</var>)
+<dd>
+Create a connection object using the connection tool named
+<i>name</i>. <i>sizes</i> is a 6-tuple given buffer sizes for data in,
+data out, control in, control out, attention in and attention out.
+Alternatively, passing <tt>None</tt> for <i>sizes</i> will result in
+default buffer sizes.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html189"
+ HREF="connection-object.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> connection object</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html187"
+ HREF="connection-object.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html183"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html177"
+ HREF="module-macpath.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html185"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html186"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html188"
+ HREF="connection-object.html">4.1 connection object</A>
+<b>Up:</b> <A NAME="tex2html184"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html178"
+ HREF="module-macpath.html">3. macpath  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

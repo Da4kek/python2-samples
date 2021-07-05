@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Python/C API Reference Manual</TITLE>
+<META NAME="description" CONTENT="Python/C API Reference Manual">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="next" HREF="front.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3"
+ HREF="front.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html1"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html2"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html4"
+ HREF="front.html">Front Matter</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<P>
+<h1 align=center>Python/C API Reference Manual</h1>
+<center>
+<p><strong>Guido van Rossum</strong></p>
+<p>
+	Corporation for National Research Initiatives (CNRI) 
+<BR>
+1895 Preston White Drive, Reston, Va 20191, USA 
+<BR>
+E-mail: <font face=sans-serif>guido@CNRI.Reston.Va.US</font>, <font face=sans-serif>guido@python.org</font>
+</p>
+<p><strong>October 21, 1998</strong><br><strong>Release 1.5.2</strong></p>
+</center>
+<p>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html5"
+ HREF="front.html">Front Matter</A>
+<LI><A NAME="tex2html6"
+ HREF="contents.html">Contents</A>
+<LI><A NAME="tex2html7"
+ HREF="intro.html"><SPAN CLASS="arabic">1</SPAN>. Introduction</A>
+<UL>
+<LI><A NAME="tex2html8"
+ HREF="includes.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Include Files</A>
+<LI><A NAME="tex2html9"
+ HREF="objects.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Objects, Types and Reference Counts</A>
+<LI><A NAME="tex2html10"
+ HREF="exceptions.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Exceptions</A>
+<LI><A NAME="tex2html11"
+ HREF="embedding.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN> Embedding Python</A>
+</UL>
+<LI><A NAME="tex2html12"
+ HREF="veryhigh.html"><SPAN CLASS="arabic">2</SPAN>. The Very High Level Layer</A>
+<LI><A NAME="tex2html13"
+ HREF="countingRefs.html"><SPAN CLASS="arabic">3</SPAN>. Reference Counting</A>
+<LI><A NAME="tex2html14"
+ HREF="exceptionHandling.html"><SPAN CLASS="arabic">4</SPAN>. Exception Handling</A>
+<UL>
+<LI><A NAME="tex2html15"
+ HREF="standardExceptions.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> Standard Exceptions</A>
+</UL>
+<LI><A NAME="tex2html16"
+ HREF="utilities.html"><SPAN CLASS="arabic">5</SPAN>. Utilities</A>
+<UL>
+<LI><A NAME="tex2html17"
+ HREF="os.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> OS Utilities</A>
+<LI><A NAME="tex2html18"
+ HREF="processControl.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Process Control</A>
+<LI><A NAME="tex2html19"
+ HREF="importing.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> Importing Modules</A>
+</UL>
+<LI><A NAME="tex2html20"
+ HREF="abstract.html"><SPAN CLASS="arabic">6</SPAN>. Abstract Objects Layer</A>
+<UL>
+<LI><A NAME="tex2html21"
+ HREF="object.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Object Protocol</A>
+<LI><A NAME="tex2html22"
+ HREF="number.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> Number Protocol</A>
+<LI><A NAME="tex2html23"
+ HREF="sequence.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN> Sequence Protocol</A>
+<LI><A NAME="tex2html24"
+ HREF="mapping.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">4</SPAN> Mapping Protocol</A>
+<LI><A NAME="tex2html25"
+ HREF="node24.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">5</SPAN> Constructors</A>
+</UL>
+<LI><A NAME="tex2html26"
+ HREF="concrete.html"><SPAN CLASS="arabic">7</SPAN>. Concrete Objects Layer</A>
+<UL>
+<LI><A NAME="tex2html27"
+ HREF="fundamental.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> Fundamental Objects</A>
+<LI><A NAME="tex2html28"
+ HREF="sequenceObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Sequence Objects</A>
+<LI><A NAME="tex2html29"
+ HREF="mapObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> Mapping Objects</A>
+<LI><A NAME="tex2html30"
+ HREF="numericObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">4</SPAN> Numeric Objects</A>
+<LI><A NAME="tex2html31"
+ HREF="otherObjects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> Other Objects</A>
+</UL>
+<LI><A NAME="tex2html32"
+ HREF="initialization.html"><SPAN CLASS="arabic">8</SPAN>. Initialization, Finalization, and Threads</A>
+<UL>
+<LI><A NAME="tex2html33"
+ HREF="threads.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> Thread State and the Global Interpreter Lock</A>
+</UL>
+<LI><A NAME="tex2html34"
+ HREF="newTypes.html"><SPAN CLASS="arabic">9</SPAN>. Defining New Object Types</A>
+<LI><A NAME="tex2html35"
+ HREF="debugging.html"><SPAN CLASS="arabic">10</SPAN>. Debugging</A>
+<LI><A NAME="tex2html36"
+ HREF="genindex.html">Index</A>
+<LI><A NAME="tex2html37"
+ HREF="about.html">About this document ...</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3"
+ HREF="front.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html1"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html2"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html4"
+ HREF="front.html">Front Matter</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

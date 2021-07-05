@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.22 dis --
+Disassembler.</TITLE>
+<META NAME="description" CONTENT="3.22 dis --
+Disassembler.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-site.html">
+<LINK REL="previous" HREF="module-compileall.html">
+<LINK REL="up" HREF="python.html">
+<LINK REL="next" HREF="bytecodes.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1251"
+ HREF="bytecodes.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1247"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1241"
+ HREF="module-compileall.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1249"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1250"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1252"
+ HREF="bytecodes.html">3.22.1 Python Byte Code</A>
+<b>Up:</b> <A NAME="tex2html1248"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html1242"
+ HREF="module-compileall.html">3.21 compileall  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0052200000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">22</SPAN> <tt>dis</tt> --
+         Disassembler.</A>
+</H1>
+
+
+<P>
+
+<P>
+The <tt>dis</tt> module supports the analysis of Python byte code by
+disassembling it.  Since there is no Python assembler, this module
+defines the Python assembly language.  The Python byte code which
+this module takes as an input is defined in the file 
+"<tt>Include/opcode.h</tt>" and used by the compiler and the interpreter.
+
+<P>
+Example: Given the function <tt>myfunc</tt>:
+
+<P>
+<dl><dd><pre>
+def myfunc(alist):
+    return len(alist)
+</pre></dl>
+
+<P>
+the following command can be used to get the disassembly of
+<tt>myfunc()</tt>:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; dis.dis(myfunc)
+          0 SET_LINENO          1
+
+          3 SET_LINENO          2
+          6 LOAD_GLOBAL         0 (len)
+          9 LOAD_FAST           0 (alist)
+         12 CALL_FUNCTION       1
+         15 RETURN_VALUE   
+         16 LOAD_CONST          0 (None)
+         19 RETURN_VALUE
+</pre></dl>
+
+<P>
+The <tt>dis</tt> module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-5733"><tt>dis</tt></a></b> (<big>[</big><var>bytesource</var><big>]</big>)
+<dd>
+Disassemble the <i>bytesource</i> object. <i>bytesource</i> can denote
+either a class, a method, a function, or a code object.  For a class,
+it disassembles all methods.  For a single code sequence, it prints
+one line per byte code instruction.  If no object is provided, it
+disassembles the last traceback.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5734"><tt>distb</tt></a></b> (<big>[</big><var>tb</var><big>]</big>)
+<dd>
+Disassembles the top-of-stack function of a traceback, using the last
+traceback if none was passed.  The instruction causing the exception
+is indicated.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5735"><tt>disassemble</tt></a></b> (<var>code</var><big>[</big><var>, lasti</var><big>]</big>)
+<dd>
+Disassembles a code object, indicating the last instruction if <i>lasti</i>
+was provided.  The output is divided in the following columns:
+
+<P>
+<DL COMPACT>
+<DT>1.
+<DD>the current instruction, indicated as "<tt>-&gt;</tt>",
+<DT>2.
+<DD>a labelled instruction, indicated with "<tt>&gt;&gt;</tt>",
+<DT>3.
+<DD>the address of the instruction,
+<DT>4.
+<DD>the operation code name,
+<DT>5.
+<DD>operation parameters, and
+<DT>6.
+<DD>interpretation of the parameters in parentheses.
+</DL>
+
+<P>
+The parameter interpretation recognizes local and global
+variable names, constant values, branch targets, and compare
+operators.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5736"><tt>disco</tt></a></b> (<var>code</var><big>[</big><var>, lasti</var><big>]</big>)
+<dd>
+A synonym for disassemble.  It is more convenient to type, and kept
+for compatibility with earlier Python releases.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5303"><tt>opname</tt></a></b>
+<dd>
+Sequence of a operation names, indexable using the byte code.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5306"><tt>cmp_op</tt></a></b>
+<dd>
+Sequence of all compare operation names.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5309"><tt>hasconst</tt></a></b>
+<dd>
+Sequence of byte codes that have a constant parameter.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5312"><tt>hasname</tt></a></b>
+<dd>
+Sequence of byte codes that access a attribute by name.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5315"><tt>hasjrel</tt></a></b>
+<dd>
+Sequence of byte codes that have a relative jump target.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5318"><tt>hasjabs</tt></a></b>
+<dd>
+Sequence of byte codes that have an absolute jump target.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5321"><tt>haslocal</tt></a></b>
+<dd>
+Sequence of byte codes that access a a local variable.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-5324"><tt>hascompare</tt></a></b>
+<dd>
+Sequence of byte codes of boolean operations.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html1253"
+ HREF="bytecodes.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">22</SPAN>.<SPAN CLASS="arabic">1</SPAN> Python Byte Code Instructions</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1251"
+ HREF="bytecodes.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1247"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1241"
+ HREF="module-compileall.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1249"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1250"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1252"
+ HREF="bytecodes.html">3.22.1 Python Byte Code</A>
+<b>Up:</b> <A NAME="tex2html1248"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html1242"
+ HREF="module-compileall.html">3.21 compileall  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

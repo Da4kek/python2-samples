@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.8.2 For extension writers and programs that embed Python</TITLE>
+<META NAME="description" CONTENT="6.8.2 For extension writers and programs that embed Python">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="node102.html">
+<LINK REL="up" HREF="module-locale.html">
+<LINK REL="next" HREF="someos.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1746"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1742"
+ HREF="module-locale.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1738"
+ HREF="node102.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1744"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1745"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1747"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Up:</b> <A NAME="tex2html1743"
+ HREF="module-locale.html">6.8 locale  </A>
+<b>Previous:</b> <A NAME="tex2html1739"
+ HREF="node102.html">6.8.1 Background, details, hints,</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION008820000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> For extension writers and programs that embed Python
+</H2>
+
+<P>
+Extension modules should never call <tt>setlocale()</tt>, except to
+find out what the current locale is.  But since the return value can
+only be used portably to restore it, that is not very useful (except
+perhaps to find out whether or not the locale is "<tt>C</tt>").
+
+<P>
+When Python is embedded in an application, if the application sets the
+locale to something specific before initializing Python, that is
+generally okay, and Python will use whatever locale is set,
+<i>except</i> that the <tt>LC_NUMERIC</tt> locale should always be
+"<tt>C</tt>".
+
+<P>
+The <tt>setlocale()</tt> function in the <tt>locale</tt> module contains
+gives the Python progammer the impression that you can manipulate the
+<tt>LC_NUMERIC</tt> locale setting, but this not the case at the C
+level: C code will always find that the <tt>LC_NUMERIC</tt> locale
+setting is "<tt>C</tt>".  This is because too much would break when the
+decimal point character is set to something else than a period
+(e.g. the Python parser would break).  Caveat: threads that run
+without holding Python's global interpreter lock may occasionally find
+that the numeric locale setting differs; this is because the only
+portable way to implement this feature is to set the numeric locale
+settings to what the user requests, extract the relevant
+characteristics, and then restore the "<tt>C</tt>" numeric locale.
+
+<P>
+When Python code uses the <tt>locale</tt> module to change the locale,
+this also affect the embedding application.  If the embedding
+application doesn't want this to happen, it should remove the
+<tt>_locale</tt> extension module (which does all the work) from the
+table of built-in modules in the "<tt>config.c</tt>" file, and make sure
+that the <tt>_locale</tt> module is not accessible as a shared library.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1746"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1742"
+ HREF="module-locale.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1738"
+ HREF="node102.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1744"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1745"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1747"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Up:</b> <A NAME="tex2html1743"
+ HREF="module-locale.html">6.8 locale  </A>
+<b>Previous:</b> <A NAME="tex2html1739"
+ HREF="node102.html">6.8.1 Background, details, hints,</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

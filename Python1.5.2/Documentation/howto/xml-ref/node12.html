@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.2 ParserFactory methods</TITLE>
+<META NAME="description" CONTENT="3.2 ParserFactory methods">
+<META NAME="keywords" CONTENT="xml-ref">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="xml-ref.css">
+<LINK REL="previous" HREF="node11.html">
+<LINK REL="up" HREF="node10.html">
+<LINK REL="next" HREF="node13.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html186"
+ HREF="node13.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html183"
+ HREF="node10.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html179"
+ HREF="node11.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/XML Reference Guide</b></td>
+<td align=right width="20%"><A NAME="tex2html185"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html187"
+ HREF="node13.html">4. xml.sax.saxlib</A>
+<b>Up:</b> <A NAME="tex2html184"
+ HREF="node10.html">3. xml.sax.saxexts</A>
+<b>Previous:</b> <A NAME="tex2html180"
+ HREF="node11.html">3.1 ExtendedParser methods</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000420000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>ParserFactory</tt> methods</A>
+</H2>
+
+<P>
+<dl><dt><b><a name="l2h-114"><tt>get_parser_list</tt></a></b> ()
+<dd>
+Returns the list of possible drivers.  Currently this starts out as
+<tt>["xml.sax.drivers.drv_xmltok",
+                      "xml.sax.drivers.drv_xmlproc",
+                      "xml.sax.drivers.drv_xmltoolkit",
+                      "xml.sax.drivers.drv_xmllib"]</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-119"><tt>make_parser</tt></a></b> (<big>[</big><var>driver_name</var><big>]</big>)
+<dd>
+Returns a SAX driver for the first available parser of the parsers
+in the list. Note that the list contains drivers, so it first tries
+the driver and if that exists imports it to see if the parser also
+exists. If no parsers are available a <tt>SAXException</tt> is thrown.
+
+<P>
+Optionally, <i>driver_name</i> can be a string containing the name of
+the driver to be used; the stored parser list will then not be used at
+all.  
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-125"><tt>set_parser_list</tt></a></b> (<var>list</var>)
+<dd>
+Sets the driver list to <i>list</i>.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html186"
+ HREF="node13.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html183"
+ HREF="node10.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html179"
+ HREF="node11.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/XML Reference Guide</b></td>
+<td align=right width="20%"><A NAME="tex2html185"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html187"
+ HREF="node13.html">4. xml.sax.saxlib</A>
+<b>Up:</b> <A NAME="tex2html184"
+ HREF="node10.html">3. xml.sax.saxexts</A>
+<b>Previous:</b> <A NAME="tex2html180"
+ HREF="node11.html">3.1 ExtendedParser methods</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

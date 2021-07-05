@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>5.9.1 Cmd Objects</TITLE>
+<META NAME="description" CONTENT="5.9.1 Cmd Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-cmd.html">
+<LINK REL="up" HREF="module-cmd.html">
+<LINK REL="next" HREF="allos.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1616"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1612"
+ HREF="module-cmd.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1608"
+ HREF="module-cmd.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1614"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1615"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1617"
+ HREF="allos.html">6. Generic Operating System</A>
+<b>Up:</b> <A NAME="tex2html1613"
+ HREF="module-cmd.html">5.9 cmd  </A>
+<b>Previous:</b> <A NAME="tex2html1609"
+ HREF="module-cmd.html">5.9 cmd  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION007910000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Cmd Objects
+</H2>
+
+<P>
+A <tt>Cmd</tt> instance has the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-9001"><tt>cmdloop</tt></a></b> (<big>[</big><var>intro</var><big>]</big>)
+<dd>
+Repeatedly issue a prompt, accept input, parse an initial prefix off
+the received input, and dispatch to action methods, passing them the
+remainder of the line as argument.
+
+<P>
+The optional argument is a banner or intro string to be issued before the
+first prompt (this overrides the <tt>intro</tt> class member).
+
+<P>
+If the <tt>readline</tt> module is loaded, input will automatically
+inherit <b>bash</b>-like history-list editing (e.g. <kbd>Ctrl-P</kbd>
+scrolls back to the last command, <kbd>Ctrl-N</kbd> forward to the next
+one, <kbd>Ctrl-F</kbd> moves the cursor to the right non-destructively,
+<kbd>Ctrl-B</kbd> moves the cursor to the left non-destructively, etc.).
+
+<P>
+An end-of-file on input is passed back as the string <tt>'EOF'</tt>.
+
+<P>
+An interpreter instance will recognize a command name "<tt>foo</tt>" if
+and only if it has a method <tt>do_foo()</tt>.  As a special case,
+a line containing only the character "<tt>?</tt>" is dispatched to
+the method <tt>do_help()</tt>.  As another special case, a line
+containing only the character "<tt>!</tt>" is dispatched to the
+method <tt>do_shell</tt> (if such a method is defined).
+
+<P>
+All subclasses of <tt>Cmd</tt> inherit a predefined <tt>do_help</tt>.
+This method, called with an argument <tt>bar</tt>, invokes the
+corresponding method <tt>help_bar()</tt>.  With no argument,
+<tt>do_help()</tt> lists all available help topics (that is, all
+commands with corresponding <tt>help_*()</tt> methods), and also lists
+any undocumented commands.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9025"><tt>onecmd</tt></a></b> (<var>str</var>)
+<dd>
+Interpret the argument as though it had been typed in in
+response to the prompt.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9029"><tt>emptyline</tt></a></b> ()
+<dd>
+Method called when an empty line is entered in response to the prompt.
+If this method is not overridden, it repeats the last nonempty command
+entered.  
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9033"><tt>default</tt></a></b> (<var>line</var>)
+<dd>
+Method called on an input line when the command prefix is not
+recognized. If this method is not overridden, it prints an
+error message and returns.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9037"><tt>precmd</tt></a></b> ()
+<dd>
+Hook method executed just before the input prompt is issued.  This
+method is a stub in <tt>Cmd</tt>; it exists to be overridden by
+subclasses.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9042"><tt>postcmd</tt></a></b> ()
+<dd>
+Hook method executed just after a command dispatch is finished.  This
+method is a stub in <tt>Cmd</tt>; it exists to be overridden by
+subclasses.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9047"><tt>preloop</tt></a></b> ()
+<dd>
+Hook method executed once when <tt>cmdloop()</tt> is called.  This
+method is a stub in <tt>Cmd</tt>; it exists to be overridden by
+subclasses.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9053"><tt>postloop</tt></a></b> ()
+<dd>
+Hook method executed once when <tt>cmdloop()</tt> is about to return.
+This method is a stub in <tt>Cmd</tt>; it exists to be overridden by
+subclasses.
+</dl>
+
+<P>
+Instances of <tt>Cmd</tt> subclasses have some public instance variables:
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>prompt</tt></a></b>
+<dd>
+The prompt issued to solicit input.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>identchars</tt></a></b>
+<dd>
+The string of characters accepted for the command prefix.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>lastcmd</tt></a></b>
+<dd>
+The last nonempty command prefix seen. 
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>intro</tt></a></b>
+<dd>
+A string to issue as an intro or banner.  May be overridden by giving
+the <tt>cmdloop()</tt> method an argument.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>doc_header</tt></a></b>
+<dd>
+The header to issue if the help output has a section for documented
+commands.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>misc_header</tt></a></b>
+<dd>
+The header to issue if the help output has a section for miscellaneous 
+help topics (that is, there are <tt>help_*()</tt> methods without
+corresponding <tt>do_*()</tt> methods).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>undoc_header</tt></a></b>
+<dd>
+The header to issue if the help output has a section for undocumented 
+commands (that is, there are <tt>do_*()</tt> methods without
+corresponding <tt>help_*()</tt> methods).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>ruler</tt></a></b>
+<dd>
+The character used to draw separator lines under the help-message
+headers.  If empty, no ruler line is drawn.  It defaults to
+"<tt>=</tt>".
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1616"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1612"
+ HREF="module-cmd.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1608"
+ HREF="module-cmd.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1614"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1615"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1617"
+ HREF="allos.html">6. Generic Operating System</A>
+<b>Up:</b> <A NAME="tex2html1613"
+ HREF="module-cmd.html">5.9 cmd  </A>
+<b>Previous:</b> <A NAME="tex2html1609"
+ HREF="module-cmd.html">5.9 cmd  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

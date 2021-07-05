@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.3 UDP Stream Objects</TITLE>
+<META NAME="description" CONTENT="12.3 UDP Stream Objects">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="previous" HREF="node24.html">
+<LINK REL="up" HREF="module-mactcp.html">
+<LINK REL="next" HREF="module-macspeech.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html414"
+ HREF="module-macspeech.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html410"
+ HREF="module-mactcp.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html406"
+ HREF="node24.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html412"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html413"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html415"
+ HREF="module-macspeech.html">13. macspeech  </A>
+<b>Up:</b> <A NAME="tex2html411"
+ HREF="module-mactcp.html">12. mactcp  </A>
+<b>Previous:</b> <A NAME="tex2html407"
+ HREF="node24.html">12.2 TCP Status Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0021230000000000000000">
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">3</SPAN> UDP Stream Objects</A>
+</H2>
+
+<P>
+Note that, unlike the name suggests, there is nothing stream-like
+about UDP.
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>asr</tt></a></b>
+<dd>
+<a name="l2h-1457"></a><a name="l2h-1458"></a>The asynchronous service routine to be called on events such as
+datagram arrival without outstanding <tt>Read</tt> call. The <i>asr</i>
+has a single argument, the event code.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>port</tt></a></b>
+<dd>
+A read-only member giving the port number of this UDP Stream.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1466"><tt>Read</tt></a></b> (<var>timeout</var>)
+<dd>
+Read a datagram, waiting at most <i>timeout</i> seconds (-1 is
+infinite).  Return the data.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1471"><tt>Write</tt></a></b> (<var>host, port, buf</var>)
+<dd>
+Send <i>buf</i> as a datagram to IP-address <i>host</i>, port
+<i>port</i>.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html414"
+ HREF="module-macspeech.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html410"
+ HREF="module-mactcp.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html406"
+ HREF="node24.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html412"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html413"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html415"
+ HREF="module-macspeech.html">13. macspeech  </A>
+<b>Up:</b> <A NAME="tex2html411"
+ HREF="module-mactcp.html">12. mactcp  </A>
+<b>Previous:</b> <A NAME="tex2html407"
+ HREF="node24.html">12.2 TCP Status Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

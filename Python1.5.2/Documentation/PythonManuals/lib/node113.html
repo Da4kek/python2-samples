@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.5.1 Lock Objects</TITLE>
+<META NAME="description" CONTENT="7.5.1 Lock Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="node114.html">
+<LINK REL="previous" HREF="module-threading.html">
+<LINK REL="up" HREF="module-threading.html">
+<LINK REL="next" HREF="node114.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1871"
+ HREF="node114.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1867"
+ HREF="module-threading.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1861"
+ HREF="module-threading.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1869"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1870"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1872"
+ HREF="node114.html">7.5.2 RLock Objects</A>
+<b>Up:</b> <A NAME="tex2html1868"
+ HREF="module-threading.html">7.5 threading  </A>
+<b>Previous:</b> <A NAME="tex2html1862"
+ HREF="module-threading.html">7.5 threading  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION009510000000000000000">
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Lock Objects</A>
+</H2>
+
+<P>
+A primitive lock is a synchronization primitive that is not owned
+by a particular thread when locked.  In Python, it is currently
+the lowest level synchronization primitive available, implemented
+directly by the <tt>thread</tt> extension module.
+
+<P>
+A primitive lock is in one of two states, ``locked'' or ``unlocked''.
+It is created in the unlocked state.  It has two basic methods,
+<tt>acquire()</tt> and <tt>release()</tt>.  When the state is
+unlocked, <tt>acquire()</tt> changes the state to locked and returns
+immediately.  When the state is locked, <tt>acquire()</tt> blocks
+until a call to <tt>release()</tt> in another thread changes it to
+unlocked, then the <tt>acquire()</tt> call resets it to locked and
+returns.  The <tt>release()</tt> method should only be called in the
+locked state; it changes the state to unlocked and returns
+immediately.  When more than one thread is blocked in
+<tt>acquire()</tt> waiting for the state to turn to unlocked, only one
+thread proceeds when a <tt>release()</tt> call resets the state to
+unlocked; which one of the waiting threads proceeds is not defined,
+and may vary across implementations.
+
+<P>
+All methods are executed atomically.
+
+<P>
+<dl><dt><b><a name="l2h-11359"><tt>acquire</tt></a></b> (<var>blocking=1</var>)
+<dd>
+Acquire a lock, blocking or non-blocking.
+
+<P>
+When invoked without arguments, block until the lock is
+unlocked, then set it to locked, and return.  There is no
+return value in this case.
+
+<P>
+When invoked with the <i>blocking</i> argument set to true, do the
+same thing as when called without arguments, and return true.
+
+<P>
+When invoked with the <i>blocking</i> argument set to false, do not
+block.  If a call without an argument would block, return false
+immediately; otherwise, do the same thing as when called
+without arguments, and return true.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11365"><tt>release</tt></a></b> ()
+<dd>
+Release a lock.
+
+<P>
+When the lock is locked, reset it to unlocked, and return.  If
+any other threads are blocked waiting for the lock to become
+unlocked, allow exactly one of them to proceed.
+
+<P>
+Do not call this method when the lock is unlocked.
+
+<P>
+There is no return value.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1871"
+ HREF="node114.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1867"
+ HREF="module-threading.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1861"
+ HREF="module-threading.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1869"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1870"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1872"
+ HREF="node114.html">7.5.2 RLock Objects</A>
+<b>Up:</b> <A NAME="tex2html1868"
+ HREF="module-threading.html">7.5 threading  </A>
+<b>Previous:</b> <A NAME="tex2html1862"
+ HREF="module-threading.html">7.5 threading  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.9.2 SMTP Example </TITLE>
+<META NAME="description" CONTENT="11.9.2 SMTP Example ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="SMTP-objects.html">
+<LINK REL="up" HREF="module-smtplib.html">
+<LINK REL="next" HREF="module-urlparse.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2799"
+ HREF="module-urlparse.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2795"
+ HREF="module-smtplib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2791"
+ HREF="SMTP-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2797"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2798"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2800"
+ HREF="module-urlparse.html">11.10 urlparse  </A>
+<b>Up:</b> <A NAME="tex2html2796"
+ HREF="module-smtplib.html">11.9 smtplib  </A>
+<b>Previous:</b> <A NAME="tex2html2792"
+ HREF="SMTP-objects.html">11.9.1 SMTP Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0013920000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">2</SPAN> SMTP Example 
+</H2>
+
+<P>
+<dl><dd><pre>
+import rfc822, string, sys
+
+def prompt(prompt):
+    sys.stdout.write(prompt + ": ")
+    return string.strip(sys.stdin.readline())
+
+fromaddr = prompt("From")
+toaddrs  = string.splitfields(prompt("To"), ',')
+print "Enter message, end with ^D:"
+msg = ''
+while 1:
+    line = sys.stdin.readline()
+    if not line:
+        break
+    msg = msg + line
+print "Message length is " + `len(msg)`
+
+server = SMTP('localhost')
+server.set_debuglevel(1)
+server.sendmail(fromaddr, toaddrs, msg)
+server.quit()
+</pre></dl>
+
+<P>
+<p><b>See Also:</b></p>
+
+<p><a name=>RFC 821</a>, <i>Simple Mail Transfer Protocol</i>.  Available
+online at <a href="http://info.internet.isi.edu/in-notes/rfc/files/rfc821.txt"><font face=sans-serif>http://info.internet.isi.edu/in-notes/rfc/files/rfc821.txt</font></a>.
+
+<P>
+<p><a name=>RFC 1869</a>, <i>SMTP Service Extensions</i>.  Available online 
+at <a href="http://info.internet.isi.edu/in-notes/rfc/files/rfc1869.txt"><font face=sans-serif>http://info.internet.isi.edu/in-notes/rfc/files/rfc1869.txt</font></a>.
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2799"
+ HREF="module-urlparse.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2795"
+ HREF="module-smtplib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2791"
+ HREF="SMTP-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2797"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2798"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2800"
+ HREF="module-urlparse.html">11.10 urlparse  </A>
+<b>Up:</b> <A NAME="tex2html2796"
+ HREF="module-smtplib.html">11.9 smtplib  </A>
+<b>Previous:</b> <A NAME="tex2html2792"
+ HREF="SMTP-objects.html">11.9.1 SMTP Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

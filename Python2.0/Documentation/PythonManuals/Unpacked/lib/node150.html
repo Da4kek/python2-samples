@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>6.23.3 Internationalizing your programs and modules</title>
+<META NAME="description" CONTENT="6.23.3 Internationalizing your programs and modules">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="lib.css">
+<LINK REL="next" HREF="node155.html">
+<LINK REL="previous" HREF="node145.html">
+<LINK REL="up" href="module-gettext.html">
+<LINK REL="next" HREF="node151.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A HREF="node149.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="module-gettext.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node151.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" HREF="node149.html">6.23.2.4 The Catalog constructor</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="module-gettext.html">6.23 gettext  </A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node151.html">6.23.3.1 Localizing your module</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0082330000000000000000">
+6.23.3 Internationalizing your programs and modules</A>
+</H2>
+Internationalization (I18N) refers to the operation by which a program
+is made aware of multiple languages.  Localization (L10N) refers to
+the adaptation of your program, once internationalized, to the local
+language and cultural habits.  In order to provide multilingual
+messages for your Python programs, you need to take the following
+steps:
+
+<P>
+
+<OL>
+<LI>prepare your program or module by specially marking
+          translatable strings
+</LI>
+<LI>run a suite of tools over your marked files to generate raw
+          messages catalogs
+</LI>
+<LI>create language specific translations of the message catalogs
+</LI>
+<LI>use the <tt class="module">gettext</tt> module so that message strings are
+          properly translated
+</LI>
+</OL>
+
+<P>
+In order to prepare your code for I18N, you need to look at all the
+strings in your files.  Any string that needs to be translated
+should be marked by wrapping it in <code>_('...')</code> - i.e. a call to
+the function <tt class="function">_()</tt>.  For example:
+
+<P>
+<dl><dd><pre class="verbatim">
+filename = 'mylog.txt'
+message = _('writing a log message')
+fp = open(filename, 'w')
+fp.write(message)
+fp.close()
+</pre></dl>
+
+<P>
+In this example, the string <code>'writing a log message'</code> is marked as
+a candidate for translation, while the strings <code>'mylog.txt'</code> and
+<code>'w'</code> are not.
+
+<P>
+The GNU <code>gettext</code> package provides a tool, called
+<b class="program">xgettext</b>, that scans C and C++ source code looking for these
+specially marked strings.  <b class="program">xgettext</b> generates what are
+called <span class="file">.pot</span> files, essentially structured human readable files
+which contain every marked string in the source code.  These
+<span class="file">.pot</span> files are copied and handed over to human translators who write
+language-specific versions for every supported natural language.
+
+<P>
+For I18N Python programs however, <b class="program">xgettext</b> won't work; it
+doesn't understand the myriad of string types support by Python.  The
+standard Python distribution provides a tool called
+<b class="program">pygettext</b> that does though (found in the <span class="file">Tools/i18n/</span>
+directory).<A NAME="tex2html18"
+  HREF="#foot17313"><SUP>6.3</SUP></A>  This is a command line script that
+supports a similar interface as <b class="program">xgettext</b>; see its
+documentation for details.  Once you've used <b class="program">pygettext</b> to
+create your <span class="file">.pot</span> files, you can use the standard GNU
+<b class="program">gettext</b> tools to generate your machine-readable <span class="file">.mo</span>
+files, which are readable by the <tt class="class">GNUTranslations</tt> class.
+
+<P>
+How you use the <tt class="module">gettext</tt> module in your code depends on
+whether you are internationalizing your entire application or a single
+module.
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot17313">...
+directory).</A><A NAME="foot17313"
+ HREF="node150.html#tex2html18"><SUP>6.3</SUP></A>
+<DD>Fran&#231;ois Pinard has written a program called
+<b class="program">xpot</b> which does a similar job.  It is available as part of
+his <b class="program">po-utils</b> package at
+<a class="url" href="http://www.iro.umontreal.ca/contrib/po-utils/HTML">http://www.iro.umontreal.ca/contrib/po-utils/HTML <img src='../icons/offsite.gif'
+  border='0' class='offsitelink' height='15' width='17' alt='[off-site link]'
+  ></a>.
+
+
+</DL>
+<p><hr>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html2728"
+  HREF="node151.html">6.23.3.1 Localizing your module</A>
+<LI><A NAME="tex2html2729"
+  HREF="node152.html">6.23.3.2 Localizing your application</A>
+<LI><A NAME="tex2html2730"
+  HREF="node153.html">6.23.3.3 Changing languages on the fly</A>
+<LI><A NAME="tex2html2731"
+  HREF="node154.html">6.23.3.4 Deferred translations</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A HREF="node149.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="module-gettext.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node151.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" HREF="node149.html">6.23.2.4 The Catalog constructor</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="module-gettext.html">6.23 gettext  </A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node151.html">6.23.3.1 Localizing your module</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

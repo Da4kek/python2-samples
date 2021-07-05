@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.6 glob --
+Unix shell style pathname pattern expansion.</TITLE>
+<META NAME="description" CONTENT="6.6 glob --
+Unix shell style pathname pattern expansion.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-fnmatch.html">
+<LINK REL="previous" HREF="module-errno.html">
+<LINK REL="up" HREF="allos.html">
+<LINK REL="next" HREF="module-fnmatch.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1700"
+ HREF="module-fnmatch.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1696"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1690"
+ HREF="module-errno.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1698"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1699"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1701"
+ HREF="module-fnmatch.html">6.7 fnmatch  </A>
+<b>Up:</b> <A NAME="tex2html1697"
+ HREF="allos.html">6. Generic Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1691"
+ HREF="module-errno.html">6.5 errno  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008600000000000000000">
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">6</SPAN> <tt>glob</tt> --
+         Unix shell style pathname pattern expansion.</A>
+</H1>
+
+
+<P>
+
+<P>
+The <tt>glob</tt> module finds all the pathnames matching a specified
+pattern according to the rules used by the Unix shell.  No tilde
+expansion is done, but <tt>*</tt>, <tt>?</tt>, and character ranges
+expressed with <tt>[]</tt> will be correctly matched.  This is done by
+using the <tt>os.listdir()</tt> and <tt>fnmatch.fnmatch()</tt>
+functions in concert, and not by actually invoking a subshell.  (For
+tilde and shell variable expansion, use <tt>os.path.expanduser()</tt>
+and <tt>os.path.expandvars()</tt>.)
+
+<P>
+<dl><dt><b><a name="l2h-10129"><tt>glob</tt></a></b> (<var>pathname</var>)
+<dd>
+Returns a possibly-empty list of path names that match <i>pathname</i>,
+which must be a string containing a path specification.
+<i>pathname</i> can be either absolute (like
+"<tt>/usr/src/Python-1.5/Makefile</tt>") or relative (like
+"<tt>../../Tools/*.gif</tt>"), and can contain shell-style wildcards.
+</dl>
+
+<P>
+For example, consider a directory containing only the following files:
+"<tt>1.gif</tt>", "<tt>2.txt</tt>", and "<tt>card.gif</tt>".  <tt>glob()</tt>
+will produce the following results.  Notice how any leading components
+of the path are preserved.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; import glob
+&gt;&gt;&gt; glob.glob('./[0-9].*')
+['./1.gif', './2.txt']
+&gt;&gt;&gt; glob.glob('*.gif')
+['1.gif', 'card.gif']
+&gt;&gt;&gt; glob.glob('?.gif')
+['1.gif']
+</pre></dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1700"
+ HREF="module-fnmatch.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1696"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1690"
+ HREF="module-errno.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1698"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1699"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1701"
+ HREF="module-fnmatch.html">6.7 fnmatch  </A>
+<b>Up:</b> <A NAME="tex2html1697"
+ HREF="allos.html">6. Generic Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1691"
+ HREF="module-errno.html">6.5 errno  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

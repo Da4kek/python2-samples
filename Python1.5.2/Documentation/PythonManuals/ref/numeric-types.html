@@ -1,0 +1,306 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.3.6 Emulating numeric types</TITLE>
+<META NAME="description" CONTENT="3.3.6 Emulating numeric types">
+<META NAME="keywords" CONTENT="ref">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ref.css">
+<LINK REL="previous" HREF="sequence-methods.html">
+<LINK REL="up" HREF="specialnames.html">
+<LINK REL="next" HREF="execmodel.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html640"
+ HREF="execmodel.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html636"
+ HREF="specialnames.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html632"
+ HREF="sequence-methods.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html638"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html639"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html641"
+ HREF="execmodel.html">4. Execution model</A>
+<b>Up:</b> <A NAME="tex2html637"
+ HREF="specialnames.html">3.3 Special method names</A>
+<b>Previous:</b> <A NAME="tex2html633"
+ HREF="sequence-methods.html">3.3.5 Additional methods for</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION005360000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">6</SPAN> Emulating numeric types
+</H2>
+
+<P>
+The following methods can be defined to emulate numeric objects.
+Methods corresponding to operations that are not supported by the
+particular kind of number implemented (e.g., bitwise operations for
+non-integral numbers) should be left undefined.
+
+<P>
+<dl><dt><b>__add__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__sub__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__mul__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__div__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__mod__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__divmod__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__pow__</b> (<var>self, other</var><big>[</big><var>, modulo</var><big>]</big>)
+<dd>
+<dt><b>__lshift__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__rshift__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__and__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__xor__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__or__</b> (<var>self, other</var>)
+<dd>
+These functions are
+called to implement the binary arithmetic operations (<tt>+</tt>,
+<tt>-</tt>, <tt>*</tt>, <tt>/</tt>, <tt>%</tt>,
+<tt>divmod()</tt><a name="l2h-"></a>,
+<tt>pow()</tt><a name="l2h-"></a>, <tt>**</tt>, <tt>&lt;&lt;</tt>, <tt>&gt;&gt;</tt>,
+<tt>&amp;</tt>, <tt>^</tt>, <tt>|</tt>).  For instance, to evaluate the
+expression <i>x</i><tt>+</tt><i>y</i>, where <i>x</i> is an instance of a
+class that has an <tt>__add__()</tt> method,
+<tt><i>x</i>.__add__(<i>y</i>)</tt> is called.  Note that
+<tt>__pow__()</tt> should be defined to accept an optional third
+argument if the ternary version of the built-in
+<tt>pow()</tt><a name="l2h-"></a> function is to be supported.
+<a name="l2h-1383"></a><a name="l2h-1384"></a><a name="l2h-1385"></a><a name="l2h-1386"></a><a name="l2h-1387"></a><a name="l2h-1388"></a><a name="l2h-1389"></a><a name="l2h-1390"></a><a name="l2h-1391"></a><a name="l2h-1392"></a><a name="l2h-1393"></a><a name="l2h-1394"></a></dl>
+
+<P>
+<dl><dt><b>__radd__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__rsub__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__rmul__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__rdiv__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__rmod__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__rdivmod__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__rpow__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__rlshift__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__rrshift__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__rand__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__rxor__</b> (<var>self, other</var>)
+<dd>
+<dt><b>__ror__</b> (<var>self, other</var>)
+<dd>
+These functions are
+called to implement the binary arithmetic operations (<tt>+</tt>,
+<tt>-</tt>, <tt>*</tt>, <tt>/</tt>, <tt>%</tt>,
+<tt>divmod()</tt><a name="l2h-"></a>,
+<tt>pow()</tt><a name="l2h-"></a>, <tt>**</tt>, <tt>&lt;&lt;</tt>, <tt>&gt;&gt;</tt>,
+<tt>&amp;</tt>, <tt>^</tt>, <tt>|</tt>) with reversed operands.  These
+functions are only called if the left operand does not support the
+corresponding operation.  For instance, to evaluate the expression
+<i>x</i><tt>-</tt><i>y</i>, where <i>y</i> is an instance of a class that
+has an <tt>__rsub__()</tt> method, <tt><i>y</i>.__rsub__(<i>x</i>)</tt> is
+called.  Note that ternary <tt>pow()</tt><a name="l2h-"></a> will not
+try calling <tt>__rpow__()</tt> (the coercion rules would become too
+complicated).
+<a name="l2h-1446"></a><a name="l2h-1447"></a><a name="l2h-1448"></a><a name="l2h-1449"></a><a name="l2h-1450"></a><a name="l2h-1451"></a><a name="l2h-1452"></a><a name="l2h-1453"></a><a name="l2h-1454"></a><a name="l2h-1455"></a><a name="l2h-1456"></a><a name="l2h-1457"></a></dl>
+
+<P>
+<dl><dt><b>__neg__</b> (<var>self</var>)
+<dd>
+<dt><b>__pos__</b> (<var>self</var>)
+<dd>
+<dt><b>__abs__</b> (<var>self</var>)
+<dd>
+<dt><b>__invert__</b> (<var>self</var>)
+<dd>
+Called to implement the unary arithmetic operations (<tt>-</tt>, <tt>+</tt>,
+<tt>abs()</tt><a name="l2h-"></a> and <tt>&nbsp;</tt>).
+<a name="l2h-1473"></a><a name="l2h-1474"></a><a name="l2h-1475"></a><a name="l2h-1476"></a></dl>
+
+<P>
+<dl><dt><b>__int__</b> (<var>self</var>)
+<dd>
+<dt><b>__long__</b> (<var>self</var>)
+<dd>
+<dt><b>__float__</b> (<var>self</var>)
+<dd>
+Called to implement the built-in functions
+<tt>int()</tt><a name="l2h-"></a>, <tt>long()</tt><a name="l2h-"></a> 
+and <tt>float()</tt><a name="l2h-"></a>.  Should return a value of
+the appropriate type.
+<a name="l2h-1491"></a><a name="l2h-1492"></a><a name="l2h-1493"></a></dl>
+
+<P>
+<dl><dt><b>__oct__</b> (<var>self</var>)
+<dd>
+<dt><b>__hex__</b> (<var>self</var>)
+<dd>
+Called to implement the built-in functions
+<tt>oct()</tt><a name="l2h-"></a> and
+<tt>hex()</tt><a name="l2h-"></a>.  Should return a string value.
+<a name="l2h-1504"></a><a name="l2h-1505"></a></dl>
+
+<P>
+<dl><dt><b>__coerce__</b> (<var>self, other</var>)
+<dd>
+<a name="l2h-1510"></a>Called to implement ``mixed-mode'' numeric arithmetic.  Should either
+return a 2-tuple containing <i>self</i> and <i>other</i> converted to
+a common numeric type, or <tt>None</tt> if conversion is possible.  When
+the common type would be the type of <tt>other</tt>, it is sufficient to
+return <tt>None</tt>, since the interpreter will also ask the other
+object to attempt a coercion (but sometimes, if the implementation of
+the other type cannot be changed, it is useful to do the conversion to
+the other type here).
+</dl>
+
+<P>
+<b>Coercion rules</b>: to evaluate <i>x</i> <i>op</i> <i>y</i>, the
+following steps are taken (where <tt>__op__()</tt> and
+<tt>__rop__()</tt> are the method names corresponding to <i>op</i>,
+e.g., if varop is `<tt>+</tt>', <tt>__add__()</tt> and
+<tt>__radd__()</tt> are used).  If an exception occurs at any point,
+the evaluation is abandoned and exception handling takes over.
+
+<P>
+<DL COMPACT>
+<DD><P>
+<DT>0.
+<DD>If <i>x</i> is a string object and op is the modulo operator (%),
+the string formatting operation is invoked and the remaining steps are
+skipped.
+
+<P>
+<DT>1.
+<DD>If <i>x</i> is a class instance:
+
+<P>
+<DL COMPACT>
+<DD><P>
+<DT>1a.
+<DD>If <i>x</i> has a <tt>__coerce__()</tt> method:
+	replace <i>x</i> and <i>y</i> with the 2-tuple returned by
+	<tt><i>x</i>.__coerce__(<i>y</i>)</tt>; skip to step 2 if the
+	coercion returns <tt>None</tt>.
+
+<P>
+<DT>1b.
+<DD>If neither <i>x</i> nor <i>y</i> is a class instance
+	after coercion, go to step 3.
+
+<P>
+<DT>1c.
+<DD>If <i>x</i> has a method <tt>__op__()</tt>, return
+	<tt><i>x</i>.__op__(<i>y</i>)</tt>; otherwise, restore <i>x</i> and
+	<i>y</i> to their value before step 1a.
+
+<P>
+</DL>
+
+<P>
+<DT>2.
+<DD>If <i>y</i> is a class instance:
+
+<P>
+<DL COMPACT>
+<DD><P>
+<DT>2a.
+<DD>If <i>y</i> has a <tt>__coerce__()</tt> method:
+	replace <i>y</i> and <i>x</i> with the 2-tuple returned by
+	<tt><i>y</i>.__coerce__(<i>x</i>)</tt>; skip to step 3 if the
+	coercion returns <tt>None</tt>.
+
+<P>
+<DT>2b.
+<DD>If neither <i>x</i> nor <i>y</i> is a class instance
+	after coercion, go to step 3.
+
+<P>
+<DT>2b.
+<DD>If <i>y</i> has a method <tt>__rop__()</tt>, return
+	<tt><i>y</i>.__rop__(<i>x</i>)</tt>; otherwise, restore <i>x</i>
+	and <i>y</i> to their value before step 2a.
+
+<P>
+</DL>
+
+<P>
+<DT>3.
+<DD>We only get here if neither <i>x</i> nor <i>y</i> is a class
+instance.
+
+<P>
+<DL COMPACT>
+<DD><P>
+<DT>3a.
+<DD>If op is `<tt>+</tt>' and <i>x</i> is a sequence,
+	sequence concatenation is invoked.
+
+<P>
+<DT>3b.
+<DD>If op is `<tt>*</tt>' and one operand is a sequence
+	and the other an integer, sequence repetition is invoked.
+
+<P>
+<DT>3c.
+<DD>Otherwise, both operands must be numbers; they are
+	coerced to a common type if possible, and the numeric
+	operation is invoked for that type.
+
+<P>
+</DL>
+
+<P>
+</DL><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html640"
+ HREF="execmodel.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html636"
+ HREF="specialnames.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html632"
+ HREF="sequence-methods.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html638"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html639"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html641"
+ HREF="execmodel.html">4. Execution model</A>
+<b>Up:</b> <A NAME="tex2html637"
+ HREF="specialnames.html">3.3 Special method names</A>
+<b>Previous:</b> <A NAME="tex2html633"
+ HREF="sequence-methods.html">3.3.5 Additional methods for</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

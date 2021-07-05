@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.15 quopri --
+Encode and decode MIME quoted-printable encoding.</TITLE>
+<META NAME="description" CONTENT="12.15 quopri --
+Encode and decode MIME quoted-printable encoding.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-mailbox.html">
+<LINK REL="previous" HREF="module-base64.html">
+<LINK REL="up" HREF="netdata.html">
+<LINK REL="next" HREF="module-mailbox.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3182"
+ HREF="module-mailbox.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3178"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3172"
+ HREF="module-base64.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3180"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3181"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3183"
+ HREF="module-mailbox.html">12.16 mailbox  </A>
+<b>Up:</b> <A NAME="tex2html3179"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html3173"
+ HREF="module-base64.html">12.14 base64  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00141500000000000000000">
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">15</SPAN> <tt>quopri</tt> --
+         Encode and decode MIME quoted-printable encoding.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module performs quoted-printable transport encoding and decoding,
+as defined in <a name=>RFC 1521</a>: ``MIME (Multipurpose Internet Mail Extensions)
+Part One''.  The quoted-printable encoding is designed for data where
+there are relatively few nonprintable characters; the base64 encoding
+scheme available via the <tt>base64</tt> module is more compact if there
+are many such characters, as when sending a graphics file.
+<a name="l2h-20371"></a>
+<a name="l2h-20373"></a>
+<P>
+<dl><dt><b><a name="l2h-20376"><tt>decode</tt></a></b> (<var>input, output</var>)
+<dd>
+Decode the contents of the <i>input</i> file and write the resulting
+decoded binary data to the <i>output</i> file.
+<i>input</i> and <i>output</i> must either be file objects or objects that
+mimic the file object interface. <i>input</i> will be read until
+<tt><i>input</i>.read()</tt> returns an empty string.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-20386"><tt>encode</tt></a></b> (<var>input, output, quotetabs</var>)
+<dd>
+Encode the contents of the <i>input</i> file and write the resulting
+quoted-printable data to the <i>output</i> file.
+<i>input</i> and <i>output</i> must either be file objects or objects that
+mimic the file object interface. <i>input</i> will be read until
+<tt><i>input</i>.read()</tt> returns an empty string.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3182"
+ HREF="module-mailbox.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3178"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3172"
+ HREF="module-base64.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3180"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3181"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3183"
+ HREF="module-mailbox.html">12.16 mailbox  </A>
+<b>Up:</b> <A NAME="tex2html3179"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html3173"
+ HREF="module-base64.html">12.14 base64  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

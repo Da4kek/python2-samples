@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.6.1 Queue Objects</TITLE>
+<META NAME="description" CONTENT="7.6.1 Queue Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-Queue.html">
+<LINK REL="up" HREF="module-Queue.html">
+<LINK REL="next" HREF="module-anydbm.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1952"
+ HREF="module-anydbm.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1948"
+ HREF="module-Queue.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1944"
+ HREF="module-Queue.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1950"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1951"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1953"
+ HREF="module-anydbm.html">7.7 anydbm  </A>
+<b>Up:</b> <A NAME="tex2html1949"
+ HREF="module-Queue.html">7.6 Queue  </A>
+<b>Previous:</b> <A NAME="tex2html1945"
+ HREF="module-Queue.html">7.6 Queue  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION009610000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Queue Objects
+</H2>
+
+<P>
+Class <tt>Queue</tt> implements queue objects and has the methods
+described below.  This class can be derived from in order to implement
+other queue organizations (e.g. stack) but the inheritable interface
+is not described here.  See the source code for details.  The public
+methods are:
+
+<P>
+<dl><dt><b><a name="l2h-11816"><tt>qsize</tt></a></b> ()
+<dd>
+Returns the approximate size of the queue.  Because of multithreading
+semantics, this number is not reliable.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11820"><tt>empty</tt></a></b> ()
+<dd>
+Returns <tt>1</tt> if the queue is empty, <tt>0</tt> otherwise.  Because
+of multithreading semantics, this is not reliable.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11826"><tt>full</tt></a></b> ()
+<dd>
+Returns <tt>1</tt> if the queue is full, <tt>0</tt> otherwise.  Because of
+multithreading semantics, this is not reliable.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11832"><tt>put</tt></a></b> (<var>item</var>)
+<dd>
+Puts <i>item</i> into the queue.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11837"><tt>get</tt></a></b> ()
+<dd>
+Gets and returns an item from the queue, blocking if necessary until
+one is available.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11841"><tt>get_nowait</tt></a></b> ()
+<dd>
+Gets and returns an item from the queue if one is immediately
+available.  Raises an <tt>Empty</tt> exception if the queue is
+empty or if the queue's emptiness cannot be determined.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1952"
+ HREF="module-anydbm.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1948"
+ HREF="module-Queue.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1944"
+ HREF="module-Queue.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1950"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1951"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1953"
+ HREF="module-anydbm.html">7.7 anydbm  </A>
+<b>Up:</b> <A NAME="tex2html1949"
+ HREF="module-Queue.html">7.6 Queue  </A>
+<b>Previous:</b> <A NAME="tex2html1945"
+ HREF="module-Queue.html">7.6 Queue  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

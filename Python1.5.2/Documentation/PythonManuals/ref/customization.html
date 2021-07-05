@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.3.1 Basic customization</TITLE>
+<META NAME="description" CONTENT="3.3.1 Basic customization">
+<META NAME="keywords" CONTENT="ref">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ref.css">
+<LINK REL="next" HREF="attribute-access.html">
+<LINK REL="previous" HREF="specialnames.html">
+<LINK REL="up" HREF="specialnames.html">
+<LINK REL="next" HREF="attribute-access.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html582"
+ HREF="attribute-access.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html578"
+ HREF="specialnames.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html572"
+ HREF="specialnames.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html580"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html581"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html583"
+ HREF="attribute-access.html">3.3.2 Customizing attribute access</A>
+<b>Up:</b> <A NAME="tex2html579"
+ HREF="specialnames.html">3.3 Special method names</A>
+<b>Previous:</b> <A NAME="tex2html573"
+ HREF="specialnames.html">3.3 Special method names</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION005310000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Basic customization
+</H2>
+
+<P>
+<dl><dt><b>__init__</b> (<var>self</var><big>[</big><var>, args...</var><big>]</big>)
+<dd>
+Called when the instance is created.  The arguments are those passed
+to the class constructor expression.  If a base class has an
+<tt>__init__()</tt> method the derived class's <tt>__init__()</tt> method must
+explicitly call it to ensure proper initialization of the base class
+part of the instance, e.g., "<tt>BaseClass.__init__(<i>self</i>,
+[<i>args</i>...])</tt>".
+<a name="l2h-1076"></a><a name="l2h-1077"></a>
+</dl>
+
+<P>
+<dl><dt><b>__del__</b> (<var>self</var>)
+<dd>
+Called when the instance is about to be destroyed.  This is also
+called a destructor<a name="l2h-1083"></a>.  If a base class
+has a <tt>__del__()</tt> method, the derived class's <tt>__del__()</tt> method
+must explicitly call it to ensure proper deletion of the base class
+part of the instance.  Note that it is possible (though not recommended!)
+for the <tt>__del__()</tt>
+method to postpone destruction of the instance by creating a new
+reference to it.  It may then be called at a later time when this new
+reference is deleted.  It is not guaranteed that
+<tt>__del__()</tt> methods are called for objects that still exist when
+the interpreter exits.
+<a name="l2h-1088"></a><a name="l2h-"></a>
+<P>
+<b>Programmer's note:</b> "<tt>del x</tt>" doesn't directly call
+<tt>x.__del__()</tt> -- the former decrements the reference count for
+<tt>x</tt> by one, and the latter is only called when its reference
+count reaches zero.  Some common situations that may prevent the
+reference count of an object to go to zero include: circular
+references between objects (e.g., a doubly-linked list or a tree data
+structure with parent and child pointers); a reference to the object
+on the stack frame of a function that caught an exception (the
+traceback stored in <tt>sys.exc_traceback</tt> keeps the stack frame
+alive); or a reference to the object on the stack frame that raised an
+unhandled exception in interactive mode (the traceback stored in
+<tt>sys.last_traceback</tt> keeps the stack frame alive).  The first
+situation can only be remedied by explicitly breaking the cycles; the
+latter two situations can be resolved by storing None in
+<tt>sys.exc_traceback</tt> or <tt>sys.last_traceback</tt>.
+
+<P>
+<b>Warning:</b> due to the precarious circumstances under which
+<tt>__del__()</tt> methods are invoked, exceptions that occur during their
+execution are ignored, and a warning is printed to <tt>sys.stderr</tt>
+instead.  Also, when <tt>__del__()</tt> is invoked is response to a module
+being deleted (e.g., when execution of the program is done), other
+globals referenced by the <tt>__del__()</tt> method may already have been
+deleted.  For this reason, <tt>__del__()</tt> methods should do the
+absolute minimum needed to maintain external invariants.  Python 1.5
+guarantees that globals whose name begins with a single underscore are
+deleted from their module before other globals are deleted; if no
+other references to such globals exist, this may help in assuring that
+imported modules are still available at the time when the
+<tt>__del__()</tt> method is called. 
+</dl>
+
+<P>
+<dl><dt><b>__repr__</b> (<var>self</var>)
+<dd>
+Called by the <tt>repr()</tt><a name="l2h-"></a> built-in function
+and by string conversions (reverse quotes) to compute the ``official''
+string representation of an object.  This should normally look like a
+valid Python expression that can be used to recreate an object with
+the same value.  By convention, objects which cannot be trivially
+converted to strings which can be used to create a similar object
+produce a string of the form "<tt>&lt;<i>...some useful
+description...</i>&gt;</tt>".
+<a name="l2h-1112"></a><a name="l2h-1113"></a>
+<a name="l2h-1115"></a>
+<a name="l2h-1117"></a>
+<a name="l2h-1119"></a></dl>
+
+<P>
+<dl><dt><b>__str__</b> (<var>self</var>)
+<dd>
+Called by the <tt>str()</tt><a name="l2h-"></a> built-in function and
+by the <tt>print</tt><a name="l2h-"></a> statement to compute the
+``informal'' string representation of an object.  This differs from
+<tt>__repr__()</tt> in that it does not have to be a valid Python
+expression: a more convenient or concise representation may be used
+instead.
+<a name="l2h-1129"></a></dl>
+
+<P>
+<dl><dt><b>__cmp__</b> (<var>self, other</var>)
+<dd>
+Called by all comparison operations.  Should return a negative integer if
+<tt>self &lt; other</tt>,  zero if <tt>self == other</tt>, a positive integer if
+<tt>self &gt; other</tt>.  If no <tt>__cmp__()</tt> operation is defined, class
+instances are compared by object identity (``address'').
+(Note: the restriction that exceptions are not propagated by
+<tt>__cmp__()</tt> has been removed in Python 1.5.)
+<a name="l2h-1139"></a><a name="l2h-"></a><a name="l2h-1141"></a></dl>
+
+<P>
+<dl><dt><b>__hash__</b> (<var>self</var>)
+<dd>
+Called for the key object for dictionary<a name="l2h-"></a>operations, and by the built-in function
+<tt>hash()</tt><a name="l2h-"></a>.  Should return a 32-bit integer
+usable as a hash value
+for dictionary operations.  The only required property is that objects
+which compare equal have the same hash value; it is advised to somehow
+mix together (e.g., using exclusive or) the hash values for the
+components of the object that also play a part in comparison of
+objects.  If a class does not define a <tt>__cmp__()</tt> method it should
+not define a <tt>__hash__()</tt> operation either; if it defines
+<tt>__cmp__()</tt> but not <tt>__hash__()</tt> its instances will not be
+usable as dictionary keys.  If a class defines mutable objects and
+implements a <tt>__cmp__()</tt> method it should not implement
+<tt>__hash__()</tt>, since the dictionary implementation requires that
+a key's hash value is immutable (if the object's hash value changes, it
+will be in the wrong hash bucket).
+<a name="l2h-1155"></a><a name="l2h-1156"></a></dl>
+
+<P>
+<dl><dt><b>__nonzero__</b> (<var>self</var>)
+<dd>
+Called to implement truth value testing; should return <tt>0</tt> or
+<tt>1</tt>.  When this method is not defined, <tt>__len__()</tt> is
+called, if it is defined (see below).  If a class defines neither
+<tt>__len__()</tt> nor <tt>__nonzero__()</tt>, all its instances are
+considered true.
+<a name="l2h-1166"></a></dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html582"
+ HREF="attribute-access.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html578"
+ HREF="specialnames.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html572"
+ HREF="specialnames.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html580"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html581"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html583"
+ HREF="attribute-access.html">3.3.2 Customizing attribute access</A>
+<b>Up:</b> <A NAME="tex2html579"
+ HREF="specialnames.html">3.3 Special method names</A>
+<b>Previous:</b> <A NAME="tex2html573"
+ HREF="specialnames.html">3.3 Special method names</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

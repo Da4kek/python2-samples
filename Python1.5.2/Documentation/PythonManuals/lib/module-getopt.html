@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.3 getopt --
+Parser for command line options.</TITLE>
+<META NAME="description" CONTENT="6.3 getopt --
+Parser for command line options.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-tempfile.html">
+<LINK REL="previous" HREF="module-time.html">
+<LINK REL="up" HREF="allos.html">
+<LINK REL="next" HREF="module-tempfile.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1664"
+ HREF="module-tempfile.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1660"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1654"
+ HREF="module-time.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1662"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1663"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1665"
+ HREF="module-tempfile.html">6.4 tempfile  </A>
+<b>Up:</b> <A NAME="tex2html1661"
+ HREF="allos.html">6. Generic Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1655"
+ HREF="module-time.html">6.2 time  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008300000000000000000">
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>getopt</tt> --
+         Parser for command line options.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module helps scripts to parse the command line arguments in
+<tt>sys.argv</tt>.
+It supports the same conventions as the Unix <tt>getopt()</tt>
+function (including the special meanings of arguments of the form
+`<tt>-</tt>' and `<tt>-</tt><tt>-</tt>').
+Long options similar to those supported by
+GNU software may be used as well via an optional third argument.
+This module provides a single function and an exception:
+
+<P>
+<dl><dt><b><a name="l2h-9639"><tt>getopt</tt></a></b> (<var>args, options</var><big>[</big><var>, long_options</var><big>]</big>)
+<dd>
+Parses command line options and parameter list.  <i>args</i> is the
+argument list to be parsed, without the leading reference to the
+running program. Typically, this means "<tt>sys.argv[1:]</tt>".
+<i>options</i> is the string of option letters that the script wants to
+recognize, with options that require an argument followed by a colon
+(i.e., the same format that Unix <tt>getopt()</tt> uses).  If
+specified, <i>long_options</i> is a list of strings with the names of
+the long options which should be supported.  The leading
+<tt>'-</tt><tt>-'</tt> characters should not be included in the option
+name.  Options which require an argument should be followed by an
+equal sign (<tt>'='</tt>).
+
+<P>
+The return value consists of two elements: the first is a list of
+<tt>(<i>option</i>, <i>value</i>)</tt> pairs; the second is the list of
+program arguments left after the option list was stripped (this is a
+trailing slice of the first argument).
+Each option-and-value pair returned has the option as its first
+element, prefixed with a hyphen (e.g., <tt>'-x'</tt>), and the option
+argument as its second element, or an empty string if the option has
+no argument.
+The options occur in the list in the same order in which they were
+found, thus allowing multiple occurrences.  Long and short options may
+be mixed.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-9631"><tt>error</tt></a></b>
+<dd>
+This is raised when an unrecognized option is found in the argument
+list or when an option requiring an argument is given none.
+The argument to the exception is a string indicating the cause of the
+error.  For long options, an argument given to an option which does
+not require one will also cause this exception to be raised.
+</dl>
+
+<P>
+An example using only Unix style options:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; import getopt, string
+&gt;&gt;&gt; args = string.split('-a -b -cfoo -d bar a1 a2')
+&gt;&gt;&gt; args
+['-a', '-b', '-cfoo', '-d', 'bar', 'a1', 'a2']
+&gt;&gt;&gt; optlist, args = getopt.getopt(args, 'abc:d:')
+&gt;&gt;&gt; optlist
+[('-a', ''), ('-b', ''), ('-c', 'foo'), ('-d', 'bar')]
+&gt;&gt;&gt; args
+['a1', 'a2']
+&gt;&gt;&gt;
+</pre></dl>
+
+<P>
+Using long option names is equally easy:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; s = '--condition=foo --testing --output-file abc.def -x a1 a2'
+&gt;&gt;&gt; args = string.split(s)
+&gt;&gt;&gt; args
+['--condition=foo', '--testing', '--output-file', 'abc.def', '-x', 'a1', 'a2']
+&gt;&gt;&gt; optlist, args = getopt.getopt(args, 'x', [
+...     'condition=', 'output-file=', 'testing'])
+&gt;&gt;&gt; optlist
+[('--condition', 'foo'), ('--testing', ''), ('--output-file', 'abc.def'), ('-x',
+ '')]
+&gt;&gt;&gt; args
+['a1', 'a2']
+&gt;&gt;&gt;
+</pre></dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1664"
+ HREF="module-tempfile.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1660"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1654"
+ HREF="module-time.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1662"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1663"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1665"
+ HREF="module-tempfile.html">6.4 tempfile  </A>
+<b>Up:</b> <A NAME="tex2html1661"
+ HREF="allos.html">6. Generic Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1655"
+ HREF="module-time.html">6.2 time  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

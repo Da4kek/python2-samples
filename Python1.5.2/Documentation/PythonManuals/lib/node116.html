@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.5.4 Semaphore Objects</TITLE>
+<META NAME="description" CONTENT="7.5.4 Semaphore Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="node117.html">
+<LINK REL="previous" HREF="node115.html">
+<LINK REL="up" HREF="module-threading.html">
+<LINK REL="next" HREF="node117.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1907"
+ HREF="node117.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1903"
+ HREF="module-threading.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1897"
+ HREF="node115.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1905"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1906"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1908"
+ HREF="node117.html">7.5.5 Event Objects</A>
+<b>Up:</b> <A NAME="tex2html1904"
+ HREF="module-threading.html">7.5 threading  </A>
+<b>Previous:</b> <A NAME="tex2html1898"
+ HREF="node115.html">7.5.3 Condition Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION009540000000000000000">
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN> Semaphore Objects</A>
+</H2>
+
+<P>
+This is one of the oldest synchronization primitives in the history of
+computer science, invented by the early Dutch computer scientist
+Edsger W. Dijkstra (he used <tt>P()</tt> and <tt>V()</tt> instead of <tt>acquire()</tt>
+and <tt>release()</tt>).
+
+<P>
+A semaphore manages an internal counter which is decremented by each
+<tt>acquire()</tt> call and incremented by each <tt>release()</tt>
+call.  The counter can never go below zero; when <tt>acquire()</tt>
+finds that it is zero, it blocks, waiting until some other thread
+calls <tt>release()</tt>.
+
+<P>
+<dl><dt><b><a name="l2h-11458"><tt>Semaphore</tt></a></b> (<var>value=1</var>)
+<dd>
+The optional argument gives the initial value for the internal
+counter; it defaults to 1.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11461"><tt>acquire</tt></a></b> (<var>blocking=1</var>)
+<dd>
+Acquire a semaphore.
+
+<P>
+When invoked without arguments: if the internal counter is larger than
+zero on entry, decrement it by one and return immediately.  If it is
+zero on entry, block, waiting until some other thread has called
+<tt>release()</tt> to make it larger than zero.  This is done with
+proper interlocking so that if multiple <tt>acquire()</tt> calls are
+blocked, <tt>release()</tt> will wake exactly one of them up.  The
+implementation may pick one at random, so the order in which blocked
+threads are awakened should not be relied on.  There is no return
+value in this case.
+
+<P>
+When invoked with the <i>blocking</i> argument set to true, do the same
+thing as when called without arguments, and return true.
+
+<P>
+When invoked with the <i>blocking</i> argument set to false, do not
+block.  If a call without an argument would block, return false
+immediately; otherwise, do the same thing as when called without
+arguments, and return true.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11470"><tt>release</tt></a></b> ()
+<dd>
+Release a semaphore,
+incrementing the internal counter by one.  When it was zero on
+entry and another thread is waiting for it to become larger
+than zero again, wake up that thread.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1907"
+ HREF="node117.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1903"
+ HREF="module-threading.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1897"
+ HREF="node115.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1905"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1906"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1908"
+ HREF="node117.html">7.5.5 Event Objects</A>
+<b>Up:</b> <A NAME="tex2html1904"
+ HREF="module-threading.html">7.5 threading  </A>
+<b>Previous:</b> <A NAME="tex2html1898"
+ HREF="node115.html">7.5.3 Condition Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

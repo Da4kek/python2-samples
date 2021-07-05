@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>5.5 bisect --
+Array bisection algorithms for binary searching.</TITLE>
+<META NAME="description" CONTENT="5.5 bisect --
+Array bisection algorithms for binary searching.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-array.html">
+<LINK REL="previous" HREF="module-random.html">
+<LINK REL="up" HREF="misc.html">
+<LINK REL="next" HREF="bisect-example.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1548"
+ HREF="bisect-example.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1544"
+ HREF="misc.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1538"
+ HREF="module-random.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1546"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1547"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1549"
+ HREF="bisect-example.html">5.5.1 Example</A>
+<b>Up:</b> <A NAME="tex2html1545"
+ HREF="misc.html">5. Miscellaneous Services</A>
+<b>Previous:</b> <A NAME="tex2html1539"
+ HREF="module-random.html">5.4 random  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION007500000000000000000">
+<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>bisect</tt> --
+         Array bisection algorithms for binary searching.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides support for maintaining a list in sorted order
+without having to sort the list after each insertion.  For long lists
+of items with expensive comparison operations, this can be an
+improvement over the more common approach.  The module is called
+<tt>bisect</tt> because it uses a basic bisection algorithm to do its
+work.  The source code may be used a useful reference for a working
+example of the algorithm (i.e., the boundary conditions are already
+right!).
+
+<P>
+The following functions are provided:
+
+<P>
+<dl><dt><b><a name="l2h-8532"><tt>bisect</tt></a></b> (<var>list, item</var><big>[</big><var>, lo</var><big>[</big><var>, hi</var><big>]</big><big>]</big>)
+<dd>
+Locate the proper insertion point for <i>item</i> in <i>list</i> to
+maintain sorted order.  The parameters <i>lo</i> and <i>hi</i> may be
+used to specify a subset of the list which should be considered.  The
+return value is suitable for use as the first parameter to
+<tt><i>list</i>.insert()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-8533"><tt>insort</tt></a></b> (<var>list, item</var><big>[</big><var>, lo</var><big>[</big><var>, hi</var><big>]</big><big>]</big>)
+<dd>
+Insert <i>item</i> in <i>list</i> in sorted order.  This is equivalent
+to <tt><i>list</i>.insert(bisect.bisect(<i>list</i>, <i>item</i>,
+<i>lo</i>, <i>hi</i>), <i>item</i>)</tt>.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html1550"
+ HREF="bisect-example.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Example</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1548"
+ HREF="bisect-example.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1544"
+ HREF="misc.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1538"
+ HREF="module-random.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1546"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1547"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1549"
+ HREF="bisect-example.html">5.5.1 Example</A>
+<b>Up:</b> <A NAME="tex2html1545"
+ HREF="misc.html">5. Miscellaneous Services</A>
+<b>Previous:</b> <A NAME="tex2html1539"
+ HREF="module-random.html">5.4 random  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

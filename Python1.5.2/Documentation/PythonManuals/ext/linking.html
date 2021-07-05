@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.2.1 Shared Libraries</TITLE>
+<META NAME="description" CONTENT="3.2.1 Shared Libraries">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ext.css">
+<LINK REL="next" HREF="irixLinking.html">
+<LINK REL="previous" HREF="makedynload.html">
+<LINK REL="up" HREF="makedynload.html">
+<LINK REL="next" HREF="irixLinking.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html375"
+ HREF="irixLinking.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html372"
+ HREF="makedynload.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html366"
+ HREF="makedynload.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html374"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html376"
+ HREF="irixLinking.html">3.2.2 SGI IRIX 4</A>
+<b>Up:</b> <A NAME="tex2html373"
+ HREF="makedynload.html">3.2 Building a Dynamically</A>
+<b>Previous:</b> <A NAME="tex2html367"
+ HREF="makedynload.html">3.2 Building a Dynamically</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION005210000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Shared Libraries
+</H2>
+
+<P>
+You must link the "<tt>.o</tt>" file to produce a shared library.  This is 
+done using a special invocation of the Unix loader/linker,
+<i>ld</i>(1).  Unfortunately the invocation differs slightly per
+system.
+
+<P>
+On SunOS 4, use
+<dl><dd><pre>
+ld spammodule.o -o spammodule.so
+</pre></dl>
+
+<P>
+On Solaris 2, use
+<dl><dd><pre>
+ld -G spammodule.o -o spammodule.so
+</pre></dl>
+
+<P>
+On SGI IRIX 5, use
+<dl><dd><pre>
+ld -shared spammodule.o -o spammodule.so
+</pre></dl>
+
+<P>
+On other systems, consult the manual page for <i>ld</i>(1) to find
+what flags, if any, must be used.
+
+<P>
+If your extension module uses system libraries that haven't already
+been linked with Python (e.g. a windowing system), these must be
+passed to the <b>ld</b> command as "<tt>-l</tt>" options after the
+"<tt>.o</tt>" file.
+
+<P>
+The resulting file "<tt>spammodule.so</tt>" must be copied into a directory
+along the Python module search path.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html375"
+ HREF="irixLinking.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html372"
+ HREF="makedynload.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html366"
+ HREF="makedynload.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html374"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html376"
+ HREF="irixLinking.html">3.2.2 SGI IRIX 4</A>
+<b>Up:</b> <A NAME="tex2html373"
+ HREF="makedynload.html">3.2 Building a Dynamically</A>
+<b>Previous:</b> <A NAME="tex2html367"
+ HREF="makedynload.html">3.2 Building a Dynamically</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

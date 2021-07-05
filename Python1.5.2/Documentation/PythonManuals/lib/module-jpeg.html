@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>14.4 jpeg --
+Read and write image files in compressed JPEG format.</TITLE>
+<META NAME="description" CONTENT="14.4 jpeg --
+Read and write image files in compressed JPEG format.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-rgbimg.html">
+<LINK REL="previous" HREF="module-aifc.html">
+<LINK REL="up" HREF="mmedia.html">
+<LINK REL="next" HREF="module-rgbimg.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3320"
+ HREF="module-rgbimg.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3316"
+ HREF="mmedia.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3310"
+ HREF="module-aifc.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3318"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3319"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3321"
+ HREF="module-rgbimg.html">14.5 rgbimg  </A>
+<b>Up:</b> <A NAME="tex2html3317"
+ HREF="mmedia.html">14. Multimedia Services</A>
+<b>Previous:</b> <A NAME="tex2html3311"
+ HREF="module-aifc.html">14.3 aifc  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0016400000000000000000">
+<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>jpeg</tt> --
+         Read and write image files in compressed JPEG format.</A>
+</H1>
+
+
+<P>
+
+<P>
+The module <tt>jpeg</tt> provides access to the jpeg compressor and
+decompressor written by the Independent JPEG Group
+<a name="l2h-21512"></a>494
+. JPEG is a (draft?)
+standard for compressing pictures.  For details on JPEG or the
+Independent JPEG Group software refer to the JPEG standard or the
+documentation provided with the software.
+
+<P>
+The <tt>jpeg</tt> module defines an exception and some functions.
+
+<P>
+<dl><dt><b><a name="l2h-21515"><tt>error</tt></a></b>
+<dd>
+Exception raised by <tt>compress()</tt> and <tt>decompress()</tt>
+in case of errors.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21521"><tt>compress</tt></a></b> (<var>data, w, h, b</var>)
+<dd>
+Treat data as a pixmap of width <i>w</i> and height <i>h</i>, with
+<i>b</i> bytes per pixel.  The data is in SGI GL order, so the first
+pixel is in the lower-left corner. This means that <tt>gl.lrectread()</tt>
+return data can immediately be passed to <tt>compress()</tt>.
+Currently only 1 byte and 4 byte pixels are allowed, the former being
+treated as greyscale and the latter as RGB color.
+<tt>compress()</tt> returns a string that contains the compressed
+picture, in JFIF<a name="l2h-21528"></a> format.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21532"><tt>decompress</tt></a></b> (<var>data</var>)
+<dd>
+Data is a string containing a picture in JFIF<a name="l2h-21533"></a> format. It
+returns a tuple <tt>(<i>data</i>, <i>width</i>, <i>height</i>,
+<i>bytesperpixel</i>)</tt>.  Again, the data is suitable to pass to
+<tt>gl.lrectwrite()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21542"><tt>setoption</tt></a></b> (<var>name, value</var>)
+<dd>
+Set various options.  Subsequent <tt>compress()</tt> and
+<tt>decompress()</tt> calls will use these options.  The following
+options are available:
+
+<P>
+<table border align=center>
+  <tr><th align=left><b>Option</b></th>
+      <th><b>Effect</b></th>
+  <tr><td><code>'forcegray'</code></td>
+      <td>Force output to be grayscale, even if input is RGB.</td>
+  <tr><td><code>'quality'</code></td>
+      <td>Set the quality of the compressed image to a value between
+    <tt>0</tt> and <tt>100</tt> (default is <tt>75</tt>).  This only affects
+    compression.</td>
+  <tr><td><code>'optimize'</code></td>
+      <td>Perform Huffman table optimization.  Takes longer, but results in
+    smaller compressed image.  This only affects compression.</td>
+  <tr><td><code>'smooth'</code></td>
+      <td>Perform inter-block smoothing on uncompressed image.  Only useful
+    for low-quality images.  This only affects decompression.</td>
+
+</table>
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3320"
+ HREF="module-rgbimg.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3316"
+ HREF="mmedia.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3310"
+ HREF="module-aifc.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3318"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3319"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3321"
+ HREF="module-rgbimg.html">14.5 rgbimg  </A>
+<b>Up:</b> <A NAME="tex2html3317"
+ HREF="mmedia.html">14. Multimedia Services</A>
+<b>Previous:</b> <A NAME="tex2html3311"
+ HREF="module-aifc.html">14.3 aifc  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

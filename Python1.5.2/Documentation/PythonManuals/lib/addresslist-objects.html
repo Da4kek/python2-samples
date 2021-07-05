@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.5.2 AddressList Objects</TITLE>
+<META NAME="description" CONTENT="12.5.2 AddressList Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="message-objects.html">
+<LINK REL="up" HREF="module-rfc822.html">
+<LINK REL="next" HREF="module-mimetools.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2979"
+ HREF="module-mimetools.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2975"
+ HREF="module-rfc822.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2971"
+ HREF="message-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2977"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2978"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2980"
+ HREF="module-mimetools.html">12.6 mimetools  </A>
+<b>Up:</b> <A NAME="tex2html2976"
+ HREF="module-rfc822.html">12.5 rfc822  </A>
+<b>Previous:</b> <A NAME="tex2html2972"
+ HREF="message-objects.html">12.5.1 Message Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0014520000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> AddressList Objects
+</H2>
+
+<P>
+An <tt>AddressList</tt> instance has the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-19222"><tt>__len__</tt></a></b> (<var>name</var>)
+<dd>
+Return the number of addresses in the address list.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19226"><tt>__str__</tt></a></b> (<var>name</var>)
+<dd>
+Return a canonicalized string representation of the address list.
+Addresses are rendered in "name" &lt;host@domain&gt; form, comma-separated.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19230"><tt>__add__</tt></a></b> (<var>name</var>)
+<dd>
+Return an AddressList instance that contains all addresses in both
+AddressList operands, with duplicates removed (set union).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19234"><tt>__sub__</tt></a></b> (<var>name</var>)
+<dd>
+Return an AddressList instance that contains every address in the
+left-hand AddressList operand that is not present in the right-hand
+address operand (set difference).
+</dl>
+
+<P>
+Finally, <tt>AddressList</tt> instances have one public instance variable:
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>addresslist</tt></a></b>
+<dd>
+A list of tuple string pairs, one per address.  In each member, the
+first is the canonicalized name part of the address, the second is the
+route-address (@-separated host-domain pair).
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2979"
+ HREF="module-mimetools.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2975"
+ HREF="module-rfc822.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2971"
+ HREF="message-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2977"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2978"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2980"
+ HREF="module-mimetools.html">12.6 mimetools  </A>
+<b>Up:</b> <A NAME="tex2html2976"
+ HREF="module-rfc822.html">12.5 rfc822  </A>
+<b>Previous:</b> <A NAME="tex2html2972"
+ HREF="message-objects.html">12.5.1 Message Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

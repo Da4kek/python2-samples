@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>2.1.5.2 String Formatting Operations </title>
+<META NAME="description" CONTENT="2.1.5.2 String Formatting Operations ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="lib.css">
+<LINK REL="next" href="typesseq-xrange.html">
+<LINK REL="previous" href="string-methods.html">
+<LINK REL="up" href="typesseq.html">
+<LINK REL="next" href="typesseq-xrange.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="string-methods.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="typesseq.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="typesseq-xrange.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="string-methods.html">2.1.5.1 String Methods</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="typesseq.html">2.1.5 Sequence Types</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="typesseq-xrange.html">2.1.5.3 XRange Type</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H3>
+<BR>
+2.1.5.2 String Formatting Operations 
+</H3>
+
+<P>
+
+
+<P>
+String objects have one unique built-in operation: the <code>%</code>
+operator (modulo) with a string left argument interprets this string
+as a C <tt class="cfunction">sprintf()</tt> format string to be applied to the
+right argument, and returns the string resulting from this formatting
+operation.
+
+<P>
+The right argument should be a tuple with one item for each argument
+required by the format string; if the string requires a single
+argument, the right argument may also be a single non-tuple
+object.<A NAME="tex2html5"
+  HREF="#foot843"><SUP>2.5</SUP></A>  The following format characters are understood:
+<code>%</code>, <code>c</code>, <code>s</code>, <code>i</code>, <code>d</code>, <code>u</code>, <code>o</code>,
+<code>x</code>, <code>X</code>, <code>e</code>, <code>E</code>, <code>f</code>, <code>g</code>, <code>G</code>. 
+Width and precision may be a <code>*</code> to specify that an integer argument
+specifies the actual width or precision.  The flag characters
+<code>-</code>, <code>+</code>, blank, <code>#</code> and <code>0</code> are understood.  The 
+size specifiers <code>h</code>, <code>l</code> or <code>L</code> may be present but are
+ignored.  The <code>%s</code> conversion takes any Python object and
+converts it to a string using <code>str()</code> before formatting it.  The
+ANSI features <code>%p</code> and <code>%n</code> are not supported.  Since
+Python strings have an explicit length, <code>%s</code> conversions don't
+assume that <code>'&#92;0'</code> is the end of the string.
+
+<P>
+For safety reasons, floating point precisions are clipped to 50;
+<code>%f</code> conversions for numbers whose absolute value is over 1e25
+are replaced by <code>%g</code> conversions.<A NAME="tex2html6"
+  HREF="#foot874"><SUP>2.6</SUP></A>  All other errors raise exceptions.
+
+<P>
+If the right argument is a dictionary (or any kind of mapping), then
+the formats in the string must have a parenthesized key into that
+dictionary inserted immediately after the "<tt class="character">%</tt>" character,
+and each format formats the corresponding entry from the mapping.
+For example:
+
+<P>
+<dl><dd><pre class="verbatim">
+&gt;&gt;&gt; count = 2
+&gt;&gt;&gt; language = 'Python'
+&gt;&gt;&gt; print '%(language)s has %(count)03d quote types.' % vars()
+Python has 002 quote types.
+</pre></dl>
+
+<P>
+In this case no <code>*</code> specifiers may occur in a format (since they
+require a sequential parameter list).
+
+<P>
+Additional string operations are defined in standard module
+<tt class='module'><a href='module-string.html'>string</a></tt> and in built-in module <tt class='module'><a href='module-re.html'>re</a></tt>.
+
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot843">...
+object.</A><A NAME="foot843"
+ href="typesseq-strings.html#tex2html5"><SUP>2.5</SUP></A>
+<DD>A tuple object in this case should be a singleton.
+
+
+<DT><A NAME="foot874">... conversions.</A><A NAME="foot874"
+ href="typesseq-strings.html#tex2html6"><SUP>2.6</SUP></A>
+<DD>
+  These numbers are fairly arbitrary.  They are intended to
+  avoid printing endless strings of meaningless digits without hampering
+  correct use and without having to know the exact precision of floating
+  point values on a particular machine.
+
+
+</DL>
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="string-methods.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="typesseq.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="typesseq-xrange.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="string-methods.html">2.1.5.1 String Methods</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="typesseq.html">2.1.5 Sequence Types</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="typesseq-xrange.html">2.1.5.3 XRange Type</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

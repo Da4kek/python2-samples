@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.7 fnmatch --
+Unix shell style pathname pattern matching.</TITLE>
+<META NAME="description" CONTENT="6.7 fnmatch --
+Unix shell style pathname pattern matching.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-locale.html">
+<LINK REL="previous" HREF="module-glob.html">
+<LINK REL="up" HREF="allos.html">
+<LINK REL="next" HREF="module-locale.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1712"
+ HREF="module-locale.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1708"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1702"
+ HREF="module-glob.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1710"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1711"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1713"
+ HREF="module-locale.html">6.8 locale  </A>
+<b>Up:</b> <A NAME="tex2html1709"
+ HREF="allos.html">6. Generic Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1703"
+ HREF="module-glob.html">6.6 glob  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008700000000000000000">
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>fnmatch</tt> --
+         Unix shell style pathname pattern matching.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides support for Unix shell-style wildcards, which
+are <i>not</i> the same as regular expressions (which are documented
+in the <tt>re</tt><a name="l2h-"></a> module).  The special characters
+used in shell-style wildcards are:
+
+<P>
+
+<DT><tt>*</tt>
+
+<DL COMPACT><DD>matches everything
+<DT><tt>?</tt>
+<DD>matches any single character
+<DT><tt>[</tt><i>seq</i><tt>]</tt>
+<DD>matches any character in <i>seq</i>
+<DT><tt>[!</tt><i>seq</i><tt>]</tt>
+<DD>matches any character not in <i>seq</i>
+
+</DL>
+
+<P>
+Note that the filename separator (<tt>'/'</tt> on Unix) is <i>not</i>
+special to this module.  See module <tt>glob</tt><a name="l2h-"></a>for pathname expansion (<tt>glob</tt> uses <tt>fnmatch()</tt> to
+match filename segments).
+
+<P>
+<dl><dt><b><a name="l2h-10185"><tt>fnmatch</tt></a></b> (<var>filename, pattern</var>)
+<dd>
+Test whether the <i>filename</i> string matches the <i>pattern</i>
+string, returning true or false.  If the operating system is
+case-insensitive, then both parameters will be normalized to all
+lower- or upper-case before the comparision is performed.  If you
+require a case-sensitive comparision regardless of whether that's
+standard for your operating system, use <tt>fnmatchcase()</tt>
+instead.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-10192"><tt>fnmatchcase</tt></a></b> (<var>filename, pattern</var>)
+<dd>
+Test whether <i>filename</i> matches <i>pattern</i>, returning true or
+false; the comparision is case-sensitive.
+</dl>
+
+<P>
+<p><b>See Also:</b></p>
+
+<p>Module <tt><b><a href="module-glob.html">glob</a></b></tt>&nbsp;&nbsp;&nbsp;(Shell-style path expansion)</p>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1712"
+ HREF="module-locale.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1708"
+ HREF="allos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1702"
+ HREF="module-glob.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1710"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1711"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1713"
+ HREF="module-locale.html">6.8 locale  </A>
+<b>Up:</b> <A NAME="tex2html1709"
+ HREF="allos.html">6. Generic Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1703"
+ HREF="module-glob.html">6.6 glob  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

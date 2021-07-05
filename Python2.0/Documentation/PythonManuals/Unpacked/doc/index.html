@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Documenting Python</title>
+<META NAME="description" CONTENT="Documenting Python">
+<META NAME="keywords" CONTENT="doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="doc.css">
+<LINK REL="next" href="contents.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A HREF="../index.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="contents.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Documenting Python</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="../index.html">Document Index</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="contents.html">Contents</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<P>
+
+<div class="titlepage">
+<table border="0" width="100%"><tr>
+<td class="titlegraphic" width="30%"><img width="121" height="110"
+  src="../icons/labslogo.gif"></td>
+<td>
+<h1>Documenting Python</h1>
+<p><b><font size='+2'>Fred L. Drake, Jr.</font></b></p>
+<p>
+	BeOpen PythonLabs 
+<BR>
+E-mail: <span class="email">fdrake@beopen.com</span>
+</p>
+<p><strong>October 16, 2000</strong><br><strong>Release 2.0</strong></p>
+<p></td></tr>
+</table>
+</div>
+
+<P>
+
+<H3>Abstract:</H3>
+<DIV CLASS="ABSTRACT">
+
+The Python language has a substantial body of
+documentation, much of it contributed by various authors.  The markup
+used for the Python documentation is based on <SPAN CLASS="logo,LaTeX">L<SUP><SMALL>A</SMALL></SUP>T<SMALL>E</SMALL>X</SPAN> and requires a
+significant set of macros written specifically for documenting Python.
+This document describes the macros introduced to support Python
+documentation and how they should be used to support a wide range of
+output formats.
+
+<P>
+This document describes the document classes and special markup used
+in the Python documentation.  Authors may use this guide, in
+conjunction with the template files provided with the
+distribution, to create or maintain whole documents or sections.
+</DIV>
+<P>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html6"
+  href="contents.html">Contents</A>
+<LI><A NAME="tex2html7"
+  HREF="node2.html">1 Introduction</A>
+<LI><A NAME="tex2html8"
+  HREF="node3.html">2 Directory Structure</A>
+<LI><A NAME="tex2html9"
+  href="latex-primer.html">3 <SPAN CLASS="logo,LaTeX">L<SUP><SMALL>A</SMALL></SUP>T<SMALL>E</SMALL>X</SPAN> Primer </A>
+<LI><A NAME="tex2html10"
+  href="classes.html">4 Document Classes </A>
+<LI><A NAME="tex2html11"
+  HREF="node6.html">5 Special Markup Constructs</A>
+<UL>
+<LI><A NAME="tex2html12"
+  href="preamble-info.html">5.1 Markup for the Preamble </A>
+<LI><A NAME="tex2html13"
+  href="meta-info.html">5.2 Meta-information Markup </A>
+<LI><A NAME="tex2html14"
+  href="info-units.html">5.3 Information Units </A>
+<LI><A NAME="tex2html15"
+  HREF="node10.html">5.4 Showing Code Examples</A>
+<LI><A NAME="tex2html16"
+  HREF="node11.html">5.5 Inline Markup</A>
+<LI><A NAME="tex2html17"
+  HREF="node12.html">5.6 Module-specific Markup</A>
+<LI><A NAME="tex2html18"
+  HREF="node13.html">5.7 Library-level Markup</A>
+<LI><A NAME="tex2html19"
+  HREF="node14.html">5.8 Table Markup</A>
+<LI><A NAME="tex2html20"
+  href="references.html">5.9 Reference List Markup </A>
+<LI><A NAME="tex2html21"
+  href="indexing.html">5.10 Index-generating Markup </A>
+</UL>
+<LI><A NAME="tex2html22"
+  HREF="node17.html">6 Special Names</A>
+<LI><A NAME="tex2html23"
+  HREF="node18.html">7 Processing Tools</A>
+<UL>
+<LI><A NAME="tex2html24"
+  HREF="node19.html">7.1 External Tools</A>
+<LI><A NAME="tex2html25"
+  HREF="node20.html">7.2 Internal Tools</A>
+</UL>
+<LI><A NAME="tex2html26"
+  href="futures.html">8 Future Directions </A>
+<UL>
+<LI><A NAME="tex2html27"
+  href="structured.html">8.1 Structured Documentation </A>
+<LI><A NAME="tex2html28"
+  href="discussion.html">8.2 Discussion Forums </A>
+</UL>
+<LI><A NAME="tex2html29"
+  href="about.html">About this document ...</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A HREF="../index.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="contents.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Documenting Python</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="../index.html">Document Index</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="contents.html">Contents</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

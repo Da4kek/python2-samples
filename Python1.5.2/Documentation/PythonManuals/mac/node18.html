@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8.1 IC Objects</TITLE>
+<META NAME="description" CONTENT="8.1 IC Objects">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="previous" HREF="module-ic.html">
+<LINK REL="up" HREF="module-ic.html">
+<LINK REL="next" HREF="module-MacOS.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html329"
+ HREF="module-MacOS.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html325"
+ HREF="module-ic.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html321"
+ HREF="module-ic.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html327"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html328"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html330"
+ HREF="module-MacOS.html">9. MacOS  </A>
+<b>Up:</b> <A NAME="tex2html326"
+ HREF="module-ic.html">8. ic  </A>
+<b>Previous:</b> <A NAME="tex2html322"
+ HREF="module-ic.html">8. ic  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION002810000000000000000">
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> IC Objects</A>
+</H2>
+
+<P>
+<tt>IC</tt> objects have a mapping interface, hence to obtain the mail
+address you simply get <tt><i>ic</i>['MailAddress']</tt>. Assignment also
+works, and changes the option in the configuration file.
+
+<P>
+The module knows about various datatypes, and converts the internal IC
+representation to a ``logical'' Python data structure. Running the
+<tt>ic</tt> module standalone will run a test program that lists all
+keys and values in your IC database, this will have to server as
+documentation.
+
+<P>
+If the module does not know how to represent the data it returns an
+instance of the <tt>ICOpaqueData</tt> type, with the raw data in its
+<tt>data</tt> attribute. Objects of this type are also acceptable values
+for assignment.
+
+<P>
+Besides the dictionary interface, <tt>IC</tt> objects have the
+following methods:
+
+<P>
+<dl><dt><b><a name="l2h-990"><tt>launchurl</tt></a></b> (<var>url</var><big>[</big><var>, hint</var><big>]</big>)
+<dd>
+Parse the given URL, lauch the correct application and pass it the
+URL. The optional <i>hint</i> can be a scheme name such as
+<tt>'mailto:'</tt>, in which case incomplete URLs are completed with this
+scheme.  If <i>hint</i> is not provided, incomplete URLs are invalid.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-997"><tt>parseurl</tt></a></b> (<var>data</var><big>[</big><var>, start</var><big>[</big><var>, end</var><big>[</big><var>, hint</var><big>]</big><big>]</big><big>]</big>)
+<dd>
+Find an URL somewhere in <i>data</i> and return start position, end
+position and the URL. The optional <i>start</i> and <i>end</i> can be
+used to limit the search, so for instance if a user clicks in a long
+textfield you can pass the whole textfield and the click-position in
+<i>start</i> and this routine will return the whole URL in which the
+user clicked.  As above, <i>hint</i> is an optional scheme used to
+complete incomplete URLs.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1006"><tt>mapfile</tt></a></b> (<var>file</var>)
+<dd>
+Return the mapping entry for the given <i>file</i>, which can be passed
+as either a filename or an <tt>macfs.FSSpec()</tt> result, and which
+need not exist.
+
+<P>
+The mapping entry is returned as a tuple <tt>(</tt><i>version</i>,
+<i>type</i>, <i>creator</i>, <i>postcreator</i>, <i>flags</i>,
+<i>extension</i>, <i>appname</i>, <i>postappname</i>, <i>mimetype</i>,
+<i>entryname</i><tt>)</tt>, where <i>version</i> is the entry version
+number, <i>type</i> is the 4-character filetype, <i>creator</i> is the
+4-character creator type, <i>postcreator</i> is the 4-character creator
+code of an
+optional application to post-process the file after downloading,
+<i>flags</i> are various bits specifying whether to transfer in binary
+or ascii and such, <i>extension</i> is the filename extension for this
+file type, <i>appname</i> is the printable name of the application to
+which this file belongs, <i>postappname</i> is the name of the
+postprocessing application, <i>mimetype</i> is the MIME type of this
+file and <i>entryname</i> is the name of this entry.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1034"><tt>maptypecreator</tt></a></b> (<var>type, creator</var><big>[</big><var>, filename</var><big>]</big>)
+<dd>
+Return the mapping entry for files with given 4-character <i>type</i> and
+<i>creator</i> codes. The optional <i>filename</i> may be specified to
+further help finding the correct entry (if the creator code is
+<tt>'????'</tt>, for instance).
+
+<P>
+The mapping entry is returned in the same format as for <i>mapfile</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1043"><tt>settypecreator</tt></a></b> (<var>file</var>)
+<dd>
+Given an existing <i>file</i>, specified either as a filename or as an
+<tt>macfs.FSSpec()</tt> result, set its creator and type correctly based
+on its extension.  The finder is told about the change, so the finder
+icon will be updated quickly.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html329"
+ HREF="module-MacOS.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html325"
+ HREF="module-ic.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html321"
+ HREF="module-ic.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html327"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html328"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html330"
+ HREF="module-MacOS.html">9. MacOS  </A>
+<b>Up:</b> <A NAME="tex2html326"
+ HREF="module-ic.html">8. ic  </A>
+<b>Previous:</b> <A NAME="tex2html322"
+ HREF="module-ic.html">8. ic  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

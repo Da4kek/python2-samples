@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2.1.1 Truth Value Testing </TITLE>
+<META NAME="description" CONTENT="2.1.1 Truth Value Testing ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="boolean.html">
+<LINK REL="previous" HREF="types.html">
+<LINK REL="up" HREF="types.html">
+<LINK REL="next" HREF="boolean.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html584"
+ HREF="boolean.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html580"
+ HREF="types.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html574"
+ HREF="types.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html582"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html583"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html585"
+ HREF="boolean.html">2.1.2 Boolean Operations</A>
+<b>Up:</b> <A NAME="tex2html581"
+ HREF="types.html">2.1 Built-in Types</A>
+<b>Previous:</b> <A NAME="tex2html575"
+ HREF="types.html">2.1 Built-in Types</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION004110000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Truth Value Testing 
+</H2>
+
+<P>
+Any object can be tested for truth value, for use in an <tt>if</tt> or
+<tt>while</tt> condition or as operand of the Boolean operations below.
+The following values are considered false:
+<a name="l2h-"></a><a name="l2h-"></a><a name="l2h-120"></a>
+<a name="l2h-122"></a>
+<a name="l2h-124"></a>
+<P>
+
+<UL><LI><tt>None</tt>
+	<a name="l2h-128"></a>
+
+<P>
+
+<LI>zero of any numeric type, e.g., <tt>0</tt>, <tt>0L</tt>, <tt>0.0</tt>.
+
+<P>
+
+<LI>any empty sequence, e.g., <tt>''</tt>, <tt>()</tt>, <tt>[]</tt>.
+
+<P>
+
+<LI>any empty mapping, e.g., <tt>{}</tt>.
+
+<P>
+
+<LI>instances of user-defined classes, if the class defines a
+	<tt>__nonzero__()</tt> or <tt>__len__()</tt> method, when that
+	method returns zero.
+
+<P>
+
+</UL>
+
+<P>
+All other values are considered true -- so objects of many types are
+always true.
+<a name="l2h-139"></a>
+<P>
+Operations and built-in functions that have a Boolean result always
+return <tt>0</tt> for false and <tt>1</tt> for true, unless otherwise
+stated.  (Important exception: the Boolean operations
+"<tt>or</tt>"<a name="l2h-"></a> and "<tt>and</tt>"<a name="l2h-"></a> always return one of
+their operands.)
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html584"
+ HREF="boolean.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html580"
+ HREF="types.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html574"
+ HREF="types.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html582"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html583"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html585"
+ HREF="boolean.html">2.1.2 Boolean Operations</A>
+<b>Up:</b> <A NAME="tex2html581"
+ HREF="types.html">2.1 Built-in Types</A>
+<b>Previous:</b> <A NAME="tex2html575"
+ HREF="types.html">2.1 Built-in Types</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.1.1 Example</TITLE>
+<META NAME="description" CONTENT="7.1.1 Example">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-signal.html">
+<LINK REL="up" HREF="module-signal.html">
+<LINK REL="next" HREF="module-socket.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1781"
+ HREF="module-socket.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1777"
+ HREF="module-signal.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1773"
+ HREF="module-signal.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1779"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1780"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1782"
+ HREF="module-socket.html">7.2 socket  </A>
+<b>Up:</b> <A NAME="tex2html1778"
+ HREF="module-signal.html">7.1 signal  </A>
+<b>Previous:</b> <A NAME="tex2html1774"
+ HREF="module-signal.html">7.1 signal  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION009110000000000000000">
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Example</A>
+</H2>
+
+<P>
+Here is a minimal example program. It uses the <tt>alarm()</tt>
+function to limit the time spent waiting to open a file; this is
+useful if the file is for a serial device that may not be turned on,
+which would normally cause the <tt>os.open()</tt> to hang
+indefinitely.  The solution is to set a 5-second alarm before opening
+the file; if the operation takes too long, the alarm signal will be
+sent, and the handler raises an exception.
+
+<P>
+<dl><dd><pre>
+import signal, os, FCNTL
+
+def handler(signum, frame):
+    print 'Signal handler called with signal', signum
+    raise IOError, "Couldn't open device!"
+
+# Set the signal handler and a 5-second alarm
+signal.signal(signal.SIGALRM, handler)
+signal.alarm(5)
+
+# This open() may hang indefinitely
+fd = os.open('/dev/ttyS0', FCNTL.O_RDWR)  
+
+signal.alarm(0)          # Disable the alarm
+</pre></dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1781"
+ HREF="module-socket.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1777"
+ HREF="module-signal.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1773"
+ HREF="module-signal.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1779"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1780"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1782"
+ HREF="module-socket.html">7.2 socket  </A>
+<b>Up:</b> <A NAME="tex2html1778"
+ HREF="module-signal.html">7.1 signal  </A>
+<b>Previous:</b> <A NAME="tex2html1774"
+ HREF="module-signal.html">7.1 signal  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

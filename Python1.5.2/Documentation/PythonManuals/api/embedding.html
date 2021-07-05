@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1.4 Embedding Python</TITLE>
+<META NAME="description" CONTENT="1.4 Embedding Python">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="previous" HREF="exceptions.html">
+<LINK REL="up" HREF="intro.html">
+<LINK REL="next" HREF="veryhigh.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html204"
+ HREF="veryhigh.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html200"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html196"
+ HREF="exceptions.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html202"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html203"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html205"
+ HREF="veryhigh.html">2. The Very High</A>
+<b>Up:</b> <A NAME="tex2html201"
+ HREF="intro.html">1. Introduction</A>
+<b>Previous:</b> <A NAME="tex2html197"
+ HREF="exceptions.html">1.3 Exceptions</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION003400000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN> Embedding Python
+</H1>
+
+<P>
+The one important task that only embedders (as opposed to extension
+writers) of the Python interpreter have to worry about is the
+initialization, and possibly the finalization, of the Python
+interpreter.  Most functionality of the interpreter can only be used
+after the interpreter has been initialized.
+
+<P>
+The basic initialization function is <tt>Py_Initialize()</tt>.
+This initializes the table of loaded modules, and creates the
+fundamental modules <tt>__builtin__</tt><a name="l2h-"></a>,
+<tt>__main__</tt><a name="l2h-"></a> and 
+<tt>sys</tt><a name="l2h-"></a>.  It also initializes the module
+search path (<tt>sys.path</tt>).<a name="l2h-"></a>
+
+<P>
+<tt>Py_Initialize()</tt> does not set the ``script argument list'' 
+(<tt>sys.argv</tt>).  If this variable is needed by Python code that 
+will be executed later, it must be set explicitly with a call to 
+<tt>PySys_SetArgv(<i>argc</i>, <i>argv</i>)</tt> subsequent to the call 
+to <tt>Py_Initialize()</tt>.
+
+<P>
+On most systems (in particular, on Unix and Windows, although the
+details are slightly different), <tt>Py_Initialize()</tt>
+calculates the module search path based upon its best guess for the
+location of the standard Python interpreter executable, assuming that
+the Python library is found in a fixed location relative to the Python
+interpreter executable.  In particular, it looks for a directory named
+"<tt>lib/python1.5</tt>" (replacing "<tt>1.5</tt>" with the current
+interpreter version) relative to the parent directory where the
+executable named "<tt>python</tt>" is found on the shell command search
+path (the environment variable <a name="l2h-201">$PATH</a>).
+
+<P>
+For instance, if the Python executable is found in
+"<tt>/usr/local/bin/python</tt>", it will assume that the libraries are in
+"<tt>/usr/local/lib/python1.5</tt>".  (In fact, this particular path
+is also the ``fallback'' location, used when no executable file named
+"<tt>python</tt>" is found along <a name="l2h-205">$PATH</a>.)  The user can override
+this behavior by setting the environment variable <a name="l2h-206">$PYTHONHOME</a>,
+or insert additional directories in front of the standard path by
+setting <a name="l2h-207">$PYTHONPATH</a>.
+
+<P>
+The embedding application can steer the search by calling 
+<tt>Py_SetProgramName(<i>file</i>)</tt> <i>before</i> calling 
+<tt>Py_Initialize()</tt>.  Note that <a name="l2h-211">$PYTHONHOME</a> still
+overrides this and <a name="l2h-212">$PYTHONPATH</a> is still inserted in front of
+the standard path.  An application that requires total control has to
+provide its own implementation of <tt>Py_GetPath()</tt>,
+<tt>Py_GetPrefix()</tt>, <tt>Py_GetExecPrefix()</tt>,
+<tt>Py_GetProgramFullPath()</tt> (all defined in
+"<tt>Modules/getpath.c</tt>").
+
+<P>
+Sometimes, it is desirable to ``uninitialize'' Python.  For instance, 
+the application may want to start over (make another call to 
+<tt>Py_Initialize()</tt>) or the application is simply done with its 
+use of Python and wants to free all memory allocated by Python.  This
+can be accomplished by calling <tt>Py_Finalize()</tt>.  The function
+<tt>Py_IsInitialized()</tt> returns true iff Python is currently in the
+initialized state.  More information about these functions is given in
+a later chapter.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html204"
+ HREF="veryhigh.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html200"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html196"
+ HREF="exceptions.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html202"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html203"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html205"
+ HREF="veryhigh.html">2. The Very High</A>
+<b>Up:</b> <A NAME="tex2html201"
+ HREF="intro.html">1. Introduction</A>
+<b>Previous:</b> <A NAME="tex2html197"
+ HREF="exceptions.html">1.3 Exceptions</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

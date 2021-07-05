@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>15.3 rotor --
+Enigma-like encryption and decryption.</TITLE>
+<META NAME="description" CONTENT="15.3 rotor --
+Enigma-like encryption and decryption.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-mpz.html">
+<LINK REL="up" HREF="crypto.html">
+<LINK REL="next" HREF="sgi.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3388"
+ HREF="sgi.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3384"
+ HREF="crypto.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3380"
+ HREF="module-mpz.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3386"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3387"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3389"
+ HREF="sgi.html">16. SGI IRIX Specific</A>
+<b>Up:</b> <A NAME="tex2html3385"
+ HREF="crypto.html">15. Cryptographic Services</A>
+<b>Previous:</b> <A NAME="tex2html3381"
+ HREF="module-mpz.html">15.2 mpz  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0017300000000000000000">
+<SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">3</SPAN> <tt>rotor</tt> --
+         Enigma-like encryption and decryption.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module implements a rotor-based encryption algorithm, contributed by
+Lance Ellinghouse<a name="l2h-21958"></a>.  The design is derived
+from the Enigma device<a name="l2h-21959"></a>, a machine
+used during World War II to encipher messages.  A rotor is simply a
+permutation.  For example, if the character `A' is the origin of the rotor,
+then a given rotor might map `A' to `L', `B' to `Z', `C' to `G', and so on.
+To encrypt, we choose several different rotors, and set the origins of the
+rotors to known positions; their initial position is the ciphering key.  To
+encipher a character, we permute the original character by the first rotor,
+and then apply the second rotor's permutation to the result. We continue
+until we've applied all the rotors; the resulting character is our
+ciphertext.  We then change the origin of the final rotor by one position,
+from `A' to `B'; if the final rotor has made a complete revolution, then we
+rotate the next-to-last rotor by one position, and apply the same procedure
+recursively.  In other words, after enciphering one character, we advance
+the rotors in the same fashion as a car's odometer. Decoding works in the
+same way, except we reverse the permutations and apply them in the opposite
+order.
+<a name="l2h-21961"></a>
+
+<P>
+The available functions in this module are:
+
+<P>
+<dl><dt><b><a name="l2h-22002"><tt>newrotor</tt></a></b> (<var>key</var><big>[</big><var>, numrotors</var><big>]</big>)
+<dd>
+Return a rotor object. <i>key</i> is a string containing the encryption key
+for the object; it can contain arbitrary binary data. The key will be used
+to randomly generate the rotor permutations and their initial positions.
+<i>numrotors</i> is the number of rotor permutations in the returned object;
+if it is omitted, a default value of 6 will be used.
+</dl>
+
+<P>
+Rotor objects have the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-21970"><tt>setkey</tt></a></b> (<var>key</var>)
+<dd>
+Sets the rotor's key to <i>key</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21975"><tt>encrypt</tt></a></b> (<var>plaintext</var>)
+<dd>
+Reset the rotor object to its initial state and encrypt <i>plaintext</i>,
+returning a string containing the ciphertext.  The ciphertext is always the
+same length as the original plaintext.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21980"><tt>encryptmore</tt></a></b> (<var>plaintext</var>)
+<dd>
+Encrypt <i>plaintext</i> without resetting the rotor object, and return a
+string containing the ciphertext.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21985"><tt>decrypt</tt></a></b> (<var>ciphertext</var>)
+<dd>
+Reset the rotor object to its initial state and decrypt <i>ciphertext</i>,
+returning a string containing the ciphertext.  The plaintext string will
+always be the same length as the ciphertext.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21990"><tt>decryptmore</tt></a></b> (<var>ciphertext</var>)
+<dd>
+Decrypt <i>ciphertext</i> without resetting the rotor object, and return a
+string containing the ciphertext.
+</dl>
+
+<P>
+An example usage:
+<dl><dd><pre>
+&gt;&gt;&gt; import rotor
+&gt;&gt;&gt; rt = rotor.newrotor('key', 12)
+&gt;&gt;&gt; rt.encrypt('bar')
+'\2534\363'
+&gt;&gt;&gt; rt.encryptmore('bar')
+'\357\375$'
+&gt;&gt;&gt; rt.encrypt('bar')
+'\2534\363'
+&gt;&gt;&gt; rt.decrypt('\2534\363')
+'bar'
+&gt;&gt;&gt; rt.decryptmore('\357\375$')
+'bar'
+&gt;&gt;&gt; rt.decrypt('\357\375$')
+'l(\315'
+&gt;&gt;&gt; del rt
+</pre></dl>
+
+<P>
+The module's code is not an exact simulation of the original Enigma
+device; it implements the rotor encryption scheme differently from the
+original. The most important difference is that in the original
+Enigma, there were only 5 or 6 different rotors in existence, and they
+were applied twice to each character; the cipher key was the order in
+which they were placed in the machine.  The Python <tt>rotor</tt>
+module uses the supplied key to initialize a random number generator;
+the rotor permutations and their initial positions are then randomly
+generated.  The original device only enciphered the letters of the
+alphabet, while this module can handle any 8-bit binary data; it also
+produces binary output.  This module can also operate with an
+arbitrary number of rotors.
+
+<P>
+The original Enigma cipher was broken in 1944. The version implemented here is probably a good deal more difficult to crack
+(especially if you use many rotors), but it won't be impossible for
+a truly skilful and determined attacker to break the cipher.  So if you want
+to keep the NSA out of your files, this rotor cipher may well be unsafe, but
+for discouraging casual snooping through your files, it will probably be
+just fine, and may be somewhat safer than using the Unix <b>crypt</b>
+command.
+<a name="l2h-21999"></a><a name="l2h-22000"></a>
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3388"
+ HREF="sgi.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3384"
+ HREF="crypto.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3380"
+ HREF="module-mpz.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3386"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3387"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3389"
+ HREF="sgi.html">16. SGI IRIX Specific</A>
+<b>Up:</b> <A NAME="tex2html3385"
+ HREF="crypto.html">15. Cryptographic Services</A>
+<b>Previous:</b> <A NAME="tex2html3381"
+ HREF="module-mpz.html">15.2 mpz  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

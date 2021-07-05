@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8. ic --
+Access to Internet Config.</TITLE>
+<META NAME="description" CONTENT="8. ic --
+Access to Internet Config.">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="module-MacOS.html">
+<LINK REL="previous" HREF="module-macfs.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="node18.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html318"
+ HREF="node18.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html314"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html308"
+ HREF="finfo-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html316"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html317"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html319"
+ HREF="node18.html">8.1 IC Objects</A>
+<b>Up:</b> <A NAME="tex2html315"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html309"
+ HREF="finfo-objects.html">7.3 FInfo Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002800000000000000000">
+<SPAN CLASS="arabic">8</SPAN>. <tt>ic</tt> --
+         Access to Internet Config.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides access to Macintosh Internet Config package,
+which stores preferences for Internet programs such as mail address,
+default homepage, etc. Also, Internet Config contains an elaborate set
+of mappings from Macintosh creator/type codes to foreign filename
+extensions plus information on how to transfer files (binary, ascii,
+etc).
+
+<P>
+There is a low-level companion module
+<tt>icglue</tt><a name="l2h-"></a> which provides the basic
+Internet Config access functionality.  This low-level module is not
+documented, but the docstrings of the routines document the parameters
+and the routine names are the same as for the Pascal or C API to
+Internet Config, so the standard IC programmers' documentation can be
+used if this module is needed.
+
+<P>
+The <tt>ic</tt> module defines the <tt>error</tt> exception and
+symbolic names for all error codes Internet Config can produce; see
+the source for details.
+
+<P>
+<dl><dt><b><a name="l2h-959"><tt>error</tt></a></b>
+<dd>
+Exception raised on errors in the <tt>ic</tt> module.
+</dl>
+
+<P>
+The <tt>ic</tt> module defines the following class and function:
+
+<P>
+<dl><dt><b><a name="l2h-1057"><tt>IC</tt></a></b> (<big>[</big><var>signature</var><big>[</big><var>, ic</var><big>]</big><big>]</big>)
+<dd>
+Create an internet config object. The signature is a 4-character creator
+code of the current application (default <tt>'Pyth'</tt>) which may
+influence some of ICs settings. The optional <i>ic</i> argument is a
+low-level <tt>icglue.icinstance</tt> created beforehand, this may be
+useful if you want to get preferences from a different config file,
+etc.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1050"><tt>launchurl</tt></a></b> (<var>url</var><big>[</big><var>, hint</var><big>]</big>)
+<dd>
+<dt><b><a name="l2h-1060"><tt>parseurl</tt></a></b> (<var>data</var><big>[</big><var>, start</var><big>[</big><var>, end</var><big>[</big><var>, hint</var><big>]</big><big>]</big><big>]</big>)
+<dd>
+<dt><b><a name="l2h-976"><tt>mapfile</tt></a></b> (<var>file</var>)
+<dd>
+<dt><b><a name="l2h-1052"><tt>maptypecreator</tt></a></b> (<var>type, creator</var><big>[</big><var>, filename</var><big>]</big>)
+<dd>
+<dt><b><a name="l2h-980"><tt>settypecreator</tt></a></b> (<var>file</var>)
+<dd>
+These functions are ``shortcuts'' to the methods of the same name,
+described below.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html320"
+ HREF="node18.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> IC Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html318"
+ HREF="node18.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html314"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html308"
+ HREF="finfo-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html316"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html317"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html319"
+ HREF="node18.html">8.1 IC Objects</A>
+<b>Up:</b> <A NAME="tex2html315"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html309"
+ HREF="finfo-objects.html">7.3 FInfo Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

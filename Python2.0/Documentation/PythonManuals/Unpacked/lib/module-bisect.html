@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>5.5 bisect -- Array bisection algorithm</title>
+<META NAME="description" CONTENT="5.5 bisect -- Array bisection algorithm">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="lib.css">
+<LINK REL="next" href="module-array.html">
+<LINK REL="previous" href="module-whrandom.html">
+<LINK REL="up" href="misc.html">
+<LINK REL="next" href="bisect-example.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-whrandom.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="misc.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="bisect-example.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-whrandom.html">5.4 whrandom  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="misc.html">5. Miscellaneous Services</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="bisect-example.html">5.5.1 Example</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION007500000000000000000">
+5.5 <tt class="module">bisect</tt> --
+         Array bisection algorithm</A>
+</H1>
+
+<P>
+
+
+<P>
+This module provides support for maintaining a list in sorted order
+without having to sort the list after each insertion.  For long lists
+of items with expensive comparison operations, this can be an
+improvement over the more common approach.  The module is called
+<tt class="module">bisect</tt> because it uses a basic bisection algorithm to do its
+work.  The source code may be most useful as a working example of the
+algorithm (i.e., the boundary conditions are already right!).
+
+<P>
+The following functions are provided:
+
+<P>
+<dl><dt><b><a name='l2h-754'><tt class='function'>bisect</tt></a></b> (<var>list, item</var><big>[</big><var>, lo</var><big>[</big><var>, hi</var><big>]</big><big>]</big>)
+<dd>
+Locate the proper insertion point for <var>item</var> in <var>list</var> to
+maintain sorted order.  The parameters <var>lo</var> and <var>hi</var> may be
+used to specify a subset of the list which should be considered.  The
+return value is suitable for use as the first parameter to
+<code><var>list</var>.insert()</code>.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-755'><tt class='function'>insort</tt></a></b> (<var>list, item</var><big>[</big><var>, lo</var><big>[</big><var>, hi</var><big>]</big><big>]</big>)
+<dd>
+Insert <var>item</var> in <var>list</var> in sorted order.  This is equivalent
+to <code><var>list</var>.insert(bisect.bisect(<var>list</var>, <var>item</var>,
+<var>lo</var>, <var>hi</var>), <var>item</var>)</code>.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html2038"
+  href="bisect-example.html">5.5.1 Example</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-whrandom.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="misc.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="bisect-example.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-whrandom.html">5.4 whrandom  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="misc.html">5. Miscellaneous Services</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="bisect-example.html">5.5.1 Example</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

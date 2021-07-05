@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3. Pattern Differences</TITLE>
+<META NAME="description" CONTENT="3. Pattern Differences">
+<META NAME="keywords" CONTENT="regex-to-re">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex-to-re.css">
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="up" HREF="regex-to-re.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html56"
+ HREF="node5.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html53"
+ HREF="regex-to-re.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html47"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>regex-to-re HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html55"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html57"
+ HREF="node5.html">4. String Substitutions</A>
+<b>Up:</b> <A NAME="tex2html54"
+ HREF="regex-to-re.html">regex-to-re HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html48"
+ HREF="node3.html">2. Module-level differences</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000400000000000000000">
+<SPAN CLASS="arabic">3</SPAN>. Pattern Differences</A>
+</H1>
+
+<P>
+The <tt>regex</tt> module uses Emacs-style regular expressions, while
+the <tt>re</tt> module uses Perl-style expressions.  The largest
+difference between the two is that in Emacs-style syntax, all
+metacharacters have a backslash in front of them.  For example, groups
+are delimited by "<tt>&#92;(</tt>" and "<tt>&#92;)</tt>"; "<tt>(</tt>" and "<tt>)</tt>" match the literal characters.
+This clutters moderately complicated expressions with lots of
+backslashes.  Unfortunately, Python's string literals also use the
+backslash as an escape character, so it's frequently necessary to add
+backslashes in front of backslashes; "<tt>&#92;&#92;&#92;&#92;</tt>" is required to match a
+single "<tt>&#92;</tt>", for example.
+
+<P>
+In Perl-style expressions, things are just the opposite; "<tt>&#92;(</tt>" and "<tt>&#92;)</tt>"
+match the literal characters "<tt>(</tt>" and "<tt>)</tt>", while "<tt>(</tt>" and "<tt>)</tt>" in a pattern
+denote grouping.  This makes patterns neater, since you'll rarely need
+to match literal "<tt>( )</tt>" characters, but will often be using grouping.
+
+<P>
+<tt>regex</tt> pattern: 
+<dl><dd><pre>
+\(\w+\|[0-9]+\)
+</pre></dl>
+
+<P>
+<tt>re</tt> pattern: 
+<dl><dd><pre>
+(\w+|[0-9]+)
+</pre></dl>
+
+<P>
+The Perl syntax also has more character classes that allow simplifying
+some expressions.  The <tt>regex</tt> module only supports "<tt>&#92;w</tt>" to match
+alphanumeric characters, and "<tt>&#92;W</tt>" to match non-alphanumeric characters.
+The <tt>re</tt> module adds "<tt>&#92;d</tt>" and "<tt>&#92;D</tt>" for digits and non-digits,
+and "<tt>&#92;s</tt>" and "<tt>&#92;S</tt>"
+for whitespace and non-whitespace characters.
+
+<P>
+<tt>regex</tt> pattern: 
+<dl><dd><pre>
+[0-9]+[ \t\n]+
+</pre></dl>
+
+<P>
+<tt>re</tt> pattern:
+<dl><dd><pre>
+\d+\s+
+</pre></dl>
+
+<P>
+Regular expressions can get very complicated and difficult to
+understand.  To make expressions clearer, the <tt>re.VERBOSE</tt> flag can be
+specified.  This flag causes whitespace outside of a character class
+to be ignored, and a "<tt>#</tt>" symbol outside of a character class is treated
+as the start of a comment, extending to the end of the line.  This
+means a pattern can be put inside a triple-quoted string, and then
+formatted for clarity.
+
+<P>
+<tt>re</tt> code:
+<dl><dd><pre>
+pat = re.compile("""
+(?P&lt;command&gt; # A command contains ...
+  \w+)       # ... a word ...
+  \s+        # ... followed by whitespace ...
+(?P&lt;var&gt;     # ... and an optional variable name 
+  (?!\d)     # Lookahead assertion: can't start with a digit
+  \w+        # Match a word 
+)""", re.VERBOSE)
+</pre></dl>
+
+<P>
+If the <tt>re.VERBOSE</tt> flag seems a bit easy to overlook, off at the end of
+the statement, you can put (?x) inside the pattern; this has the same
+effect as specifying <tt>re.VERBOSE</tt>, but makes the flag setting part of
+the pattern.  There are similar extensions to specify <tt>re.DOTALL</tt>,
+<tt>re.IGNORECASE</tt>, <tt>re.LOCALE</tt>, and <tt>re.MULTILINE</tt>: (?s),
+(?i), (?L), and (?m).
+
+<P>
+A module to automatically translate expressions from the old <tt>regex</tt>
+syntax to the new syntax has been written, and is available as
+"<tt>reconvert.py</tt>" in Python 1.5b2. (I haven't really looked at it yet.)
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html56"
+ HREF="node5.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html53"
+ HREF="regex-to-re.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html47"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>regex-to-re HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html55"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html57"
+ HREF="node5.html">4. String Substitutions</A>
+<b>Up:</b> <A NAME="tex2html54"
+ HREF="regex-to-re.html">regex-to-re HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html48"
+ HREF="node3.html">2. Module-level differences</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>15.1 Application Objects</TITLE>
+<META NAME="description" CONTENT="15.1 Application Objects">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="window-objects.html">
+<LINK REL="previous" HREF="module-FrameWork.html">
+<LINK REL="up" HREF="module-FrameWork.html">
+<LINK REL="next" HREF="window-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html491"
+ HREF="window-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html487"
+ HREF="module-FrameWork.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html481"
+ HREF="module-FrameWork.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html489"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html490"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html492"
+ HREF="window-objects.html">15.2 Window Objects</A>
+<b>Up:</b> <A NAME="tex2html488"
+ HREF="module-FrameWork.html">15. FrameWork  </A>
+<b>Previous:</b> <A NAME="tex2html482"
+ HREF="module-FrameWork.html">15. FrameWork  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0021510000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">1</SPAN> Application Objects
+</H2>
+
+<P>
+Application objects have the following methods, among others:
+
+<P>
+
+<P>
+<dl><dt><b><a name="l2h-1797"><tt>makeusermenus</tt></a></b> ()
+<dd>
+Override this method if you need menus in your application. Append the
+menus to the attribute <tt>menubar</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1802"><tt>getabouttext</tt></a></b> ()
+<dd>
+Override this method to return a text string describing your
+application.  Alternatively, override the <tt>do_about()</tt> method
+for more elaborate ``about'' messages.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1965"><tt>mainloop</tt></a></b> (<big>[</big><var>mask</var><big>[</big><var>, wait</var><big>]</big><big>]</big>)
+<dd>
+This routine is the main event loop, call it to set your application
+rolling. <i>Mask</i> is the mask of events you want to handle,
+<i>wait</i> is the number of ticks you want to leave to other
+concurrent application (default 0, which is probably not a good
+idea). While raising <tt>self</tt> to exit the mainloop is still
+supported it is not recommended, call <tt>self._quit</tt> instead.
+
+<P>
+The event loop is split into many small parts, each of which can be
+overridden. The default methods take care of dispatching events to
+windows and dialogs, handling drags and resizes, Apple Events, events
+for non-FrameWork windows, etc.
+
+<P>
+In general, all event handlers should return <tt>1</tt> if the event is fully
+handled and <tt>0</tt> otherwise (because the front window was not a FrameWork
+window, for instance). This is needed so that update events and such
+can be passed on to other windows like the Sioux console window.
+Calling <tt>MacOS.HandleEvent()</tt> is not allowed within
+<i>our_dispatch</i> or its callees, since this may result in an
+infinite loop if the code is called through the Python inner-loop
+event handler.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1819"><tt>asyncevents</tt></a></b> (<var>onoff</var>)
+<dd>
+Call this method with a nonzero parameter to enable
+asynchronous event handling. This will tell the inner interpreter loop
+to call the application event handler <i>async_dispatch</i> whenever events
+are available. This will cause FrameWork window updates and the user
+interface to remain working during long computations, but will slow the
+interpreter down and may cause surprising results in non-reentrant code
+(such as FrameWork itself). By default <i>async_dispatch</i> will immedeately
+call <i>our_dispatch</i> but you may override this to handle only certain
+events asynchronously. Events you do not handle will be passed to Sioux
+and such.
+
+<P>
+The old on/off value is returned.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1826"><tt>_quit</tt></a></b> ()
+<dd>
+Terminate the running <tt>mainloop()</tt> call at the next convenient
+moment.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1831"><tt>do_char</tt></a></b> (<var>c, event</var>)
+<dd>
+The user typed character <i>c</i>. The complete details of the event
+can be found in the <i>event</i> structure. This method can also be
+provided in a <tt>Window</tt> object, which overrides the
+application-wide handler if the window is frontmost.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1838"><tt>do_dialogevent</tt></a></b> (<var>event</var>)
+<dd>
+Called early in the event loop to handle modeless dialog events. The
+default method simply dispatches the event to the relevant dialog (not
+through the the <tt>DialogWindow</tt> object involved). Override if you
+need special handling of dialog events (keyboard shortcuts, etc).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1843"><tt>idle</tt></a></b> (<var>event</var>)
+<dd>
+Called by the main event loop when no events are available. The
+null-event is passed (so you can look at mouse position, etc).
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html491"
+ HREF="window-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html487"
+ HREF="module-FrameWork.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html481"
+ HREF="module-FrameWork.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html489"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html490"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html492"
+ HREF="window-objects.html">15.2 Window Objects</A>
+<b>Up:</b> <A NAME="tex2html488"
+ HREF="module-FrameWork.html">15. FrameWork  </A>
+<b>Previous:</b> <A NAME="tex2html482"
+ HREF="module-FrameWork.html">15. FrameWork  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

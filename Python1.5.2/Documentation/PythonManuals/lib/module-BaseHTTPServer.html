@@ -1,0 +1,355 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.12 BaseHTTPServer --
+Basic HTTP server.</TITLE>
+<META NAME="description" CONTENT="11.12 BaseHTTPServer --
+Basic HTTP server.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-SocketServer.html">
+<LINK REL="up" HREF="internet.html">
+<LINK REL="next" HREF="netdata.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2833"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2829"
+ HREF="internet.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2825"
+ HREF="module-SocketServer.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2831"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2832"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2834"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Up:</b> <A NAME="tex2html2830"
+ HREF="internet.html">11. Internet Protocols and</A>
+<b>Previous:</b> <A NAME="tex2html2826"
+ HREF="module-SocketServer.html">11.11 SocketServer  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00131200000000000000000">
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">12</SPAN> <tt>BaseHTTPServer</tt> --
+         Basic HTTP server.</A>
+</H1>
+
+
+<P>
+
+<P>
+<a name="l2h-17783"></a>
+<a name="l2h-17785"></a>
+<a name="l2h-17787"></a><a name="l2h-17788"></a>
+<P>
+This module defines two classes for implementing HTTP servers
+(web servers). Usually, this module isn't used directly, but is used
+as a basis for building functioning web servers. See the
+<tt>SimpleHTTPServer</tt> and <tt>CGIHTTPServer</tt> modules.
+<a name="l2h-"></a><a name="l2h-"></a>
+<P>
+The first class, <tt>HTTPServer</tt>, is a
+<tt>SocketServer.TCPServer</tt> subclass. It creates and listens at the
+web socket, dispatching the requests to a handler. Code to create and
+run the server looks like this:
+
+<P>
+<dl><dd><pre>
+def run(server_class=BaseHTTPServer.HTTPServer,
+        handler_class=BaseHTTPServer.BaseHTTPRequestHandler):
+    server_address = ('', 8000)
+    httpd = server_class(server_address, handler_class)
+    httpd.serve_forever()
+</pre></dl>
+
+<P>
+<dl><dt><b><a name="l2h-17799"><tt>HTTPServer</tt></a></b> (<var>server_address, RequestHandlerClass</var>)
+<dd>
+This class builds on the <tt>TCPServer</tt> class by
+storing the server address as instance
+variables named <tt>server_name</tt> and <tt>server_port</tt>. The
+server is accessible by the handler, typically through the handler's
+<tt>server</tt> instance variable.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17807"><tt>BaseHTTPRequestHandler</tt></a></b> (<var>request, client_address, server</var>)
+<dd>
+This class is used
+to handle the HTTP requests that arrive at the server. By itself,
+it cannot respond to any actual HTTP requests; it must be subclassed
+to handle each request method (e.g. GET or POST).
+<tt>BaseHTTPRequestHandler</tt> provides a number of class and instance
+variables, and methods for use by subclasses.
+
+<P>
+The handler will parse the request and the headers, then call a
+method specific to the request type. The method name is constructed
+from the request. For example, for the request method "<tt>SPAM</tt>", the
+<tt>do_SPAM()</tt> method will be called with no arguments. All of
+the relevant information is stored in instance variables of the
+handler.  Subclasses should not need to override or extend the
+<tt>__init__()</tt> method.
+</dl>
+
+<P>
+<tt>BaseHTTPRequestHandler</tt> has the following instance variables:
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>client_address</tt></a></b>
+<dd>
+Contains a tuple of the form <tt>(<i>host</i>, <i>port</i>)</tt> referring
+to the client's address.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>command</tt></a></b>
+<dd>
+Contains the command (request type). For example, <tt>'GET'</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>path</tt></a></b>
+<dd>
+Contains the request path.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>request_version</tt></a></b>
+<dd>
+Contains the version string from the request. For example,
+<tt>'HTTP/1.0'</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>headers</tt></a></b>
+<dd>
+Holds an instance of the class specified by the <tt>MessageClass</tt>
+class variable. This instance parses and manages the headers in
+the HTTP request.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>rfile</tt></a></b>
+<dd>
+Contains an input stream, positioned at the start of the optional
+input data.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>wfile</tt></a></b>
+<dd>
+Contains the output stream for writing a response back to the client.
+Proper adherance to the HTTP protocol must be used when writing
+to this stream.
+</dl>
+
+<P>
+<tt>BaseHTTPRequestHandler</tt> has the following class variables:
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>server_version</tt></a></b>
+<dd>
+Specifies the server software version.  You may want to override
+this.
+The format is multiple whitespace-separated strings,
+where each string is of the form name[/version].
+For example, <tt>'BaseHTTP/0.2'</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>sys_version</tt></a></b>
+<dd>
+Contains the Python system version, in a form usable by the
+<tt>version_string</tt> method and the <tt>server_version</tt> class
+variable. For example, <tt>'Python/1.4'</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>error_message_format</tt></a></b>
+<dd>
+Specifies a format string for building an error response to the
+client. It uses parenthesized, keyed format specifiers, so the
+format operand must be a dictionary. The <i>code</i> key should
+be an integer, specifing the numeric HTTP error code value.
+<i>message</i> should be a string containing a (detailed) error
+message of what occurred, and <i>explain</i> should be an
+explanation of the error code number. Default <i>message</i>
+and <i>explain</i> values can found in the <i>responses</i>
+class variable.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>protocol_version</tt></a></b>
+<dd>
+This specifies the HTTP protocol version used in responses.
+Typically, this should not be overridden. Defaults to
+<tt>'HTTP/1.0'</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>MessageClass</tt></a></b>
+<dd>
+Specifies a <tt>rfc822.Message</tt>-like class to parse HTTP
+headers. Typically, this is not overridden, and it defaults to
+<tt>mimetools.Message</tt>.
+<a name="l2h-17869"></a>
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>responses</tt></a></b>
+<dd>
+This variable contains a mapping of error code integers to two-element
+tuples containing a short and long message. For example,
+<tt>{<i>code</i>: (<i>shortmessage</i>, <i>longmessage</i>)}</tt>. The
+<i>shortmessage</i> is usually used as the <i>message</i> key in an
+error response, and <i>longmessage</i> as the <i>explain</i> key
+(see the <tt>error_message_format</tt> class variable).
+</dl>
+
+<P>
+A <tt>BaseHTTPRequestHandler</tt> instance has the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-17884"><tt>handle</tt></a></b> ()
+<dd>
+Overrides the superclass' <tt>handle()</tt> method to provide the
+specific handler behavior. This method will parse and dispatch
+the request to the appropriate <tt>do_*()</tt> method.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17890"><tt>send_error</tt></a></b> (<var>code</var><big>[</big><var>, message</var><big>]</big>)
+<dd>
+Sends and logs a complete error reply to the client. The numeric
+<i>code</i> specifies the HTTP error code, with <i>message</i> as
+optional, more specific text. A complete set of headers is sent,
+followed by text composed using the <tt>error_message_format</tt>
+class variable.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17897"><tt>send_response</tt></a></b> (<var>code</var><big>[</big><var>, message</var><big>]</big>)
+<dd>
+Sends a response header and logs the accepted request. The HTTP
+response line is sent, followed by <i>Server</i> and <i>Date</i>
+headers. The values for these two headers are picked up from the
+<tt>version_string()</tt> and <tt>date_time_string()</tt> methods,
+respectively.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17905"><tt>send_header</tt></a></b> (<var>keyword, value</var>)
+<dd>
+Writes a specific MIME header to the output stream. <i>keyword</i>
+should specify the header keyword, with <i>value</i> specifying
+its value.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17911"><tt>end_headers</tt></a></b> ()
+<dd>
+Sends a blank line, indicating the end of the MIME headers in
+the response.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17915"><tt>log_request</tt></a></b> (<big>[</big><var>code</var><big>[</big><var>, size</var><big>]</big><big>]</big>)
+<dd>
+Logs an accepted (successful) request. <i>code</i> should specify
+the numeric HTTP code associated with the response. If a size of
+the response is available, then it should be passed as the
+<i>size</i> parameter.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17921"><tt>log_error</tt></a></b> (<var>...</var>)
+<dd>
+Logs an error when a request cannot be fulfilled. By default,
+it passes the message to <tt>log_message()</tt>, so it takes the
+same arguments (<i>format</i> and additional values).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17927"><tt>log_message</tt></a></b> (<var>format, ...</var>)
+<dd>
+Logs an arbitrary message to <tt>sys.stderr</tt>. This is typically
+overridden to create custom error logging mechanisms. The
+<i>format</i> argument is a standard printf-style format string,
+where the additional arguments to <tt>log_message()</tt> are applied
+as inputs to the formatting. The client address and current date
+and time are prefixed to every message logged.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17934"><tt>version_string</tt></a></b> ()
+<dd>
+Returns the server software's version string. This is a combination
+of the <tt>server_version</tt> and <tt>sys_version</tt> class variables.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17940"><tt>date_time_string</tt></a></b> ()
+<dd>
+Returns the current date and time, formatted for a message header.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17944"><tt>log_data_time_string</tt></a></b> ()
+<dd>
+Returns the current date and time, formatted for logging.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17948"><tt>address_string</tt></a></b> ()
+<dd>
+Returns the client address, formatted for logging. A name lookup
+is performed on the client's IP address.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2833"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2829"
+ HREF="internet.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2825"
+ HREF="module-SocketServer.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2831"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2832"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2834"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Up:</b> <A NAME="tex2html2830"
+ HREF="internet.html">11. Internet Protocols and</A>
+<b>Previous:</b> <A NAME="tex2html2826"
+ HREF="module-SocketServer.html">11.11 SocketServer  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

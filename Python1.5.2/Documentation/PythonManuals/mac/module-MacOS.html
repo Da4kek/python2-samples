@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>9. MacOS --
+Access to MacOS specific interpreter features.</TITLE>
+<META NAME="description" CONTENT="9. MacOS --
+Access to MacOS specific interpreter features.">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="module-macostools.html">
+<LINK REL="previous" HREF="module-ic.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="module-macostools.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html341"
+ HREF="module-macostools.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html337"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html331"
+ HREF="node18.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html339"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html340"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html342"
+ HREF="module-macostools.html">10. macostools  </A>
+<b>Up:</b> <A NAME="tex2html338"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html332"
+ HREF="node18.html">8.1 IC Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002900000000000000000">
+<SPAN CLASS="arabic">9</SPAN>. <tt>MacOS</tt> --
+         Access to MacOS specific interpreter features.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides access to MacOS specific functionality in the
+Python interpreter, such as how the interpreter eventloop functions
+and the like. Use with care.
+
+<P>
+Note the capitalisation of the module name, this is a historical
+artifact.
+
+<P>
+<dl><dt><b><a name="l2h-1107"><tt>Error</tt></a></b>
+<dd>
+This exception is raised on MacOS generated errors, either from
+functions in this module or from other mac-specific modules like the
+toolbox interfaces. The arguments are the integer error code (the
+<tt>OSErr</tt> value) and a textual description of the error code.
+Symbolic names for all known error codes are defined in the standard
+module <tt>macerrors</tt><a name="l2h-"></a>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1114"><tt>SetEventHandler</tt></a></b> (<var>handler</var>)
+<dd>
+In the inner interpreter loop Python will occasionally check for events,
+unless disabled with <tt>ScheduleParams()</tt>. With this function you
+can pass a Python event-handler function that will be called if an event
+is available. The event is passed as parameter and the function should return
+non-zero if the event has been fully processed, otherwise event processing
+continues (by passing the event to the console window package, for instance).
+
+<P>
+Call <tt>SetEventHandler()</tt> without a parameter to clear the
+event handler. Setting an event handler while one is already set is an
+error.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1163"><tt>SchedParams</tt></a></b> (<big>[</big><var>doint</var><big>[</big><var>, evtmask</var><big>[</big><var>,
+                              besocial</var><big>[</big><var>, interval</var><big>[</big><var>,
+                              bgyield</var><big>]</big><big>]</big><big>]</big><big>]</big><big>]</big>)
+<dd>
+Influence the interpreter inner loop event handling. <i>Interval</i>
+specifies how often (in seconds, floating point) the interpreter
+should enter the event processing code. When true, <i>doint</i> causes
+interrupt (command-dot) checking to be done. <i>evtmask</i> tells the
+interpreter to do event processing for events in the mask (redraws,
+mouseclicks to switch to other applications, etc). The <i>besocial</i>
+flag gives other processes a chance to run. They are granted minimal
+runtime when Python is in the foreground and <i>bgyield</i> seconds per
+<i>interval</i> when Python runs in the background.
+
+<P>
+All parameters are optional, and default to the current value. The return
+value of this function is a tuple with the old values of these options.
+Initial defaults are that all processing is enabled, checking is done every
+quarter second and the CPU is given up for a quarter second when in the
+background.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1130"><tt>HandleEvent</tt></a></b> (<var>ev</var>)
+<dd>
+Pass the event record <i>ev</i> back to the Python event loop, or
+possibly to the handler for the <tt>sys.stdout</tt> window (based on the
+compiler used to build Python). This allows Python programs that do
+their own event handling to still have some command-period and
+window-switching capability.
+
+<P>
+If you attempt to call this function from an event handler set through
+<tt>SetEventHandler()</tt> you will get an exception.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1137"><tt>GetErrorString</tt></a></b> (<var>errno</var>)
+<dd>
+Return the textual description of MacOS error code <i>errno</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1142"><tt>splash</tt></a></b> (<var>resid</var>)
+<dd>
+This function will put a splash window
+on-screen, with the contents of the DLOG resource specified by
+<i>resid</i>. Calling with a zero argument will remove the splash
+screen. This function is useful if you want an applet to post a splash screen
+early in initialization without first having to load numerous
+extension modules.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1158"><tt>DebugStr</tt></a></b> (<var>message </var><big>[</big><var>, object</var><big>]</big>)
+<dd>
+Drop to the low-level debugger with message <i>message</i>. The
+optional <i>object</i> argument is not used, but can easily be
+inspected from the debugger.
+
+<P>
+Note that you should use this function with extreme care: if no
+low-level debugger like MacsBug is installed this call will crash your
+system. It is intended mainly for developers of Python extension
+modules.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1159"><tt>openrf</tt></a></b> (<var>name </var><big>[</big><var>, mode</var><big>]</big>)
+<dd>
+Open the resource fork of a file. Arguments are the same as for the
+built-in function <tt>open()</tt>. The object returned has file-like
+semantics, but it is not a Python file object, so there may be subtle
+differences.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html341"
+ HREF="module-macostools.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html337"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html331"
+ HREF="node18.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html339"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html340"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html342"
+ HREF="module-macostools.html">10. macostools  </A>
+<b>Up:</b> <A NAME="tex2html338"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html332"
+ HREF="node18.html">8.1 IC Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

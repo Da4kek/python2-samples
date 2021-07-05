@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8.5 crypt --
+The crypt() function used to check Unix passwords.</TITLE>
+<META NAME="description" CONTENT="8.5 crypt --
+The crypt() function used to check Unix passwords.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-dbm.html">
+<LINK REL="previous" HREF="module-grp.html">
+<LINK REL="up" HREF="unix.html">
+<LINK REL="next" HREF="module-dbm.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2082"
+ HREF="module-dbm.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2078"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2072"
+ HREF="module-grp.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2080"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2081"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2083"
+ HREF="module-dbm.html">8.6 dbm  </A>
+<b>Up:</b> <A NAME="tex2html2079"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2073"
+ HREF="module-grp.html">8.4 grp  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0010500000000000000000">
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>crypt</tt> --
+         The <tt>crypt()</tt> function used to check Unix passwords.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module implements an interface to the <i>crypt</i>(3) routine,
+which is a one-way hash function based upon a modified DES algorithm;
+see the Unix man page for further details.  Possible uses include
+allowing Python scripts to accept typed passwords from the user, or
+attempting to crack Unix passwords with a dictionary.
+<a name="l2h-13259"></a>
+<P>
+<dl><dt><b><a name="l2h-13262"><tt>crypt</tt></a></b> (<var>word, salt</var>)
+<dd> 
+<i>word</i> will usually be a user's password.  <i>salt</i> is a
+2-character string which will be used to select one of 4096 variations
+of DES<a name="l2h-13265"></a>.  The characters in <i>salt</i> must be
+either <tt>.</tt>, <tt>/</tt>, or an alphanumeric character.  Returns the
+hashed password as a string, which will be composed of characters from
+the same alphabet as the salt.
+</dl>
+
+<P>
+The module and documentation were written by Steve Majewski.
+<a name="l2h-13271"></a><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2082"
+ HREF="module-dbm.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2078"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2072"
+ HREF="module-grp.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2080"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2081"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2083"
+ HREF="module-dbm.html">8.6 dbm  </A>
+<b>Up:</b> <A NAME="tex2html2079"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2073"
+ HREF="module-grp.html">8.4 grp  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

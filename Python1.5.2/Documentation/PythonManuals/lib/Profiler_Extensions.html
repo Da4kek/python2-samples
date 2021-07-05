@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>10.8 Extensions -- Deriving Better Profilers</TITLE>
+<META NAME="description" CONTENT="10.8 Extensions -- Deriving Better Profilers">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="node158.html">
+<LINK REL="up" HREF="profile.html">
+<LINK REL="next" HREF="node160.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2422"
+ HREF="node160.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2418"
+ HREF="profile.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2414"
+ HREF="node158.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2420"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2421"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2423"
+ HREF="node160.html">10.8.1 OldProfile Class</A>
+<b>Up:</b> <A NAME="tex2html2419"
+ HREF="profile.html">10. The Python Profiler</A>
+<b>Previous:</b> <A NAME="tex2html2415"
+ HREF="node158.html">10.7 Calibration</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0012800000000000000000">
+<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">8</SPAN> Extensions -- Deriving Better Profilers</A>
+</H1>
+
+<P>
+The <tt>Profile</tt> class of module <tt>profile</tt> was written so that
+derived classes could be developed to extend the profiler.  Rather
+than describing all the details of such an effort, I'll just present
+the following two examples of derived classes that can be used to do
+profiling.  If the reader is an avid Python programmer, then it should
+be possible to use these as a model and create similar (and perchance
+better) profile classes.
+
+<P>
+If all you want to do is change how the timer is called, or which
+timer function is used, then the basic class has an option for that in
+the constructor for the class.  Consider passing the name of a
+function to call into the constructor:
+
+<P>
+<dl><dd><pre>
+pr = profile.Profile(your_time_func)
+</pre></dl>
+
+<P>
+The resulting profiler will call <tt>your_time_func()</tt> instead of
+<tt>os.times()</tt>.  The function should return either a single number
+or a list of numbers (like what <tt>os.times()</tt> returns).  If the
+function returns a single time number, or the list of returned numbers
+has length 2, then you will get an especially fast version of the
+dispatch routine.
+
+<P>
+Be warned that you <i>should</i> calibrate the profiler class for the
+timer function that you choose.  For most machines, a timer that
+returns a lone integer value will provide the best results in terms of
+low overhead during profiling.  (<tt>os.times()</tt> is
+<i>pretty</i> bad, 'cause it returns a tuple of floating point values,
+so all arithmetic is floating point in the profiler!).  If you want to
+substitute a better timer in the cleanest fashion, you should derive a
+class, and simply put in the replacement dispatch method that better
+handles your timer call, along with the appropriate calibration
+constant :-).
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html2424"
+ HREF="node160.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> OldProfile Class</A>
+<LI><A NAME="tex2html2425"
+ HREF="node161.html"><SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">2</SPAN> HotProfile Class</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2422"
+ HREF="node160.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2418"
+ HREF="profile.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2414"
+ HREF="node158.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2420"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2421"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2423"
+ HREF="node160.html">10.8.1 OldProfile Class</A>
+<b>Up:</b> <A NAME="tex2html2419"
+ HREF="profile.html">10. The Python Profiler</A>
+<b>Previous:</b> <A NAME="tex2html2415"
+ HREF="node158.html">10.7 Calibration</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

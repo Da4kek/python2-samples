@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Macintosh Library Modules</TITLE>
+<META NAME="description" CONTENT="Macintosh Library Modules">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="front.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3"
+ HREF="front.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html1"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html4"
+ HREF="front.html">Front Matter</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<P>
+<h1 align=center>Macintosh Library Modules</h1>
+<center>
+<p><strong>Guido van Rossum</strong></p>
+<p>
+	Corporation for National Research Initiatives (CNRI) 
+<BR>
+1895 Preston White Drive, Reston, Va 20191, USA 
+<BR>
+E-mail: <font face=sans-serif>guido@CNRI.Reston.Va.US</font>, <font face=sans-serif>guido@python.org</font>
+</p>
+<p><strong>August 12, 1998</strong><br><strong>Release 1.5.2</strong></p>
+</center>
+<p>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html5"
+ HREF="front.html">Front Matter</A>
+<LI><A NAME="tex2html6"
+ HREF="contents.html">Contents</A>
+<UL>
+<LI><A NAME="tex2html7"
+ HREF="intro.html"><SPAN CLASS="arabic">1</SPAN>. Introduction</A>
+<LI><A NAME="tex2html8"
+ HREF="module-mac.html"><SPAN CLASS="arabic">2</SPAN>. <tt>mac</tt> --
+         Similar interfaces to the <tt>posix</tt> module.</A>
+<LI><A NAME="tex2html9"
+ HREF="module-macpath.html"><SPAN CLASS="arabic">3</SPAN>. <tt>macpath</tt> --
+         MacOS path manipulation functions.</A>
+<LI><A NAME="tex2html10"
+ HREF="module-ctb.html"><SPAN CLASS="arabic">4</SPAN>. <tt>ctb</tt> --
+         Interface to the Communications Tool Box.</A>
+<UL>
+<LI><A NAME="tex2html11"
+ HREF="connection-object.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> connection object</A>
+</UL>
+<LI><A NAME="tex2html12"
+ HREF="module-macconsole.html"><SPAN CLASS="arabic">5</SPAN>. <tt>macconsole</tt> --
+         Think C's console package.</A>
+<UL>
+<LI><A NAME="tex2html13"
+ HREF="node9.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> macconsole options object</A>
+<LI><A NAME="tex2html14"
+ HREF="node10.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> console window object</A>
+</UL>
+<LI><A NAME="tex2html15"
+ HREF="module-macdnr.html"><SPAN CLASS="arabic">6</SPAN>. <tt>macdnr</tt> --
+         Interfaces to the Macintosh Domain Name Resolver.</A>
+<UL>
+<LI><A NAME="tex2html16"
+ HREF="dnr-result-object.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> dnr result object</A>
+</UL>
+<LI><A NAME="tex2html17"
+ HREF="module-macfs.html"><SPAN CLASS="arabic">7</SPAN>. <tt>macfs</tt> --
+         FSSpec, the Alias Manager, <b>finder</b> aliases,
+         and the Standard File package.</A>
+<UL>
+<LI><A NAME="tex2html18"
+ HREF="fsspec-objects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">1</SPAN> FSSpec objects</A>
+<LI><A NAME="tex2html19"
+ HREF="alias-objects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> Alias Objects</A>
+<LI><A NAME="tex2html20"
+ HREF="finfo-objects.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">3</SPAN> FInfo Objects</A>
+</UL>
+<LI><A NAME="tex2html21"
+ HREF="module-ic.html"><SPAN CLASS="arabic">8</SPAN>. <tt>ic</tt> --
+         Access to Internet Config.</A>
+<UL>
+<LI><A NAME="tex2html22"
+ HREF="node18.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> IC Objects</A>
+</UL>
+<LI><A NAME="tex2html23"
+ HREF="module-MacOS.html"><SPAN CLASS="arabic">9</SPAN>. <tt>MacOS</tt> --
+         Access to MacOS specific interpreter features.</A>
+<LI><A NAME="tex2html24"
+ HREF="module-macostools.html"><SPAN CLASS="arabic">10</SPAN>. <tt>macostools</tt> --
+         Convenience routines for file manipulation.</A>
+<LI><A NAME="tex2html25"
+ HREF="module-findertools.html"><SPAN CLASS="arabic">11</SPAN>. <tt>findertools</tt> --
+         Wrappers around the <b>finder</b>'s Apple Events interface.</A>
+<LI><A NAME="tex2html26"
+ HREF="module-mactcp.html"><SPAN CLASS="arabic">12</SPAN>. <tt>mactcp</tt> --
+         The MacTCP interfaces.</A>
+<UL>
+<LI><A NAME="tex2html27"
+ HREF="node23.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">1</SPAN> TCP Stream Objects</A>
+<LI><A NAME="tex2html28"
+ HREF="node24.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">2</SPAN> TCP Status Objects</A>
+<LI><A NAME="tex2html29"
+ HREF="node25.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">3</SPAN> UDP Stream Objects</A>
+</UL>
+<LI><A NAME="tex2html30"
+ HREF="module-macspeech.html"><SPAN CLASS="arabic">13</SPAN>. <tt>macspeech</tt> --
+         Interface to the Macintosh Speech Manager.</A>
+<UL>
+<LI><A NAME="tex2html31"
+ HREF="voice-objects.html"><SPAN CLASS="arabic">13</SPAN>.<SPAN CLASS="arabic">1</SPAN> Voice Objects</A>
+<LI><A NAME="tex2html32"
+ HREF="speech-channel-objects.html"><SPAN CLASS="arabic">13</SPAN>.<SPAN CLASS="arabic">2</SPAN> Speech Channel Objects</A>
+</UL>
+<LI><A NAME="tex2html33"
+ HREF="module-EasyDialogs.html"><SPAN CLASS="arabic">14</SPAN>. <tt>EasyDialogs</tt> --
+         Basic Macintosh dialogs.</A>
+<LI><A NAME="tex2html34"
+ HREF="module-FrameWork.html"><SPAN CLASS="arabic">15</SPAN>. <tt>FrameWork</tt> --
+         Interactive application framework.</A>
+<UL>
+<LI><A NAME="tex2html35"
+ HREF="application-objects.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">1</SPAN> Application Objects</A>
+<LI><A NAME="tex2html36"
+ HREF="window-objects.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">2</SPAN> Window Objects</A>
+<LI><A NAME="tex2html37"
+ HREF="controlswindow-object.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">3</SPAN> ControlsWindow Object</A>
+<LI><A NAME="tex2html38"
+ HREF="scrolledwindow-object.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">4</SPAN> ScrolledWindow Object</A>
+<LI><A NAME="tex2html39"
+ HREF="dialogwindow-objects.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">5</SPAN> DialogWindow Objects</A>
+</UL>
+<LI><A NAME="tex2html40"
+ HREF="module-MiniAEFrame.html"><SPAN CLASS="arabic">16</SPAN>. <tt>MiniAEFrame</tt> --
+         Support to act as an Open Scripting Architecture server.</A>
+<UL>
+<LI><A NAME="tex2html41"
+ HREF="aeserver-objects.html"><SPAN CLASS="arabic">16</SPAN>.<SPAN CLASS="arabic">1</SPAN> AEServer Objects</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html42"
+ HREF="modindex.html">Module Index</A>
+<LI><A NAME="tex2html43"
+ HREF="genindex.html">Index</A>
+<LI><A NAME="tex2html44"
+ HREF="about.html">About this document ...</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3"
+ HREF="front.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html1"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html4"
+ HREF="front.html">Front Matter</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

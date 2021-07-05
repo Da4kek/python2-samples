@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>13.4 xml.parsers.expat -- Fast XML parsing using the Expat library</title>
+<META NAME="description" CONTENT="13.4 xml.parsers.expat -- Fast XML parsing using the Expat library">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="lib.css">
+<LINK REL="next" href="module-xml.sax.html">
+<LINK REL="previous" href="module-htmlentitydefs.html">
+<LINK REL="up" href="markup.html">
+<LINK REL="next" href="expat-example.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-htmlentitydefs.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="markup.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="expat-example.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-htmlentitydefs.html">13.3 htmlentitydefs  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="markup.html">13. Structured Markup Processing</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="expat-example.html">13.4.1 Example</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0015400000000000000000">
+13.4 <tt class="module">xml.parsers.expat</tt> --
+         Fast XML parsing using the Expat library</A>
+</H1>
+
+<P>
+
+
+<P>
+New in version 2.0.
+
+<P>
+The <tt class="module">xml.parsers.expat</tt> module is a Python interface to the Expat
+non-validating XML parser.
+The module provides a single extension type, <tt class="class">xmlparser</tt>, that
+represents the current state of an XML parser.  After an
+<tt class="class">xmlparser</tt> object has been created, various attributes of the object 
+can be set to handler functions.  When an XML document is then fed to
+the parser, the handler functions are called for the character data
+and markup in the XML document.
+
+<P>
+This module uses the <tt class="module">pyexpat</tt> module to
+provide access to the Expat parser.  Direct use of the
+<tt class="module">pyexpat</tt> module is deprecated.
+
+<P>
+The <tt class="module">xml.parsers.expat</tt> module contains two functions:
+
+<P>
+<dl><dt><b><a name='l2h-2594'><tt class='function'>ErrorString</tt></a></b> (<var>errno</var>)
+<dd>
+Returns an explanatory string for a given error number <var>errno</var>.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2595'><tt class='function'>ParserCreate</tt></a></b> (<big>[</big><var>encoding, namespace_separator</var><big>]</big>)
+<dd>
+Creates and returns a new <tt class="class">xmlparser</tt> object.  
+<var>encoding</var>, if specified, must be a string naming the encoding 
+used by the XML data.  Expat doesn't support as many encodings as
+Python does, and its repertoire of encodings can't be extended; it
+supports UTF-8, UTF-16, ISO-8859-1 (Latin1), and ASCII.  
+
+<P>
+Expat can optionally do XML namespace processing for you, enabled by
+providing a value for <var>namespace_separator</var>.  When namespace
+processing is enabled, element type names and attribute names that
+belong to a namespace will be expanded.  The element name 
+passed to the element handlers 
+<tt class="function">StartElementHandler()</tt> and <tt class="function">EndElementHandler()</tt>
+will be the concatenation of the namespace URI, the namespace
+separator character, and the local part of the name.  If the namespace
+separator is a zero byte (<code>chr(0)</code>) 
+then the namespace URI and the local part will be
+concatenated without any separator. 
+
+<P>
+For example, if <var>namespace_separator</var> is set to 
+"<tt class="samp"> </tt>", and the following document is parsed:
+
+<P>
+<dl><dd><pre class="verbatim">
+&lt;?xml version="1.0"?&gt;
+&lt;root xmlns    = "http://default-namespace.org/"
+      xmlns:py = "http://www.python.org/ns/"&gt;
+  &lt;py:elem1 /&gt;
+  &lt;elem2 xmlns="" /&gt;
+&lt;/root&gt;
+</pre></dl>
+
+<P>
+<tt class="function">StartElementHandler()</tt> will receive the following strings
+for each element:
+
+<P>
+<dl><dd><pre class="verbatim">
+http://default-namespace.org/ root
+http://www.python.org/ns/ elem1
+elem2
+</pre></dl>
+
+<P>
+</dl>
+
+<P>
+<tt class="class">xmlparser</tt> objects have the following methods:
+
+<P>
+<dl><dt><b><a name='l2h-2596'><tt class='method'>Parse</tt></a></b> (<var>data </var><big>[</big><var>, isfinal</var><big>]</big>)
+<dd>
+Parses the contents of the string <var>data</var>, calling the appropriate
+handler functions to process the parsed data.  <var>isfinal</var> must be
+true on the final call to this method.    <var>data</var> can be the empty
+string at any time.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2597'><tt class='method'>ParseFile</tt></a></b> (<var>file</var>)
+<dd>
+Parse XML data reading from the object <var>file</var>.  <var>file</var> only
+needs to provide the <tt class="method">read(<var>nbytes</var>)</tt> method, returning the
+empty string when there's no more data.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2598'><tt class='method'>SetBase</tt></a></b> (<var>base</var>)
+<dd>
+Sets the base to be used for resolving relative URIs in system identifiers in
+declarations.  Resolving relative identifiers is left to the application:
+this value will be passed through as the base argument to the
+<tt class="function">ExternalEntityRefHandler</tt>, <tt class="function">NotationDeclHandler</tt>,
+and <tt class="function">UnparsedEntityDeclHandler</tt> functions. 
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2599'><tt class='method'>GetBase</tt></a></b> ()
+<dd>
+Returns a string containing the base set by a previous call to
+<tt class="method">SetBase()</tt>, or <code>None</code> if 
+<tt class="method">SetBase()</tt> hasn't been called.
+</dl>
+
+<P>
+<tt class="class">xmlparser</tt> objects have the following attributes:
+
+<P>
+<dl><dt><b><a name='l2h-2600'><tt>returns_unicode</tt></a></b>
+<dd> 
+If this attribute is set to 1, the handler functions will be passed
+Unicode strings.  If <tt class="member">returns_unicode</tt> is 0, 8-bit strings
+containing UTF-8 encoded data will be passed to the handlers.
+</dl> 
+
+<P>
+The following attributes contain values relating to the most recent
+error encountered by an <tt class="class">xmlparser</tt> object, and will only have
+correct values once a call to <tt class="method">Parse()</tt> or <tt class="method">ParseFile()</tt>
+has raised a <tt class="exception">xml.parsers.expat.error</tt> exception.
+
+<P>
+<dl><dt><b><a name='l2h-2601'><tt>ErrorByteIndex</tt></a></b>
+<dd> 
+Byte index at which an error occurred.
+</dl> 
+
+<P>
+<dl><dt><b><a name='l2h-2602'><tt>ErrorCode</tt></a></b>
+<dd> 
+Numeric code specifying the problem.  This value can be passed to the
+<tt class="function">ErrorString()</tt> function, or compared to one of the constants
+defined in the <tt class="module">errors</tt> object.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2603'><tt>ErrorColumnNumber</tt></a></b>
+<dd> 
+Column number at which an error occurred.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2604'><tt>ErrorLineNumber</tt></a></b>
+<dd>
+Line number at which an error occurred.
+</dl>
+
+<P>
+Here is the list of handlers that can be set.  To set a handler on an
+<tt class="class">xmlparser</tt> object <var>o</var>, use
+<code><var>o</var>.<var>handlername</var> = <var>func</var></code>.  <var>handlername</var> must
+be taken from the following list, and <var>func</var> must be a callable
+object accepting the correct number of arguments.  The arguments are
+all strings, unless otherwise stated.
+
+<P>
+<dl><dt><b><a name='l2h-2605'><tt class='method'>StartElementHandler</tt></a></b> (<var>name, attributes</var>)
+<dd>
+Called for the start of every element.  <var>name</var> is a string
+containing the element name, and <var>attributes</var> is a dictionary
+mapping attribute names to their values.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2606'><tt class='method'>EndElementHandler</tt></a></b> (<var>name</var>)
+<dd>
+Called for the end of every element.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2607'><tt class='method'>ProcessingInstructionHandler</tt></a></b> (<var>target, data</var>)
+<dd>
+Called for every processing instruction.  
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2608'><tt class='method'>CharacterDataHandler</tt></a></b> (<var><var>data</var></var>)
+<dd>
+Called for character data.  
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2609'><tt class='method'>UnparsedEntityDeclHandler</tt></a></b> (<var>entityName, base,
+                                              systemId, publicId,
+                                              notationName</var>)
+<dd>
+Called for unparsed (NDATA) entity declarations.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2610'><tt class='method'>NotationDeclHandler</tt></a></b> (<var>notationName, base, systemId,
+                                        publicId</var>)
+<dd>
+Called for notation declarations.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2611'><tt class='method'>StartNamespaceDeclHandler</tt></a></b> (<var>prefix, uri</var>)
+<dd>
+Called when an element contains a namespace declaration.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2612'><tt class='method'>EndNamespaceDeclHandler</tt></a></b> (<var>prefix</var>)
+<dd>
+Called when the closing tag is reached for an element 
+that contained a namespace declaration.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2613'><tt class='method'>CommentHandler</tt></a></b> (<var>data</var>)
+<dd>
+Called for comments.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2614'><tt class='method'>StartCdataSectionHandler</tt></a></b> ()
+<dd>
+Called at the start of a CDATA section.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2615'><tt class='method'>EndCdataSectionHandler</tt></a></b> ()
+<dd>
+Called at the end of a CDATA section.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2616'><tt class='method'>DefaultHandler</tt></a></b> (<var>data</var>)
+<dd>
+Called for any characters in the XML document for
+which no applicable handler has been specified.  This means
+characters that are part of a construct which could be reported, but
+for which no handler has been supplied. 
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2617'><tt class='method'>DefaultHandlerExpand</tt></a></b> (<var>data</var>)
+<dd>
+This is the same as the <tt class="function">DefaultHandler</tt>, 
+but doesn't inhibit expansion of internal entities.
+The entity reference will not be passed to the default handler.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2618'><tt class='method'>NotStandaloneHandler</tt></a></b> ()
+<dd>
+Called if the XML document hasn't been declared as being a standalone
+document.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2619'><tt class='method'>ExternalEntityRefHandler</tt></a></b> (<var>context, base, systemId,
+                                             publicId</var>)
+<dd>
+Called for references to external entities.  
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html4824"
+  href="expat-example.html">13.4.1 Example </A>
+<LI><A NAME="tex2html4825"
+  href="expat-errors.html">13.4.2 Expat error constants </A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-htmlentitydefs.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="markup.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="expat-example.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-htmlentitydefs.html">13.3 htmlentitydefs  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="markup.html">13. Structured Markup Processing</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="expat-example.html">13.4.1 Example</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

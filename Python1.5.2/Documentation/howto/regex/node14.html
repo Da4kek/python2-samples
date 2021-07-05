@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4.2 Grouping</TITLE>
+<META NAME="description" CONTENT="4.2 Grouping">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="next" HREF="node15.html">
+<LINK REL="previous" HREF="node13.html">
+<LINK REL="up" HREF="node12.html">
+<LINK REL="next" HREF="node15.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html214"
+ HREF="node15.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html211"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html205"
+ HREF="node13.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html213"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html215"
+ HREF="node15.html">4.3 Non-capturing, and Named</A>
+<b>Up:</b> <A NAME="tex2html212"
+ HREF="node12.html">4. More Pattern Power</A>
+<b>Previous:</b> <A NAME="tex2html206"
+ HREF="node13.html">4.1 More Metacharacters</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000520000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Grouping</A>
+</H2>
+
+<P>
+Frequently you need to obtain more information than just whether the
+RE matched or not.  Regular expressions are also often used to dissect
+strings by writing a RE divided into several subgroups which
+match different components of interest.  For example, an RFC-822
+header line is divided into a header name and a value, separated by a
+"<tt>:</tt>".  This can be handled by writing a regular expression
+which matches an entire header line, and has one group which matches the
+header name, and another group which matches the header's value.
+
+<P>
+Groups are marked by the "<tt>(</tt>", "<tt>)</tt>" metacharacters.
+"<tt>(</tt>" and "<tt>)</tt>" have much the same meaning as they do
+in mathematical expressions; they group together the expressions
+contained inside them. For example, you can repeat the contents of a
+group with a repeating qualifier, such as <tt>*</tt>, <tt>+</tt>,
+<tt>?</tt>, or <tt>{<i>m</i>,<i>n</i>}</tt>.  For example,
+<tt>(ab)*</tt> will match zero or more repetitions of "<tt>ab</tt>".
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; p = re.compile('(ab)*')
+&gt;&gt;&gt; print p.match('ababababab').span()
+(0, 10)
+</pre></dl>
+
+<P>
+Groups indicated with "<tt>(</tt>", "<tt>)</tt>" also capture the
+starting and ending index of the text that they match; this can be
+retrieved by passing an argument to <tt>group()</tt>,
+<tt>start()</tt>, <tt>end()</tt>, and <tt>span()</tt>.  (Later we'll
+see how to express groups that don't capture the span of text that
+they match.)  Groups are numbered starting with 0.  Group 0 is always
+present; it's the whole RE.  The methods all have group 0 as their
+default argument.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; p = re.compile('(a)b')
+&gt;&gt;&gt; m = p.match('ab')
+&gt;&gt;&gt; m.group()
+'ab'
+&gt;&gt;&gt; m.group(0)
+'ab'
+</pre></dl>
+
+<P>
+Subgroups are numbered from left to right, from 1 upward.  Groups can
+be nested; to determine the number, just count the opening parenthesis
+characters, going from left to right.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; p = re.compile('(a(b)c)d')
+&gt;&gt;&gt; m = p.match('abcd')
+&gt;&gt;&gt; m.group(0)
+'abcd'
+&gt;&gt;&gt; m.group(1)
+'abc'
+&gt;&gt;&gt; m.group(2)
+'b'
+</pre></dl>
+
+<P>
+<tt>group()</tt> can be passed multiple group numbers at a time, in
+which case it will return a tuple containing the corresponding values
+for those groups.
+
+<P>
+<dl><dd><pre>
+  
+&gt;&gt;&gt; m.group(2,1,2)
+('b', 'abc', 'b')
+</pre></dl>  
+
+<P>
+The <tt>groups()</tt> method returns a tuple containing the strings
+for all the subgroups, from 1 up to however many there are.
+
+<P>
+<dl><dd><pre>
+  
+&gt;&gt;&gt; m.groups()
+('abc', 'b')
+</pre></dl>  
+
+<P>
+Backreferences allow you to specify that the contents of an earlier
+capturing group must also be found at the current location in the string.
+For example, <tt>&#92;1</tt> will succeed if the exact contents of group
+1 can be found at the current position, and fails otherwise.  Remember
+that Python's string literals also use a backslash followed by numbers
+to allow including arbitrary characters in a string, so be sure to use
+a raw string when incorporating backreferences in a RE.
+
+<P>
+For example, the following RE detects doubled words in a string.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; p = re.compile(r'(\b\w+)\s+\1')
+&gt;&gt;&gt; p.search('Paris in the the spring').group()
+'the the'
+</pre></dl>
+
+<P>
+Backreferences like this aren't often useful for just searching
+through a string -- there are few text formats which repeat data in
+this way -- but you'll soon find out that they're <i>very</i> useful
+when performing string substitutions.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html214"
+ HREF="node15.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html211"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html205"
+ HREF="node13.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html213"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html215"
+ HREF="node15.html">4.3 Non-capturing, and Named</A>
+<b>Up:</b> <A NAME="tex2html212"
+ HREF="node12.html">4. More Pattern Power</A>
+<b>Previous:</b> <A NAME="tex2html206"
+ HREF="node13.html">4.1 More Metacharacters</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

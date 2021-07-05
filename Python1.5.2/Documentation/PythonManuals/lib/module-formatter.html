@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.4 formatter --
+Generic output formatter and device interface.</TITLE>
+<META NAME="description" CONTENT="12.4 formatter --
+Generic output formatter and device interface.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-rfc822.html">
+<LINK REL="previous" HREF="module-xmllib.html">
+<LINK REL="up" HREF="netdata.html">
+<LINK REL="next" HREF="node199.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2893"
+ HREF="node199.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2889"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2883"
+ HREF="module-xmllib.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2891"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2892"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2894"
+ HREF="node199.html">12.4.1 The Formatter Interface</A>
+<b>Up:</b> <A NAME="tex2html2890"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html2884"
+ HREF="module-xmllib.html">12.3 xmllib  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0014400000000000000000">
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>formatter</tt> --
+         Generic output formatter and device interface.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module supports two interface definitions, each with mulitple
+implementations.  The <i>formatter</i> interface is used by the
+<tt>HTMLParser</tt> class of the <tt>htmllib</tt> module, and the
+<i>writer</i> interface is required by the formatter interface.
+<a name="l2h-18712"></a>
+
+<P>
+Formatter objects transform an abstract flow of formatting events into
+specific output events on writer objects.  Formatters manage several
+stack structures to allow various properties of a writer object to be
+changed and restored; writers need not be able to handle relative
+changes nor any sort of ``change back'' operation.  Specific writer
+properties which may be controlled via formatter objects are
+horizontal alignment, font, and left margin indentations.  A mechanism
+is provided which supports providing arbitrary, non-exclusive style
+settings to a writer as well.  Additional interfaces facilitate
+formatting events which are not reversible, such as paragraph
+separation.
+
+<P>
+Writer objects encapsulate device interfaces.  Abstract devices, such
+as file formats, are supported as well as physical devices.  The
+provided implementations all work with abstract devices.  The
+interface makes available mechanisms for setting the properties which
+formatter objects manage and inserting data into the output.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html2895"
+ HREF="node199.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> The Formatter Interface</A>
+<LI><A NAME="tex2html2896"
+ HREF="node200.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Formatter Implementations</A>
+<LI><A NAME="tex2html2897"
+ HREF="node201.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> The Writer Interface</A>
+<LI><A NAME="tex2html2898"
+ HREF="node202.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Writer Implementations</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2893"
+ HREF="node199.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2889"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2883"
+ HREF="module-xmllib.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2891"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2892"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2894"
+ HREF="node199.html">12.4.1 The Formatter Interface</A>
+<b>Up:</b> <A NAME="tex2html2890"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html2884"
+ HREF="module-xmllib.html">12.3 xmllib  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

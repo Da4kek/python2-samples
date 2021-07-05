@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.6 The print statement</TITLE>
+<META NAME="description" CONTENT="6.6 The print statement">
+<META NAME="keywords" CONTENT="ref">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ref.css">
+<LINK REL="next" HREF="return.html">
+<LINK REL="previous" HREF="del.html">
+<LINK REL="up" HREF="simple.html">
+<LINK REL="next" HREF="return.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1075"
+ HREF="return.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1071"
+ HREF="simple.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1065"
+ HREF="del.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html1073"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html1074"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1076"
+ HREF="return.html">6.7 The return statement</A>
+<b>Up:</b> <A NAME="tex2html1072"
+ HREF="simple.html">6. Simple statements</A>
+<b>Previous:</b> <A NAME="tex2html1066"
+ HREF="del.html">6.5 The del statement</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008600000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">6</SPAN> The <tt>print</tt> statement
+</H1>
+<a name="l2h-"></a>
+<P>
+<dl><dd><pre>
+print_stmt:     "print" [ expression ("," expression)* [","] ]
+</pre></dl>
+
+<P>
+<tt>print</tt> evaluates each expression in turn and writes the
+resulting object to standard output (see below).  If an object is not
+a string, it is first converted to a string using the rules for string 
+conversions.  The (resulting or original) string is then written.  A
+space is written before each object is (converted and) written, unless 
+the output system believes it is positioned at the beginning of a
+line.  This is the case (1) when no characters have yet been written
+to standard output, (2) when the last character written to standard
+output is "<tt>&#92;n</tt>", or (3) when the last write operation on
+standard output was not a <tt>print</tt> statement.  (In some cases
+it may be functional to write an empty string to standard output for
+this reason.)
+<a name="l2h-3156"></a><a name="l2h-3157"></a>
+
+<P>
+A "<tt>&#92;n</tt>" character is written at the end, unless the
+<tt>print</tt> statement ends with a comma.  This is the only action
+if the statement contains just the keyword <tt>print</tt>.
+<a name="l2h-3162"></a>
+<a name="l2h-3164"></a>
+
+<P>
+Standard output is defined as the file object named <tt>stdout</tt>
+in the built-in module <tt>sys</tt>.  If no such object exists, or if
+it does not have a <tt>write()</tt> method, a <tt>RuntimeError</tt>
+exception is raised.
+<a name="l2h-3170"></a>
+<a name="l2h-"></a><a name="l2h-3173"></a><a name="l2h-"></a>
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1075"
+ HREF="return.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1071"
+ HREF="simple.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1065"
+ HREF="del.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html1073"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html1074"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1076"
+ HREF="return.html">6.7 The return statement</A>
+<b>Up:</b> <A NAME="tex2html1072"
+ HREF="simple.html">6. Simple statements</A>
+<b>Previous:</b> <A NAME="tex2html1066"
+ HREF="del.html">6.5 The del statement</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

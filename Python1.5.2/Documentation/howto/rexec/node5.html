@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.1 Inserting Variables</TITLE>
+<META NAME="description" CONTENT="3.1 Inserting Variables">
+<META NAME="keywords" CONTENT="rexec">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="rexec.css">
+<LINK REL="next" HREF="node6.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="up" HREF="node4.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html77"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html74"
+ HREF="node4.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html68"
+ HREF="node4.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Restricted Execution HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html76"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html78"
+ HREF="node6.html">3.2 Allowing Access to</A>
+<b>Up:</b> <A NAME="tex2html75"
+ HREF="node4.html">3. Customizing The Restricted</A>
+<b>Previous:</b> <A NAME="tex2html69"
+ HREF="node4.html">3. Customizing The Restricted</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000410000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Inserting Variables</A>
+</H2>
+
+<P>
+While restricted code may be completely self-contained, it's common for
+it to require other data: perhaps a tuple listing various available
+plug-ins, or a dictionary mapping symbols to values.  For simple Python
+data types, such as numbers and strings, the natural solution is to
+insert variables into one of the namespaces used by the restricted
+environment, binding the desired variable name to the value.
+
+<P>
+Continuing from the examples above, you can get the dictionary
+corresponding to the restricted module named <tt>module_name</tt> with the
+following code:
+
+<P>
+<dl><dd><pre>
+module = r_env.add_module(module_name)
+mod_dict = module.__dict__
+</pre></dl>
+
+<P>
+Despite its name, the <tt>add_module()</tt> method actually only adds the
+module if it doesn't already exist; it returns the corresponding module
+object, whether or not the module had to be created.  
+
+<P>
+Most commonly, you'll insert variable bindings into the <tt>__main__</tt>
+or <tt>__builtins__</tt> module, so these will be the most frequent values
+of <tt>module_name</tt>.  
+
+<P>
+Once you have the module's dictionary, you need only insert a key/value
+pair for the desired variable name and value.  For example, to add a
+<tt>username</tt> variable:
+
+<P>
+<dl><dd><pre>
+mod_dict['username'] = "Kate Bush"
+</pre></dl>
+
+<P>
+Restricted code will then have access to this variable.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html77"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html74"
+ HREF="node4.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html68"
+ HREF="node4.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Restricted Execution HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html76"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html78"
+ HREF="node6.html">3.2 Allowing Access to</A>
+<b>Up:</b> <A NAME="tex2html75"
+ HREF="node4.html">3. Customizing The Restricted</A>
+<b>Previous:</b> <A NAME="tex2html69"
+ HREF="node4.html">3. Customizing The Restricted</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

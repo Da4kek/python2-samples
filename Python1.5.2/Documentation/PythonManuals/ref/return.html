@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.7 The return statement</TITLE>
+<META NAME="description" CONTENT="6.7 The return statement">
+<META NAME="keywords" CONTENT="ref">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ref.css">
+<LINK REL="next" HREF="raise.html">
+<LINK REL="previous" HREF="print.html">
+<LINK REL="up" HREF="simple.html">
+<LINK REL="next" HREF="raise.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1087"
+ HREF="raise.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1083"
+ HREF="simple.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1077"
+ HREF="print.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html1085"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html1086"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1088"
+ HREF="raise.html">6.8 The raise statement</A>
+<b>Up:</b> <A NAME="tex2html1084"
+ HREF="simple.html">6. Simple statements</A>
+<b>Previous:</b> <A NAME="tex2html1078"
+ HREF="print.html">6.6 The print statement</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION008700000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">7</SPAN> The <tt>return</tt> statement
+</H1>
+<a name="l2h-"></a>
+<P>
+<dl><dd><pre>
+return_stmt:    "return" [expression_list]
+</pre></dl>
+
+<P>
+<tt>return</tt> may only occur syntactically nested in a function
+definition, not within a nested class definition.
+<a name="l2h-3181"></a>
+<a name="l2h-3183"></a>
+
+<P>
+If an expression list is present, it is evaluated, else <tt>None</tt>
+is substituted.
+
+<P>
+<tt>return</tt> leaves the current function call with the expression
+list (or <tt>None</tt>) as return value.
+
+<P>
+When <tt>return</tt> passes control out of a <tt>try</tt> statement
+with a <tt>finally</tt> clause, that <tt>finally</tt> clause is executed
+before really leaving the function.
+<a name="l2h-3192"></a>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1087"
+ HREF="raise.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1083"
+ HREF="simple.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1077"
+ HREF="print.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html1085"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html1086"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1088"
+ HREF="raise.html">6.8 The raise statement</A>
+<b>Up:</b> <A NAME="tex2html1084"
+ HREF="simple.html">6. Simple statements</A>
+<b>Previous:</b> <A NAME="tex2html1078"
+ HREF="print.html">6.6 The print statement</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

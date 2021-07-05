@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.1.4 Functions</TITLE>
+<META NAME="description" CONTENT="11.1.4 Functions">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="node168.html">
+<LINK REL="previous" HREF="node166.html">
+<LINK REL="up" HREF="module-cgi.html">
+<LINK REL="next" HREF="node168.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2527"
+ HREF="node168.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2523"
+ HREF="module-cgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2517"
+ HREF="node166.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2525"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2526"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2528"
+ HREF="node168.html">11.1.5 Caring about security</A>
+<b>Up:</b> <A NAME="tex2html2524"
+ HREF="module-cgi.html">11.1 cgi  </A>
+<b>Previous:</b> <A NAME="tex2html2518"
+ HREF="node166.html">11.1.3 Old classes</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0013140000000000000000">
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN> Functions</A>
+</H2>
+
+<P>
+These are useful if you want more control, or if you want to employ
+some of the algorithms implemented in this module in other
+circumstances.
+
+<P>
+<dl><dt><b><a name="l2h-15479"><tt>parse</tt></a></b> (<var>fp</var>)
+<dd>
+Parse a query in the environment or from a file (default
+<tt>sys.stdin</tt>).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15484"><tt>parse_qs</tt></a></b> (<var>qs</var>)
+<dd>
+Parse a query string given as a string argument (data of type 
+<font face=sans-serif>application/x-www-form-urlencoded</font>).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15489"><tt>parse_multipart</tt></a></b> (<var>fp, pdict</var>)
+<dd>
+Parse input of type <font face=sans-serif>multipart/form-data</font> (for 
+file uploads).  Arguments are <i>fp</i> for the input file and
+<i>pdict</i> for the dictionary containing other parameters of
+<tt>content-type</tt> header
+
+<P>
+Returns a dictionary just like <tt>parse_qs()</tt> keys are the
+field names, each value is a list of values for that field.  This is
+easy to use but not much good if you are expecting megabytes to be
+uploaded -- in that case, use the <tt>FieldStorage</tt> class instead
+which is much more flexible.  Note that <tt>content-type</tt> is the
+raw, unparsed contents of the <tt>content-type</tt> header.
+
+<P>
+Note that this does not parse nested multipart parts -- use
+<tt>FieldStorage</tt> for that.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15502"><tt>parse_header</tt></a></b> (<var>string</var>)
+<dd>
+Parse a header like <tt>content-type</tt> into a main
+content-type and a dictionary of parameters.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15507"><tt>test</tt></a></b> ()
+<dd>
+Robust test CGI script, usable as main program.
+Writes minimal HTTP headers and formats all information provided to
+the script in HTML form.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15511"><tt>print_environ</tt></a></b> ()
+<dd>
+Format the shell environment in HTML.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15515"><tt>print_form</tt></a></b> (<var>form</var>)
+<dd>
+Format a form in HTML.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15519"><tt>print_directory</tt></a></b> ()
+<dd>
+Format the current directory in HTML.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15523"><tt>print_environ_usage</tt></a></b> ()
+<dd>
+Print a list of useful (used by CGI) environment variables in
+HTML.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-15595"><tt>escape</tt></a></b> (<var>s</var><big>[</big><var>, quote</var><big>]</big>)
+<dd>
+Convert the characters
+"<tt>&amp;</tt>", "<tt>&lt;</tt>" and "<tt>&gt;</tt>" in string <i>s</i> to
+HTML-safe sequences.  Use this if you need to display text that might
+contain such characters in HTML.  If the optional flag <i>quote</i> is
+true, the double quote character ("<tt>"</tt>") is also translated;
+this helps for inclusion in an HTML attribute value, e.g. in <tt>&lt;A
+HREF="..."&gt;</tt>.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2527"
+ HREF="node168.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2523"
+ HREF="module-cgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2517"
+ HREF="node166.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2525"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2526"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2528"
+ HREF="node168.html">11.1.5 Caring about security</A>
+<b>Up:</b> <A NAME="tex2html2524"
+ HREF="module-cgi.html">11.1 cgi  </A>
+<b>Previous:</b> <A NAME="tex2html2518"
+ HREF="node166.html">11.1.3 Old classes</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

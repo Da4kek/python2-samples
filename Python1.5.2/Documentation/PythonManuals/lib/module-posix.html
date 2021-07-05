@@ -1,0 +1,735 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8.1 posix --
+The most common POSIX system calls.</TITLE>
+<META NAME="description" CONTENT="8.1 posix --
+The most common POSIX system calls.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-posixpath.html">
+<LINK REL="previous" HREF="unix.html">
+<LINK REL="up" HREF="unix.html">
+<LINK REL="next" HREF="module-posixpath.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2034"
+ HREF="module-posixpath.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2030"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2024"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2032"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2033"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2035"
+ HREF="module-posixpath.html">8.2 posixpath  </A>
+<b>Up:</b> <A NAME="tex2html2031"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2025"
+ HREF="unix.html">8. Unix Specific Services</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0010100000000000000000">
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> <tt>posix</tt> --
+         The most common POSIX system calls.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides access to operating system functionality that is
+standardized by the C Standard and the POSIX standard (a thinly
+disguised Unix interface).
+
+<P>
+<b>Do not import this module directly.</b>  Instead, import the
+module <tt>os</tt>, which provides a <i>portable</i> version of this
+interface.  On Unix, the <tt>os</tt> module provides a superset of
+the <tt>posix</tt> interface.  On non-Unix operating systems the
+<tt>posix</tt> module is not available, but a subset is always
+available through the <tt>os</tt> interface.  Once <tt>os</tt> is
+imported, there is <i>no</i> performance penalty in using it instead
+of <tt>posix</tt>.  In addition, <tt>os</tt> provides some additional
+functionality, such as automatically calling <tt>putenv()</tt>
+when an entry in <tt>os.environ</tt> is changed.
+<a name="l2h-"></a>
+<P>
+The descriptions below are very terse; refer to the corresponding
+Unix manual (or POSIX documentation) entry for more information.
+Arguments called <i>path</i> refer to a pathname given as a string.
+
+<P>
+Errors are reported as exceptions; the usual exceptions are given for
+type errors, while errors reported by the system calls raise
+<tt>error</tt> (a synonym for the standard exception
+<tt>OSError</tt>), described
+below.
+
+<P>
+Module <tt>posix</tt> defines the following data items:
+
+<P>
+<dl><dt><b><a name="l2h-12255"><tt>environ</tt></a></b>
+<dd>
+A dictionary representing the string environment at the time
+the interpreter was started.
+For example,
+<tt>posix.environ['HOME']</tt>
+is the pathname of your home directory, equivalent to
+<tt>getenv("HOME")</tt>
+in C.
+
+<P>
+Modifying this dictionary does not affect the string environment
+passed on by <tt>execv()</tt>, <tt>popen()</tt> or
+<tt>system()</tt>; if you need to change the environment, pass
+<tt>environ</tt> to <tt>execve()</tt> or add variable assignments and
+export statements to the command string for <tt>system()</tt> or
+<tt>popen()</tt>.
+
+<P>
+<i>However:</i> If you are using this module via the <tt>os</tt>
+module (as you should - see the introduction above), <tt>environ</tt>
+is a a mapping object that behaves almost like a dictionary but
+invokes <tt>putenv()</tt> automatically called whenever an item is
+changed.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12272"><tt>error</tt></a></b>
+<dd>
+This exception is raised when a POSIX function returns a
+POSIX-related error (e.g., not for illegal argument types).  The
+accompanying value is a pair containing the numeric error code from
+<tt>errno</tt> and the corresponding string, as would be printed by the
+C function <tt>perror()</tt>.  See the module
+<tt>errno</tt><a name="l2h-"></a>, which contains names for the
+error codes defined by the underlying operating system.
+
+<P>
+When exceptions are classes, this exception carries two attributes,
+<tt>errno</tt> and <tt>strerror</tt>.  The first holds the value of
+the C <tt>errno</tt> variable, and the latter holds the
+corresponding error message from <tt>strerror()</tt>.  For
+exceptions that involve a file system path (e.g. <tt>chdir</tt> or
+<tt>unlink</tt>), the exception instance will contain a third attribute
+<tt>filename</tt> which is the file name passed to the
+function.
+
+<P>
+When exceptions are strings, the string for the exception is
+<tt>'OSError'</tt>.
+</dl>
+
+<P>
+It defines the following functions and constants:
+
+<P>
+<dl><dt><b><a name="l2h-12292"><tt>chdir</tt></a></b> (<var>path</var>)
+<dd>
+Change the current working directory to <i>path</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12297"><tt>chmod</tt></a></b> (<var>path, mode</var>)
+<dd>
+Change the mode of <i>path</i> to the numeric <i>mode</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12303"><tt>chown</tt></a></b> (<var>path, uid, gid</var>)
+<dd>
+Change the owner and group id of <i>path</i> to the numeric <i>uid</i>
+and <i>gid</i>.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12310"><tt>close</tt></a></b> (<var>fd</var>)
+<dd>
+Close file descriptor <i>fd</i>.
+
+<P>
+Note: this function is intended for low-level I/O and must be applied
+to a file descriptor as returned by <tt>open()</tt> or
+<tt>pipe()</tt>.  To close a ``file object'' returned by the
+built-in function <tt>open()</tt> or by <tt>popen()</tt> or
+<tt>fdopen()</tt>, use its <tt>close()</tt> method.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12321"><tt>dup</tt></a></b> (<var>fd</var>)
+<dd>
+Return a duplicate of file descriptor <i>fd</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12326"><tt>dup2</tt></a></b> (<var>fd, fd2</var>)
+<dd>
+Duplicate file descriptor <i>fd</i> to <i>fd2</i>, closing the latter
+first if necessary.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12332"><tt>execv</tt></a></b> (<var>path, args</var>)
+<dd>
+Execute the executable <i>path</i> with argument list <i>args</i>,
+replacing the current process (i.e., the Python interpreter).
+The argument list may be a tuple or list of strings.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12338"><tt>execve</tt></a></b> (<var>path, args, env</var>)
+<dd>
+Execute the executable <i>path</i> with argument list <i>args</i>,
+and environment <i>env</i>,
+replacing the current process (i.e., the Python interpreter).
+The argument list may be a tuple or list of strings.
+The environment must be a dictionary mapping strings to strings.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12345"><tt>_exit</tt></a></b> (<var>n</var>)
+<dd>
+Exit to the system with status <i>n</i>, without calling cleanup
+handlers, flushing stdio buffers, etc.
+(Not on MS-DOS.)
+
+<P>
+Note: the standard way to exit is <tt>sys.exit(<i>n</i>)</tt>.
+<tt>_exit()</tt> should normally only be used in the child process
+after a <tt>fork()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12742"><tt>fdopen</tt></a></b> (<var>fd</var><big>[</big><var>, mode</var><big>[</big><var>, bufsize</var><big>]</big><big>]</big>)
+<dd>
+Return an open file object connected to the file descriptor <i>fd</i>.
+The <i>mode</i> and <i>bufsize</i> arguments have the same meaning as
+the corresponding arguments to the built-in <tt>open()</tt> function.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12361"><tt>fork</tt></a></b> ()
+<dd>
+Fork a child process.  Return <tt>0</tt> in the child, the child's
+process id in the parent.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12366"><tt>fstat</tt></a></b> (<var>fd</var>)
+<dd>
+Return status for file descriptor <i>fd</i>, like <tt>stat()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12372"><tt>ftruncate</tt></a></b> (<var>fd, length</var>)
+<dd>
+Truncate the file corresponding to file descriptor <i>fd</i>, 
+so that it is at most <i>length</i> bytes in size.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12378"><tt>getcwd</tt></a></b> ()
+<dd>
+Return a string representing the current working directory.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12382"><tt>getegid</tt></a></b> ()
+<dd>
+Return the current process' effective group id.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12386"><tt>geteuid</tt></a></b> ()
+<dd>
+Return the current process' effective user id.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12390"><tt>getgid</tt></a></b> ()
+<dd>
+Return the current process' group id.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12394"><tt>getpgrp</tt></a></b> ()
+<dd>
+Return the current process group id.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12398"><tt>getpid</tt></a></b> ()
+<dd>
+Return the current process id.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12402"><tt>getppid</tt></a></b> ()
+<dd>
+Return the parent's process id.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12406"><tt>getuid</tt></a></b> ()
+<dd>
+Return the current process' user id.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12410"><tt>kill</tt></a></b> (<var>pid, sig</var>)
+<dd>
+Kill the process <i>pid</i> with signal <i>sig</i>.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12416"><tt>link</tt></a></b> (<var>src, dst</var>)
+<dd>
+Create a hard link pointing to <i>src</i> named <i>dst</i>.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12422"><tt>listdir</tt></a></b> (<var>path</var>)
+<dd>
+Return a list containing the names of the entries in the directory.
+The list is in arbitrary order.  It does not include the special
+entries <tt>'.'</tt> and <tt>'..'</tt> even if they are present in the
+directory.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12428"><tt>lseek</tt></a></b> (<var>fd, pos, how</var>)
+<dd>
+Set the current position of file descriptor <i>fd</i> to position
+<i>pos</i>, modified by <i>how</i>: <tt>0</tt> to set the position
+relative to the beginning of the file; <tt>1</tt> to set it relative to
+the current position; <tt>2</tt> to set it relative to the end of the
+file.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12438"><tt>lstat</tt></a></b> (<var>path</var>)
+<dd>
+Like <tt>stat()</tt>, but do not follow symbolic links.  (On systems
+without symbolic links, this is identical to <tt>stat()</tt>.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12733"><tt>mkfifo</tt></a></b> (<var>path</var><big>[</big><var>, mode</var><big>]</big>)
+<dd>
+Create a FIFO (a POSIX named pipe) named <i>path</i> with numeric mode
+<i>mode</i>.  The default <i>mode</i> is <tt>0666</tt> (octal).  The current
+umask value is first masked out from the mode.
+(Not on MS-DOS.)
+
+<P>
+FIFOs are pipes that can be accessed like regular files.  FIFOs exist
+until they are deleted (for example with <tt>os.unlink()</tt>).
+Generally, FIFOs are used as rendezvous between ``client'' and
+``server'' type processes: the server opens the FIFO for reading, and
+the client opens it for writing.  Note that <tt>mkfifo()</tt>
+doesn't open the FIFO -- it just creates the rendezvous point.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12734"><tt>mkdir</tt></a></b> (<var>path</var><big>[</big><var>, mode</var><big>]</big>)
+<dd>
+Create a directory named <i>path</i> with numeric mode <i>mode</i>.
+The default <i>mode</i> is <tt>0777</tt> (octal).  On some systems,
+<i>mode</i> is ignored.  Where it is used, the current umask value is
+first masked out.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12464"><tt>nice</tt></a></b> (<var>increment</var>)
+<dd>
+Add <i>increment</i> to the process' ``niceness''.  Return the new
+niceness.  (Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12735"><tt>open</tt></a></b> (<var>file, flags</var><big>[</big><var>, mode</var><big>]</big>)
+<dd>
+Open the file <i>file</i> and set various flags according to
+<i>flags</i> and possibly its mode according to <i>mode</i>.
+The default <i>mode</i> is <tt>0777</tt> (octal), and the current umask
+value is first masked out.  Return the file descriptor for the newly
+opened file.
+
+<P>
+For a description of the flag and mode values, see the Unix or C
+run-time documentation; flag constants (like <tt>O_RDONLY</tt> and
+<tt>O_WRONLY</tt>) are defined in this module too (see below).
+
+<P>
+Note: this function is intended for low-level I/O.  For normal usage,
+use the built-in function <tt>open()</tt>, which returns a ``file
+object'' with <tt>read()</tt> and <tt>write()</tt> methods (and many
+more).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12485"><tt>pipe</tt></a></b> ()
+<dd>
+Create a pipe.  Return a pair of file descriptors <tt>(<i>r</i>,
+<i>w</i>)</tt> usable for reading and writing, respectively.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12491"><tt>plock</tt></a></b> (<var>op</var>)
+<dd>
+Lock program segments into memory.  The value of <i>op</i>
+(defined in <tt>&lt;sys/lock.h&gt;</tt>) determines which segments are locked.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12743"><tt>popen</tt></a></b> (<var>command</var><big>[</big><var>, mode</var><big>[</big><var>, bufsize</var><big>]</big><big>]</big>)
+<dd>
+Open a pipe to or from <i>command</i>.  The return value is an open
+file object connected to the pipe, which can be read or written
+depending on whether <i>mode</i> is <tt>'r'</tt> (default) or <tt>'w'</tt>.
+The <i>bufsize</i> argument has the same meaning as the corresponding
+argument to the built-in <tt>open()</tt> function.  The exit status of
+the command (encoded in the format specified for <tt>wait()</tt>) is
+available as the return value of the <tt>close()</tt> method of the file
+object, except that when the exit status is zero (termination without
+errors), <tt>None</tt> is returned.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12510"><tt>putenv</tt></a></b> (<var>varname, value</var>)
+<dd>
+<a name="l2h-12511"></a>Set the environment variable named <i>varname</i> to the string
+<i>value</i>.  Such changes to the environment affect subprocesses
+started with <tt>os.system()</tt>, <tt>os.popen()</tt> or
+<tt>os.fork()</tt> and <tt>os.execv()</tt>.  (Not on all systems.)
+
+<P>
+When <tt>putenv()</tt> is
+supported, assignments to items in <tt>os.environ</tt> are automatically
+translated into corresponding calls to <tt>putenv()</tt>; however,
+calls to <tt>putenv()</tt> don't update <tt>os.environ</tt>, so it is
+actually preferable to assign to items of <tt>os.environ</tt>.  
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12527"><tt>strerror</tt></a></b> (<var>code</var>)
+<dd>
+Return the error message corresponding to the error code in <i>code</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12532"><tt>read</tt></a></b> (<var>fd, n</var>)
+<dd>
+Read at most <i>n</i> bytes from file descriptor <i>fd</i>.
+Return a string containing the bytes read.
+
+<P>
+Note: this function is intended for low-level I/O and must be applied
+to a file descriptor as returned by <tt>open()</tt> or
+<tt>pipe()</tt>.  To read a ``file object'' returned by the
+built-in function <tt>open()</tt> or by <tt>popen()</tt> or
+<tt>fdopen()</tt>, or <tt>sys.stdin</tt>, use its
+<tt>read()</tt> or <tt>readline()</tt> methods.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12546"><tt>readlink</tt></a></b> (<var>path</var>)
+<dd>
+Return a string representing the path to which the symbolic link
+points.  (On systems without symbolic links, this always raises
+<tt>error</tt>.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12551"><tt>remove</tt></a></b> (<var>path</var>)
+<dd>
+Remove the file <i>path</i>.  See <tt>rmdir()</tt> below to remove a
+directory.  This is identical to the <tt>unlink()</tt> function
+documented below.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12558"><tt>rename</tt></a></b> (<var>src, dst</var>)
+<dd>
+Rename the file or directory <i>src</i> to <i>dst</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12564"><tt>rmdir</tt></a></b> (<var>path</var>)
+<dd>
+Remove the directory <i>path</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12569"><tt>setgid</tt></a></b> (<var>gid</var>)
+<dd>
+Set the current process' group id.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12573"><tt>setpgrp</tt></a></b> ()
+<dd>
+Calls the system call <tt>setpgrp()</tt> or <tt>setpgrp(0,
+0)</tt> depending on which version is implemented (if any).  See the
+Unix manual for the semantics.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12580"><tt>setpgid</tt></a></b> (<var>pid, pgrp</var>)
+<dd>
+Calls the system call <tt>setpgid()</tt>.  See the Unix manual
+for the semantics.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12586"><tt>setsid</tt></a></b> ()
+<dd>
+Calls the system call <tt>setsid()</tt>.  See the Unix manual
+for the semantics.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12592"><tt>setuid</tt></a></b> (<var>uid</var>)
+<dd>
+Set the current process' user id.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12596"><tt>stat</tt></a></b> (<var>path</var>)
+<dd>
+Perform a <tt>stat()</tt> system call on the given path.  The
+return value is a tuple of at least 10 integers giving the most
+important (and portable) members of the <i>stat</i> structure, in the
+order
+<tt>st_mode</tt>,
+<tt>st_ino</tt>,
+<tt>st_dev</tt>,
+<tt>st_nlink</tt>,
+<tt>st_uid</tt>,
+<tt>st_gid</tt>,
+<tt>st_size</tt>,
+<tt>st_atime</tt>,
+<tt>st_mtime</tt>,
+<tt>st_ctime</tt>.
+More items may be added at the end by some implementations.
+(On MS-DOS, some items are filled with dummy values.)
+
+<P>
+Note: The standard module <tt>stat</tt><a name="l2h-"></a> defines
+functions and constants that are useful for extracting information
+from a stat structure.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12614"><tt>symlink</tt></a></b> (<var>src, dst</var>)
+<dd>
+Create a symbolic link pointing to <i>src</i> named <i>dst</i>.  (On
+systems without symbolic links, this always raises <tt>error</tt>.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12621"><tt>system</tt></a></b> (<var>command</var>)
+<dd>
+Execute the command (a string) in a subshell.  This is implemented by
+calling the Standard C function <tt>system()</tt>, and has the
+same limitations.  Changes to <tt>posix.environ</tt>, <tt>sys.stdin</tt>
+etc. are not reflected in the environment of the executed command.
+The return value is the exit status of the process encoded in the
+format specified for <tt>wait()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12630"><tt>tcgetpgrp</tt></a></b> (<var>fd</var>)
+<dd>
+Return the process group associated with the terminal given by
+<i>fd</i> (an open file descriptor as returned by <tt>open()</tt>).
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12636"><tt>tcsetpgrp</tt></a></b> (<var>fd, pg</var>)
+<dd>
+Set the process group associated with the terminal given by
+<i>fd</i> (an open file descriptor as returned by <tt>open()</tt>)
+to <i>pg</i>.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12643"><tt>times</tt></a></b> ()
+<dd>
+Return a 5-tuple of floating point numbers indicating accumulated (CPU
+or other)
+times, in seconds.  The items are: user time, system time, children's
+user time, children's system time, and elapsed real time since a fixed
+point in the past, in that order.  See the Unix
+manual page <i>times</i>(2).  (Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12650"><tt>umask</tt></a></b> (<var>mask</var>)
+<dd>
+Set the current numeric umask and returns the previous umask.
+(Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12654"><tt>uname</tt></a></b> ()
+<dd>
+Return a 5-tuple containing information identifying the current
+operating system.  The tuple contains 5 strings:
+<tt>(<i>sysname</i>, <i>nodename</i>, <i>release</i>, <i>version</i>,
+<i>machine</i>)</tt>.  Some systems truncate the nodename to 8
+characters or to the leading component; a better way to get the
+hostname is <tt>socket.gethostname()</tt>282
+<a name="l2h-12662"></a>
+or even
+<tt>socket.gethostbyaddr(socket.gethostname())</tt>283
+<a name="l2h-12665"></a>.
+(Not on MS-DOS, nor on older Unix systems.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12670"><tt>unlink</tt></a></b> (<var>path</var>)
+<dd>
+Remove the file <i>path</i>.  This is the same function as <tt>remove</tt>;
+the <tt>unlink</tt> name is its traditional Unix name.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12741"><tt>utime</tt></a></b> (<var>path, (atime, mtime)</var>)
+<dd>
+Set the access and modified time of the file to the given values.
+(The second argument is a tuple of two items.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12683"><tt>wait</tt></a></b> ()
+<dd>
+Wait for completion of a child process, and return a tuple containing
+its pid and exit status indication: a 16-bit number, whose low byte is
+the signal number that killed the process, and whose high byte is the
+exit status (if the signal number is zero); the high bit of the low
+byte is set if a core file was produced.  (Not on MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12687"><tt>waitpid</tt></a></b> (<var>pid, options</var>)
+<dd>
+Wait for completion of a child process given by proces id, and return
+a tuple containing its pid and exit status indication (encoded as for
+<tt>wait()</tt>).  The semantics of the call are affected by the
+value of the integer <i>options</i>, which should be <tt>0</tt> for
+normal operation.  (If the system does not support
+<tt>waitpid()</tt>, this always raises <tt>error</tt>.  Not on
+MS-DOS.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12696"><tt>write</tt></a></b> (<var>fd, str</var>)
+<dd>
+Write the string <i>str</i> to file descriptor <i>fd</i>.
+Return the number of bytes actually written.
+
+<P>
+Note: this function is intended for low-level I/O and must be applied
+to a file descriptor as returned by <tt>open()</tt> or
+<tt>pipe()</tt>.  To write a ``file object'' returned by the
+built-in function <tt>open()</tt> or by <tt>popen()</tt> or
+<tt>fdopen()</tt>, or <tt>sys.stdout</tt> or <tt>sys.stderr</tt>, use
+its <tt>write()</tt> method.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12709"><tt>WNOHANG</tt></a></b>
+<dd>
+The option for <tt>waitpid()</tt> to avoid hanging if no child
+process status is available immediately.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12713"><tt>O_RDONLY</tt></a></b>
+<dd>
+<dt><b><a name="l2h-12714"><tt>O_WRONLY</tt></a></b><dd>
+<dt><b><a name="l2h-12715"><tt>O_RDWR</tt></a></b><dd>
+<dt><b><a name="l2h-12716"><tt>O_NDELAY</tt></a></b><dd>
+<dt><b><a name="l2h-12717"><tt>O_NONBLOCK</tt></a></b><dd>
+<dt><b><a name="l2h-12718"><tt>O_APPEND</tt></a></b><dd>
+<dt><b><a name="l2h-12719"><tt>O_DSYNC</tt></a></b><dd>
+<dt><b><a name="l2h-12720"><tt>O_RSYNC</tt></a></b><dd>
+<dt><b><a name="l2h-12721"><tt>O_SYNC</tt></a></b><dd>
+<dt><b><a name="l2h-12722"><tt>O_NOCTTY</tt></a></b><dd>
+<dt><b><a name="l2h-12723"><tt>O_CREAT</tt></a></b><dd>
+<dt><b><a name="l2h-12724"><tt>O_EXCL</tt></a></b><dd>
+<dt><b><a name="l2h-12725"><tt>O_TRUNC</tt></a></b><dd>
+Options for the <tt>flag</tt> argument to the <tt>open()</tt> function.
+These can be bit-wise OR'd together.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2034"
+ HREF="module-posixpath.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2030"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2024"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2032"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2033"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2035"
+ HREF="module-posixpath.html">8.2 posixpath  </A>
+<b>Up:</b> <A NAME="tex2html2031"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2025"
+ HREF="unix.html">8. Unix Specific Services</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

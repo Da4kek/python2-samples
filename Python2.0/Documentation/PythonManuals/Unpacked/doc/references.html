@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>5.9 Reference List Markup </title>
+<META NAME="description" CONTENT="5.9 Reference List Markup ">
+<META NAME="keywords" CONTENT="doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="doc.css">
+<LINK REL="next" href="indexing.html">
+<LINK REL="previous" HREF="node14.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" href="indexing.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A HREF="node14.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A HREF="node6.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="indexing.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Documenting Python</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" HREF="node14.html">5.8 Table Markup</A>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="node6.html">5 Special Markup Constructs</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="indexing.html">5.10 Index-generating Markup</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+5.9 Reference List Markup 
+</H2>
+
+<P>
+Many sections include a list of references to module documentation
+    or external documents.  These lists are created using the
+    <tt class='environment'>&#92;seealso</tt> environment.  This environment defines some
+    additional macros to support creating reference entries in a
+    reasonable manner.
+
+<P>
+The <tt class='environment'>&#92;seealso</tt> environment is typically placed in a section
+    just before any sub-sections.  This is done to ensure that
+    reference links related to the section are not hidden in a
+    subsection in the hypertext renditions of the documentation.
+
+<P>
+
+<dl class='envdesc'>
+<dt><tt>&#92;begin{<b class='environment'>seealso</b>}</tt>
+    
+<br /><tt>&#92;end{<b class='environment'>seealso</b>}</tt>
+<dd>
+      This environment creates a ``See also:'' heading and defines the
+      markup used to describe individual references.
+    </dl>
+
+<P>
+For each of the following macros, <var>why</var> should be one or more
+    complete sentences, starting with a capital letter (unless it
+    starts with an identifier, which should not be modified), and
+    ending with the apropriate punctuation.
+
+<P>
+These macros are only defined within the content of the
+    <tt class='environment'>&#92;seealso</tt> environment.
+
+<P>
+
+<dl class='macrodesc'>
+<dt><b><tt class='macro'>&#92;seemodule</tt></b>
+    <tt>[</tt><var>key</var><tt>]</tt><tt>{</tt><var>name</var><tt>}</tt><tt>{</tt><var>why</var><tt>}</tt>
+<dd>
+      Refer to another module.  <var>why</var> should be a brief
+      explanation of why the reference may be interesting.  The module
+      name is given in <var>name</var>, with the link key given in
+      <var>key</var> if necessary.  In the HTML and PDF conversions, the
+      module name will be a hyperlink to the referred-to module.
+      <b>Note:</b>  The module must be documented in the same
+      document (the corresponding <tt class='macro'>&#92;declaremodule</tt> is required).
+    </dl>
+
+<P>
+
+<dl class='macrodesc'>
+<dt><b><tt class='macro'>&#92;seepep</tt></b>
+    <tt>{</tt><var>number</var><tt>}</tt><tt>{</tt><var>title</var><tt>}</tt><tt>{</tt><var>why</var><tt>}</tt>
+<dd>
+      Refer to an Python Enhancement Proposal (PEP).  <var>number</var>
+      should be the official number assigned by the PEP Editor,
+      <var>title</var> should be the human-readable title of the PEP as
+      found in the official copy of the document, and <var>why</var> should
+      explain what's interesting about the PEP.  This should be used
+      to refer the reader to PEPs which specify interfaces or language
+      features relevant to the material in the annotated section of the
+      documentation.
+    </dl>
+
+<P>
+
+<dl class='macrodesc'>
+<dt><b><tt class='macro'>&#92;seerfc</tt></b>
+    <tt>{</tt><var>number</var><tt>}</tt><tt>{</tt><var>title</var><tt>}</tt><tt>{</tt><var>why</var><tt>}</tt>
+<dd>
+      Refer to an IETF Request for Comments (RFC).  Otherwise very
+      similar to <tt class='macro'>&#92;seepep</tt>.  This should be used
+      to refer the reader to PEPs which specify protocols or data
+      formats relevant to the material in the annotated section of the
+      documentation.
+    </dl>
+
+<P>
+
+<dl class='macrodesc'>
+<dt><b><tt class='macro'>&#92;seetext</tt></b>
+    <tt>{</tt><var>text</var><tt>}</tt>
+<dd>
+      Add arbitrary text <var>text</var> to the ``See also:'' list.  This
+      can be used to refer to off-line materials or on-line materials
+      using the <tt class='macro'>&#92;url</tt> macro.  This should consist of one or more
+      complete sentences.
+    </dl>
+
+<P>
+
+<dl class='macrodesc'>
+<dt><b><tt class='macro'>&#92;seetitle</tt></b>
+    <tt>[</tt><var>url</var><tt>]</tt><tt>{</tt><var>title</var><tt>}</tt><tt>{</tt><var>why</var><tt>}</tt>
+<dd>
+      Add a reference to an external document named <var>title</var>.  If
+      <var>url</var> is given, the title is made a hyperlink in the HTML
+      version of the documentation, and displayed below the title in
+      the typeset versions of the documentation.
+    </dl>
+
+<P>
+
+<dl class='macrodesc'>
+<dt><b><tt class='macro'>&#92;seeurl</tt></b>
+    <tt>{</tt><var>url</var><tt>}</tt><tt>{</tt><var>why</var><tt>}</tt>
+<dd>
+      References to specific on-line resources should be given using
+      the <tt class='macro'>&#92;seeurl</tt> macro.  No title is associated with the
+      reference, but the <var>why</var> text may include a title marked
+      using the <tt class='macro'>&#92;citetitle</tt> macro.
+    </dl>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A HREF="node14.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A HREF="node6.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="indexing.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Documenting Python</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" HREF="node14.html">5.8 Table Markup</A>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="node6.html">5 Special Markup Constructs</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="indexing.html">5.10 Index-generating Markup</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

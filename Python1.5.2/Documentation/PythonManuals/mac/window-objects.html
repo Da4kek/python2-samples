@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>15.2 Window Objects</TITLE>
+<META NAME="description" CONTENT="15.2 Window Objects">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="controlswindow-object.html">
+<LINK REL="previous" HREF="application-objects.html">
+<LINK REL="up" HREF="module-FrameWork.html">
+<LINK REL="next" HREF="controlswindow-object.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html503"
+ HREF="controlswindow-object.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html499"
+ HREF="module-FrameWork.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html493"
+ HREF="application-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html501"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html502"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html504"
+ HREF="controlswindow-object.html">15.3 ControlsWindow Object</A>
+<b>Up:</b> <A NAME="tex2html500"
+ HREF="module-FrameWork.html">15. FrameWork  </A>
+<b>Previous:</b> <A NAME="tex2html494"
+ HREF="application-objects.html">15.1 Application Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0021520000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">2</SPAN> Window Objects
+</H2>
+
+<P>
+Window objects have the following methods, among others:
+
+<P>
+
+<P>
+<dl><dt><b><a name="l2h-1850"><tt>open</tt></a></b> ()
+<dd>
+Override this method to open a window. Store the MacOS window-id in
+<tt>self.wid</tt> and call <tt>self.do_postopen</tt> to register the
+window with the parent application.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1856"><tt>close</tt></a></b> ()
+<dd>
+Override this method to do any special processing on window
+close. Call <tt>self.do_postclose</tt> to cleanup the parent state.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1861"><tt>do_postresize</tt></a></b> (<var>width, height, macoswindowid</var>)
+<dd>
+Called after the window is resized. Override if more needs to be done
+than calling <tt>InvalRect</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1866"><tt>do_contentclick</tt></a></b> (<var>local, modifiers, event</var>)
+<dd>
+The user clicked in the content part of a window. The arguments are
+the coordinates (window-relative), the key modifiers and the raw
+event.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1870"><tt>do_update</tt></a></b> (<var>macoswindowid, event</var>)
+<dd>
+An update event for the window was received. Redraw the window.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1874"><tt>do_activate</tt></a></b> (<var>activate, event</var>)
+<dd>
+The window was activated (<tt>activate==1</tt>) or deactivated
+(<tt>activate==0</tt>). Handle things like focus highlighting, etc.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html503"
+ HREF="controlswindow-object.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html499"
+ HREF="module-FrameWork.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html493"
+ HREF="application-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html501"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html502"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html504"
+ HREF="controlswindow-object.html">15.3 ControlsWindow Object</A>
+<b>Up:</b> <A NAME="tex2html500"
+ HREF="module-FrameWork.html">15. FrameWork  </A>
+<b>Previous:</b> <A NAME="tex2html494"
+ HREF="application-objects.html">15.1 Application Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

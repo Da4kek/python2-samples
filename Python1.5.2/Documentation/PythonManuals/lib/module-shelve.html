@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.10 shelve --
+Python object persistency.</TITLE>
+<META NAME="description" CONTENT="3.10 shelve --
+Python object persistency.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-copy.html">
+<LINK REL="previous" HREF="module-copyreg.html">
+<LINK REL="up" HREF="python.html">
+<LINK REL="next" HREF="module-copy.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html983"
+ HREF="module-copy.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html979"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html973"
+ HREF="module-copyreg.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html981"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html982"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html984"
+ HREF="module-copy.html">3.11 copy  </A>
+<b>Up:</b> <A NAME="tex2html980"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html974"
+ HREF="module-copyreg.html">3.9 copy_reg  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0051000000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">10</SPAN> <tt>shelve</tt> --
+         Python object persistency.</A>
+</H1>
+
+
+<P>
+
+<P>
+A ``shelf'' is a persistent, dictionary-like object.  The difference
+with ``dbm'' databases is that the values (not the keys!) in a shelf
+can be essentially arbitrary Python objects -- anything that the
+<tt>pickle</tt> module can handle.  This includes most class instances,
+recursive data types, and objects containing lots of shared
+sub-objects.  The keys are ordinary strings.
+<a name="l2h-"></a>
+<P>
+To summarize the interface (<tt>key</tt> is a string, <tt>data</tt> is an
+arbitrary object):
+
+<P>
+<dl><dd><pre>
+import shelve
+
+d = shelve.open(filename) # open, with (g)dbm filename -- no suffix
+
+d[key] = data   # store data at key (overwrites old data if
+                # using an existing key)
+data = d[key]   # retrieve data at key (raise KeyError if no
+                # such key)
+del d[key]      # delete data stored at key (raises KeyError
+                # if no such key)
+flag = d.has_key(key)   # true if the key exists
+list = d.keys() # a list of all existing keys (slow!)
+
+d.close()       # close it
+</pre></dl>
+Restrictions:
+
+<P>
+
+<UL><LI>The choice of which database package will be used (e.g. <tt>dbm</tt> or
+<tt>gdbm</tt>)
+depends on which interface is available.  Therefore it isn't safe to
+open the database directly using <tt>dbm</tt>.  The database is also
+(unfortunately) subject to the limitations of <tt>dbm</tt>, if it is used --
+this means that (the pickled representation of) the objects stored in
+the database should be fairly small, and in rare cases key collisions
+may cause the database to refuse updates.
+<a name="l2h-"></a><a name="l2h-"></a>
+<P>
+
+<LI>Dependent on the implementation, closing a persistent dictionary may
+or may not be necessary to flush changes to disk.
+
+<P>
+
+<LI>The <tt>shelve</tt> module does not support <i>concurrent</i> read/write
+access to shelved objects.  (Multiple simultaneous read accesses are
+safe.)  When a program has a shelf open for writing, no other program
+should have it open for reading or writing.  Unix file locking can
+be used to solve this, but this differs across Unix versions and
+requires knowledge about the database implementation used.
+
+<P>
+
+</UL>
+
+<P>
+<p><b>See Also:</b></p>
+
+  <p>Module <tt><b><a href="module-pickle.html">pickle</a></b></tt>&nbsp;&nbsp;&nbsp;(Object serialization used by <tt>shelve</tt>.)</p>
+  <p>Module <tt><b><a href="module-cPickle.html">cPickle</a></b></tt>&nbsp;&nbsp;&nbsp;(High-performance version of <tt>pickle</tt>.)</p>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html983"
+ HREF="module-copy.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html979"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html973"
+ HREF="module-copyreg.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html981"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html982"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html984"
+ HREF="module-copy.html">3.11 copy  </A>
+<b>Up:</b> <A NAME="tex2html980"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html974"
+ HREF="module-copyreg.html">3.9 copy_reg  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

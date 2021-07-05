@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>3.19 codeop -- Compile Python code</title>
+<META NAME="description" CONTENT="3.19 codeop -- Compile Python code">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="lib.css">
+<LINK REL="next" href="module-pprint.html">
+<LINK REL="previous" href="module-code.html">
+<LINK REL="up" href="python.html">
+<LINK REL="next" href="module-pprint.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="console-objects.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="python.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="module-pprint.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="console-objects.html">3.18.2 Interactive Console Objects</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="python.html">3. Python Runtime Services</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="module-pprint.html">3.20 pprint  </A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0051900000000000000000">
+3.19 <tt class="module">codeop</tt> --
+         Compile Python code</A>
+</H1>
+
+<P>
+
+
+<P>
+The <tt class="module">codeop</tt> module provides a function to compile Python code
+with hints on whether it is certainly complete, possibly complete or
+definitely incomplete.  This is used by the <tt class='module'><a href='module-code.html'>code</a></tt> module
+and should not normally be used directly.
+
+<P>
+The <tt class="module">codeop</tt> module defines the following function:
+
+<P>
+<dl><dt><b><a name='l2h-494'><tt class='function'>compile_command</tt></a></b> (<var>source</var><big>[</big><var>, filename</var><big>[</big><var>, symbol</var><big>]</big><big>]</big>)
+<dd>
+Tries to compile <var>source</var>, which should be a string of Python
+code and return a code object if <var>source</var> is valid
+Python code. In that case, the filename attribute of the code object
+will be <var>filename</var>, which defaults to <code>'&lt;input&gt;'</code>.
+Returns <code>None</code> if <var>source</var> is <i>not</i> valid Python
+code, but is a prefix of valid Python code.
+
+<P>
+If there is a problem with <var>source</var>, an exception will be raised.
+<tt class="exception">SyntaxError</tt> is raised if there is invalid Python syntax,
+and <tt class="exception">OverflowError</tt> if there is an invalid numeric
+constant.
+
+<P>
+The <var>symbol</var> argument determines whether <var>source</var> is compiled
+as a statement (<code>'single'</code>, the default) or as an expression
+(<code>'eval'</code>).  Any other value will cause <tt class="exception">ValueError</tt> to 
+be raised.
+
+<P>
+<b>Caveat:</b>
+It is possible (but not likely) that the parser stops parsing
+with a successful outcome before reaching the end of the source;
+in this case, trailing symbols may be ignored instead of causing an
+error.  For example, a backslash followed by two newlines may be
+followed by arbitrary garbage.  This will be fixed once the API
+for the parser is better.
+</dl>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="console-objects.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="python.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="module-pprint.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="console-objects.html">3.18.2 Interactive Console Objects</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="python.html">3. Python Runtime Services</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="module-pprint.html">3.20 pprint  </A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

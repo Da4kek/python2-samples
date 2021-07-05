@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2. Starting and ending a curses Application</TITLE>
+<META NAME="description" CONTENT="2. Starting and ending a curses Application">
+<META NAME="keywords" CONTENT="curses">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="curses.css">
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="up" HREF="curses.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html65"
+ HREF="node5.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html62"
+ HREF="curses.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html56"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Curses Programming with Python</b></td>
+<td align=right width="20%"><A NAME="tex2html64"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html66"
+ HREF="node5.html">3. Windows and Pads</A>
+<b>Up:</b> <A NAME="tex2html63"
+ HREF="curses.html">Curses Programming with Python</A>
+<b>Previous:</b> <A NAME="tex2html57"
+ HREF="node3.html">1.1 The Python curses</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000300000000000000000">
+<SPAN CLASS="arabic">2</SPAN>. Starting and ending  a curses Application</A>
+</H1>
+
+<P>
+Before doing anything, curses must be initialized.  This is done by
+calling the <tt>initscr()</tt> function, which will determine the
+terminal type, send any required setup codes to the terminal, and
+create various internal data structures.  If successful,
+<tt>initscr()</tt> returns a window object representing the entire
+screen; this is usually called <tt>stdscr</tt>, after the name of the
+corresponding C
+variable.
+
+<P>
+<dl><dd><pre>
+import curses
+stdscr = curses.initscr()
+</pre></dl>
+
+<P>
+Usually curses applications turn off automatic echoing of keys to the
+screen, in order to be able to read keys and only display them under
+certain circumstances.  This requires calling the <tt>noecho()</tt>
+function.
+
+<P>
+<dl><dd><pre>
+curses.noecho()
+</pre></dl>
+
+<P>
+Applications will also commonly need to react to keys instantly,
+without requiring the Enter key to be pressed; this is called cbreak
+mode, as opposed to the usual buffered input mode.
+
+<P>
+<dl><dd><pre>
+curses.cbreak()
+</pre></dl>
+
+<P>
+Terminals usually return special keys, such as the cursor keys or
+navigation keys such as Page Up and Home, as a multibyte escape
+sequence.  While you could write your application to expect such
+sequences and process them accordingly, curses can do it for you,
+returning a special value such as <tt>curses.KEY_LEFT</tt>.  To get
+curses to do the job, you'll have to enable keypad mode.
+
+<P>
+<dl><dd><pre>
+stdscr.keypad(1)
+</pre></dl>
+
+<P>
+Terminating a curses application is much easier than starting one.  
+Simply call the <tt>endwin()</tt> function to restore the terminal
+to its original operating mode.  
+
+<P>
+<dl><dd><pre>
+curses.endwin()
+</pre></dl>
+
+<P>
+A common problem when debugging a curses application is to get your
+terminal messed up when the application dies without restoring the
+terminal to its previous state.  In Python this commonly happens when
+your code is buggy and raises an uncaught exception.  Keys are no
+longer be echoed to the screen when you type them, for example, which
+makes using the shell difficult.
+
+<P>
+In Python you can avoid this and make debugging much easier by copying
+the following top-level code.  It initializes the terminal and then
+calls the <tt>main()</tt> function, which will be your application's
+code.  If <tt>main()</tt> raises an uncaught exception, the terminal
+is restored to its normal state before printing the traceback.
+
+<P>
+<dl><dd><pre>
+def main(stdscr):
+    # Your code goes here
+    ...
+
+if __name__=='__main__':
+    import curses, traceback
+    try:
+        # Initialize curses
+        stdscr=curses.initscr()
+        # Turn off echoing of keys, and enter cbreak mode,
+        # where no buffering is performed on keyboard input
+        curses.noecho() ; curses.cbreak()
+
+        # In keypad mode, escape sequences for special keys
+        # (like the cursor keys) will be interpreted and
+        # a special value like curses.KEY_LEFT will be returned
+        stdscr.keypad(1)
+        main(stdscr)                    # Enter the main loop
+        # Set everything back to normal
+        stdscr.keypad(0)
+        curses.echo() ; curses.nocbreak()
+        curses.endwin()                 # Terminate curses
+    except:
+        # In the event of an error, restore the terminal
+        # to a sane state.
+        stdscr.keypad(0)
+        curses.echo() ; curses.nocbreak()
+        curses.endwin()
+        traceback.print_exc()           # Print the exception
+</pre></dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html65"
+ HREF="node5.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html62"
+ HREF="curses.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html56"
+ HREF="node3.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Curses Programming with Python</b></td>
+<td align=right width="20%"><A NAME="tex2html64"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html66"
+ HREF="node5.html">3. Windows and Pads</A>
+<b>Up:</b> <A NAME="tex2html63"
+ HREF="curses.html">Curses Programming with Python</A>
+<b>Previous:</b> <A NAME="tex2html57"
+ HREF="node3.html">1.1 The Python curses</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

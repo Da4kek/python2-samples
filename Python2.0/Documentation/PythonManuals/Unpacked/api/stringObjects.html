@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>7.2.1 String Objects </title>
+<META NAME="description" CONTENT="7.2.1 String Objects ">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="api.css">
+<LINK REL="next" href="unicodeObjects.html">
+<LINK REL="previous" href="sequenceObjects.html">
+<LINK REL="up" href="sequenceObjects.html">
+<LINK REL="next" href="unicodeObjects.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="sequenceObjects.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="sequenceObjects.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="unicodeObjects.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="sequenceObjects.html">7.2 Sequence Objects</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="sequenceObjects.html">7.2 Sequence Objects</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="unicodeObjects.html">7.2.2 Unicode Objects</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+7.2.1 String Objects 
+</H2>
+
+<P>
+
+<dl><dt><b><tt class='ctype'><a name='l2h-266'>PyStringObject</a></tt></b>
+<dd>
+This subtype of <tt class="ctype">PyObject</tt> represents a Python string object.
+</dl>
+
+<P>
+<dl><dt>PyTypeObject <b><a name='l2h-267'><tt class='cdata'>PyString_Type</tt></a></b>
+<dd>
+This instance of <tt class="ctype">PyTypeObject</tt> represents the Python string
+type; it is the same object as <code>types.TypeType</code> in the Python
+layer..
+</dl>
+
+<P>
+<dl><dt>int <b><a name='l2h-270'><tt class='cfunction'>PyString_Check</tt></a></b> (<var>PyObject *o</var>)
+<dd>
+Returns true if the object <var>o</var> is a string object.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-271'><tt class='cfunction'>PyString_FromString</tt></a></b> (<var>const char *v</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+Returns a new string object with the value <var>v</var> on success, and
+<tt class="constant">NULL</tt> on failure.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-272'><tt class='cfunction'>PyString_FromStringAndSize</tt></a></b> (<var>const char *v,
+                                                         int len</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+Returns a new string object with the value <var>v</var> and length
+<var>len</var> on success, and <tt class="constant">NULL</tt> on failure.  If <var>v</var> is <tt class="constant">NULL</tt>,
+the contents of the string are uninitialized.
+</dl>
+
+<P>
+<dl><dt>int <b><a name='l2h-273'><tt class='cfunction'>PyString_Size</tt></a></b> (<var>PyObject *string</var>)
+<dd>
+Returns the length of the string in string object <var>string</var>.
+</dl>
+
+<P>
+<dl><dt>int <b><a name='l2h-274'><tt class='cfunction'>PyString_GET_SIZE</tt></a></b> (<var>PyObject *string</var>)
+<dd>
+Macro form of <tt class="cfunction">PyString_Size()</tt> but without error
+checking.
+</dl>
+
+<P>
+<dl><dt>char* <b><a name='l2h-275'><tt class='cfunction'>PyString_AsString</tt></a></b> (<var>PyObject *string</var>)
+<dd>
+Returns a null-terminated representation of the contents of
+<var>string</var>.  The pointer refers to the internal buffer of
+<var>string</var>, not a copy.  The data must not be modified in any way.
+It must not be de-allocated.
+</dl>
+
+<P>
+<dl><dt>char* <b><a name='l2h-276'><tt class='cfunction'>PyString_AS_STRING</tt></a></b> (<var>PyObject *string</var>)
+<dd>
+Macro form of <tt class="cfunction">PyString_AsString()</tt> but without error
+checking.
+</dl>
+
+<P>
+<dl><dt>int <b><a name='l2h-277'><tt class='cfunction'>PyString_AsStringAndSize</tt></a></b> (<var>PyObject *obj,
+                                                 char **buffer,
+                                                 int *length</var>)
+<dd>
+Returns a null-terminated representation of the contents of the object
+<var>obj</var> through the output variables <var>buffer</var> and <var>length</var>.
+
+<P>
+The function accepts both string and Unicode objects as input. For
+Unicode objects it returns the default encoded version of the object.
+If <var>length</var> is set to <tt class="constant">NULL</tt>, the resulting buffer may not contain
+null characters; if it does, the function returns -1 and a
+TypeError is raised.
+
+<P>
+The buffer refers to an internal string buffer of <var>obj</var>, not a
+copy. The data must not be modified in any way.  It must not be
+de-allocated.
+</dl>
+
+<P>
+<dl><dt>void <b><a name='l2h-278'><tt class='cfunction'>PyString_Concat</tt></a></b> (<var>PyObject **string,
+                                         PyObject *newpart</var>)
+<dd>
+Creates a new string object in <var>*string</var> containing the
+contents of <var>newpart</var> appended to <var>string</var>; the caller will
+own the new reference.  The reference to the old value of <var>string</var>
+will be stolen.  If the new string
+cannot be created, the old reference to <var>string</var> will still be
+discarded and the value of <var>*string</var> will be set to
+<tt class="constant">NULL</tt>; the appropriate exception will be set.
+</dl>
+
+<P>
+<dl><dt>void <b><a name='l2h-279'><tt class='cfunction'>PyString_ConcatAndDel</tt></a></b> (<var>PyObject **string,
+                                               PyObject *newpart</var>)
+<dd>
+Creates a new string object in <var>*string</var> containing the contents
+of <var>newpart</var> appended to <var>string</var>.  This version decrements
+the reference count of <var>newpart</var>.
+</dl>
+
+<P>
+<dl><dt>int <b><a name='l2h-280'><tt class='cfunction'>_PyString_Resize</tt></a></b> (<var>PyObject **string, int newsize</var>)
+<dd>
+A way to resize a string object even though it is ``immutable''.  
+Only use this to build up a brand new string object; don't use this if
+the string may already be known in other parts of the code.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-281'><tt class='cfunction'>PyString_Format</tt></a></b> (<var>PyObject *format,
+                                              PyObject *args</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+Returns a new string object from <var>format</var> and <var>args</var>.  Analogous
+to <code><var>format</var> % <var>args</var></code>.  The <var>args</var> argument must be
+a tuple.
+</dl>
+
+<P>
+<dl><dt>void <b><a name='l2h-282'><tt class='cfunction'>PyString_InternInPlace</tt></a></b> (<var>PyObject **string</var>)
+<dd>
+Intern the argument <var>*string</var> in place.  The argument must be the
+address of a pointer variable pointing to a Python string object.
+If there is an existing interned string that is the same as
+<var>*string</var>, it sets <var>*string</var> to it (decrementing the reference 
+count of the old string object and incrementing the reference count of
+the interned string object), otherwise it leaves <var>*string</var> alone
+and interns it (incrementing its reference count).  (Clarification:
+even though there is a lot of talk about reference counts, think of
+this function as reference-count-neutral; you own the object after
+the call if and only if you owned it before the call.)
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-283'><tt class='cfunction'>PyString_InternFromString</tt></a></b> (<var>const char *v</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+A combination of <tt class="cfunction">PyString_FromString()</tt> and
+<tt class="cfunction">PyString_InternInPlace()</tt>, returning either a new string object
+that has been interned, or a new (``owned'') reference to an earlier
+interned string object with the same value.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-284'><tt class='cfunction'>PyString_Decode</tt></a></b> (<var>const char *s,
+                                               int size,
+                                               const char *encoding,
+                                               const char *errors</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+Create a string object by decoding <var>size</var> bytes of the encoded
+buffer <var>s</var>. <var>encoding</var> and <var>errors</var> have the same meaning
+as the parameters of the same name in the unicode() builtin
+function. The codec to be used is looked up using the Python codec
+registry. Returns <tt class="constant">NULL</tt> in case an exception was raised by the
+codec.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-285'><tt class='cfunction'>PyString_Encode</tt></a></b> (<var>const Py_UNICODE *s,
+                                               int size,
+                                               const char *encoding,
+                                               const char *errors</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+Encodes the <tt class="ctype">Py_UNICODE</tt> buffer of the given size and returns a
+Python string object. <var>encoding</var> and <var>errors</var> have the same
+meaning as the parameters of the same name in the string .encode()
+method. The codec to be used is looked up using the Python codec
+registry. Returns <tt class="constant">NULL</tt> in case an exception was raised by the
+codec.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-286'><tt class='cfunction'>PyString_AsEncodedString</tt></a></b> (<var>PyObject *unicode,
+                                               const char *encoding,
+                                               const char *errors</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+Encodes a string object and returns the result as Python string
+object. <var>encoding</var> and <var>errors</var> have the same meaning as the
+parameters of the same name in the string .encode() method. The codec
+to be used is looked up using the Python codec registry. Returns
+<tt class="constant">NULL</tt> in case an exception was raised by the codec.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="sequenceObjects.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="sequenceObjects.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="unicodeObjects.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="sequenceObjects.html">7.2 Sequence Objects</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="sequenceObjects.html">7.2 Sequence Objects</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="unicodeObjects.html">7.2.2 Unicode Objects</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

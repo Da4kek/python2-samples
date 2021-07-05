@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.1.6 Installing your CGI script on a Unix system</TITLE>
+<META NAME="description" CONTENT="11.1.6 Installing your CGI script on a Unix system">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="node170.html">
+<LINK REL="previous" HREF="node168.html">
+<LINK REL="up" HREF="module-cgi.html">
+<LINK REL="next" HREF="node170.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2551"
+ HREF="node170.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2547"
+ HREF="module-cgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2541"
+ HREF="node168.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2549"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2550"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2552"
+ HREF="node170.html">11.1.7 Testing your CGI</A>
+<b>Up:</b> <A NAME="tex2html2548"
+ HREF="module-cgi.html">11.1 cgi  </A>
+<b>Previous:</b> <A NAME="tex2html2542"
+ HREF="node168.html">11.1.5 Caring about security</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0013160000000000000000">
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN> Installing your CGI script on a Unix system</A>
+</H2>
+
+<P>
+Read the documentation for your HTTP server and check with your local
+system administrator to find the directory where CGI scripts should be
+installed; usually this is in a directory "<tt>cgi-bin</tt>" in the server tree.
+
+<P>
+Make sure that your script is readable and executable by ``others''; the
+Unix file mode should be <tt>0755</tt> octal (use "<tt>chmod 0755
+filename</tt>").  Make sure that the first line of the script contains
+<tt>#!</tt> starting in column 1 followed by the pathname of the Python
+interpreter, for instance:
+
+<P>
+<dl><dd><pre>
+#!/usr/local/bin/python
+</pre></dl>
+
+<P>
+Make sure the Python interpreter exists and is executable by ``others''.
+
+<P>
+Make sure that any files your script needs to read or write are
+readable or writable, respectively, by ``others'' -- their mode
+should be <tt>0644</tt> for readable and <tt>0666</tt> for writable.  This
+is because, for security reasons, the HTTP server executes your script
+as user ``nobody'', without any special privileges.  It can only read
+(write, execute) files that everybody can read (write, execute).  The
+current directory at execution time is also different (it is usually
+the server's cgi-bin directory) and the set of environment variables
+is also different from what you get at login.  In particular, don't
+count on the shell's search path for executables (<a name="l2h-15549">$PATH</a>) or
+the Python module search path (<a name="l2h-15550">$PYTHONPATH</a>) to be set to
+anything interesting.
+
+<P>
+If you need to load modules from a directory which is not on Python's
+default module search path, you can change the path in your script,
+before importing other modules, e.g.:
+
+<P>
+<dl><dd><pre>
+import sys
+sys.path.insert(0, "/usr/home/joe/lib/python")
+sys.path.insert(0, "/usr/local/lib/python")
+</pre></dl>
+
+<P>
+(This way, the directory inserted last will be searched first!)
+
+<P>
+Instructions for non-Unix systems will vary; check your HTTP server's
+documentation (it will usually have a section on CGI scripts).
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2551"
+ HREF="node170.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2547"
+ HREF="module-cgi.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2541"
+ HREF="node168.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2549"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2550"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2552"
+ HREF="node170.html">11.1.7 Testing your CGI</A>
+<b>Up:</b> <A NAME="tex2html2548"
+ HREF="module-cgi.html">11.1 cgi  </A>
+<b>Previous:</b> <A NAME="tex2html2542"
+ HREF="node168.html">11.1.5 Caring about security</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

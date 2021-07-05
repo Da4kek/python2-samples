@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1.3 Back to the Example</TITLE>
+<META NAME="description" CONTENT="1.3 Back to the Example">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ext.css">
+<LINK REL="next" HREF="methodTable.html">
+<LINK REL="previous" HREF="errors.html">
+<LINK REL="up" HREF="intro.html">
+<LINK REL="next" HREF="methodTable.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html135"
+ HREF="methodTable.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html132"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html126"
+ HREF="errors.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html134"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html136"
+ HREF="methodTable.html">1.4 The Module's Method</A>
+<b>Up:</b> <A NAME="tex2html133"
+ HREF="intro.html">1. Extending Python with</A>
+<b>Previous:</b> <A NAME="tex2html127"
+ HREF="errors.html">1.2 Intermezzo: Errors and</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION003300000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN> Back to the Example
+</H1>
+
+<P>
+Going back to our example function, you should now be able to
+understand this statement:
+
+<P>
+<dl><dd><pre>
+    if (!PyArg_ParseTuple(args, "s", &amp;command))
+        return NULL;
+</pre></dl>
+
+<P>
+It returns <tt>NULL</tt> (the error indicator for functions returning
+object pointers) if an error is detected in the argument list, relying
+on the exception set by <tt>PyArg_ParseTuple()</tt>.  Otherwise the
+string value of the argument has been copied to the local variable
+<tt>command</tt>.  This is a pointer assignment and you are not supposed
+to modify the string to which it points (so in Standard C, the variable
+<tt>command</tt> should properly be declared as "<tt>const char
+*command</tt>").
+
+<P>
+The next statement is a call to the Unix function
+<tt>system()</tt>, passing it the string we just got from
+<tt>PyArg_ParseTuple()</tt>:
+
+<P>
+<dl><dd><pre>
+    sts = system(command);
+</pre></dl>
+
+<P>
+Our <tt>spam.system()</tt> function must return the value of
+<tt>sts</tt> as a Python object.  This is done using the function
+<tt>Py_BuildValue()</tt>, which is something like the inverse of
+<tt>PyArg_ParseTuple()</tt>: it takes a format string and an
+arbitrary number of C values, and returns a new Python object.
+More info on <tt>Py_BuildValue()</tt> is given later.
+
+<P>
+<dl><dd><pre>
+    return Py_BuildValue("i", sts);
+</pre></dl>
+
+<P>
+In this case, it will return an integer object.  (Yes, even integers
+are objects on the heap in Python!)
+
+<P>
+If you have a C function that returns no useful argument (a function
+returning <tt>void</tt>), the corresponding Python function must return
+<tt>None</tt>.   You need this idiom to do so:
+
+<P>
+<dl><dd><pre>
+    Py_INCREF(Py_None);
+    return Py_None;
+</pre></dl>
+
+<P>
+<tt>Py_None</tt> is the C name for the special Python object
+<tt>None</tt>.  It is a genuine Python object rather than a <tt>NULL</tt>
+pointer, which means ``error'' in most contexts, as we have seen.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html135"
+ HREF="methodTable.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html132"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html126"
+ HREF="errors.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html134"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html136"
+ HREF="methodTable.html">1.4 The Module's Method</A>
+<b>Up:</b> <A NAME="tex2html133"
+ HREF="intro.html">1. Extending Python with</A>
+<b>Previous:</b> <A NAME="tex2html127"
+ HREF="errors.html">1.2 Intermezzo: Errors and</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

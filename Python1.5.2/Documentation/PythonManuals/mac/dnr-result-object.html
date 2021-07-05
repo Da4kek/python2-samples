@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.1 dnr result object</TITLE>
+<META NAME="description" CONTENT="6.1 dnr result object">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="previous" HREF="module-macdnr.html">
+<LINK REL="up" HREF="module-macdnr.html">
+<LINK REL="next" HREF="module-macfs.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html257"
+ HREF="module-macfs.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html253"
+ HREF="module-macdnr.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html249"
+ HREF="module-macdnr.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html255"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html256"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html258"
+ HREF="module-macfs.html">7. macfs  </A>
+<b>Up:</b> <A NAME="tex2html254"
+ HREF="module-macdnr.html">6. macdnr  </A>
+<b>Previous:</b> <A NAME="tex2html250"
+ HREF="module-macdnr.html">6. macdnr  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION002610000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> dnr result object
+</H2>
+
+<P>
+Since the DNR calls all execute asynchronously you do not get the
+results back immediately.  Instead, you get a dnr result object.  You
+can check this object to see whether the query is complete, and access
+its attributes to obtain the information when it is.
+
+<P>
+Alternatively, you can also reference the result attributes directly,
+this will result in an implicit wait for the query to complete.
+
+<P>
+The <tt>rtnCode</tt> and <tt>cname</tt> attributes are always
+available, the others depend on the type of query (address, hinfo or
+mx).
+
+<P>
+<dl><dt><b><a name="l2h-562"><tt>wait</tt></a></b> ()
+<dd>
+Wait for the query to complete.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-566"><tt>isdone</tt></a></b> ()
+<dd>
+Return <tt>1</tt> if the query is complete.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>rtnCode</tt></a></b>
+<dd>
+The error code returned by the query.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>cname</tt></a></b>
+<dd>
+The canonical name of the host that was queried.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>ip0</tt></a></b>
+<dd>
+<dt><b><a name="l2h-578"><tt>ip1</tt></a></b><dd>
+<dt><b><a name="l2h-579"><tt>ip2</tt></a></b><dd>
+<dt><b><a name="l2h-580"><tt>ip3</tt></a></b><dd>
+At most four integer IP addresses for this host.  Unused entries are
+zero.  Valid only for address queries.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>cpuType</tt></a></b>
+<dd>
+<dt><b><a name="l2h-584"><tt>osType</tt></a></b><dd>
+Textual strings giving the machine type an OS name.  Valid for ``hinfo''
+queries.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>exchange</tt></a></b>
+<dd>
+The name of a mail-exchanger host.  Valid for ``mx'' queries.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-"><tt>preference</tt></a></b>
+<dd>
+The preference of this mx record.  Not too useful, since the Macintosh
+will only return a single mx record.  Valid for ``mx'' queries only.
+</dl>
+
+<P>
+The simplest way to use the module to convert names to dotted-decimal
+strings, without worrying about idle time, etc:
+<dl><dd><pre>
+&gt;&gt;&gt; def gethostname(name):
+...     import macdnr
+...     dnrr = macdnr.StrToAddr(name)
+...     return macdnr.AddrToStr(dnrr.ip0)
+</pre></dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html257"
+ HREF="module-macfs.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html253"
+ HREF="module-macdnr.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html249"
+ HREF="module-macdnr.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html255"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html256"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html258"
+ HREF="module-macfs.html">7. macfs  </A>
+<b>Up:</b> <A NAME="tex2html254"
+ HREF="module-macdnr.html">6. macdnr  </A>
+<b>Previous:</b> <A NAME="tex2html250"
+ HREF="module-macdnr.html">6. macdnr  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

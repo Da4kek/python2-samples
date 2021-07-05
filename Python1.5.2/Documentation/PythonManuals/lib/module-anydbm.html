@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.7 anydbm --
+Generic interface to DBM-style database modules.</TITLE>
+<META NAME="description" CONTENT="7.7 anydbm --
+Generic interface to DBM-style database modules.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-dumbdbm.html">
+<LINK REL="previous" HREF="module-Queue.html">
+<LINK REL="up" HREF="someos.html">
+<LINK REL="next" HREF="module-dumbdbm.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1964"
+ HREF="module-dumbdbm.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1960"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1954"
+ HREF="QueueObjects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1962"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1963"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1965"
+ HREF="module-dumbdbm.html">7.8 dumbdbm  </A>
+<b>Up:</b> <A NAME="tex2html1961"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1955"
+ HREF="QueueObjects.html">7.6.1 Queue Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009700000000000000000">
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">7</SPAN> <tt>anydbm</tt> --
+         Generic interface to DBM-style database modules.</A>
+</H1>
+
+
+<P>
+
+<P>
+<tt>anydbm</tt> is a generic interface to variants of the DBM
+database -- <tt>dbhash</tt><a name="l2h-"></a>,
+<tt>gdbm</tt><a name="l2h-"></a>, or <tt>dbm</tt><a name="l2h-"></a>.
+If none of these modules is installed, the slow-but-simple
+implementation in module <tt>dumbdbm</tt><a name="l2h-"></a> will
+be used.
+
+<P>
+<dl><dt><b><a name="l2h-11934"><tt>open</tt></a></b> (<var>filename</var><big>[</big><var>, flag</var><big>[</big><var>, mode</var><big>]</big><big>]</big>)
+<dd>
+Open the database file <i>filename</i> and return a corresponding object.
+
+<P>
+If the database file already exists, the <tt>whichdb</tt> module is
+used to determine its type and the appropriate module is used; if it
+doesn't exist, the first module listed above that can be imported is
+used.
+
+<P>
+The optional <i>flag</i> argument can be
+<tt>'r'</tt> to open an existing database for reading only,
+<tt>'w'</tt> to open an existing database for reading and writing,
+<tt>'c'</tt> to create the database if it doesn't exist, or
+<tt>'n'</tt>, which will always create a new empty database.  If not
+specified, the default value is <tt>'r'</tt>.
+
+<P>
+The optional <i>mode</i> argument is the Unix mode of the file, used
+only when the database has to be created.  It defaults to octal
+<tt>0666</tt> (and will be modified by the prevailing umask).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11901"><tt>error</tt></a></b>
+<dd>
+A tuple containing the exceptions that can be raised by each of the
+supported modules, with a unique exception <tt>anydbm.error</tt> as
+the first item -- the latter is used when <tt>anydbm.error</tt> is
+raised.
+</dl>
+
+<P>
+The object returned by <tt>open()</tt> supports most of the same
+functionality as dictionaries; keys and their corresponding values can
+be stored, retrieved, and deleted, and the <tt>has_key()</tt> and
+<tt>keys()</tt> methods are available.  Keys and values must always be
+strings.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1964"
+ HREF="module-dumbdbm.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1960"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1954"
+ HREF="QueueObjects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1962"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1963"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1965"
+ HREF="module-dumbdbm.html">7.8 dumbdbm  </A>
+<b>Up:</b> <A NAME="tex2html1961"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1955"
+ HREF="QueueObjects.html">7.6.1 Queue Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

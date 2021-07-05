@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.4.1 FTP Objects</TITLE>
+<META NAME="description" CONTENT="11.4.1 FTP Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-ftplib.html">
+<LINK REL="up" HREF="module-ftplib.html">
+<LINK REL="next" HREF="module-gopherlib.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2656"
+ HREF="module-gopherlib.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2652"
+ HREF="module-ftplib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2648"
+ HREF="module-ftplib.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2654"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2655"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2657"
+ HREF="module-gopherlib.html">11.5 gopherlib  </A>
+<b>Up:</b> <A NAME="tex2html2653"
+ HREF="module-ftplib.html">11.4 ftplib  </A>
+<b>Previous:</b> <A NAME="tex2html2649"
+ HREF="module-ftplib.html">11.4 ftplib  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0013410000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> FTP Objects
+</H2>
+
+<P>
+<tt>FTP</tt> instances have the following methods:
+
+<P>
+<dl><dt><b><a name="l2h-16161"><tt>set_debuglevel</tt></a></b> (<var>level</var>)
+<dd>
+Set the instance's debugging level.  This controls the amount of
+debugging output printed.  The default, <tt>0</tt>, produces no
+debugging output.  A value of <tt>1</tt> produces a moderate amount of
+debugging output, generally a single line per request.  A value of
+<tt>2</tt> or higher produces the maximum amount of debugging output,
+logging each line sent and received on the control connection.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16168"><tt>connect</tt></a></b> (<var>host</var><big>[</big><var>, port</var><big>]</big>)
+<dd>
+Connect to the given host and port.  The default port number is <tt>21</tt>, as
+specified by the FTP protocol specification.  It is rarely needed to
+specify a different port number.  This function should be called only
+once for each instance; it should not be called at all if a host was
+given when the instance was created.  All other methods can only be
+used after a connection has been made.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16173"><tt>getwelcome</tt></a></b> ()
+<dd>
+Return the welcome message sent by the server in reply to the initial
+connection.  (This message sometimes contains disclaimers or help
+information that may be relevant to the user.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16177"><tt>login</tt></a></b> (<big>[</big><var>user</var><big>[</big><var>, passwd</var><big>[</big><var>, acct</var><big>]</big><big>]</big><big>]</big>)
+<dd>
+Log in as the given <i>user</i>.  The <i>passwd</i> and <i>acct</i>
+parameters are optional and default to the empty string.  If no
+<i>user</i> is specified, it defaults to <tt>'anonymous'</tt>.  If
+<i>user</i> is <tt>anonymous</tt>, the default <i>passwd</i> is
+"<tt><i>realuser</i>@<i>host</i></tt>" where <i>realuser</i> is the real user
+name (glanced from the <a name="l2h-16190">$LOGNAME</a> or <a name="l2h-16191">$USER</a> environment
+variable) and <i>host</i> is the hostname as returned by
+<tt>socket.gethostname()</tt>.  This function should be called only
+once for each instance, after a connection has been established; it
+should not be called at all if a host and user were given when the
+instance was created.  Most FTP commands are only allowed after the
+client has logged in.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16196"><tt>abort</tt></a></b> ()
+<dd>
+Abort a file transfer that is in progress.  Using this does not always
+work, but it's worth a try.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16200"><tt>sendcmd</tt></a></b> (<var>command</var>)
+<dd>
+Send a simple command string to the server and return the response
+string.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16204"><tt>voidcmd</tt></a></b> (<var>command</var>)
+<dd>
+Send a simple command string to the server and handle the response.
+Return nothing if a response code in the range 200-299 is received.
+Raise an exception otherwise.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16208"><tt>retrbinary</tt></a></b> (<var>command, callback</var><big>[</big><var>, maxblocksize</var><big>]</big>)
+<dd>
+Retrieve a file in binary transfer mode.  <i>command</i> should be an
+appropriate "<tt>RETR</tt>" command, i.e. <tt>'RETR <i>filename</i>'</tt>.
+The <i>callback</i> function is called for each block of data received,
+with a single string argument giving the data block.
+The optional <i>maxblocksize</i> argument specifies the maximum chunk size to
+read on the low-level socket object created to do the actual transfer
+(which will also be the largest size of the data blocks passed to
+<i>callback</i>).  A reasonable default is chosen.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16218"><tt>retrlines</tt></a></b> (<var>command</var><big>[</big><var>, callback</var><big>]</big>)
+<dd>
+Retrieve a file or directory listing in ASCII transfer mode.
+<i>command</i> should be an appropriate "<tt>RETR</tt>" command (see
+<tt>retrbinary()</tt> or a "<tt>LIST</tt>" command (usually just the string
+<tt>'LIST'</tt>).  The <i>callback</i> function is called for each line,
+with the trailing CRLF stripped.  The default <i>callback</i> prints
+the line to <tt>sys.stdout</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16231"><tt>storbinary</tt></a></b> (<var>command, file, blocksize</var>)
+<dd>
+Store a file in binary transfer mode.  <i>command</i> should be an
+appropriate "<tt>STOR</tt>" command, i.e. <tt>"STOR <i>filename</i>"</tt>.
+<i>file</i> is an open file object which is read until EOF using its
+<tt>read()</tt> method in blocks of size <i>blocksize</i> to provide the
+data to be stored.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16242"><tt>storlines</tt></a></b> (<var>command, file</var>)
+<dd>
+Store a file in ASCII transfer mode.  <i>command</i> should be an
+appropriate "<tt>STOR</tt>" command (see <tt>storbinary()</tt>).  Lines are
+read until EOF from the open file object <i>file</i> using its
+<tt>readline()</tt> method to privide the data to be stored.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16253"><tt>transfercmd</tt></a></b> (<var>cmd</var>)
+<dd>
+Initiate a transfer over the data connection.  If the transfer is
+active, send a "<tt>PORT</tt>" command and the transfer command specified
+by <i>cmd</i>, and accept the connection.  If the server is passive,
+send a "<tt>PASV</tt>" command, connect to it, and start the transfer
+command.  Either way, return the socket for the connection.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16260"><tt>ntransfercmd</tt></a></b> (<var>cmd</var>)
+<dd>
+Like <tt>transfercmd()</tt>, but returns a tuple of the data
+connection and the expected size of the data.  If the expected size
+could not be computed, <tt>None</tt> will be returned as the expected
+size.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16266"><tt>nlst</tt></a></b> (<var>argument</var><big>[</big><var>, ...</var><big>]</big>)
+<dd>
+Return a list of files as returned by the "<tt>NLST</tt>" command.  The
+optional <i>argument</i> is a directory to list (default is the current
+server directory).  Multiple arguments can be used to pass
+non-standard options to the "<tt>NLST</tt>" command.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16273"><tt>dir</tt></a></b> (<var>argument</var><big>[</big><var>, ...</var><big>]</big>)
+<dd>
+Return a directory listing as returned by the "<tt>LIST</tt>" command, as
+a list of lines.  The optional <i>argument</i> is a directory to list
+(default is the current server directory).  Multiple arguments can be
+used to pass non-standard options to the "<tt>LIST</tt>" command.  If the
+last argument is a function, it is used as a <i>callback</i> function
+as for <tt>retrlines()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16282"><tt>rename</tt></a></b> (<var>fromname, toname</var>)
+<dd>
+Rename file <i>fromname</i> on the server to <i>toname</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16288"><tt>delete</tt></a></b> (<var>filename</var>)
+<dd>
+Remove the file named <i>filename</i> from the server.  If successful,
+returns the text of the response, otherwise raises
+<tt>error_perm</tt> on permission errors or <tt>error_reply</tt> 
+on other errors.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16295"><tt>cwd</tt></a></b> (<var>pathname</var>)
+<dd>
+Set the current directory on the server.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16299"><tt>mkd</tt></a></b> (<var>pathname</var>)
+<dd>
+Create a new directory on the server.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16303"><tt>pwd</tt></a></b> ()
+<dd>
+Return the pathname of the current directory on the server.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16307"><tt>rmd</tt></a></b> (<var>dirname</var>)
+<dd>
+Remove the directory named <i>dirname</i> on the server.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16312"><tt>size</tt></a></b> (<var>filename</var>)
+<dd>
+Request the size of the file named <i>filename</i> on the server.  On
+success, the size of the file is returned as an integer, otherwise
+<tt>None</tt> is returned.  Note that the "<tt>SIZE</tt>" command is not 
+standardized, but is supported by many common server implementations.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16319"><tt>quit</tt></a></b> ()
+<dd>
+Send a "<tt>QUIT</tt>" command to the server and close the connection.
+This is the ``polite'' way to close a connection, but it may raise an
+exception of the server reponds with an error to the "<tt>QUIT</tt>"
+command.  This implies a call to the <tt>close()</tt> method which
+renders the <tt>FTP</tt> instance useless for subsequent calls (see
+below).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16327"><tt>close</tt></a></b> ()
+<dd>
+Close the connection unilaterally.  This should not be applied to an
+already closed connection (e.g. after a successful call to
+<tt>quit()</tt>.  After this call the <tt>FTP</tt> instance should not
+be used any more (i.e., after a call to <tt>close()</tt> or
+<tt>quit()</tt> you cannot reopen the connection by issueing another
+<tt>login()</tt> method).
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2656"
+ HREF="module-gopherlib.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2652"
+ HREF="module-ftplib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2648"
+ HREF="module-ftplib.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2654"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2655"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2657"
+ HREF="module-gopherlib.html">11.5 gopherlib  </A>
+<b>Up:</b> <A NAME="tex2html2653"
+ HREF="module-ftplib.html">11.4 ftplib  </A>
+<b>Previous:</b> <A NAME="tex2html2649"
+ HREF="module-ftplib.html">11.4 ftplib  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

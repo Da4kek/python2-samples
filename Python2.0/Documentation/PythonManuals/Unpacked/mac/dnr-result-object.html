@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>2.4.1 DNR Result Objects </title>
+<META NAME="description" CONTENT="2.4.1 DNR Result Objects ">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="mac.css">
+<LINK REL="previous" href="module-macdnr.html">
+<LINK REL="up" href="module-macdnr.html">
+<LINK REL="next" href="module-macfs.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-macdnr.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="module-macdnr.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="module-macfs.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Macintosh Library Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-macdnr.html">2.4 macdnr  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="module-macdnr.html">2.4 macdnr  </A>
+<b class="navlabel">Next:</b> <a class="sectref" href="module-macfs.html">2.5 macfs  </A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+2.4.1 DNR Result Objects 
+</H2>
+
+<P>
+Since the DNR calls all execute asynchronously you do not get the
+results back immediately.  Instead, you get a dnr result object.  You
+can check this object to see whether the query is complete, and access
+its attributes to obtain the information when it is.
+
+<P>
+Alternatively, you can also reference the result attributes directly,
+this will result in an implicit wait for the query to complete.
+
+<P>
+The <tt class="member">rtnCode</tt> and <tt class="member">cname</tt> attributes are always
+available, the others depend on the type of query (address, hinfo or
+mx).
+
+<P>
+<dl><dt><b><a name='l2h-42'><tt class='method'>wait</tt></a></b> ()
+<dd>
+Wait for the query to complete.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-43'><tt class='method'>isdone</tt></a></b> ()
+<dd>
+Return <code>1</code> if the query is complete.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-44'><tt class='member'>rtnCode</tt></a></b>
+<dd>
+The error code returned by the query.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-45'><tt class='member'>cname</tt></a></b>
+<dd>
+The canonical name of the host that was queried.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-46'><tt class='member'>ip0</tt></a></b>
+<dd>
+<dt><b><a name='l2h-47'><tt class='member'>ip1</tt></a></b><dd><dt><b><a name='l2h-48'><tt class='member'>ip2</tt></a></b><dd><dt><b><a name='l2h-49'><tt class='member'>ip3</tt></a></b><dd>At most four integer IP addresses for this host.  Unused entries are
+zero.  Valid only for address queries.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-50'><tt class='member'>cpuType</tt></a></b>
+<dd>
+<dt><b><a name='l2h-51'><tt class='member'>osType</tt></a></b><dd>Textual strings giving the machine type an OS name.  Valid for ``hinfo''
+queries.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-52'><tt class='member'>exchange</tt></a></b>
+<dd>
+The name of a mail-exchanger host.  Valid for ``mx'' queries.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-53'><tt class='member'>preference</tt></a></b>
+<dd>
+The preference of this mx record.  Not too useful, since the Macintosh
+will only return a single mx record.  Valid for ``mx'' queries only.
+</dl>
+
+<P>
+The simplest way to use the module to convert names to dotted-decimal
+strings, without worrying about idle time, etc:
+
+<P>
+<dl><dd><pre class="verbatim">
+&gt;&gt;&gt; def gethostname(name):
+...     import macdnr
+...     dnrr = macdnr.StrToAddr(name)
+...     return macdnr.AddrToStr(dnrr.ip0)
+</pre></dl>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="module-macdnr.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="module-macdnr.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="module-macfs.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Macintosh Library Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="module-macdnr.html">2.4 macdnr  </A>
+<b class="navlabel">Up:</b> <a class="sectref" href="module-macdnr.html">2.4 macdnr  </A>
+<b class="navlabel">Next:</b> <a class="sectref" href="module-macfs.html">2.5 macfs  </A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

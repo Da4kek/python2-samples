@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>2.1 A simple example</title>
+<META NAME="description" CONTENT="2.1 A simple example">
+<META NAME="keywords" CONTENT="dist">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="dist.css">
+<LINK REL="next" href="python-terms.html">
+<LINK REL="previous" href="concepts.html">
+<LINK REL="up" href="concepts.html">
+<LINK REL="next" href="python-terms.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="concepts.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="concepts.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="python-terms.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="concepts.html">2 Concepts &amp; Terminology</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="concepts.html">2 Concepts &amp; Terminology</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="python-terms.html">2.2 General Python terminology</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+2.1 A simple example
+</H2>
+
+<P>
+The setup script is usually quite simple, although since it's written in
+Python, there are no arbitrary limits to what you can do with
+it.<A NAME="tex2html1"
+  HREF="#foot687"><SUP>1</SUP></A>  If
+all you want to do is distribute a module called <tt class="module">foo</tt>, contained
+in a file <span class="file">foo.py</span>, then your setup script can be as little as
+this:
+<dl><dd><pre class="verbatim">
+from distutils.core import setup
+setup (name = "foo",
+       version = "1.0",
+       py_modules = ["foo"])
+</pre></dl>
+
+<P>
+Some observations:
+
+<UL>
+<LI>most information that you supply to the Distutils is supplied as
+  keyword arguments to the <tt class="function">setup()</tt> function
+</LI>
+<LI>those keyword arguments fall into two categories: package
+  meta-data (name, version number) and information about what's in the
+  package (a list of pure Python modules, in this case)
+</LI>
+<LI>modules are specified by module name, not filename (the same will
+  hold true for packages and extensions)
+</LI>
+<LI>it's recommended that you supply a little more meta-data, in
+  particular your name, email address and a URL for the project
+  (see section&nbsp;<A href="setup-script.html#setup-script">3</A> for an example)
+</LI>
+</UL>
+
+<P>
+To create a source distribution for this module, you would create a
+setup script, <span class="file">setup.py</span>, containing the above code, and run:
+<dl><dd><pre class="verbatim">
+python setup.py sdist
+</pre></dl>
+which will create an archive file (e.g., tarball on Unix, zip file on
+Windows) containing your setup script, <span class="file">setup.py</span>, and your module,
+<span class="file">foo.py</span>.  The archive file will be named <span class="file">Foo-1.0.tar.gz</span> (or
+<span class="file">.zip</span>), and will unpack into a directory <span class="file">Foo-1.0</span>.
+
+<P>
+If an end-user wishes to install your <tt class="module">foo</tt> module, all she has
+to do is download <span class="file">Foo-1.0.tar.gz</span> (or <span class="file">.zip</span>), unpack it,
+and--from the <span class="file">Foo-1.0</span> directory--run
+<dl><dd><pre class="verbatim">
+python setup.py install
+</pre></dl>
+which will ultimately copy <span class="file">foo.py</span> to the appropriate directory
+for third-party modules in their Python installation.
+
+<P>
+This simple example demonstrates some fundamental concepts of the
+Distutils: first, both developers and installers have the same basic
+user interface, i.e. the setup script.  The difference is which
+Distutils <i>commands</i> they use: the <code>sdist</code> command is
+almost exclusively for module developers, while <code>install</code> is
+more often for installers (although most developers will want to install
+their own code occasionally).
+
+<P>
+If you want to make things really easy for your users, you can create
+one or more built distributions for them.  For instance, if you are
+running on a Windows machine, and want to make things easy for other
+Windows users, you can create an executable installer (the most
+appropriate type of built distribution for this platform) with the
+<code>bdist_wininst</code> command.  For example:
+<dl><dd><pre class="verbatim">
+python setup.py bdist_wininst
+</pre></dl>
+will create an executable installer, <span class="file">Foo-1.0.win32.exe</span>, in the
+current directory.
+
+<P>
+<b>** not implemented yet **</b>
+(Another way to create executable installers for Windows is with the
+<code>bdist_wise</code> command, which uses Wise--the commercial
+installer-generator used to create Python's own installer--to create
+the installer.  Wise-based installers are more appropriate for large,
+industrial-strength applications that need the full capabilities of a
+``real'' installer.  <code>bdist_wininst</code> creates a self-extracting
+zip file with a minimal user interface, which is enough for small- to
+medium-sized module collections.  You'll need to have version XXX of
+Wise installed on your system for the <code>bdist_wise</code> command to
+work; it's available from <a class="url" href="http://foo/bar/baz">http://foo/bar/baz <img src='../icons/offsite.gif'
+  border='0' class='offsitelink' height='15' width='17' alt='[off-site link]'
+  ></a>.)
+
+<P>
+Currently (Distutils 0.9.2), the are only other useful built
+distribution format is RPM, implemented by the <code>bdist_rpm</code>
+command.  For example, the following command will create an RPM file
+called <span class="file">Foo-1.0.noarch.rpm</span>:
+<dl><dd><pre class="verbatim">
+python setup.py bdist_rpm
+</pre></dl>
+(This uses the <code>rpm</code> command, so has to be run on an RPM-based
+system such as Red Hat Linux, SuSE Linux, or Mandrake Linux.)
+
+<P>
+You can find out what distribution formats are available at any time by
+running
+<dl><dd><pre class="verbatim">
+python setup.py bdist --help-formats
+</pre></dl>
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot687">...
+it.</A><A NAME="foot687"
+ href="simple-example.html#tex2html1"><SUP>1</SUP></A>
+<DD>But be careful about putting arbitrarily expensive
+  operations in your setup script; unlike, say, Autoconf-style configure
+  scripts, the setup script may be run multiple times in the course of
+  building and installing your module distribution.  If you need to
+  insert potentially expensive processing steps into the Distutils
+  chain, see section&nbsp;<A href="extending.html#extending">8</A> on extending the Distutils.
+
+</DL>
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="concepts.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="concepts.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="python-terms.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="concepts.html">2 Concepts &amp; Terminology</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="concepts.html">2 Concepts &amp; Terminology</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="python-terms.html">2.2 General Python terminology</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

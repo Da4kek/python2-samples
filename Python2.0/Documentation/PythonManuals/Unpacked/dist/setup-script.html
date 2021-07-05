@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>3 Writing the Setup Script</title>
+<META NAME="description" CONTENT="3 Writing the Setup Script">
+<META NAME="keywords" CONTENT="dist">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="dist.css">
+<LINK REL="next" href="setup-config.html">
+<LINK REL="previous" href="concepts.html">
+<LINK REL="up" HREF="dist.html">
+<LINK REL="next" href="listing-packages.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="distutils-term.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A HREF="dist.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="listing-packages.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="distutils-term.html">2.3 Distutils-specific terminology</A>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="dist.html">Distributing Python Modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="listing-packages.html">3.1 Listing whole packages</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1>
+<BR>
+3 Writing the Setup Script
+</H1>
+
+<P>
+The setup script is the centre of all activity in building,
+distributing, and installing modules using the Distutils.  The main
+purpose of the setup script is to describe your module distribution to
+the Distutils, so that the various commands that operate on your modules
+do the right thing.  As we saw in section&nbsp;<A href="simple-example.html#simple-example">2.1</A> above,
+the setup script consists mainly of a call to <tt class="function">setup()</tt>, and
+most information supplied to the Distutils by the module developer is
+supplied as keyword arguments to <tt class="function">setup()</tt>.
+
+<P>
+Here's a slightly more involved example, which we'll follow for the next
+couple of sections: the Distutils' own setup script.  (Keep in mind that
+although the Distutils are included with Python 1.6 and later, they also
+have an independent existence so that Python 1.5.2 users can use them to
+install other module distributions.  The Distutils' own setup script,
+shown here, is used to install the package into Python 1.5.2.)
+
+<P>
+<dl><dd><pre class="verbatim">
+#!/usr/bin/env python
+
+from distutils.core import setup
+
+setup (name = "Distutils",
+       version = "1.0",
+       description = "Python Distribution Utilities",
+       author = "Greg Ward",
+       author_email = "gward@python.net",
+       url = "http://www.python.org/sigs/distutils-sig/",
+
+       packages = ['distutils', 'distutils.command'],
+      )
+</pre></dl>
+There are only two differences between this and the trivial one-file
+distribution presented in section&nbsp;<A href="simple-example.html#simple-example">2.1</A>: more
+meta-data, and the specification of pure Python modules by package,
+rather than by module.  This is important since the Distutils consist of
+a couple of dozen modules split into (so far) two packages; an explicit
+list of every module would be tedious to generate and difficult to
+maintain.
+
+<P>
+Note that any pathnames (files or directories) supplied in the setup
+script should be written using the Unix convention, i.e.
+slash-separated.  The Distutils will take care of converting this
+platform-neutral representation into whatever is appropriate on your
+current platform before actually using the pathname.  This makes your
+setup script portable across operating systems, which of course is one
+of the major goals of the Distutils.  In this spirit, all pathnames in
+this document are slash-separated (Mac OS programmers should keep in
+mind that the <i>absence</i> of a leading slash indicates a relative
+path, the opposite of the Mac OS convention with colons).
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html170"
+  href="listing-packages.html">3.1 Listing whole packages</A>
+<LI><A NAME="tex2html171"
+  href="listing-modules.html">3.2 Listing individual modules</A>
+<LI><A NAME="tex2html172"
+  href="describing-extensions.html">3.3 Describing extension modules</A>
+<UL>
+<LI><A NAME="tex2html173"
+  HREF="node11.html">3.3.1 Extension names and packages</A>
+<LI><A NAME="tex2html174"
+  HREF="node12.html">3.3.2 Extension source files</A>
+<LI><A NAME="tex2html175"
+  HREF="node13.html">3.3.3 Preprocessor options</A>
+<LI><A NAME="tex2html176"
+  HREF="node14.html">3.3.4 Library options</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="distutils-term.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A HREF="dist.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="listing-packages.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="distutils-term.html">2.3 Distutils-specific terminology</A>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="dist.html">Distributing Python Modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="listing-packages.html">3.1 Listing whole packages</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

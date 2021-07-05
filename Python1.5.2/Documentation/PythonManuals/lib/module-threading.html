@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.5 threading --
+Higher-level threading interfaces.</TITLE>
+<META NAME="description" CONTENT="7.5 threading --
+Higher-level threading interfaces.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-Queue.html">
+<LINK REL="previous" HREF="module-thread.html">
+<LINK REL="up" HREF="someos.html">
+<LINK REL="next" HREF="node113.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1853"
+ HREF="node113.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1849"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1843"
+ HREF="module-thread.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1851"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1852"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1854"
+ HREF="node113.html">7.5.1 Lock Objects</A>
+<b>Up:</b> <A NAME="tex2html1850"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1844"
+ HREF="module-thread.html">7.4 thread  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION009500000000000000000">
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>threading</tt> --
+         Higher-level threading interfaces.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module constructs higher-level threading interfaces on top of the 
+lower level <tt>thread</tt> module.
+
+<P>
+This module is safe for use with "<tt>from threading import *</tt>".  It
+defines the following functions and objects:
+
+<P>
+<dl><dt><b><a name="l2h-11300"><tt>activeCount</tt></a></b> ()
+<dd>
+Return the number of currently active <tt>Thread</tt> objects.
+The returned count is equal to the length of the list returned by
+<tt>enumerate()</tt>.
+A function that returns the number of currently active threads.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11306"><tt>Condition</tt></a></b> ()
+<dd>
+A factory function that returns a new condition variable object.
+A condition variable allows one or more threads to wait until they
+are notified by another thread.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11310"><tt>currentThread</tt></a></b> ()
+<dd>
+Return the current <tt>Thread</tt> object, corresponding to the
+caller's thread of control.  If the caller's thread of control was not
+created through the
+<tt>threading</tt> module, a dummy thread object with limited functionality
+is returned.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11316"><tt>enumerate</tt></a></b> ()
+<dd>
+Return a list of all currently active <tt>Thread</tt> objects.
+The list includes daemonic threads, dummy thread objects created
+by <tt>currentThread()</tt>, and the main thread.  It excludes terminated
+threads and threads that have not yet been started.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11322"><tt>Event</tt></a></b> ()
+<dd>
+A factory function that returns a new event object.  An event
+manages a flag that can be set to true with the <tt>set()</tt> method and
+reset to false with the <tt>clear()</tt> method.  The <tt>wait()</tt> method blocks
+until the flag is true.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11329"><tt>Lock</tt></a></b> ()
+<dd>
+A factory function that returns a new primitive lock object.  Once
+a thread has acquired it, subsequent attempts to acquire it block,
+until it is released; any thread may release it.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11333"><tt>RLock</tt></a></b> ()
+<dd>
+A factory function that returns a new reentrant lock object.
+A reentrant lock must be released by the thread that acquired it.
+Once a thread has acquired a reentrant lock, the same thread may
+acquire it again without blocking; the thread must release it once
+for each time it has acquired it.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11337"><tt>Semaphore</tt></a></b> ()
+<dd>
+A factory function that returns a new semaphore object.  A
+semaphore manages a counter representing the number of <tt>release()</tt>
+calls minus the number of <tt>acquire()</tt> calls, plus an initial value.
+The <tt>acquire()</tt> method blocks if necessary until it can return
+without making the counter negative.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-11344"><tt>Thread</tt></a></b> ()
+<dd>
+A class that represents a thread of control.  This class can be safely subclassed in a limited fashion.
+</dl>
+
+<P>
+Detailed interfaces for the objects are documented below.  
+
+<P>
+The design of this module is loosely based on Java's threading model.
+However, where Java makes locks and condition variables basic behavior
+of every object, they are separate objects in Python.  Python's <tt>Thread</tt>
+class supports a subset of the behavior of Java's Thread class;
+currently, there are no priorities, no thread groups, and threads
+cannot be destroyed, stopped, suspended, resumed, or interrupted.  The
+static methods of Java's Thread class, when implemented, are mapped to
+module-level functions.
+
+<P>
+All of the methods described below are executed atomically.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html1855"
+ HREF="node113.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Lock Objects</A>
+<LI><A NAME="tex2html1856"
+ HREF="node114.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> RLock Objects</A>
+<LI><A NAME="tex2html1857"
+ HREF="node115.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">3</SPAN> Condition Objects</A>
+<LI><A NAME="tex2html1858"
+ HREF="node116.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">4</SPAN> Semaphore Objects</A>
+<LI><A NAME="tex2html1859"
+ HREF="node117.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">5</SPAN> Event Objects</A>
+<LI><A NAME="tex2html1860"
+ HREF="node118.html"><SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">6</SPAN> Thread Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1853"
+ HREF="node113.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1849"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1843"
+ HREF="module-thread.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1851"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1852"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1854"
+ HREF="node113.html">7.5.1 Lock Objects</A>
+<b>Up:</b> <A NAME="tex2html1850"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html1844"
+ HREF="module-thread.html">7.4 thread  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

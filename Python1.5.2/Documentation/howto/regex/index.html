@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Regular Expression HOWTO</TITLE>
+<META NAME="description" CONTENT="Regular Expression HOWTO">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="next" HREF="contents.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html2"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html4"
+ HREF="contents.html">Contents</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+<h1 align=center>Regular Expression HOWTO</h1>
+<center>
+<p><strong>A.M. Kuchling</strong></p>
+<p><font face=sans-serif>akuchling@acm.org</font></p>
+</center>
+<p>
+
+<P>
+
+<H3>Abstract:</H3>
+<DIV CLASS="ABSTRACT">
+
+This document is an introductory tutorial to using regular expressions
+in Python with the <tt>re</tt> module.  It provides a gentler
+introduction than the corresponding section in the Library Reference.
+</DIV>
+<P>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html5"
+ HREF="contents.html">Contents</A>
+<LI><A NAME="tex2html6"
+ HREF="node2.html"><SPAN CLASS="arabic">1</SPAN>. Introduction</A>
+<LI><A NAME="tex2html7"
+ HREF="node3.html"><SPAN CLASS="arabic">2</SPAN>. Simple Patterns</A>
+<UL>
+<LI><A NAME="tex2html8"
+ HREF="node4.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Matching Characters</A>
+<LI><A NAME="tex2html9"
+ HREF="node5.html"><SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Repeating Things</A>
+</UL>
+<LI><A NAME="tex2html10"
+ HREF="node6.html"><SPAN CLASS="arabic">3</SPAN>. Using Regular Expressions</A>
+<UL>
+<LI><A NAME="tex2html11"
+ HREF="node7.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Compiling Regular Expressions</A>
+<LI><A NAME="tex2html12"
+ HREF="node8.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> The Backslash Plague</A>
+<LI><A NAME="tex2html13"
+ HREF="node9.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN> Performing Matches</A>
+<LI><A NAME="tex2html14"
+ HREF="node10.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> Module-Level Functions</A>
+<LI><A NAME="tex2html15"
+ HREF="node11.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN> Compilation Flags</A>
+</UL>
+<LI><A NAME="tex2html16"
+ HREF="node12.html"><SPAN CLASS="arabic">4</SPAN>. More Pattern Power</A>
+<UL>
+<LI><A NAME="tex2html17"
+ HREF="node13.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">1</SPAN> More Metacharacters</A>
+<LI><A NAME="tex2html18"
+ HREF="node14.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">2</SPAN> Grouping</A>
+<LI><A NAME="tex2html19"
+ HREF="node15.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">3</SPAN> Non-capturing, and Named Groups</A>
+<LI><A NAME="tex2html20"
+ HREF="node16.html"><SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> Other Assertions</A>
+</UL>
+<LI><A NAME="tex2html21"
+ HREF="node17.html"><SPAN CLASS="arabic">5</SPAN>. Modifying Strings</A>
+<UL>
+<LI><A NAME="tex2html22"
+ HREF="node18.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Splitting Strings</A>
+<LI><A NAME="tex2html23"
+ HREF="node19.html"><SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Search and Replace</A>
+</UL>
+<LI><A NAME="tex2html24"
+ HREF="node20.html"><SPAN CLASS="arabic">6</SPAN>. Common Problems</A>
+<UL>
+<LI><A NAME="tex2html25"
+ HREF="node21.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> Know About the string Module</A>
+<LI><A NAME="tex2html26"
+ HREF="node22.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> match() versus search()</A>
+<LI><A NAME="tex2html27"
+ HREF="node23.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">3</SPAN> Greedy versus Non-Greedy</A>
+<LI><A NAME="tex2html28"
+ HREF="node24.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">4</SPAN> Not using re.VERBOSE</A>
+</UL>
+<LI><A NAME="tex2html29"
+ HREF="node25.html"><SPAN CLASS="arabic">7</SPAN>. Feedback</A>
+<LI><A NAME="tex2html30"
+ HREF="about.html">About this document ...</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html2"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html4"
+ HREF="contents.html">Contents</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

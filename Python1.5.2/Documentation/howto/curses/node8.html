@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>5. User Input</TITLE>
+<META NAME="description" CONTENT="5. User Input">
+<META NAME="keywords" CONTENT="curses">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="curses.css">
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="up" HREF="curses.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html108"
+ HREF="node9.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html105"
+ HREF="curses.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html99"
+ HREF="node7.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Curses Programming with Python</b></td>
+<td align=right width="20%"><A NAME="tex2html107"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html109"
+ HREF="node9.html">6. For More Information</A>
+<b>Up:</b> <A NAME="tex2html106"
+ HREF="curses.html">Curses Programming with Python</A>
+<b>Previous:</b> <A NAME="tex2html100"
+ HREF="node7.html">4.1 Attributes and Colour</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000600000000000000000">
+<SPAN CLASS="arabic">5</SPAN>. User Input</A>
+</H1>
+
+<P>
+curses offers only very simple input mechanisms.  Windows have a
+<tt>getch()</tt> method that pauses, and waits for the user to hit a
+key, displaying it if <tt>echo()</tt> has been called earlier.  You
+can optionally specify a coordinate to which the cursor should be
+moved before pausing.  <tt>getch()</tt> returns an integer; if it's
+between 0 and 255, it represents the ASCII code of the key pressed.
+Values greater than 255 are special keys such as Page Up, Home, or the
+cursor keys.  You can compare the value returned to constants such as
+<tt>curses.KEY_PPAGE</tt>, <tt>curses.KEY_HOME</tt>, or
+<tt>curses.KEY_LEFT</tt>.  Usually the main loop of your program
+might look like this:
+
+<P>
+<dl><dd><pre>
+while (1)
+    c = stdscr.getch()
+    if c == ord('p'): PrintDocument()
+    elif c == ord('q'): break  # Exit the while()
+    elif c == curses.KEY_HOME: x = y = 0
+</pre></dl>
+
+<P>
+There's also a method to retrieve an entire string,
+<tt>getstr()</tt>.  It isn't used very often, because its
+functionality is quite limited; the only editing keys available are
+the backspace key and the Enter key, which terminates the string.  It
+can optionally be limited to a fixed number of characters.
+
+<P>
+<dl><dd><pre>
+curses.echo()            # Enable echoing of characters
+
+# Get a 15-character string, with the cursor on the top line 
+s = stdscr.getstr(0,0, 15)
+</pre></dl>
+
+<P>
+In future versions of this HOWTO, I'd like to include an
+implementation of a fancy string entry function that allows full
+editing.  If you write such a function, send me a copy and it'll be
+added to the next version of this document.
+ 
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html108"
+ HREF="node9.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html105"
+ HREF="curses.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html99"
+ HREF="node7.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Curses Programming with Python</b></td>
+<td align=right width="20%"><A NAME="tex2html107"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html109"
+ HREF="node9.html">6. For More Information</A>
+<b>Up:</b> <A NAME="tex2html106"
+ HREF="curses.html">Curses Programming with Python</A>
+<b>Previous:</b> <A NAME="tex2html100"
+ HREF="node7.html">4.1 Attributes and Colour</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

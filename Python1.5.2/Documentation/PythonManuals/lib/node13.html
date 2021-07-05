@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2.1.5.2 Mutable Sequence Types</TITLE>
+<META NAME="description" CONTENT="2.1.5.2 Mutable Sequence Types">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="node12.html">
+<LINK REL="up" HREF="typesseq.html">
+<LINK REL="next" HREF="typesmapping.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html667"
+ HREF="typesmapping.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html663"
+ HREF="typesseq.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html659"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html665"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html666"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html668"
+ HREF="typesmapping.html">2.1.6 Mapping Types</A>
+<b>Up:</b> <A NAME="tex2html664"
+ HREF="typesseq.html">2.1.5 Sequence Types</A>
+<b>Previous:</b> <A NAME="tex2html660"
+ HREF="node12.html">2.1.5.1 More String Operations</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION004152000000000000000">
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> Mutable Sequence Types</A>
+</H3>
+
+<P>
+List objects support additional operations that allow in-place
+modification of the object.
+These operations would be supported by other mutable sequence types
+(when added to the language) as well.
+Strings and tuples are immutable sequence types and such objects cannot
+be modified once created.
+The following operations are defined on mutable sequence types (where
+<i>x</i> is an arbitrary object):
+<a name="l2h-"></a>
+<a name="l2h-643"></a>
+
+<P>
+<table border align=center>
+  <tr><th><b>Operation</b></th>
+      <th align=left><b>Result</b></th>
+      <th><b>Notes</b></th>
+  <tr><td align=center><code><i>s</i>[<i>i</i>] = <i>x</i></code></td>
+      <td>item <i>i</i> of <i>s</i> is replaced by <i>x</i></td>
+      
+  <tr><td align=center><code><i>s</i>[<i>i</i>:<i>j</i>] = <i>t</i></code></td>
+      <td>slice of <i>s</i> from <i>i</i> to <i>j</i> is replaced by <i>t</i></td>
+      
+  <tr><td align=center><code>del <i>s</i>[<i>i</i>:<i>j</i>]</code></td>
+      <td>same as <tt><i>s</i>[<i>i</i>:<i>j</i>] = []</tt></td>
+      
+  <tr><td align=center><code><i>s</i>.append(<i>x</i>)</code></td>
+      <td>same as <tt><i>s</i>[len(<i>s</i>):len(<i>s</i>)] = [<i>x</i>]</tt></td>
+      
+  <tr><td align=center><code><i>s</i>.extend(<i>x</i>)</code></td>
+      <td>same as <tt><i>s</i>[len(<i>s</i>):len(<i>s</i>)] = <i>x</i></tt></td>
+      <td align=center>(5)</td>
+  <tr><td align=center><code><i>s</i>.count(<i>x</i>)</code></td>
+      <td>return number of <i>i</i>'s for which <tt><i>s</i>[<i>i</i>] == <i>x</i></tt></td>
+      
+  <tr><td align=center><code><i>s</i>.index(<i>x</i>)</code></td>
+      <td>return smallest <i>i</i> such that <tt><i>s</i>[<i>i</i>] == <i>x</i></tt></td>
+      <td align=center>(1)</td>
+  <tr><td align=center><code><i>s</i>.insert(<i>i</i>, <i>x</i>)</code></td>
+      <td>same as <tt><i>s</i>[<i>i</i>:<i>i</i>] = [<i>x</i>]</tt>
+	  if <tt><i>i</i> &gt;= 0</tt></td>
+      
+  <tr><td align=center><code><i>s</i>.pop(</var><big>[</big><var><i>i</i></var><big>]</big><var>)</code></td>
+      <td>same as <tt><i>x</i> = <i>s</i>[<i>i</i>]; del <i>s</i>[<i>i</i>]; return <i>x</i></tt></td>
+      <td align=center>(4)</td>
+  <tr><td align=center><code><i>s</i>.remove(<i>x</i>)</code></td>
+      <td>same as <tt>del <i>s</i>[<i>s</i>.index(<i>x</i>)]</tt></td>
+      <td align=center>(1)</td>
+  <tr><td align=center><code><i>s</i>.reverse()</code></td>
+      <td>reverses the items of <i>s</i> in place</td>
+      <td align=center>(3)</td>
+  <tr><td align=center><code><i>s</i>.sort(</var><big>[</big><var><i>cmpfunc</i></var><big>]</big><var>)</code></td>
+      <td>sort the items of <i>s</i> in place</td>
+      <td align=center>(2), (3)</td>
+
+</table>
+<a name="l2h-"></a>
+<a name="l2h-"></a>
+<a name="l2h-"></a>
+<a name="l2h-744"></a>
+<a name="l2h-746"></a>
+<a name="l2h-"></a><a name="l2h-750"></a>20
+<a name="l2h-751"></a>21
+<a name="l2h-752"></a>22
+<a name="l2h-753"></a>23
+<a name="l2h-754"></a>24
+<a name="l2h-755"></a>25
+<a name="l2h-756"></a>26
+<a name="l2h-757"></a>27
+<a name="l2h-758"></a>28
+
+Notes:
+<DL>
+<DT><STRONG>(1)</STRONG>
+<DD>Raises an exception when <i>x</i> is not found in <i>s</i>.
+  
+<DT><STRONG>(2)</STRONG>
+<DD>The <tt>sort()</tt> method takes an optional argument
+  specifying a comparison function of two arguments (list items) which
+  should return <tt>-1</tt>, <tt>0</tt> or <tt>1</tt> depending on whether the
+  first argument is considered smaller than, equal to, or larger than the
+  second argument.  Note that this slows the sorting process down
+  considerably; e.g. to sort a list in reverse order it is much faster
+  to use calls to <tt>sort()</tt> and <tt>reverse()</tt> than to use
+  <tt>sort()</tt> with a comparison function that reverses the ordering of
+  the elements.
+
+<P>
+<DT><STRONG>(3)</STRONG>
+<DD>The <tt>sort()</tt> and <tt>reverse()</tt> methods modify the
+list in place for economy of space when sorting or reversing a large
+list.  They don't return the sorted or reversed list to remind you of
+this side effect.
+
+<P>
+<DT><STRONG>(4)</STRONG>
+<DD>The <tt>pop()</tt> method is experimental and not supported 
+by other mutable sequence types than lists.
+The optional argument <i>i</i> defaults to <tt>-1</tt>, so that
+by default the last item is removed and returned.
+
+<P>
+<DT><STRONG>(5)</STRONG>
+<DD>Raises an exception when <i>x</i> is not a list object.  The 
+<tt>extend()</tt> method is experimental and not supported by mutable types
+other than lists.
+</DL>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html667"
+ HREF="typesmapping.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html663"
+ HREF="typesseq.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html659"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html665"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html666"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html668"
+ HREF="typesmapping.html">2.1.6 Mapping Types</A>
+<b>Up:</b> <A NAME="tex2html664"
+ HREF="typesseq.html">2.1.5 Sequence Types</A>
+<b>Previous:</b> <A NAME="tex2html660"
+ HREF="node12.html">2.1.5.1 More String Operations</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

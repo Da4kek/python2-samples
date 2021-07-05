@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6. macdnr --
+Interfaces to the Macintosh Domain Name Resolver.</TITLE>
+<META NAME="description" CONTENT="6. macdnr --
+Interfaces to the Macintosh Domain Name Resolver.">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="module-macfs.html">
+<LINK REL="previous" HREF="module-macconsole.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="dnr-result-object.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html246"
+ HREF="dnr-result-object.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html242"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html236"
+ HREF="node10.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html244"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html245"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html247"
+ HREF="dnr-result-object.html">6.1 dnr result object</A>
+<b>Up:</b> <A NAME="tex2html243"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html237"
+ HREF="node10.html">5.2 console window object</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002600000000000000000">
+<SPAN CLASS="arabic">6</SPAN>. <tt>macdnr</tt> --
+         Interfaces to the Macintosh Domain Name Resolver.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides an interface to the Macintosh Domain Name
+Resolver.  It is usually used in conjunction with the <tt>mactcp</tt>
+module, to map hostnames to IP addresses.  It may not be available in
+all Mac Python versions.
+<a name="l2h-518"></a><a name="l2h-519"></a>
+<P>
+The <tt>macdnr</tt> module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-595"><tt>Open</tt></a></b> (<big>[</big><var>filename</var><big>]</big>)
+<dd>
+Open the domain name resolver extension.  If <i>filename</i> is given it
+should be the pathname of the extension, otherwise a default is
+used.  Normally, this call is not needed since the other calls will
+open the extension automatically.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-528"><tt>Close</tt></a></b> ()
+<dd>
+Close the resolver extension.  Again, not needed for normal use.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-532"><tt>StrToAddr</tt></a></b> (<var>hostname</var>)
+<dd>
+Look up the IP address for <i>hostname</i>.  This call returns a dnr
+result object of the ``address'' variation.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-537"><tt>AddrToName</tt></a></b> (<var>addr</var>)
+<dd>
+Do a reverse lookup on the 32-bit integer IP-address
+<i>addr</i>.  Returns a dnr result object of the ``address'' variation.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-542"><tt>AddrToStr</tt></a></b> (<var>addr</var>)
+<dd>
+Convert the 32-bit integer IP-address <i>addr</i> to a dotted-decimal
+string.  Returns the string.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-547"><tt>HInfo</tt></a></b> (<var>hostname</var>)
+<dd>
+Query the nameservers for a <tt>HInfo</tt> record for host
+<i>hostname</i>.  These records contain hardware and software
+information about the machine in question (if they are available in
+the first place).  Returns a dnr result object of the ``hinfo''
+variety.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-553"><tt>MXInfo</tt></a></b> (<var>domain</var>)
+<dd>
+Query the nameservers for a mail exchanger for <i>domain</i>.  This is
+the hostname of a host willing to accept SMTP<a name="l2h-555"></a> mail for the
+given domain.  Returns a dnr result object of the ``mx'' variety.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html248"
+ HREF="dnr-result-object.html"><SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN> dnr result object</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html246"
+ HREF="dnr-result-object.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html242"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html236"
+ HREF="node10.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html244"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html245"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html247"
+ HREF="dnr-result-object.html">6.1 dnr result object</A>
+<b>Up:</b> <A NAME="tex2html243"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html237"
+ HREF="node10.html">5.2 console window object</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

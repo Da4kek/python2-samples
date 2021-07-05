@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.5 Compilation Flags</TITLE>
+<META NAME="description" CONTENT="3.5 Compilation Flags">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="previous" HREF="node10.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node12.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html177"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html174"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html170"
+ HREF="node10.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html176"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html178"
+ HREF="node12.html">4. More Pattern Power</A>
+<b>Up:</b> <A NAME="tex2html175"
+ HREF="node6.html">3. Using Regular Expressions</A>
+<b>Previous:</b> <A NAME="tex2html171"
+ HREF="node10.html">3.4 Module-Level Functions</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000450000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN> Compilation Flags</A>
+</H2>
+
+<P>
+Compilation flags let you modify some aspects of how regular
+expressions work.  Flags are available in the <tt>re</tt> module under
+two names, a long name such as <tt>IGNORECASE</tt>, and a short,
+one-letter form such as <tt>I</tt>.  (If you're familiar with Perl's
+pattern modifiers, the one-letter forms use the same letters; the
+short form of <tt>re.VERBOSE</tt> is <tt>re.X</tt>.)  Multiple
+flags can be specified by bitwise OR-ing them;
+<tt>re.I | re.M</tt> sets both the <tt>I</tt> and <tt>M</tt> flags,
+for example.
+
+<P>
+Here's a table of the available flags, followed by
+a more detailed explanation of each one.
+
+<P>
+<table border align=center>
+  <tr><th><b>Flag</b></th>
+      <th align=left><b>Meaning</b></th>
+  <tr><td align=center><tt>DOTALL</tt>, <tt>S</tt></td>
+      <td>Make <tt>.</tt> match any
+  character, including newlines</td>
+  <tr><td align=center><tt>IGNORECASE</tt>, <tt>I</tt></td>
+      <td>Do case-insensitive matches</td>
+  <tr><td align=center><tt>LOCALE</tt>, <tt>L</tt></td>
+      <td>Do a locale-aware match</td>
+  <tr><td align=center><tt>MULTILINE</tt>, <tt>M</tt></td>
+      <td>Multi-line matching,
+  affecting <tt>^</tt> and <tt>$</tt></td>
+  <tr><td align=center><tt>VERBOSE</tt>, <tt>X</tt></td>
+      <td>Enable verbose REs,
+  which can be organized more cleanly and understandably.</td>
+
+</table>
+
+<P>
+<dl><dt><b><a name="l2h-334"><tt>I</tt></a></b>
+<dd>
+<dt><b><a name="l2h-335"><tt>IGNORECASE</tt></a></b><dd>
+Perform case-insensitive matching; character class and literal strings
+will match
+letters by ignoring case.  For example, <tt>[A-Z]</tt> will match
+lowercase letters, too, and <tt>Spam</tt> will match "<tt>Spam</tt>",
+"<tt>spam</tt>", or "<tt>spAM</tt>".<A NAME="tex2html1"
+ HREF="#foot752"><SUP><SPAN CLASS="arabic">1</SPAN></SUP></A>This doesn't take the current locale into account.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-348"><tt>L</tt></a></b>
+<dd>
+<dt><b><a name="l2h-349"><tt>LOCALE</tt></a></b><dd>
+Make <tt>&#92;w</tt>, <tt>&#92;W</tt>, <tt>&#92;b</tt>,
+and <tt>&#92;B</tt>, dependent on the current locale.  
+
+<P>
+Locales are a feature of the C library intended to help in writing
+programs that take account of language differences.  For example, if
+you're processing French text, you'd want to be able to write
+<tt>&#92;w+</tt> to match words, but <tt>&#92;w</tt> only matches the
+character class <tt>[A-Za-z]</tt>; it won't match "<tt>&#233;</tt>" or
+"<tt>&#231;</tt>".  If your system is configured properly, and a French
+locale is selected, certain C functions will tell the program that
+"<tt>&#233;</tt>" should also be considered a letter.  Setting the
+<tt>LOCALE</tt> flag when compiling a regular expression will cause the
+resulting compiled object to use these C functions for <tt>&#92;w</tt>;
+this is slower, but also enables <tt>&#92;w+</tt> to match French words as
+you'd expect.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-365"><tt>M</tt></a></b>
+<dd>
+<dt><b><a name="l2h-366"><tt>MULTILINE</tt></a></b><dd>
+Usually <tt>^</tt> matches only at the beginning of the string, and
+<tt>$</tt> only at the end of the string and immediately before the
+newline (if any) at the end of the string. When this flag is
+specified, <tt>^</tt> matches at the beginning of the string and at
+the beginning of each line within the string, immediately following
+each newline.  Similarly, the <tt>$</tt> metacharacter matches either at
+the end of the string and at the end of each line (immediately
+preceding each newline).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-373"><tt>S</tt></a></b>
+<dd>
+<dt><b><a name="l2h-374"><tt>DOTALL</tt></a></b><dd>
+Makes the "<tt>.</tt>" special character match any character at all,
+including a newline; without this flag, "<tt>.</tt>" will match
+anything <i>except</i> a newline.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-380"><tt>X</tt></a></b>
+<dd>
+<dt><b><a name="l2h-381"><tt>VERBOSE</tt></a></b><dd> This flag allows you to write regular expressions
+that are more readable, by giving you more flexibility in how you can
+format them.  When this flag has been specified, whitespace within the
+RE string is ignored, except when in a character class or preceded by an
+unescaped backslash; this lets you organize and indent the RE
+more clearly.  It also enables you to put comments within a RE;
+comments are marked by a "<tt>#</tt>" that's neither in a character
+class or preceded by an unescaped backslash.  Comments are simply
+ignored.
+
+<P>
+For example, here's a RE that uses <tt>re.VERBOSE</tt>; see how
+much easier it is to read?
+
+<P>
+<dl><dd><pre>
+charref = re.compile(r"""
+ &amp;#		     # Start of a numeric entity reference
+ (?P&lt;char&gt;      
+   [0-9]+[^0-9]      # Decimal form
+   | 0[0-7]+[^0-7]   # Octal form
+   | x[0-9a-fA-F]+[^0-9a-fA-F] # Hexadecimal form
+ )
+""", re.VERBOSE)
+</pre></dl>
+Without the verbose setting, the RE would look like this:
+<dl><dd><pre>
+charref = re.compile("&amp;#(?P&lt;char&gt;[0-9]+[^0-9]"
+                     "|0[0-7]+[^0-7]"
+                     "|x[0-9a-fA-F]+[^0-9a-fA-F])")
+</pre></dl>
+In the above example, Python's automatic concatenation of string literals has been used to
+break up the RE into smaller pieces, but it's still more difficult to
+understand than the version using <tt>re.VERBOSE</tt>.
+</dl>
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot752">...spAM.</A><A NAME="foot752"
+ HREF="node11.html#tex2html1"><SUP><SPAN CLASS="arabic">1</SPAN></SUP></A>
+<DD>"<tt>Spam</tt>", "<tt>spam</tt>",
+"<tt>spam</tt>", "<tt>spam</tt>", "<tt>spam</tt>", ...
+
+</DL><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html177"
+ HREF="node12.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html174"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html170"
+ HREF="node10.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html176"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html178"
+ HREF="node12.html">4. More Pattern Power</A>
+<b>Up:</b> <A NAME="tex2html175"
+ HREF="node6.html">3. Using Regular Expressions</A>
+<b>Previous:</b> <A NAME="tex2html171"
+ HREF="node10.html">3.4 Module-Level Functions</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

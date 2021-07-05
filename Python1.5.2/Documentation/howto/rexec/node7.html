@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4. Customizing the Restricted Environment</TITLE>
+<META NAME="description" CONTENT="4. Customizing the Restricted Environment">
+<META NAME="keywords" CONTENT="rexec">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="rexec.css">
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="up" HREF="rexec.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html97"
+ HREF="node8.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html94"
+ HREF="rexec.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html88"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Restricted Execution HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html96"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html98"
+ HREF="node8.html">5. References</A>
+<b>Up:</b> <A NAME="tex2html95"
+ HREF="rexec.html">Restricted Execution HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html89"
+ HREF="node6.html">3.2 Allowing Access to</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000500000000000000000">
+<SPAN CLASS="arabic">4</SPAN>. Customizing the Restricted Environment</A>
+</H1>
+
+<P>
+Often you'll wish to customize the restricted environment in various
+ways, most commonly by adding or subtracting variables or functions from
+the modules available.  At a more advanced level, you might wish to
+write replacements for existing functions; for example, a Web browser
+that executes Python applets would have an import function that allows
+retrieving modules via HTTP and importing them.
+
+<P>
+An easy way to add or remove functions is to create the <tt>RExec</tt>
+instance, get the namespace dictionary for the desired module, and add
+or delete the desired function.  For example, the <tt>RExec</tt> class
+provides a restricted <tt>open()</tt> that allows opening files for
+reading.  If you wish to disallow this, you can simply delete 'open'
+from the <tt>RExec</tt> instance's <tt>__builtin__</tt> module.
+
+<P>
+<dl><dd><pre>
+module = r_env.add_module('__builtin__')
+mod_dict = module.__dict__
+del mod_dict['open']
+</pre></dl>
+
+<P>
+(This isn't enough to prevent code from accessing the filesystem; 
+the <tt>RExec</tt> class also allows access 
+via some of the functions in the <tt>posix</tt> module, which is usually
+aliased to the <tt>os</tt> module.  See below for how to change this.)
+
+<P>
+This is fine if only a single function is being added or removed, but
+for more complicated changes, subclassing the <tt>RExec</tt> class is a
+better idea.
+
+<P>
+Subclassing can potentially be quite simple.  The <tt>RExec</tt> class
+defines some class attributes that are used to initialize the restricted
+versions of modules such as <tt>os</tt> and <tt>sys</tt>.  Changing the
+environment's policy then requires just changing the class attribute in
+your subclass.  For example, the default environment allows restricted
+code to use the <tt>posix</tt> module to get its process and group ID.  If
+you decide to disallow this, you can do it with the following custom
+class:
+
+<P>
+<dl><dd><pre>
+class MyRExec(rexec.RExec):
+    ok_posix_names = ('error', 'fstat', 'listdir', 'lstat', 'readlink',
+		      'stat', 'times', 'uname')
+</pre></dl>
+
+<P>
+More elaborate customizations may require overriding one of the methods
+called to create the corresponding module.  The functions to be
+overridden are <tt>make_builtin</tt>, <tt>make_main</tt>,
+<tt>make_osname</tt>, and <tt>make_sys</tt>.  The <tt>r_import</tt>,
+<tt>r_open</tt>, and <tt>r_reload</tt> methods are made available to
+restricted code, so by overriding these functions, you can change the
+capabilities available.
+
+<P>
+For example, defining a new import function requires overriding 
+<tt>r_import</tt>:
+
+<P>
+<dl><dd><pre>
+class MyRExec(rexec.RExec):
+    def r_import(self, mname, globals={}, locals={}, fromlist=[]):
+        raise ImportError, "No imports allowed--ever"
+</pre></dl>
+
+<P>
+Obviously, a less trivial function could import modules using HTTP or
+whatever.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html97"
+ HREF="node8.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html94"
+ HREF="rexec.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html88"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Restricted Execution HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html96"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html98"
+ HREF="node8.html">5. References</A>
+<b>Up:</b> <A NAME="tex2html95"
+ HREF="rexec.html">Restricted Execution HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html89"
+ HREF="node6.html">3.2 Allowing Access to</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

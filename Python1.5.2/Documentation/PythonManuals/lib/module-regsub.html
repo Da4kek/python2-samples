@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4.4 regsub --
+Substitution and splitting operations that use regular expressions.</TITLE>
+<META NAME="description" CONTENT="4.4 regsub --
+Substitution and splitting operations that use regular expressions.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-struct.html">
+<LINK REL="previous" HREF="module-regex.html">
+<LINK REL="up" HREF="strings.html">
+<LINK REL="next" HREF="module-struct.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1442"
+ HREF="module-struct.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1438"
+ HREF="strings.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1432"
+ HREF="Contents_of_Module_regex.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1440"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1441"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1443"
+ HREF="module-struct.html">4.5 struct  </A>
+<b>Up:</b> <A NAME="tex2html1439"
+ HREF="strings.html">4. String Services</A>
+<b>Previous:</b> <A NAME="tex2html1433"
+ HREF="Contents_of_Module_regex.html">4.3.2 Module Contents</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION006400000000000000000">
+<SPAN CLASS="arabic">4</SPAN>.<SPAN CLASS="arabic">4</SPAN> <tt>regsub</tt> --
+         Substitution and splitting operations that use regular expressions.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module defines a number of functions useful for working with
+regular expressions (see built-in module <tt>regex</tt>).
+
+<P>
+Warning: these functions are not thread-safe.
+
+<P>
+<b>Obsolescence note:</b>
+This module is obsolete as of Python version 1.5; it is still being
+maintained because much existing code still uses it.  All new code in
+need of regular expressions should use the new <tt>re</tt> module, which
+supports the more powerful and regular Perl-style regular expressions.
+Existing code should be converted.  The standard library module
+<tt>reconvert</tt> helps in converting <tt>regex</tt> style regular
+expressions to <tt>re</tt> style regular expressions.  (For more
+conversion help, see Andrew Kuchling's<a name="l2h-7609"></a>``regex-to-re HOWTO'' at
+<a href="http://www.python.org/doc/howto/regex-to-re/"><font face=sans-serif>http://www.python.org/doc/howto/regex-to-re/</font></a>.)
+
+<P>
+<dl><dt><b><a name="l2h-7613"><tt>sub</tt></a></b> (<var>pat, repl, str</var>)
+<dd>
+Replace the first occurrence of pattern <i>pat</i> in string
+<i>str</i> by replacement <i>repl</i>.  If the pattern isn't found,
+the string is returned unchanged.  The pattern may be a string or an
+already compiled pattern.  The replacement may contain references
+"<tt>&#92;<i>digit</i></tt>" to subpatterns and escaped backslashes.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-7621"><tt>gsub</tt></a></b> (<var>pat, repl, str</var>)
+<dd>
+Replace all (non-overlapping) occurrences of pattern <i>pat</i> in
+string <i>str</i> by replacement <i>repl</i>.  The same rules as for
+<tt>sub()</tt> apply.  Empty matches for the pattern are replaced only
+when not adjacent to a previous match, so e.g.
+<tt>gsub('', '-', 'abc')</tt> returns <tt>'-a-b-c-'</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-7661"><tt>split</tt></a></b> (<var>str, pat</var><big>[</big><var>, maxsplit</var><big>]</big>)
+<dd>
+Split the string <i>str</i> in fields separated by delimiters matching
+the pattern <i>pat</i>, and return a list containing the fields.  Only
+non-empty matches for the pattern are considered, so e.g.
+<tt>split('a:b', ':*')</tt> returns <tt>['a', 'b']</tt> and
+<tt>split('abc', '')</tt> returns <tt>['abc']</tt>.  The <i>maxsplit</i>
+defaults to 0. If it is nonzero, only <i>maxsplit</i> number of splits
+occur, and the remainder of the string is returned as the final
+element of the list.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-7662"><tt>splitx</tt></a></b> (<var>str, pat</var><big>[</big><var>, maxsplit</var><big>]</big>)
+<dd>
+Split the string <i>str</i> in fields separated by delimiters matching
+the pattern <i>pat</i>, and return a list containing the fields as well
+as the separators.  For example, <tt>splitx('a:::b', ':*')</tt> returns
+<tt>['a', ':::', 'b']</tt>.  Otherwise, this function behaves the same
+as <tt>split</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-7663"><tt>capwords</tt></a></b> (<var>s</var><big>[</big><var>, pat</var><big>]</big>)
+<dd>
+Capitalize words separated by optional pattern <i>pat</i>.  The default
+pattern uses any characters except letters, digits and underscores as
+word delimiters.  Capitalization is done by changing the first
+character of each word to upper case.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-7657"><tt>clear_cache</tt></a></b> ()
+<dd>
+The regsub module maintains a cache of compiled regular expressions,
+keyed on the regular expression string and the syntax of the regex
+module at the time the expression was compiled.  This function clears
+that cache.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1442"
+ HREF="module-struct.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1438"
+ HREF="strings.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1432"
+ HREF="Contents_of_Module_regex.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1440"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1441"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1443"
+ HREF="module-struct.html">4.5 struct  </A>
+<b>Up:</b> <A NAME="tex2html1439"
+ HREF="strings.html">4. String Services</A>
+<b>Previous:</b> <A NAME="tex2html1433"
+ HREF="Contents_of_Module_regex.html">4.3.2 Module Contents</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

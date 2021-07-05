@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>3.1 A Cookbook Approach </title>
+<META NAME="description" CONTENT="3.1 A Cookbook Approach ">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="ext.css">
+<LINK REL="next" href="dynamic-linking.html">
+<LINK REL="previous" href="building-on-windows.html">
+<LINK REL="up" href="building-on-windows.html">
+<LINK REL="next" href="dynamic-linking.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="building-on-windows.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="building-on-windows.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="dynamic-linking.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Extending and Embedding the Python Interpreter</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="building-on-windows.html">3. Building C and</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="building-on-windows.html">3. Building C and</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="dynamic-linking.html">3.2 Differences Between Unix</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1>
+<BR>
+3.1 A Cookbook Approach 
+</H1>
+
+<P>
+
+<P>
+This section provides a recipe for building a Python extension on
+Windows.
+
+<P>
+Grab the binary installer from <a class="url" href="http://www.python.org/">http://www.python.org/ <img src='../icons/offsite.gif'
+  border='0' class='offsitelink' height='15' width='17' alt='[off-site link]'
+  ></a> and
+install Python.  The binary installer has all of the required header
+files except for <span class="file">config.h</span>.
+
+<P>
+Get the source distribution and extract it into a convenient location.
+Copy the <span class="file">config.h</span> from the <span class="file">PC/</span> directory into the
+<span class="file">include/</span> directory created by the installer.
+
+<P>
+Create a <span class="file">Setup</span> file for your extension module, as described in
+chapter <A href="building-on-unix.html#building-on-unix">2</A>.
+
+<P>
+Get David Ascher's <span class="file">compile.py</span> script from
+<a class="url" href="http://starship.python.net/crew/da/compile/">http://starship.python.net/crew/da/compile/ <img src='../icons/offsite.gif'
+  border='0' class='offsitelink' height='15' width='17' alt='[off-site link]'
+  ></a>.  Run the script to
+create Microsoft Visual C++ project files.
+
+<P>
+Open the DSW file in Visual C++ and select <b>Build</b>.
+
+<P>
+If your module creates a new type, you may have trouble with this line:
+
+<P>
+<dl><dd><pre class="verbatim">
+    PyObject_HEAD_INIT(&amp;PyType_Type)
+</pre></dl>
+
+<P>
+Change it to:
+
+<P>
+<dl><dd><pre class="verbatim">
+    PyObject_HEAD_INIT(NULL)
+</pre></dl>
+
+<P>
+and add the following to the module initialization function:
+
+<P>
+<dl><dd><pre class="verbatim">
+    MyObject_Type.ob_type = &amp;PyType_Type;
+</pre></dl>
+
+<P>
+Refer to section 3 of the Python FAQ
+(<a class="url" href="http://www.python.org/doc/FAQ.html">http://www.python.org/doc/FAQ.html <img src='../icons/offsite.gif'
+  border='0' class='offsitelink' height='15' width='17' alt='[off-site link]'
+  ></a>) for details on why you must
+do this.
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="building-on-windows.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="building-on-windows.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="dynamic-linking.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Extending and Embedding the Python Interpreter</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="building-on-windows.html">3. Building C and</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="building-on-windows.html">3. Building C and</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="dynamic-linking.html">3.2 Differences Between Unix</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

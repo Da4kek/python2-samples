@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>13.4.2 Expat error constants </title>
+<META NAME="description" CONTENT="13.4.2 Expat error constants ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="lib.css">
+<LINK REL="previous" href="expat-example.html">
+<LINK REL="up" href="module-xml.parsers.expat.html">
+<LINK REL="next" href="module-xml.sax.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="expat-example.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="module-xml.parsers.expat.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="module-xml.sax.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="expat-example.html">13.4.1 Example</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="module-xml.parsers.expat.html">13.4 xml.parsers.expat  </A>
+<b class="navlabel">Next:</b> <a class="sectref" href="module-xml.sax.html">13.5 xml.sax  </A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+13.4.2 Expat error constants 
+</H2>
+
+<P>
+The following table lists the error constants in the
+<code>errors</code> object of the <tt class="module">xml.parsers.expat</tt> module.  These
+constants are useful in interpreting some of the attributes of the
+parser object after an error has occurred.
+
+<P>
+The <code>errors</code> object has the following attributes:
+
+<P>
+<dl><dt><b><a name='l2h-2621'><tt>XML_ERROR_ASYNC_ENTITY</tt></a></b>
+<dd>
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2622'><tt>XML_ERROR_ATTRIBUTE_EXTERNAL_ENTITY_REF</tt></a></b>
+<dd>
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2623'><tt>XML_ERROR_BAD_CHAR_REF</tt></a></b>
+<dd>
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2624'><tt>XML_ERROR_BINARY_ENTITY_REF</tt></a></b>
+<dd>
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2625'><tt>XML_ERROR_DUPLICATE_ATTRIBUTE</tt></a></b>
+<dd>
+An attribute was used more than once in a start tag.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2626'><tt>XML_ERROR_INCORRECT_ENCODING</tt></a></b>
+<dd>
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2627'><tt>XML_ERROR_INVALID_TOKEN</tt></a></b>
+<dd>
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2628'><tt>XML_ERROR_JUNK_AFTER_DOC_ELEMENT</tt></a></b>
+<dd>
+Something other than whitespace occurred after the document element.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2629'><tt>XML_ERROR_MISPLACED_XML_PI</tt></a></b>
+<dd>
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2630'><tt>XML_ERROR_NO_ELEMENTS</tt></a></b>
+<dd>
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2631'><tt>XML_ERROR_NO_MEMORY</tt></a></b>
+<dd>
+Expat was not able to allocate memory internally.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2632'><tt>XML_ERROR_PARAM_ENTITY_REF</tt></a></b>
+<dd>
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2633'><tt>XML_ERROR_PARTIAL_CHAR</tt></a></b>
+<dd>
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2634'><tt>XML_ERROR_RECURSIVE_ENTITY_REF</tt></a></b>
+<dd>
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2635'><tt>XML_ERROR_SYNTAX</tt></a></b>
+<dd>
+Some unspecified syntax error was encountered.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2636'><tt>XML_ERROR_TAG_MISMATCH</tt></a></b>
+<dd>
+An end tag did not match the innermost open start tag.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2637'><tt>XML_ERROR_UNCLOSED_TOKEN</tt></a></b>
+<dd>
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2638'><tt>XML_ERROR_UNDEFINED_ENTITY</tt></a></b>
+<dd>
+A reference was made to a entity which was not defined.
+</dl>
+
+<P>
+<dl><dt><b><a name='l2h-2639'><tt>XML_ERROR_UNKNOWN_ENCODING</tt></a></b>
+<dd>
+The document encoding is not supported by Expat.
+</dl>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="expat-example.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="module-xml.parsers.expat.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="module-xml.sax.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="expat-example.html">13.4.1 Example</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="module-xml.parsers.expat.html">13.4 xml.parsers.expat  </A>
+<b class="navlabel">Next:</b> <a class="sectref" href="module-xml.sax.html">13.5 xml.sax  </A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

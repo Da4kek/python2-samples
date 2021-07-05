@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2.1.6 Mapping Types </TITLE>
+<META NAME="description" CONTENT="2.1.6 Mapping Types ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="typesother.html">
+<LINK REL="previous" HREF="typesseq.html">
+<LINK REL="up" HREF="types.html">
+<LINK REL="next" HREF="typesother.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html679"
+ HREF="typesother.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html675"
+ HREF="types.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html669"
+ HREF="node13.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html677"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html678"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html680"
+ HREF="typesother.html">2.1.7 Other Built-in Types</A>
+<b>Up:</b> <A NAME="tex2html676"
+ HREF="types.html">2.1 Built-in Types</A>
+<b>Previous:</b> <A NAME="tex2html670"
+ HREF="node13.html">2.1.5.2 Mutable Sequence Types</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION004160000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">6</SPAN> Mapping Types 
+</H2>
+
+<P>
+A <i>mapping</i> object maps values of one type (the key type) to
+arbitrary objects.  Mappings are mutable objects.  There is currently
+only one standard mapping type, the <i>dictionary</i>.  A dictionary's keys are
+almost arbitrary values.  The only types of values not acceptable as
+keys are values containing lists or dictionaries or other mutable
+types that are compared by value rather than by object identity.
+Numeric types used for keys obey the normal rules for numeric
+comparison: if two numbers compare equal (e.g. <tt>1</tt> and
+<tt>1.0</tt>) then they can be used interchangeably to index the same
+dictionary entry.
+
+<P>
+<a name="l2h-782"></a>
+<a name="l2h-784"></a>
+
+<P>
+Dictionaries are created by placing a comma-separated list of
+<tt><i>key</i>: <i>value</i></tt> pairs within braces, for example:
+<tt>{'jack': 4098, 'sjoerd': 4127}</tt> or
+<tt>{4098: 'jack', 4127: 'sjoerd'}</tt>.
+
+<P>
+The following operations are defined on mappings (where <i>a</i> is a
+mapping, <i>k</i> is a key and <i>x</i> is an arbitrary object):
+
+<P>
+<table border align=center>
+  <tr><th><b>Operation</b></th>
+      <th align=left><b>Result</b></th>
+      <th><b>Notes</b></th>
+  <tr><td align=center><code>len(<i>a</i>)</code></td>
+      <td>the number of items in <i>a</i></td>
+      
+  <tr><td align=center><code><i>a</i>[<i>k</i>]</code></td>
+      <td>the item of <i>a</i> with key <i>k</i></td>
+      <td align=center>(1)</td>
+  <tr><td align=center><code><i>a</i>[<i>k</i>] = <i>x</i></code></td>
+      <td>set <tt><i>a</i>[<i>k</i>]</tt> to <i>x</i></td>
+      
+  <tr><td align=center><code>del <i>a</i>[<i>k</i>]</code></td>
+      <td>remove <tt><i>a</i>[<i>k</i>]</tt> from <i>a</i></td>
+      <td align=center>(1)</td>
+  <tr><td align=center><code><i>a</i>.clear()</code></td>
+      <td>remove all items from <tt>a</tt></td>
+      
+  <tr><td align=center><code><i>a</i>.copy()</code></td>
+      <td>a (shallow) copy of <tt>a</tt></td>
+      
+  <tr><td align=center><code><i>a</i>.has_key(<i>k</i>)</code></td>
+      <td><tt>1</tt> if <i>a</i> has a key <i>k</i>, else <tt>0</tt></td>
+      
+  <tr><td align=center><code><i>a</i>.items()</code></td>
+      <td>a copy of <i>a</i>'s list of (<i>key</i>, <i>value</i>) pairs</td>
+      <td align=center>(2)</td>
+  <tr><td align=center><code><i>a</i>.keys()</code></td>
+      <td>a copy of <i>a</i>'s list of keys</td>
+      <td align=center>(2)</td>
+  <tr><td align=center><code><i>a</i>.update(<i>b</i>)</code></td>
+      <td><tt>for k, v in <i>b</i>.items(): <i>a</i>[k] = v</tt></td>
+      <td align=center>(3)</td>
+  <tr><td align=center><code><i>a</i>.values()</code></td>
+      <td>a copy of <i>a</i>'s list of values</td>
+      <td align=center>(2)</td>
+  <tr><td align=center><code><i>a</i>.get(<i>k</i></var><big>[</big><var>, <i>f</i></var><big>]</big><var>)</code></td>
+      <td>the value of <i>a</i> with key <i>k</i></td>
+      <td align=center>(4)</td>
+
+</table>
+<a name="l2h-"></a>
+<a name="l2h-"></a>
+<a name="l2h-"></a><a name="l2h-"></a><a name="l2h-865"></a>30
+<a name="l2h-866"></a>31
+<a name="l2h-867"></a>32
+<a name="l2h-868"></a>33
+<a name="l2h-869"></a>34
+<a name="l2h-870"></a>35
+<a name="l2h-871"></a>36
+<a name="l2h-872"></a>37
+
+Notes:
+<DL>
+<DT><STRONG>(1)</STRONG>
+<DD>Raises an exception if <i>k</i> is not in the map.
+
+<P>
+<DT><STRONG>(2)</STRONG>
+<DD>Keys and values are listed in random order.
+
+<P>
+<DT><STRONG>(3)</STRONG>
+<DD><i>b</i> must be of the same type as <i>a</i>.
+
+<P>
+<DT><STRONG>(4)</STRONG>
+<DD>Never raises an exception if <i>k</i> is not in the map,
+instead it returns <i>f</i>.  <i>f</i> is optional, when not provided
+and <i>k</i> is not in the map, <tt>None</tt> is returned.
+</DL>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html679"
+ HREF="typesother.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html675"
+ HREF="types.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html669"
+ HREF="node13.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html677"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html678"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html680"
+ HREF="typesother.html">2.1.7 Other Built-in Types</A>
+<b>Up:</b> <A NAME="tex2html676"
+ HREF="types.html">2.1 Built-in Types</A>
+<b>Previous:</b> <A NAME="tex2html670"
+ HREF="node13.html">2.1.5.2 Mutable Sequence Types</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

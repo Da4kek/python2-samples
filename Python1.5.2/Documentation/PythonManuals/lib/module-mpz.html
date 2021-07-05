@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>15.2 mpz --
+GNU MP library for arbitrary precision arithmetic.</TITLE>
+<META NAME="description" CONTENT="15.2 mpz --
+GNU MP library for arbitrary precision arithmetic.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-rotor.html">
+<LINK REL="previous" HREF="module-md5.html">
+<LINK REL="up" HREF="crypto.html">
+<LINK REL="next" HREF="module-rotor.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3378"
+ HREF="module-rotor.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3374"
+ HREF="crypto.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3368"
+ HREF="module-md5.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3376"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3377"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3379"
+ HREF="module-rotor.html">15.3 rotor  </A>
+<b>Up:</b> <A NAME="tex2html3375"
+ HREF="crypto.html">15. Cryptographic Services</A>
+<b>Previous:</b> <A NAME="tex2html3369"
+ HREF="module-md5.html">15.1 md5  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0017200000000000000000">
+<SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>mpz</tt> --
+         GNU MP library for arbitrary precision arithmetic.</A>
+</H1>
+
+
+<P>
+
+<P>
+This is an optional module.  It is only available when Python is
+configured to include it, which requires that the GNU MP software is
+installed.
+<a name="l2h-21810"></a><a name="l2h-21811"></a><a name="l2h-21812"></a>
+<P>
+This module implements the interface to part of the GNU MP library,
+which defines arbitrary precision integer and rational number
+arithmetic routines.  Only the interfaces to the <i>integer</i>
+(<tt>mpz_*()</tt>) routines are provided. If not stated
+otherwise, the description in the GNU MP documentation can be applied.
+
+<P>
+Support for rational numbers<a name="l2h-21815"></a> can be
+implemented in Python.  For an example, see the <tt>Rat</tt>507
+<a name="l2h-21818"></a> module, provided as
+"<tt>Demos/classes/Rat.py</tt>" in the Python source distribution.
+
+<P>
+In general, <i>mpz</i>-numbers can be used just like other standard
+Python numbers, e.g., you can use the built-in operators like <tt>+</tt>,
+<tt>*</tt>, etc., as well as the standard built-in functions like
+<tt>abs()</tt>, <tt>int()</tt>, ..., <tt>divmod()</tt>,
+<tt>pow()</tt>.  <b>Please note:</b> the <i>bitwise-xor</i>
+operation has been implemented as a bunch of <i>and</i>s,
+<i>invert</i>s and <i>or</i>s, because the library lacks an
+<tt>mpz_xor()</tt> function, and I didn't need one.
+
+<P>
+You create an mpz-number by calling the function <tt>mpz()</tt> (see
+below for an exact description). An mpz-number is printed like this:
+<tt>mpz(<i>value</i>)</tt>.
+
+<P>
+<dl><dt><b><a name="l2h-21837"><tt>mpz</tt></a></b> (<var>value</var>)
+<dd>
+  Create a new mpz-number. <i>value</i> can be an integer, a long,
+  another mpz-number, or even a string. If it is a string, it is
+  interpreted as an array of radix-256 digits, least significant digit
+  first, resulting in a positive number. See also the <tt>binary()</tt>
+  method, described below.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21842"><tt>MPZType</tt></a></b>
+<dd>
+  The type of the objects returned by <tt>mpz()</tt> and most other
+  functions in this module.
+</dl>
+
+<P>
+A number of <i>extra</i> functions are defined in this module. Non
+mpz-arguments are converted to mpz-values first, and the functions
+return mpz-numbers.
+
+<P>
+<dl><dt><b><a name="l2h-21848"><tt>powm</tt></a></b> (<var>base, exponent, modulus</var>)
+<dd>
+  Return <tt>pow(<i>base</i>, <i>exponent</i>) % <i>modulus</i></tt>. If
+  <tt><i>exponent</i> == 0</tt>, return <tt>mpz(1)</tt>. In contrast to the
+  C library function, this version can handle negative exponents.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21859"><tt>gcd</tt></a></b> (<var>op1, op2</var>)
+<dd>
+  Return the greatest common divisor of <i>op1</i> and <i>op2</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21865"><tt>gcdext</tt></a></b> (<var>a, b</var>)
+<dd>
+  Return a tuple <tt>(<i>g</i>, <i>s</i>, <i>t</i>)</tt>, such that
+  <tt><i>a</i>*<i>s</i> + <i>b</i>*<i>t</i> == <i>g</i> == gcd(<i>a</i>, <i>b</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21879"><tt>sqrt</tt></a></b> (<var>op</var>)
+<dd>
+  Return the square root of <i>op</i>. The result is rounded towards zero.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21884"><tt>sqrtrem</tt></a></b> (<var>op</var>)
+<dd>
+  Return a tuple <tt>(<i>root</i>, <i>remainder</i>)</tt>, such that
+  <tt><i>root</i>*<i>root</i> + <i>remainder</i> == <i>op</i></tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21894"><tt>divm</tt></a></b> (<var>numerator, denominator, modulus</var>)
+<dd>
+  Returns a number <i>q</i> such that
+  <tt><i>q</i> * <i>denominator</i> % <i>modulus</i> ==
+  <i>numerator</i></tt>.  One could also implement this function in Python,
+  using <tt>gcdext()</tt>.
+</dl>
+
+<P>
+An mpz-number has one method:
+
+<P>
+<dl><dt><b><a name="l2h-21904"><tt>binary</tt></a></b> ()
+<dd>
+  Convert this mpz-number to a binary string, where the number has been
+  stored as an array of radix-256 digits, least significant digit first.
+
+<P>
+The mpz-number must have a value greater than or equal to zero,
+  otherwise <tt>ValueError</tt> will be raised.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3378"
+ HREF="module-rotor.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3374"
+ HREF="crypto.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3368"
+ HREF="module-md5.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3376"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3377"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3379"
+ HREF="module-rotor.html">15.3 rotor  </A>
+<b>Up:</b> <A NAME="tex2html3375"
+ HREF="crypto.html">15. Cryptographic Services</A>
+<b>Previous:</b> <A NAME="tex2html3369"
+ HREF="module-md5.html">15.1 md5  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

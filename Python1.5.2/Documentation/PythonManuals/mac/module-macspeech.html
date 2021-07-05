@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>13. macspeech --
+Interface to the Macintosh Speech Manager.</TITLE>
+<META NAME="description" CONTENT="13. macspeech --
+Interface to the Macintosh Speech Manager.">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="module-EasyDialogs.html">
+<LINK REL="previous" HREF="module-mactcp.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="voice-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html426"
+ HREF="voice-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html422"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html416"
+ HREF="node25.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html424"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html425"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html427"
+ HREF="voice-objects.html">13.1 Voice Objects</A>
+<b>Up:</b> <A NAME="tex2html423"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html417"
+ HREF="node25.html">12.3 UDP Stream Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0021300000000000000000">
+<SPAN CLASS="arabic">13</SPAN>. <tt>macspeech</tt> --
+         Interface to the Macintosh Speech Manager.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module provides an interface to the Macintosh Speech Manager,
+<a name="l2h-1549"></a><a name="l2h-1550"></a>allowing you to let the Macintosh utter phrases. You need a version of
+the Speech Manager extension (version 1 and 2 have been tested) in
+your "<tt>Extensions</tt>" folder for this to work. The module does not
+provide full access to all features of the Speech Manager yet.  It may
+not be available in all Mac Python versions.
+
+<P>
+<dl><dt><b><a name="l2h-1554"><tt>Available</tt></a></b> ()
+<dd>
+Test availability of the Speech Manager extension (and, on the
+PowerPC, the Speech Manager shared library). Return <tt>0</tt> or
+<tt>1</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1560"><tt>Version</tt></a></b> ()
+<dd>
+Return the (integer) version number of the Speech Manager.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1564"><tt>SpeakString</tt></a></b> (<var>str</var>)
+<dd>
+Utter the string <i>str</i> using the default voice,
+asynchronously. This aborts any speech that may still be active from
+prior <tt>SpeakString()</tt> invocations.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1570"><tt>Busy</tt></a></b> ()
+<dd>
+Return the number of speech channels busy, system-wide.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1574"><tt>CountVoices</tt></a></b> ()
+<dd>
+Return the number of different voices available.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1578"><tt>GetIndVoice</tt></a></b> (<var>num</var>)
+<dd>
+Return a Voice object for voice number <i>num</i>.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html428"
+ HREF="voice-objects.html"><SPAN CLASS="arabic">13</SPAN>.<SPAN CLASS="arabic">1</SPAN> Voice Objects</A>
+<LI><A NAME="tex2html429"
+ HREF="speech-channel-objects.html"><SPAN CLASS="arabic">13</SPAN>.<SPAN CLASS="arabic">2</SPAN> Speech Channel Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html426"
+ HREF="voice-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html422"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html416"
+ HREF="node25.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html424"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html425"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html427"
+ HREF="voice-objects.html">13.1 Voice Objects</A>
+<b>Up:</b> <A NAME="tex2html423"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html417"
+ HREF="node25.html">12.3 UDP Stream Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

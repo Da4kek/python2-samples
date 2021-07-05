@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1.10.4 NULL Pointers</TITLE>
+<META NAME="description" CONTENT="1.10.4 NULL Pointers">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ext.css">
+<LINK REL="previous" HREF="thinIce.html">
+<LINK REL="up" HREF="refcounts.html">
+<LINK REL="next" HREF="cplusplus.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html258"
+ HREF="cplusplus.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html255"
+ HREF="refcounts.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html251"
+ HREF="thinIce.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html257"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html259"
+ HREF="cplusplus.html">1.11 Writing Extensions in</A>
+<b>Up:</b> <A NAME="tex2html256"
+ HREF="refcounts.html">1.10 Reference Counts</A>
+<b>Previous:</b> <A NAME="tex2html252"
+ HREF="thinIce.html">1.10.3 Thin Ice</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0031040000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">4</SPAN> NULL Pointers
+</H2>
+
+<P>
+In general, functions that take object references as arguments do not
+expect you to pass them <tt>NULL</tt> pointers, and will dump core (or
+cause later core dumps) if you do so.  Functions that return object
+references generally return <tt>NULL</tt> only to indicate that an
+exception occurred.  The reason for not testing for <tt>NULL</tt>
+arguments is that functions often pass the objects they receive on to
+other function -- if each function were to test for <tt>NULL</tt>,
+there would be a lot of redundant tests and the code would run slower.
+
+<P>
+It is better to test for <tt>NULL</tt> only at the ``source'', i.e. when a pointer that may be <tt>NULL</tt> is received, e.g. from
+<tt>malloc()</tt> or from a function that may raise an exception.
+
+<P>
+The macros <tt>Py_INCREF()</tt> and <tt>Py_DECREF()</tt>
+do not check for <tt>NULL</tt> pointers -- however, their variants
+<tt>Py_XINCREF()</tt> and <tt>Py_XDECREF()</tt> do.
+
+<P>
+The macros for checking for a particular object type
+(<tt>Py<i>type</i>_Check()</tt>) don't check for <tt>NULL</tt> pointers --
+again, there is much code that calls several of these in a row to test
+an object against various different expected types, and this would
+generate redundant tests.  There are no variants with <tt>NULL</tt>
+checking.
+
+<P>
+The C function calling mechanism guarantees that the argument list
+passed to C functions (<tt>args</tt> in the examples) is never
+<tt>NULL</tt> -- in fact it guarantees that it is always a tuple.<A NAME="tex2html4"
+ HREF="#foot630"><SUP><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN></SUP></A>
+<P>
+It is a severe error to ever let a <tt>NULL</tt> pointer ``escape'' to
+the Python user.  
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot630">...11</A><A NAME="foot630"
+ HREF="nullPointers.html#tex2html4"><SUP><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">4</SPAN></SUP></A>
+<DD>These guarantees don't hold when you use the ``old'' style
+calling convention -- this is still found in much existing code.
+
+</DL><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html258"
+ HREF="cplusplus.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html255"
+ HREF="refcounts.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html251"
+ HREF="thinIce.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html257"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html259"
+ HREF="cplusplus.html">1.11 Writing Extensions in</A>
+<b>Up:</b> <A NAME="tex2html256"
+ HREF="refcounts.html">1.10 Reference Counts</A>
+<b>Previous:</b> <A NAME="tex2html252"
+ HREF="thinIce.html">1.10.3 Thin Ice</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

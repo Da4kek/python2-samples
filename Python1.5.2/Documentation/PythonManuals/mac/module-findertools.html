@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11. findertools --
+Wrappers around the finder's Apple Events interface.</TITLE>
+<META NAME="description" CONTENT="11. findertools --
+Wrappers around the finder's Apple Events interface.">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="module-mactcp.html">
+<LINK REL="previous" HREF="module-macostools.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="module-mactcp.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html365"
+ HREF="module-mactcp.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html361"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html355"
+ HREF="module-macostools.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html363"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html364"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html366"
+ HREF="module-mactcp.html">12. mactcp  </A>
+<b>Up:</b> <A NAME="tex2html362"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html356"
+ HREF="module-macostools.html">10. macostools  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0021100000000000000000">
+<SPAN CLASS="arabic">11</SPAN>. <tt>findertools</tt> --
+         Wrappers around the <b>finder</b>'s Apple Events interface.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module contains routines that give Python programs access to some
+functionality provided by the finder. They are implemented as wrappers
+around the AppleEvent<a name="l2h-1238"></a> interface to the finder.
+
+<P>
+All file and folder parameters can be specified either as full
+pathnames or as FSSpec objects.
+
+<P>
+The <tt>findertools</tt> module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-1243"><tt>launch</tt></a></b> (<var>file</var>)
+<dd>
+Tell the finder to launch <i>file</i>. What launching means depends on the file:
+applications are started, folders are opened and documents are opened
+in the correct application.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1248"><tt>Print</tt></a></b> (<var>file</var>)
+<dd>
+Tell the finder to print a file (again specified by full pathname or
+FSSpec). The behaviour is identical to selecting the file and using
+the print command in the finder.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1253"><tt>copy</tt></a></b> (<var>file, destdir</var>)
+<dd>
+Tell the finder to copy a file or folder <i>file</i> to folder
+<i>destdir</i>. The function returns an Alias object pointing to
+the new file.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1260"><tt>move</tt></a></b> (<var>file, destdir</var>)
+<dd>
+Tell the finder to move a file or folder <i>file</i> to folder
+<i>destdir</i>. The function returns an Alias object pointing to
+the new file.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1267"><tt>sleep</tt></a></b> ()
+<dd>
+Tell the finder to put the Macintosh to sleep, if your machine
+supports it.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1271"><tt>restart</tt></a></b> ()
+<dd>
+Tell the finder to perform an orderly restart of the machine.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1275"><tt>shutdown</tt></a></b> ()
+<dd>
+Tell the finder to perform an orderly shutdown of the machine.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html365"
+ HREF="module-mactcp.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html361"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html355"
+ HREF="module-macostools.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html363"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html364"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html366"
+ HREF="module-mactcp.html">12. mactcp  </A>
+<b>Up:</b> <A NAME="tex2html362"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html356"
+ HREF="module-macostools.html">10. macostools  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

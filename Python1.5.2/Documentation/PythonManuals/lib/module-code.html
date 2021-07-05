@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.18 code --
+Code object services.</TITLE>
+<META NAME="description" CONTENT="3.18 code --
+Code object services.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-pprint.html">
+<LINK REL="previous" HREF="module-keyword.html">
+<LINK REL="up" HREF="python.html">
+<LINK REL="next" HREF="module-pprint.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1192"
+ HREF="module-pprint.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1188"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1182"
+ HREF="module-keyword.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1190"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1191"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1193"
+ HREF="module-pprint.html">3.19 pprint  </A>
+<b>Up:</b> <A NAME="tex2html1189"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html1183"
+ HREF="module-keyword.html">3.17 keyword  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0051800000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">18</SPAN> <tt>code</tt> --
+         Code object services.</A>
+</H1>
+
+
+<P>
+
+<P>
+The <tt>code</tt> module defines operations pertaining to Python code
+objects.
+
+<P>
+The <tt>code</tt> module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-5024"><tt>compile_command</tt></a></b> (<var>source, </var><big>[</big><var>filename</var><big>[</big><var>, symbol</var><big>]</big><big>]</big>)
+<dd>
+This function is useful for programs that want to emulate Python's
+interpreter main loop (a.k.a. the read-eval-print loop).  The tricky
+part is to determine when the user has entered an incomplete command
+that can be completed by entering more text (as opposed to a complete
+command or a syntax error).  This function <i>almost</i> always makes
+the same decision as the real interpreter main loop.
+
+<P>
+Arguments: <i>source</i> is the source string; <i>filename</i> is the
+optional filename from which source was read, defaulting to
+<tt>"&lt;input&gt;"</tt>; and <i>symbol</i> is the optional grammar start
+symbol, which should be either <tt>"single"</tt> (the default) or
+<tt>"eval"</tt>.
+
+<P>
+Return a code object (the same as <tt>compile(<i>source</i>,
+<i>filename</i>, <i>symbol</i>)</tt>) if the command is complete and valid;
+return <tt>None</tt> if the command is incomplete; raise
+<tt>SyntaxError</tt> if the command is a syntax error.
+
+<P>
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1192"
+ HREF="module-pprint.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1188"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1182"
+ HREF="module-keyword.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1190"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1191"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1193"
+ HREF="module-pprint.html">3.19 pprint  </A>
+<b>Up:</b> <A NAME="tex2html1189"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html1183"
+ HREF="module-keyword.html">3.17 keyword  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

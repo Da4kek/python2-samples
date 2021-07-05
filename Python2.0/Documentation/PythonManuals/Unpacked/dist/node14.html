@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>3.3.4 Library options</title>
+<META NAME="description" CONTENT="3.3.4 Library options">
+<META NAME="keywords" CONTENT="dist">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="dist.css">
+<LINK REL="previous" HREF="node13.html">
+<LINK REL="up" href="describing-extensions.html">
+<LINK REL="next" href="setup-config.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A HREF="node13.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="describing-extensions.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="setup-config.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" HREF="node13.html">3.3.3 Preprocessor options</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="describing-extensions.html">3.3 Describing extension modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="setup-config.html">4 Writing the Setup</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION000434000000000000000">
+3.3.4 Library options</A>
+</H3>
+
+<P>
+You can also specify the libraries to link against when building your
+extension, and the directories to search for those libraries.  The
+<code>libraries</code> option is a list of libraries to link against,
+<code>library_dirs</code> is a list of directories to search for libraries at 
+link-time, and <code>runtime_library_dirs</code> is a list of directories to 
+search for shared (dynamically loaded) libraries at run-time.
+
+<P>
+For example, if you need to link against libraries known to be in the
+standard library search path on target systems
+<dl><dd><pre class="verbatim">
+Extension(...,
+          libraries=["gdbm", "readline"])
+</pre></dl>
+
+<P>
+If you need to link with libraries in a non-standard location, you'll
+have to include the location in <code>library_dirs</code>:
+<dl><dd><pre class="verbatim">
+Extension(...,
+          library_dirs=["/usr/X11R6/lib"],
+          libraries=["X11", "Xt"])
+</pre></dl>
+(Again, this sort of non-portable construct should be avoided if you
+intend to distribute your code.)
+
+<P>
+<b>** still undocumented: extra_objects, extra_compile_args,
+  extra_link_args, export_symbols--none of which are frequently
+  needed, some of which might be completely unnecessary! **</b>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A HREF="node13.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="describing-extensions.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="setup-config.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" HREF="node13.html">3.3.3 Preprocessor options</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="describing-extensions.html">3.3 Describing extension modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="setup-config.html">4 Writing the Setup</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

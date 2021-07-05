@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>17.1.1 Audio Device Objects</TITLE>
+<META NAME="description" CONTENT="17.1.1 Audio Device Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-sunaudiodev.html">
+<LINK REL="up" HREF="module-sunaudiodev.html">
+<LINK REL="next" HREF="undoc.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3650"
+ HREF="undoc.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3646"
+ HREF="module-sunaudiodev.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3642"
+ HREF="module-sunaudiodev.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3648"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3649"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3651"
+ HREF="undoc.html">18. Undocumented Modules</A>
+<b>Up:</b> <A NAME="tex2html3647"
+ HREF="module-sunaudiodev.html">17.1 sunaudiodev  </A>
+<b>Previous:</b> <A NAME="tex2html3643"
+ HREF="module-sunaudiodev.html">17.1 sunaudiodev  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0019110000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">17</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Audio Device Objects
+</H2>
+
+<P>
+The audio device objects are returned by <tt>open()</tt> define the
+following methods (except <tt>control</tt> objects which only provide
+<tt>getinfo()</tt>, <tt>setinfo()</tt> and <tt>drain()</tt>):
+
+<P>
+<dl><dt><b><a name="l2h-23665"><tt>close</tt></a></b> ()
+<dd>
+This method explicitly closes the device. It is useful in situations
+where deleting the object does not immediately close it since there
+are other references to it. A closed device should not be used again.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23669"><tt>drain</tt></a></b> ()
+<dd>
+This method waits until all pending output is processed and then returns.
+Calling this method is often not necessary: destroying the object will
+automatically close the audio device and this will do an implicit drain.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23673"><tt>flush</tt></a></b> ()
+<dd>
+This method discards all pending output. It can be used avoid the
+slow response to a user's stop request (due to buffering of up to one
+second of sound).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23677"><tt>getinfo</tt></a></b> ()
+<dd>
+This method retrieves status information like input and output volume,
+etc. and returns it in the form of
+an audio status object. This object has no methods but it contains a
+number of attributes describing the current device status. The names
+and meanings of the attributes are described in
+"<tt>/usr/include/sun/audioio.h</tt>" and in the <i>audio</i>(7I)
+manual page.  Member names
+are slightly different from their C counterparts: a status object is
+only a single structure. Members of the <tt>play</tt> substructure have
+"<tt>o_</tt>" prepended to their name and members of the <tt>record</tt>
+structure have "<tt>i_</tt>". So, the C member <tt>play.sample_rate</tt> is
+accessed as <tt>o_sample_rate</tt>, <tt>record.gain</tt> as <tt>i_gain</tt>
+and <tt>monitor_gain</tt> plainly as <tt>monitor_gain</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23696"><tt>ibufcount</tt></a></b> ()
+<dd>
+This method returns the number of samples that are buffered on the
+recording side, i.e. the program will not block on a
+<tt>read()</tt> call of so many samples.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23701"><tt>obufcount</tt></a></b> ()
+<dd>
+This method returns the number of samples buffered on the playback
+side. Unfortunately, this number cannot be used to determine a number
+of samples that can be written without blocking since the kernel
+output queue length seems to be variable.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23705"><tt>read</tt></a></b> (<var>size</var>)
+<dd>
+This method reads <i>size</i> samples from the audio input and returns
+them as a Python string. The function blocks until enough data is available.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23710"><tt>setinfo</tt></a></b> (<var>status</var>)
+<dd>
+This method sets the audio device status parameters. The <i>status</i>
+parameter is an device status object as returned by <tt>getinfo()</tt> and
+possibly modified by the program.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-23716"><tt>write</tt></a></b> (<var>samples</var>)
+<dd>
+Write is passed a Python string containing audio samples to be played.
+If there is enough buffer space free it will immediately return,
+otherwise it will block.
+</dl>
+
+<P>
+There is a companion module,
+<tt>SUNAUDIODEV</tt><a name="l2h-"></a>, which defines useful
+symbolic constants like <tt>MIN_GAIN</tt>, <tt>MAX_GAIN</tt>,
+<tt>SPEAKER</tt>, etc. The names of the constants are the same names
+as used in the C include file <tt>&lt;sun/audioio.h&gt;</tt>, with the
+leading string "<tt>AUDIO_</tt>" stripped.
+
+<P>
+Useability of the control device is limited at the moment, since there
+is no way to use the ``wait for something to happen'' feature the
+device provides.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3650"
+ HREF="undoc.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3646"
+ HREF="module-sunaudiodev.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3642"
+ HREF="module-sunaudiodev.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3648"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3649"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3651"
+ HREF="undoc.html">18. Undocumented Modules</A>
+<b>Up:</b> <A NAME="tex2html3647"
+ HREF="module-sunaudiodev.html">17.1 sunaudiodev  </A>
+<b>Previous:</b> <A NAME="tex2html3643"
+ HREF="module-sunaudiodev.html">17.1 sunaudiodev  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

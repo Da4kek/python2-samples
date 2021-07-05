@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.5 rfc822 --
+Parse RFC 822 mail headers.</TITLE>
+<META NAME="description" CONTENT="12.5 rfc822 --
+Parse RFC 822 mail headers.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-mimetools.html">
+<LINK REL="previous" HREF="module-formatter.html">
+<LINK REL="up" HREF="netdata.html">
+<LINK REL="next" HREF="message-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2955"
+ HREF="message-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2951"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2945"
+ HREF="node202.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2953"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2954"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2956"
+ HREF="message-objects.html">12.5.1 Message Objects</A>
+<b>Up:</b> <A NAME="tex2html2952"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html2946"
+ HREF="node202.html">12.4.4 Writer Implementations</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0014500000000000000000">
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">5</SPAN> <tt>rfc822</tt> --
+         Parse RFC 822 mail headers.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module defines a class, <tt>Message</tt>, which represents a
+collection of ``email headers'' as defined by the Internet standard
+<a name=>RFC 822</a>.  It is used in various contexts, usually to read such
+headers from a file.  This module also defines a helper class 
+<tt>AddressList</tt> for parsing RFC822 addresses.
+
+<P>
+Note that there's a separate module to read Unix, MH, and MMDF
+style mailbox files: <tt>mailbox</tt><a name="l2h-"></a>.
+
+<P>
+<dl><dt><b><a name="l2h-19243"><tt>Message</tt></a></b> (<var>file</var><big>[</big><var>, seekable</var><big>]</big>)
+<dd>
+A <tt>Message</tt> instance is instantiated with an input object as
+parameter.  Message relies only on the input object having a
+<tt>readline()</tt> method; in particular, ordinary file objects
+qualify.  Instantiation reads headers from the input object up to a
+delimiter line (normally a blank line) and stores them in the
+instance.
+
+<P>
+This class can work with any input object that supports a
+<tt>readline()</tt> method.  If the input object has seek and tell
+capability, the <tt>rewindbody()</tt> method will work; also, illegal
+lines will be pushed back onto the input stream.  If the input object
+lacks seek but has an <tt>unread()</tt> method that can push back a
+line of input, <tt>Message</tt> will use that to push back illegal
+lines.  Thus this class can be used to parse messages coming from a
+buffered stream.
+
+<P>
+The optional <i>seekable</i> argument is provided as a workaround for
+certain stdio libraries in which <tt>tell()</tt> discards buffered
+data before discovering that the <tt>lseek()</tt> system call
+doesn't work.  For maximum portability, you should set the seekable
+argument to zero to prevent that initial <tt>tell()</tt> when passing
+in an unseekable object such as a a file object created from a socket
+object.
+
+<P>
+Input lines as read from the file may either be terminated by CR-LF or
+by a single linefeed; a terminating CR-LF is replaced by a single
+linefeed before the line is stored.
+
+<P>
+All header matching is done independent of upper or lower case;
+e.g. <tt><i>m</i>['From']</tt>, <tt><i>m</i>['from']</tt> and
+<tt><i>m</i>['FROM']</tt> all yield the same result.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19077"><tt>AddressList</tt></a></b> (<var>field</var>)
+<dd>
+You may instantiate the AddresssList helper class using a single
+string parameter, a comma-separated list of <a name=>RFC 822</a> addresses to be
+parsed.  (The parameter <tt>None</tt> yields an empty list.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19083"><tt>parsedate</tt></a></b> (<var>date</var>)
+<dd>
+Attempts to parse a date according to the rules in <a name=>RFC 822</a>.
+however, some mailers don't follow that format as specified, so
+<tt>parsedate()</tt> tries to guess correctly in such cases. 
+<i>date</i> is a string containing an <a name=>RFC 822</a> date, such as 
+<tt>'Mon, 20 Nov 1995 19:12:08 -0500'</tt>.  If it succeeds in parsing
+the date, <tt>parsedate()</tt> returns a 9-tuple that can be passed
+directly to <tt>time.mktime()</tt>; otherwise <tt>None</tt> will be
+returned.  
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19095"><tt>parsedate_tz</tt></a></b> (<var>date</var>)
+<dd>
+Performs the same function as <tt>parsedate()</tt>, but returns
+either <tt>None</tt> or a 10-tuple; the first 9 elements make up a tuple
+that can be passed directly to <tt>time.mktime()</tt>, and the tenth
+is the offset of the date's timezone from UTC (which is the official
+term for Greenwich Mean Time).  (Note that the sign of the timezone
+offset is the opposite of the sign of the <tt>time.timezone</tt>
+variable for the same timezone; the latter variable follows the
+POSIX standard while this module follows <a name=>RFC 822</a>.)  If the input
+string has no timezone, the last element of the tuple returned is
+<tt>None</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19106"><tt>mktime_tz</tt></a></b> (<var>tuple</var>)
+<dd>
+Turn a 10-tuple as returned by <tt>parsedate_tz()</tt> into a UTC
+timestamp.  It the timezone item in the tuple is <tt>None</tt>, assume
+local time.  Minor deficiency: this first interprets the first 8
+elements as a local time and then compensates for the timezone
+difference; this may yield a slight error around daylight savings time
+switch dates.  Not enough to worry about for common use.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html2957"
+ HREF="message-objects.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">1</SPAN> Message Objects</A>
+<LI><A NAME="tex2html2958"
+ HREF="addresslist-objects.html"><SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">5</SPAN>.<SPAN CLASS="arabic">2</SPAN> AddressList Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2955"
+ HREF="message-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2951"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2945"
+ HREF="node202.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2953"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2954"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2956"
+ HREF="message-objects.html">12.5.1 Message Objects</A>
+<b>Up:</b> <A NAME="tex2html2952"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html2946"
+ HREF="node202.html">12.4.4 Writer Implementations</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

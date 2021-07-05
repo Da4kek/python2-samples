@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>3.3.2 Extension source files</title>
+<META NAME="description" CONTENT="3.3.2 Extension source files">
+<META NAME="keywords" CONTENT="dist">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="dist.css">
+<LINK REL="next" HREF="node13.html">
+<LINK REL="previous" HREF="node11.html">
+<LINK REL="up" href="describing-extensions.html">
+<LINK REL="next" HREF="node13.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A HREF="node11.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="describing-extensions.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node13.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" HREF="node11.html">3.3.1 Extension names and</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="describing-extensions.html">3.3 Describing extension modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node13.html">3.3.3 Preprocessor options</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION000432000000000000000">
+3.3.2 Extension source files</A>
+</H3>
+
+<P>
+The second argument to the <tt class="class">Extension</tt> constructor is a list of
+source files.  Since the Distutils currently only support C/C++
+extensions, these are normally C/C++ source files.  (Be sure to use
+appropriate extensions to distinguish C++ source files: <span class="file">.cc</span> and
+<span class="file">.cpp</span> seem to be recognized by both Unix and Windows compilers.)
+
+<P>
+However, you can also include SWIG interface (<span class="file">.i</span>) files in the
+list; the <code>build_ext</code> command knows how to deal with SWIG
+extensions: it will run SWIG on the interface file and compile the
+resulting C/C++ file into your extension.
+
+<P>
+<b>** SWIG support is rough around the edges and largely untested;
+  especially SWIG support of C++ extensions!  Explain in more detail
+  here when the interface firms up. **</b>
+
+<P>
+On some platforms, you can include non-source files that are processed
+by the compiler and included in your extension.  Currently, this just
+means Windows resource files for Visual C++.  <b>** get more detail on
+  this feature from Thomas Heller! **</b>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A HREF="node11.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="describing-extensions.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node13.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Distributing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" HREF="node11.html">3.3.1 Extension names and</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="describing-extensions.html">3.3 Describing extension modules</A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node13.html">3.3.3 Preprocessor options</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

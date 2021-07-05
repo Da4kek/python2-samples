@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1.2 Objects, Types and Reference Counts</TITLE>
+<META NAME="description" CONTENT="1.2 Objects, Types and Reference Counts">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="next" HREF="exceptions.html">
+<LINK REL="previous" HREF="includes.html">
+<LINK REL="up" HREF="intro.html">
+<LINK REL="next" HREF="refcounts.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html146"
+ HREF="refcounts.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html142"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html136"
+ HREF="includes.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html144"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html145"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html147"
+ HREF="refcounts.html">1.2.1 Reference Counts</A>
+<b>Up:</b> <A NAME="tex2html143"
+ HREF="intro.html">1. Introduction</A>
+<b>Previous:</b> <A NAME="tex2html137"
+ HREF="includes.html">1.1 Include Files</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION003200000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN> Objects, Types and Reference Counts
+</H1>
+
+<P>
+Most Python/C API functions have one or more arguments as well as a
+return value of type <tt>PyObject *</tt>.  This type is a pointer
+to an opaque data type representing an arbitrary Python
+object.  Since all Python object types are treated the same way by the
+Python language in most situations (e.g., assignments, scope rules,
+and argument passing), it is only fitting that they should be
+represented by a single C type.  All Python objects live on the heap:
+you never declare an automatic or static variable of type
+<tt>PyObject</tt>, only pointer variables of type <tt>PyObject *</tt> can 
+be declared.
+
+<P>
+All Python objects (even Python integers) have a <i>type</i> and a
+<i>reference count</i>.  An object's type determines what kind of object 
+it is (e.g., an integer, a list, or a user-defined function; there are 
+many more as explained in the <i>Python Reference Manual</i>).  For 
+each of the well-known types there is a macro to check whether an 
+object is of that type; for instance, "<tt>PyList_Check(<i>a</i>)</tt>" is
+true iff the object pointed to by <i>a</i> is a Python list.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html148"
+ HREF="refcounts.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> Reference Counts</A>
+<UL>
+<LI><A NAME="tex2html149"
+ HREF="refcountDetails.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Reference Count Details</A>
+</UL>
+<LI><A NAME="tex2html150"
+ HREF="types.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> Types</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html146"
+ HREF="refcounts.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html142"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html136"
+ HREF="includes.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html144"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html145"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html147"
+ HREF="refcounts.html">1.2.1 Reference Counts</A>
+<b>Up:</b> <A NAME="tex2html143"
+ HREF="intro.html">1. Introduction</A>
+<b>Previous:</b> <A NAME="tex2html137"
+ HREF="includes.html">1.1 Include Files</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

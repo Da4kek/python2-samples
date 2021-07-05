@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.23 site --
+A standard way to reference site-specific modules.</TITLE>
+<META NAME="description" CONTENT="3.23 site --
+A standard way to reference site-specific modules.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-user.html">
+<LINK REL="previous" HREF="module-dis.html">
+<LINK REL="up" HREF="python.html">
+<LINK REL="next" HREF="module-user.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1274"
+ HREF="module-user.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1270"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1264"
+ HREF="bytecodes.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1272"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1273"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1275"
+ HREF="module-user.html">3.24 user  </A>
+<b>Up:</b> <A NAME="tex2html1271"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html1265"
+ HREF="bytecodes.html">3.22.1 Python Byte Code</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0052300000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">23</SPAN> <tt>site</tt> --
+         A standard way to reference site-specific modules.</A>
+</H1>
+
+
+<P>
+
+<P>
+<b>This module is automatically imported during initialization.</b>
+
+<P>
+In earlier versions of Python (up to and including 1.5a3), scripts or
+modules that needed to use site-specific modules would place
+"<tt>import site</tt>" somewhere near the top of their code.  This is no
+longer necessary.
+
+<P>
+This will append site-specific paths to to the module search path.
+<a name="l2h-"></a>
+
+<P>
+It starts by constructing up to four directories from a head and a
+tail part.  For the head part, it uses <tt>sys.prefix</tt> and
+<tt>sys.exec_prefix</tt>; empty heads are skipped.  For
+the tail part, it uses the empty string (on Macintosh or Windows) or
+it uses first "<tt>lib/python<i>version</i>/site-packages</tt>" and then
+"<tt>lib/site-python</tt>" (on Unix).  For each of the distinct
+head-tail combinations, it sees if it refers to an existing directory,
+and if so, adds to <tt>sys.path</tt>, and also inspected for path
+configuration files.
+<a name="l2h-5980"></a>
+<a name="l2h-5982"></a>
+
+<P>
+A path configuration file is a file whose name has the form
+"<tt><i>package</i>.pth</tt>"; its contents are additional items (one
+per line) to be added to <tt>sys.path</tt>.  Non-existing items are
+never added to <tt>sys.path</tt>, but no check is made that the item
+refers to a directory (rather than a file).  No item is added to
+<tt>sys.path</tt> more than once.  Blank lines and lines beginning with
+<tt>#</tt> are skipped.
+<a name="l2h-5989"></a><a name="l2h-"></a>
+
+<P>
+For example, suppose <tt>sys.prefix</tt> and <tt>sys.exec_prefix</tt> are
+set to "<tt>/usr/local</tt>".  The Python 1.5.2 library is then
+installed in "<tt>/usr/local/lib/python1.5</tt>" (note that only the first 
+three characters of <tt>sys.version</tt> are used to form the path
+name).  Suppose this has a subdirectory
+"<tt>/usr/local/lib/python1.5/site-packages</tt>" with three
+subsubdirectories, "<tt>foo</tt>", "<tt>bar</tt>" and "<tt>spam</tt>", and two
+path configuration files, "<tt>foo.pth</tt>" and "<tt>bar.pth</tt>".  Assume
+"<tt>foo.pth</tt>" contains the following:
+
+<P>
+<dl><dd><pre>
+# foo package configuration
+
+foo
+bar
+bletch
+</pre></dl>
+
+<P>
+and "<tt>bar.pth</tt>" contains:
+
+<P>
+<dl><dd><pre>
+# bar package configuration
+
+bar
+</pre></dl>
+
+<P>
+Then the following directories are added to <tt>sys.path</tt>, in this
+order:
+
+<P>
+<dl><dd><pre>
+/usr/local/lib/python1.5/site-packages/bar
+/usr/local/lib/python1.5/site-packages/foo
+</pre></dl>
+
+<P>
+Note that "<tt>bletch</tt>" is omitted because it doesn't exist; the
+"<tt>bar</tt>" directory precedes the "<tt>foo</tt>" directory because
+"<tt>bar.pth</tt>" comes alphabetically before "<tt>foo.pth</tt>"; and
+"<tt>spam</tt>" is omitted because it is not mentioned in either path
+configuration file.
+
+<P>
+After these path manipulations, an attempt is made to import a module
+named <tt>sitecustomize</tt><a name="l2h-"></a>, which can
+perform arbitrary site-specific customizations.  If this import fails
+with an <tt>ImportError</tt> exception, it is silently ignored.
+
+<P>
+Note that for some non-Unix systems, <tt>sys.prefix</tt> and
+<tt>sys.exec_prefix</tt> are empty, and the path manipulations are
+skipped; however the import of
+<tt>sitecustomize</tt><a name="l2h-"></a> is still attempted.
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1274"
+ HREF="module-user.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1270"
+ HREF="python.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1264"
+ HREF="bytecodes.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1272"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1273"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1275"
+ HREF="module-user.html">3.24 user  </A>
+<b>Up:</b> <A NAME="tex2html1271"
+ HREF="python.html">3. Python Services</A>
+<b>Previous:</b> <A NAME="tex2html1265"
+ HREF="bytecodes.html">3.22.1 Python Byte Code</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

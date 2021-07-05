@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.1 Compiling Regular Expressions</TITLE>
+<META NAME="description" CONTENT="3.1 Compiling Regular Expressions">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html135"
+ HREF="node8.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html132"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html126"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html134"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html136"
+ HREF="node8.html">3.2 The Backslash Plague</A>
+<b>Up:</b> <A NAME="tex2html133"
+ HREF="node6.html">3. Using Regular Expressions</A>
+<b>Previous:</b> <A NAME="tex2html127"
+ HREF="node6.html">3. Using Regular Expressions</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000410000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Compiling Regular Expressions</A>
+</H2>
+
+<P>
+Regular expressions are compiled into <tt>RegexObject</tt>
+instances, which then have methods for various operations such 
+as searching for pattern matches or
+performing string substitutions.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; import re
+&gt;&gt;&gt; p = re.compile('ab*')
+&gt;&gt;&gt; print p
+&lt;re.RegexObject instance at 80b4150&gt;
+</pre></dl>
+<tt>re.compile()</tt> also accepts an optional <i>flags</i>
+argument, used to enable various special features and syntax
+variations.  We'll go over the available settings later, but for now a
+single example will do:
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; p = re.compile('ab*', re.IGNORECASE)
+</pre></dl>
+The RE is passed to <tt>re.compile()</tt> as a string.
+REs are handled as strings because regular expressions aren't
+part of the core Python language, and no special syntax was created for
+expressing them.  (There are applications that don't need REs at all,
+so there's no need to bloat the language specification by including
+them.)  Instead, the <tt>re</tt> module is just a C extension module,
+just like the <tt>string</tt> module.
+
+<P>
+Putting REs in strings keeps the Python language simpler, but has one
+disadvantage which is the topic of the next section.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html135"
+ HREF="node8.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html132"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html126"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html134"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html136"
+ HREF="node8.html">3.2 The Backslash Plague</A>
+<b>Up:</b> <A NAME="tex2html133"
+ HREF="node6.html">3. Using Regular Expressions</A>
+<b>Previous:</b> <A NAME="tex2html127"
+ HREF="node6.html">3. Using Regular Expressions</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

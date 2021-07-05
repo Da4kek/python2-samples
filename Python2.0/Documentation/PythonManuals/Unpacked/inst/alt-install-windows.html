@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>4.3 Alternate installation: Windows</title>
+<META NAME="description" CONTENT="4.3 Alternate installation: Windows">
+<META NAME="keywords" CONTENT="inst">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="inst.css">
+<LINK REL="next" href="alt-install-macos.html">
+<LINK REL="previous" href="alt-install-home.html">
+<LINK REL="up" href="alt-install.html">
+<LINK REL="next" href="alt-install-macos.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="alt-install-home.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="alt-install.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="alt-install-macos.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="alt-install-home.html">4.2 Alternate installation: Unix</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="alt-install.html">4 Alternate Installation</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="alt-install-macos.html">4.4 Alternate installation: Mac&nbsp;OS</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+4.3 Alternate installation: Windows
+</H2>
+
+<P>
+Since Windows has no conception of a user's home directory, and since
+the standard Python installation under Windows is simpler than that
+under Unix, there's no point in having separate <b class="programopt">--prefix</b>
+and <b class="programopt">--home</b> options.  Just use the <b class="programopt">--prefix</b>
+option to specify a base directory, e.g.
+<dl><dd><pre class="verbatim">
+python setup.py install --prefix="\Temp\Python"
+</pre></dl>
+to install modules to the <span class="file">&#92;Temp</span> directory on the current
+drive.
+
+<P>
+The installation base is defined by the <b class="programopt">--prefix</b> option;
+the <b class="programopt">--exec-prefix</b> option is not supported under Windows.
+Files are installed as follows:
+<table border align="center" style="border-collapse: collapse">
+  <thead>
+    <tr>
+      <th align="left"><b>Type of file</b>&nbsp;</th>
+      <th><b>Installation Directory</b>&nbsp;</th>
+      <th><b>Override option</b>&nbsp;</th>
+    </thead>
+  <tbody valign='baseline'>
+    <tr><td align="left" valign="baseline">pure module distribution</td>
+        <td><font face="sans-serif"></i>prefix</i></font></td>
+        <td><b class="programopt">--install-purelib</b></td>
+    <tr><td align="left" valign="baseline">non-pure module distribution</td>
+        <td><font face="sans-serif"></i>prefix</i></font></td>
+        <td><b class="programopt">--install-platlib</b></td>
+    <tr><td align="left" valign="baseline">scripts</td>
+        <td><font face="sans-serif"></i>prefix</i></font><span class="file">&#92;Scripts</span></td>
+        <td><b class="programopt">--install-scripts</b></td>
+    <tr><td align="left" valign="baseline">data</td>
+        <td><font face="sans-serif"></i>prefix</i></font><span class="file">&#92;Data</span></td>
+        <td><b class="programopt">--install-data</b></td></tbody>
+</table>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="alt-install-home.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="alt-install.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="alt-install-macos.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="alt-install-home.html">4.2 Alternate installation: Unix</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="alt-install.html">4 Alternate Installation</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="alt-install-macos.html">4.4 Alternate installation: Mac&nbsp;OS</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.7.2 MultiFile Example </TITLE>
+<META NAME="description" CONTENT="12.7.2 MultiFile Example ">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="MultiFile-objects.html">
+<LINK REL="up" HREF="module-multifile.html">
+<LINK REL="next" HREF="module-binhex.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3038"
+ HREF="module-binhex.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3034"
+ HREF="module-multifile.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3030"
+ HREF="MultiFile-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3036"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3037"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3039"
+ HREF="module-binhex.html">12.8 binhex  </A>
+<b>Up:</b> <A NAME="tex2html3035"
+ HREF="module-multifile.html">12.7 multifile  </A>
+<b>Previous:</b> <A NAME="tex2html3031"
+ HREF="MultiFile-objects.html">12.7.1 MultiFile Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0014720000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>MultiFile</tt> Example 
+</H2>
+
+<P>
+<dl><dd><pre>
+fp = MultiFile(sys.stdin, 0)
+fp.push(outer_boundary)
+message1 = fp.readlines()
+# We should now be either at real EOF or stopped on a message
+# boundary. Re-enable the outer boundary.
+fp.next()
+# Read another message with the same delimiter
+message2 = fp.readlines()
+# Re-enable that delimiter again
+fp.next()
+# Now look for a message subpart with a different boundary
+fp.push(inner_boundary)
+sub_header = fp.readlines()
+# If no exception has been thrown, we're looking at the start of
+# the message subpart.  Reset and grab the subpart
+fp.next()
+sub_body = fp.readlines()
+# Got it.  Now pop the inner boundary to re-enable the outer one.
+fp.pop()
+# Read to next outer boundary
+message3 = fp.readlines()
+</pre></dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3038"
+ HREF="module-binhex.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3034"
+ HREF="module-multifile.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3030"
+ HREF="MultiFile-objects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3036"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3037"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3039"
+ HREF="module-binhex.html">12.8 binhex  </A>
+<b>Up:</b> <A NAME="tex2html3035"
+ HREF="module-multifile.html">12.7 multifile  </A>
+<b>Previous:</b> <A NAME="tex2html3031"
+ HREF="MultiFile-objects.html">12.7.1 MultiFile Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

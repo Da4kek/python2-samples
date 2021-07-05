@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1.1 Include Files</TITLE>
+<META NAME="description" CONTENT="1.1 Include Files">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="next" HREF="objects.html">
+<LINK REL="previous" HREF="intro.html">
+<LINK REL="up" HREF="intro.html">
+<LINK REL="next" HREF="objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html134"
+ HREF="objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html130"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html124"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html132"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html133"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html135"
+ HREF="objects.html">1.2 Objects, Types and</A>
+<b>Up:</b> <A NAME="tex2html131"
+ HREF="intro.html">1. Introduction</A>
+<b>Previous:</b> <A NAME="tex2html125"
+ HREF="intro.html">1. Introduction</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION003100000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN> Include Files
+</H1>
+
+<P>
+All function, type and macro definitions needed to use the Python/C
+API are included in your code by the following line:
+
+<P>
+<dl><dd><pre>
+#include "Python.h"
+</pre></dl>
+
+<P>
+This implies inclusion of the following standard headers:
+<tt>&lt;stdio.h&gt;</tt>, <tt>&lt;string.h&gt;</tt>, <tt>&lt;errno.h&gt;</tt>, and
+<tt>&lt;stdlib.h&gt;</tt> (if available).
+
+<P>
+All user visible names defined by Python.h (except those defined by
+the included standard headers) have one of the prefixes "<tt>Py</tt>" or
+"<tt>_Py</tt>".  Names beginning with "<tt>_Py</tt>" are for internal use
+only.  Structure member names do not have a reserved prefix.
+
+<P>
+<b>Important:</b> user code should never define names that begin
+with "<tt>Py</tt>" or "<tt>_Py</tt>".  This confuses the reader, and
+jeopardizes the portability of the user code to future Python
+versions, which may define additional names beginning with one of
+these prefixes.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html134"
+ HREF="objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html130"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html124"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html132"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html133"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html135"
+ HREF="objects.html">1.2 Objects, Types and</A>
+<b>Up:</b> <A NAME="tex2html131"
+ HREF="intro.html">1. Introduction</A>
+<b>Previous:</b> <A NAME="tex2html125"
+ HREF="intro.html">1. Introduction</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

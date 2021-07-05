@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.4 Not using re.VERBOSE</TITLE>
+<META NAME="description" CONTENT="6.4 Not using re.VERBOSE">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="previous" HREF="node23.html">
+<LINK REL="up" HREF="node20.html">
+<LINK REL="next" HREF="node25.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html324"
+ HREF="node25.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html321"
+ HREF="node20.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html317"
+ HREF="node23.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html323"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html325"
+ HREF="node25.html">7. Feedback</A>
+<b>Up:</b> <A NAME="tex2html322"
+ HREF="node20.html">6. Common Problems</A>
+<b>Previous:</b> <A NAME="tex2html318"
+ HREF="node23.html">6.3 Greedy versus Non-Greedy</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000740000000000000000">
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">4</SPAN> Not using re.VERBOSE</A>
+</H2>
+
+<P>
+By now you've probably noticed that regular expressions are a very
+compact notation, but they're not terribly readable.  REs of
+moderate complexity can become lengthy collections of backslashes,
+parentheses, and metacharacters, making them difficult to read and
+understand.  
+
+<P>
+For such REs, specifying the <tt>re.VERBOSE</tt> flag when
+compiling the regular expression can be helpful, because it allows
+you to format the regular expression more clearly.
+
+<P>
+The <tt>re.VERBOSE</tt> flag has several effects.  Whitespace in the
+regular expression that <i>isn't</i> inside a character class is
+ignored.  This means that an expression such as <tt>dog | cat</tt> is
+equivalent to the less readable <tt>dog|cat</tt>, but <tt>[a b]</tt>
+will still match the characters "<tt>a</tt>", "<tt>b</tt>", or a
+space.  In addition, you can also put comments inside a RE; comments
+extend from a
+"<tt>#</tt>" character to the next newline.  When used with triple-quoted
+strings, this enables REs to be formatted more neatly:
+
+<P>
+<dl><dd><pre>
+pat = re.compile(r"""
+ \s*                 # Skip leading whitespace
+ (?P&lt;header&gt;[^:]+)   # Header name
+ \s* :               # Whitespace, and a colon
+ (?P&lt;value&gt;.*?)      # The header's value -- *? used to
+                     # lose the following trailing whitespace
+ \s*$                # Trailing whitespace to end-of-line
+""", re.VERBOSE)
+</pre></dl>
+This is far more readable than:
+
+<P>
+<dl><dd><pre>
+pat = re.compile(r"\s*(?P&lt;header&gt;[^:]+)\s*:(?P&lt;value&gt;.*?)\s*$")
+</pre></dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html324"
+ HREF="node25.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html321"
+ HREF="node20.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html317"
+ HREF="node23.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html323"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html325"
+ HREF="node25.html">7. Feedback</A>
+<b>Up:</b> <A NAME="tex2html322"
+ HREF="node20.html">6. Common Problems</A>
+<b>Previous:</b> <A NAME="tex2html318"
+ HREF="node23.html">6.3 Greedy versus Non-Greedy</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

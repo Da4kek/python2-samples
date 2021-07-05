@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.4 Module-Level Functions</TITLE>
+<META NAME="description" CONTENT="3.4 Module-Level Functions">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node9.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html168"
+ HREF="node11.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html165"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html159"
+ HREF="node9.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html167"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html169"
+ HREF="node11.html">3.5 Compilation Flags</A>
+<b>Up:</b> <A NAME="tex2html166"
+ HREF="node6.html">3. Using Regular Expressions</A>
+<b>Previous:</b> <A NAME="tex2html160"
+ HREF="node9.html">3.3 Performing Matches</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000440000000000000000">
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> Module-Level Functions</A>
+</H2>
+
+<P>
+You don't have to produce a <tt>RegexObject</tt> and call its methods;
+the <tt>re</tt> module also provides top-level functions called
+<tt>match()</tt>, <tt>search()</tt>, <tt>sub()</tt>, and so
+forth.  These functions take the same arguments as the corresponding
+<tt>RegexObject</tt> method, with the RE string added as the first
+argument, and still return either <tt>None</tt> or a <tt>MatchObject</tt>
+instance.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; print re.match(r'From\s+', 'Fromage amk')
+None
+&gt;&gt;&gt; re.match(r'From\s+', 'From amk Thu May 14 19:12:10 1998')
+&lt;re.MatchObject instance at 80c5978&gt;
+</pre></dl>
+Under the hood, these functions simply produce a <tt>RegexObject</tt>
+for you and call the appropriate method on it.  They also store the
+compiled object in a cache, so future calls to them using the same
+RE are faster.  
+
+<P>
+Should you use these module-level functions, or should you get the
+<tt>RegexObject</tt> and call its methods yourself?  That choice
+depends on how frequently the RE will be used, and on your
+personal coding style.  If a RE is being used at only one point
+in the code, then the module functions are probably more convenient.
+If a program contains a lot of regular expressions, or re-uses
+the same ones in several locations, then it might be worthwhile
+to collect all the definitions in the same place, in a section of
+code that compiles all the REs ahead of time.  To take an example
+from the standard library, here's an extract from "<tt>xmllib.py</tt>":
+
+<P>
+<dl><dd><pre>
+ref = re.compile( ... )
+entityref = re.compile( ... )
+charref = re.compile( ... )
+starttagopen = re.compile( ... )
+</pre></dl>
+(I generally prefer to work with the compiled object, even for
+one-time uses, but few people will be as much of a purist about this
+as I am.)
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html168"
+ HREF="node11.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html165"
+ HREF="node6.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html159"
+ HREF="node9.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html167"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html169"
+ HREF="node11.html">3.5 Compilation Flags</A>
+<b>Up:</b> <A NAME="tex2html166"
+ HREF="node6.html">3. Using Regular Expressions</A>
+<b>Previous:</b> <A NAME="tex2html160"
+ HREF="node9.html">3.3 Performing Matches</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

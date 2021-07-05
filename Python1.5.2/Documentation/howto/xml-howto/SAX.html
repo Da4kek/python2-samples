@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3. SAX: The Simple API for XML</TITLE>
+<META NAME="description" CONTENT="3. SAX: The Simple API for XML">
+<META NAME="keywords" CONTENT="xml-howto">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="xml-howto.css">
+<LINK REL="next" HREF="DOM.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="up" HREF="xml-howto.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html96"
+ HREF="node7.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html93"
+ HREF="xml-howto.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html87"
+ HREF="node5.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/XML HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html95"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html97"
+ HREF="node7.html">3.1 Starting Out</A>
+<b>Up:</b> <A NAME="tex2html94"
+ HREF="xml-howto.html">Python/XML HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html88"
+ HREF="node5.html">2.1 Related Links</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000400000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>. SAX: The Simple API for XML
+</H1>
+
+<P>
+The Simple API for XML isn't a standard in the formal sense, but an
+informal specification designed by David Megginson, with input from
+many people on the xml-dev mailing list.  SAX defines an event-driven
+interface for parsing XML.  To use SAX, you must create Python class
+instances which implement a specified interface, and the parser will
+then call various methods of those objects.
+
+<P>
+SAX is most suitable for purposes where you want to read through an
+entire XML document from beginning to end, and perform some
+computation, such as building a data structure representating a
+document, or summarizing information in a document (computing an
+average value of a certain element, for example).  It's not very
+useful if you want to modify the document structure in some
+complicated way that involves changing how elements are nested, though
+it could be used if you simply wish to change element contents or
+attributes.  For example, you would not want to re-order chapters in a
+book using SAX, but you might want to change the contents of any
+<tt>name</tt> elements with the attribute <tt>lang</tt> equal to
+'greek' into Greek letters.
+
+<P>
+One advantage of SAX is speed and simplicity.  Let's say
+you've defined a complicated DTD for listing comic books, and you wish
+to scan through your collection and list everything written by Neil
+Gaiman.  For this specialized task, there's no need to expend effort
+examining elements for artists and editors and colourists, because
+they're irrelevant to the search.  You can therefore write a class
+instance which ignores all elements that aren't <tt>writer</tt>.
+
+<P>
+Another advantage is that you don't have the whole document resident
+in memory at any one time, which matters if you are processing really
+huge documents.
+
+<P>
+SAX defines 4 basic interfaces; an SAX-compliant XML parser can be
+passed any objects that support these interfaces, and will call
+various methods as data is processed.  Your task, therefore, is to
+implement those interfaces that are relevant to your application.
+
+<P>
+The SAX interfaces are:
+
+<P>
+<table border align=center>
+  <tr><th><b>Interface</b></th>
+      <th><b>Purpose</b></th>
+
+<P>
+<tr><td align=center><code>DocumentHandler</code></td>
+      <td>Called for general document events.  This
+interface is the heart of SAX; its methods are called for the start of
+the document, the start and end of elements, and for the characters of
+data contained inside elements.
+</td>
+
+<P>
+<tr><td align=center><code>DTDHandler</code></td>
+      <td>Called to handle DTD events required for basic
+parsing.  This means notation declarations (XML spec section XXX) and
+unparsed entity declarations (XML spec section XXX).
+</td>
+
+<P>
+<tr><td align=center><code>EntityResolver</code></td>
+      <td>Called to resolve references to external
+entities.  If your documents will have no external entity references,
+you won't need to implement this interface. </td>
+
+<P>
+<tr><td align=center><code>ErrorHandler</code></td>
+      <td>Called for error handling.  The parser will call
+methods from this interface to report all warnings and errors.</td>
+
+<P>
+
+</table>
+
+<P>
+Python doesn't support the concept of interfaces, so the interfaces
+listed above are implemented as Python classes.  The default method
+implementations are defined to do nothing--the method body is just a
+Python <tt>pass</tt> statement-so usually you can simply ignore methods
+that aren't relevant to your application.  The one big exception is
+the <tt>ErrorHandler</tt> interface; if you don't provide methods that
+print a message or otherwise take some action, errors in the XML data
+will be silently ignored.  This is almost certainly <i>not</i> what
+you want your application to do, so always implement at least the
+<tt>error()</tt> and <tt>fatalError()</tt> methods.
+<tt>xml.sax.saxutils</tt> provides an <tt>ErrorPrinter</tt> class which
+sends error messages to standard error, and an <tt>ErrorRaiser</tt>
+class which raises an exception for any warnings or errors.
+
+<P>
+Pseudo-code for using SAX looks something like this:
+<dl><dd><pre>
+# Define your specialized handler classes
+from xml.sax import saxlib
+class docHandler(saxlib.DocumentHandler):
+    ...
+
+# Create an instance of the handler classes
+dh = docHandler()
+
+# Create an XML parser
+parser = ...
+
+# Tell the parser to use your handler instance
+parser.setDocumentHandler(dh)
+
+# Parse the file; your handler's method will get called
+parser.parseFile(sys.stdin)
+</pre></dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html98"
+ HREF="node7.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Starting Out</A>
+<LI><A NAME="tex2html99"
+ HREF="node8.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN> Error Handling</A>
+<LI><A NAME="tex2html100"
+ HREF="node9.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN> Searching Element Content</A>
+<LI><A NAME="tex2html101"
+ HREF="node10.html"><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN> Related Links</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html96"
+ HREF="node7.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html93"
+ HREF="xml-howto.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html87"
+ HREF="node5.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/XML HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html95"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html97"
+ HREF="node7.html">3.1 Starting Out</A>
+<b>Up:</b> <A NAME="tex2html94"
+ HREF="xml-howto.html">Python/XML HOWTO</A>
+<b>Previous:</b> <A NAME="tex2html88"
+ HREF="node5.html">2.1 Related Links</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

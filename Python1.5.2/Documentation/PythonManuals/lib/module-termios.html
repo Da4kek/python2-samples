@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8.8 termios --
+POSIX style tty control.</TITLE>
+<META NAME="description" CONTENT="8.8 termios --
+POSIX style tty control.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-TERMIOSuppercase.html">
+<LINK REL="previous" HREF="module-gdbm.html">
+<LINK REL="up" HREF="unix.html">
+<LINK REL="next" HREF="termios_Example.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2118"
+ HREF="termios_Example.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2114"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2108"
+ HREF="module-gdbm.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2116"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2117"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2119"
+ HREF="termios_Example.html">8.8.1 Example</A>
+<b>Up:</b> <A NAME="tex2html2115"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2109"
+ HREF="module-gdbm.html">8.7 gdbm  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0010800000000000000000">
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">8</SPAN> <tt>termios</tt> --
+         POSIX style tty control.</A>
+</H1>
+
+
+<P>
+
+<P>
+<a name="l2h-13528"></a>
+<a name="l2h-13432"></a>
+
+<P>
+This module provides an interface to the POSIX calls for tty I/O
+control.  For a complete description of these calls, see the POSIX or
+Unix manual pages.  It is only available for those Unix versions
+that support POSIX <i>termios</i> style tty I/O control (and then
+only if configured at installation time).
+
+<P>
+All functions in this module take a file descriptor <i>fd</i> as their
+first argument.  This must be an integer file descriptor, such as
+returned by <tt>sys.stdin.fileno()</tt>.
+
+<P>
+This module should be used in conjunction with the
+<tt>TERMIOS</tt><a name="l2h-"></a> module, which defines the
+relevant symbolic constants (see the next section).
+
+<P>
+The module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-13446"><tt>tcgetattr</tt></a></b> (<var>fd</var>)
+<dd>
+Return a list containing the tty attributes for file descriptor
+<i>fd</i>, as follows: <tt>[</tt><i>iflag</i>, <i>oflag</i>, <i>cflag</i>,
+<i>lflag</i>, <i>ispeed</i>, <i>ospeed</i>, <i>cc</i><tt>]</tt> where
+<i>cc</i> is a list of the tty special characters (each a string of
+length 1, except the items with indices <tt>TERMIOS.VMIN</tt> and
+<tt>TERMIOS.VTIME</tt>, which are integers when these fields are
+defined).  The interpretation of the flags and the speeds as well as
+the indexing in the <i>cc</i> array must be done using the symbolic
+constants defined in the <tt>TERMIOS</tt> module.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13465"><tt>tcsetattr</tt></a></b> (<var>fd, when, attributes</var>)
+<dd>
+Set the tty attributes for file descriptor <i>fd</i> from the
+<i>attributes</i>, which is a list like the one returned by
+<tt>tcgetattr()</tt>.  The <i>when</i> argument determines when the
+attributes are changed: <tt>TERMIOS.TCSANOW</tt> to change
+immediately, <tt>TERMIOS.TCSADRAIN</tt> to change after transmitting
+all queued output, or <tt>TERMIOS.TCSAFLUSH</tt> to change after
+transmitting all queued output and discarding all queued input.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13476"><tt>tcsendbreak</tt></a></b> (<var>fd, duration</var>)
+<dd>
+Send a break on file descriptor <i>fd</i>.  A zero <i>duration</i> sends
+a break for 0.25-0.5 seconds; a nonzero <i>duration</i> has a system
+dependent meaning.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13483"><tt>tcdrain</tt></a></b> (<var>fd</var>)
+<dd>
+Wait until all output written to file descriptor <i>fd</i> has been
+transmitted.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13488"><tt>tcflush</tt></a></b> (<var>fd, queue</var>)
+<dd>
+Discard queued data on file descriptor <i>fd</i>.  The <i>queue</i>
+selector specifies which queue: <tt>TERMIOS.TCIFLUSH</tt> for the
+input queue, <tt>TERMIOS.TCOFLUSH</tt> for the output queue, or
+<tt>TERMIOS.TCIOFLUSH</tt> for both queues.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-13497"><tt>tcflow</tt></a></b> (<var>fd, action</var>)
+<dd>
+Suspend or resume input or output on file descriptor <i>fd</i>.  The
+<i>action</i> argument can be <tt>TERMIOS.TCOOFF</tt> to suspend
+output, <tt>TERMIOS.TCOON</tt> to restart output,
+<tt>TERMIOS.TCIOFF</tt> to suspend input, or
+<tt>TERMIOS.TCION</tt> to restart input. 
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html2120"
+ HREF="termios_Example.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> Example</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2118"
+ HREF="termios_Example.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2114"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2108"
+ HREF="module-gdbm.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2116"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2117"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2119"
+ HREF="termios_Example.html">8.8.1 Example</A>
+<b>Up:</b> <A NAME="tex2html2115"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2109"
+ HREF="module-gdbm.html">8.7 gdbm  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

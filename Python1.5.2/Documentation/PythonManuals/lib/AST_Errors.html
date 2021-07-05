@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.14.4 Exceptions and Error Handling</TITLE>
+<META NAME="description" CONTENT="3.14.4 Exceptions and Error Handling">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="AST_Objects.html">
+<LINK REL="previous" HREF="Querying_ASTs.html">
+<LINK REL="up" HREF="module-parser.html">
+<LINK REL="next" HREF="AST_Objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1098"
+ HREF="AST_Objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1094"
+ HREF="module-parser.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1088"
+ HREF="Querying_ASTs.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1096"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1097"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1099"
+ HREF="AST_Objects.html">3.14.5 AST Objects</A>
+<b>Up:</b> <A NAME="tex2html1095"
+ HREF="module-parser.html">3.14 parser  </A>
+<b>Previous:</b> <A NAME="tex2html1089"
+ HREF="Querying_ASTs.html">3.14.3 Queries on AST</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0051440000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">4</SPAN> Exceptions and Error Handling
+</H2>
+
+<P>
+The parser module defines a single exception, but may also pass other
+built-in exceptions from other portions of the Python runtime
+environment.  See each function for information about the exceptions
+it can raise.
+
+<P>
+<dl><dt><b><a name="l2h-4555"><tt>ParserError</tt></a></b>
+<dd>
+Exception raised when a failure occurs within the parser module.  This
+is generally produced for validation failures rather than the built in
+<tt>SyntaxError</tt> thrown during normal parsing.
+The exception argument is either a string describing the reason of the
+failure or a tuple containing a sequence causing the failure from a parse
+tree passed to <tt>sequence2ast()</tt> and an explanatory string.  Calls to
+<tt>sequence2ast()</tt> need to be able to handle either type of exception,
+while calls to other functions in the module will only need to be
+aware of the simple string values.
+</dl>
+
+<P>
+Note that the functions <tt>compileast()</tt>, <tt>expr()</tt>, and
+<tt>suite()</tt> may throw exceptions which are normally thrown by the
+parsing and compilation process.  These include the built in
+exceptions <tt>MemoryError</tt>, <tt>OverflowError</tt>,
+<tt>SyntaxError</tt>, and <tt>SystemError</tt>.  In these cases, these
+exceptions carry all the meaning normally associated with them.  Refer
+to the descriptions of each function for detailed information.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html1098"
+ HREF="AST_Objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html1094"
+ HREF="module-parser.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html1088"
+ HREF="Querying_ASTs.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html1096"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html1097"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html1099"
+ HREF="AST_Objects.html">3.14.5 AST Objects</A>
+<b>Up:</b> <A NAME="tex2html1095"
+ HREF="module-parser.html">3.14 parser  </A>
+<b>Previous:</b> <A NAME="tex2html1089"
+ HREF="Querying_ASTs.html">3.14.3 Queries on AST</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3.2.2 SGI IRIX 4 Dynamic Loading</TITLE>
+<META NAME="description" CONTENT="3.2.2 SGI IRIX 4 Dynamic Loading">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ext.css">
+<LINK REL="next" HREF="gnuLinking.html">
+<LINK REL="previous" HREF="linking.html">
+<LINK REL="up" HREF="makedynload.html">
+<LINK REL="next" HREF="gnuLinking.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html386"
+ HREF="gnuLinking.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html383"
+ HREF="makedynload.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html377"
+ HREF="linking.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html385"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html387"
+ HREF="gnuLinking.html">3.2.3 GNU Dynamic Loading</A>
+<b>Up:</b> <A NAME="tex2html384"
+ HREF="makedynload.html">3.2 Building a Dynamically</A>
+<b>Previous:</b> <A NAME="tex2html378"
+ HREF="linking.html">3.2.1 Shared Libraries</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION005220000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">2</SPAN> SGI IRIX 4 Dynamic Loading
+</H2>
+
+<P>
+<b>IMPORTANT:</b> You must compile your extension module with the
+additional C flag "<tt>-G0</tt>" (or "<tt>-G 0</tt>").  This instructs the
+assembler to generate position-independent code.
+
+<P>
+You don't need to link the resulting "<tt>spammodule.o</tt>" file; just
+copy it into a directory along the Python module search path.<a name="l2h-"></a>
+
+<P>
+The first time your extension is loaded, it takes some extra time and
+a few messages may be printed.  This creates a file
+"<tt>spammodule.ld</tt>" which is an image that can be loaded quickly into
+the Python interpreter process.  When a new Python interpreter is
+installed, the <tt>dl</tt> package detects this and rebuilds
+"<tt>spammodule.ld</tt>".  The file "<tt>spammodule.ld</tt>" is placed in the
+directory where "<tt>spammodule.o</tt>" was found, unless this directory is
+unwritable; in that case it is placed in a temporary
+directory.<A NAME="tex2html5"
+ HREF="#foot784"><SUP><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A>
+<P>
+If your extension modules uses additional system libraries, you must
+create a file "<tt>spammodule.libs</tt>" in the same directory as the
+"<tt>spammodule.o</tt>".  This file should contain one or more lines with
+whitespace-separated options that will be passed to the linker --
+normally only "<tt>-l</tt>" options or absolute pathnames of libraries
+("<tt>.a</tt>" files) should be used.
+
+<P>
+<BR><HR><H4>Footnotes</H4>
+<DL>
+<DT><A NAME="foot784">...
+directory.</A><A NAME="foot784"
+ HREF="irixLinking.html#tex2html5"><SUP><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A>
+<DD>Check the manual page of the <tt>dl</tt> package for
+details.
+
+</DL><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html386"
+ HREF="gnuLinking.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html383"
+ HREF="makedynload.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html377"
+ HREF="linking.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html385"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html387"
+ HREF="gnuLinking.html">3.2.3 GNU Dynamic Loading</A>
+<b>Up:</b> <A NAME="tex2html384"
+ HREF="makedynload.html">3.2 Building a Dynamically</A>
+<b>Previous:</b> <A NAME="tex2html378"
+ HREF="linking.html">3.2.1 Shared Libraries</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1.10 Reference Counts</TITLE>
+<META NAME="description" CONTENT="1.10 Reference Counts">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ext.css">
+<LINK REL="next" HREF="cplusplus.html">
+<LINK REL="previous" HREF="buildValue.html">
+<LINK REL="up" HREF="intro.html">
+<LINK REL="next" HREF="refcountsInPython.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html212"
+ HREF="refcountsInPython.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html209"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html203"
+ HREF="buildValue.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html211"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html213"
+ HREF="refcountsInPython.html">1.10.1 Reference Counting in</A>
+<b>Up:</b> <A NAME="tex2html210"
+ HREF="intro.html">1. Extending Python with</A>
+<b>Previous:</b> <A NAME="tex2html204"
+ HREF="buildValue.html">1.9 The Py_BuildValue() Function</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0031000000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">10</SPAN> Reference Counts
+</H1>
+
+<P>
+In languages like C or C++, the programmer is responsible for
+dynamic allocation and deallocation of memory on the heap.  In C,
+this is done using the functions <tt>malloc()</tt> and
+<tt>free()</tt>.  In C++, the operators <tt>new</tt> and
+<tt>delete</tt> are used with essentially the same meaning; they are
+actually implemented using <tt>malloc()</tt> and
+<tt>free()</tt>, so we'll restrict the following discussion to the
+latter.
+
+<P>
+Every block of memory allocated with <tt>malloc()</tt> should
+eventually be returned to the pool of available memory by exactly one
+call to <tt>free()</tt>.  It is important to call
+<tt>free()</tt> at the right time.  If a block's address is
+forgotten but <tt>free()</tt> is not called for it, the memory it
+occupies cannot be reused until the program terminates.  This is
+called a <i>memory leak</i>.  On the other hand, if a program calls
+<tt>free()</tt> for a block and then continues to use the block, it
+creates a conflict with re-use of the block through another
+<tt>malloc()</tt> call.  This is called <i>using freed memory</i>.
+It has the same bad consequences as referencing uninitialized data --
+core dumps, wrong results, mysterious crashes.
+
+<P>
+Common causes of memory leaks are unusual paths through the code.  For
+instance, a function may allocate a block of memory, do some
+calculation, and then free the block again.  Now a change in the
+requirements for the function may add a test to the calculation that
+detects an error condition and can return prematurely from the
+function.  It's easy to forget to free the allocated memory block when
+taking this premature exit, especially when it is added later to the
+code.  Such leaks, once introduced, often go undetected for a long
+time: the error exit is taken only in a small fraction of all calls,
+and most modern machines have plenty of virtual memory, so the leak
+only becomes apparent in a long-running process that uses the leaking
+function frequently.  Therefore, it's important to prevent leaks from
+happening by having a coding convention or strategy that minimizes
+this kind of errors.
+
+<P>
+Since Python makes heavy use of <tt>malloc()</tt> and
+<tt>free()</tt>, it needs a strategy to avoid memory leaks as well
+as the use of freed memory.  The chosen method is called
+<i>reference counting</i>.  The principle is simple: every object
+contains a counter, which is incremented when a reference to the
+object is stored somewhere, and which is decremented when a reference
+to it is deleted.  When the counter reaches zero, the last reference
+to the object has been deleted and the object is freed.
+
+<P>
+An alternative strategy is called <i>automatic garbage collection</i>.
+(Sometimes, reference counting is also referred to as a garbage
+collection strategy, hence my use of ``automatic'' to distinguish the
+two.)  The big advantage of automatic garbage collection is that the
+user doesn't need to call <tt>free()</tt> explicitly.  (Another claimed
+advantage is an improvement in speed or memory usage -- this is no
+hard fact however.)  The disadvantage is that for C, there is no
+truly portable automatic garbage collector, while reference counting
+can be implemented portably (as long as the functions <tt>malloc()</tt>
+and <tt>free()</tt> are available -- which the C Standard guarantees).
+Maybe some day a sufficiently portable automatic garbage collector
+will be available for C.  Until then, we'll have to live with
+reference counts.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html214"
+ HREF="refcountsInPython.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">1</SPAN> Reference Counting in Python</A>
+<LI><A NAME="tex2html215"
+ HREF="ownershipRules.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN> Ownership Rules</A>
+<LI><A NAME="tex2html216"
+ HREF="thinIce.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">3</SPAN> Thin Ice</A>
+<LI><A NAME="tex2html217"
+ HREF="nullPointers.html"><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">4</SPAN> NULL Pointers</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html212"
+ HREF="refcountsInPython.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html209"
+ HREF="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html203"
+ HREF="buildValue.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html211"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html213"
+ HREF="refcountsInPython.html">1.10.1 Reference Counting in</A>
+<b>Up:</b> <A NAME="tex2html210"
+ HREF="intro.html">1. Extending Python with</A>
+<b>Previous:</b> <A NAME="tex2html204"
+ HREF="buildValue.html">1.9 The Py_BuildValue() Function</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

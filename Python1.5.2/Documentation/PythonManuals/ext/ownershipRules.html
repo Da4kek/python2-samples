@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>1.10.2 Ownership Rules</TITLE>
+<META NAME="description" CONTENT="1.10.2 Ownership Rules">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="ext.css">
+<LINK REL="next" HREF="thinIce.html">
+<LINK REL="previous" HREF="refcountsInPython.html">
+<LINK REL="up" HREF="refcounts.html">
+<LINK REL="next" HREF="thinIce.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html238"
+ HREF="thinIce.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html235"
+ HREF="refcounts.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html229"
+ HREF="refcountsInPython.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html237"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html239"
+ HREF="thinIce.html">1.10.3 Thin Ice</A>
+<b>Up:</b> <A NAME="tex2html236"
+ HREF="refcounts.html">1.10 Reference Counts</A>
+<b>Previous:</b> <A NAME="tex2html230"
+ HREF="refcountsInPython.html">1.10.1 Reference Counting in</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0031020000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">10</SPAN>.<SPAN CLASS="arabic">2</SPAN> Ownership Rules
+</H2>
+
+<P>
+Whenever an object reference is passed into or out of a function, it
+is part of the function's interface specification whether ownership is
+transferred with the reference or not.
+
+<P>
+Most functions that return a reference to an object pass on ownership
+with the reference.  In particular, all functions whose function it is
+to create a new object, e.g. <tt>PyInt_FromLong()</tt> and
+<tt>Py_BuildValue()</tt>, pass ownership to the receiver.  Even if in
+fact, in some cases, you don't receive a reference to a brand new
+object, you still receive ownership of the reference.  For instance,
+<tt>PyInt_FromLong()</tt> maintains a cache of popular values and can
+return a reference to a cached item.
+
+<P>
+Many functions that extract objects from other objects also transfer
+ownership with the reference, for instance
+<tt>PyObject_GetAttrString()</tt>.  The picture is less clear, here,
+however, since a few common routines are exceptions:
+<tt>PyTuple_GetItem()</tt>, <tt>PyList_GetItem()</tt>,
+<tt>PyDict_GetItem()</tt>, and <tt>PyDict_GetItemString()</tt>
+all return references that you borrow from the tuple, list or
+dictionary.
+
+<P>
+The function <tt>PyImport_AddModule()</tt> also returns a borrowed
+reference, even though it may actually create the object it returns:
+this is possible because an owned reference to the object is stored in
+<tt>sys.modules</tt>.
+
+<P>
+When you pass an object reference into another function, in general,
+the function borrows the reference from you -- if it needs to store
+it, it will use <tt>Py_INCREF()</tt> to become an independent
+owner.  There are exactly two important exceptions to this rule:
+<tt>PyTuple_SetItem()</tt> and <tt>PyList_SetItem()</tt>.  These
+functions take over ownership of the item passed to them -- even if
+they fail!  (Note that <tt>PyDict_SetItem()</tt> and friends don't
+take over ownership -- they are ``normal.'')
+
+<P>
+When a C function is called from Python, it borrows references to its
+arguments from the caller.  The caller owns a reference to the object,
+so the borrowed reference's lifetime is guaranteed until the function
+returns.  Only when such a borrowed reference must be stored or passed
+on, it must be turned into an owned reference by calling
+<tt>Py_INCREF()</tt>.
+
+<P>
+The object reference returned from a C function that is called from
+Python must be an owned reference -- ownership is tranferred from the
+function to its caller.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html238"
+ HREF="thinIce.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html235"
+ HREF="refcounts.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html229"
+ HREF="refcountsInPython.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Extending and Embedding the Python Interpreter</b></td>
+<td align=right width="20%"><A NAME="tex2html237"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html239"
+ HREF="thinIce.html">1.10.3 Thin Ice</A>
+<b>Up:</b> <A NAME="tex2html236"
+ HREF="refcounts.html">1.10 Reference Counts</A>
+<b>Previous:</b> <A NAME="tex2html230"
+ HREF="refcountsInPython.html">1.10.1 Reference Counting in</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

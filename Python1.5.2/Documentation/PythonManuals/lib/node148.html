@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>9.1 Debugger Commands</TITLE>
+<META NAME="description" CONTENT="9.1 Debugger Commands">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="node149.html">
+<LINK REL="previous" HREF="module-pdb.html">
+<LINK REL="up" HREF="module-pdb.html">
+<LINK REL="next" HREF="node149.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2284"
+ HREF="node149.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2280"
+ HREF="module-pdb.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2274"
+ HREF="module-pdb.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2282"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2283"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2285"
+ HREF="node149.html">9.2 How It Works</A>
+<b>Up:</b> <A NAME="tex2html2281"
+ HREF="module-pdb.html">9. The Python Debugger</A>
+<b>Previous:</b> <A NAME="tex2html2275"
+ HREF="module-pdb.html">9. The Python Debugger</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0011100000000000000000">
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">1</SPAN> Debugger Commands</A>
+</H1>
+
+<P>
+The debugger recognizes the following commands.  Most commands can be
+abbreviated to one or two letters; e.g. ``<tt>h(elp)</tt>'' means that
+either ``<tt>h</tt>'' or ``<tt>help</tt>'' can be used to enter the help
+command (but not ``<tt>he</tt>'' or ``<tt>hel</tt>'', nor ``<tt>H</tt>'' or
+``<tt>Help</tt> or ``<tt>HELP</tt>'').  Arguments to commands must be
+separated by whitespace (spaces or tabs).  Optional arguments are
+enclosed in square brackets (``<tt>[]</tt>'') in the command syntax; the
+square brackets must not be typed.  Alternatives in the command syntax
+are separated by a vertical bar (``<tt>|</tt>'').
+
+<P>
+Entering a blank line repeats the last command entered.  Exception: if
+the last command was a ``<tt>list</tt>'' command, the next 11 lines are
+listed.
+
+<P>
+Commands that the debugger doesn't recognize are assumed to be Python
+statements and are executed in the context of the program being
+debugged.  Python statements can also be prefixed with an exclamation
+point (``<tt>!</tt>'').  This is a powerful way to inspect the program
+being debugged; it is even possible to change a variable or call a
+function.  When an
+exception occurs in such a statement, the exception name is printed
+but the debugger's state is not changed.
+
+<P>
+Multiple commands may be entered on a single line, separated by
+''<tt>;;</tt>''.  (A single ''<tt>;</tt>'' is not used as it is
+the separator for multiple commands in a line that is passed to
+the Python parser.)
+No intelligence is applied to separating the commands;
+the input is split at the first ''<tt>;;</tt>'' pair, even if it is in
+the middle of a quoted string.
+
+<P>
+The debugger supports aliases.  Aliases can have parameters which
+allows one a certain level of adaptability to the context under
+examination.
+
+<P>
+If a file "<tt>.pdbrc</tt>" exists in the user's home directory or in the
+current directory, it is read in and executed as if it had been typed
+at the debugger prompt.  This is particularly useful for aliases.  If
+both files exist, the one in the home directory is read first and
+aliases defined there can be overriden by the local file.
+
+<P>
+<DL>
+<DD><P>
+<DT><STRONG>h(elp) </var><big>[</big><var><i>command</i></var><big>]</big><var></STRONG>
+<DD><P>
+Without argument, print the list of available commands.  With a
+<i>command</i> as argument, print help about that command.  "<tt>help
+pdb</tt>" displays the full documentation file; if the environment variable
+<tt>PAGER</tt> is defined, the file is piped through that command
+instead.  Since the <i>command</i> argument must be an identifier,
+"<tt>help exec</tt>" must be entered to get help on the "<tt>!</tt>" command.
+
+<P>
+<DT><STRONG>w(here)</STRONG>
+<DD><P>
+Print a stack trace, with the most recent frame at the bottom.  An
+arrow indicates the current frame, which determines the context of
+most commands.
+
+<P>
+<DT><STRONG>d(own)</STRONG>
+<DD><P>
+Move the current frame one level down in the stack trace
+(to an older frame).
+
+<P>
+<DT><STRONG>u(p)</STRONG>
+<DD><P>
+Move the current frame one level up in the stack trace
+(to a newer frame).
+
+<P>
+<DT>
+<DD>b(reak) </var><big>[</big><big>[</big><var><i>filename</i>:</var><big>]</big><var><i>lineno</i>329
+<tt><BIG CLASS="XLARGE">|</BIG></tt><i>function</i>330
+</var><big>[</big><var>, <i>condition</i></var><big>]</big><big>]</big><var>]
+
+<P>
+With a <i>lineno</i> argument, set a break there in the current
+file.  With a <i>function</i> argument, set a break at the first
+executable statement within that function.
+The line number may be prefixed with a filename and a colon,
+to specify a breakpoint in another file (probably one that
+hasn't been loaded yet).  The file is searched on <tt>sys.path</tt>.
+Note that each breakpoint is assigned a number to which all the other
+breakpoint commands refer.
+
+<P>
+If a second argument is present, it is an expression which must
+evaluate to true before the breakpoint is honored.
+
+<P>
+Without argument, list all breaks, including for each breakpoint,
+the number of times that breakpoint has been hit, the current
+ignore count, and the associated condition if any.
+
+<P>
+<DT>
+<DD>tbreak </var><big>[</big><big>[</big><var><i>filename</i>:</var><big>]</big><var><i>lineno</i>331
+<tt><BIG CLASS="XLARGE">|</BIG></tt><i>function</i>332
+</var><big>[</big><var>, <i>condition</i></var><big>]</big><big>]</big><var>]
+
+<P>
+Temporary breakpoint, which is removed automatically when it is
+first hit.  The arguments are the same as break.
+
+<P>
+<DT><STRONG>cl(ear) </var><big>[</big><var><i>bpnumber</i> </var><big>[</big><var><i>bpnumber ...</i></var><big>]</big><big>]</big><var></STRONG>
+<DD><P>
+With a space separated list of breakpoint numbers, clear those
+breakpoints.  Without argument, clear all breaks (but first
+ask confirmation).
+
+<P>
+<DT><STRONG>disable </var><big>[</big><var><i>bpnumber</i> </var><big>[</big><var><i>bpnumber ...</i></var><big>]</big><big>]</big><var></STRONG>
+<DD><P>
+Disables the breakpoints given as a space separated list of
+breakpoint numbers.  Disabling a breakpoint means it cannot cause
+the program to stop execution, but unlike clearing a breakpoint, it
+remains in the list of breakpoints and can be (re-)enabled.
+
+<P>
+<DT><STRONG>enable </var><big>[</big><var><i>bpnumber</i> </var><big>[</big><var><i>bpnumber ...</i></var><big>]</big><big>]</big><var></STRONG>
+<DD><P>
+Enables the breakpoints specified.
+
+<P>
+<DT><STRONG>ignore <i>bpnumber</i> </var><big>[</big><var><i>count</i></var><big>]</big><var></STRONG>
+<DD><P>
+Sets the ignore count for the given breakpoint number.  If
+count is omitted, the ignore count is set to 0.  A breakpoint
+becomes active when the ignore count is zero.  When non-zero,
+the count is decremented each time the breakpoint is reached
+and the breakpoint is not disabled and any associated condition
+evaluates to true.
+
+<P>
+<DT><STRONG>condition <i>bpnumber</i> </var><big>[</big><var><i>condition</i></var><big>]</big><var></STRONG>
+<DD><P>
+Condition is an expression which must evaluate to true before
+the breakpoint is honored.  If condition is absent, any existing
+condition is removed; i.e., the breakpoint is made unconditional.
+
+<P>
+<DT><STRONG>s(tep)</STRONG>
+<DD><P>
+Execute the current line, stop at the first possible occasion
+(either in a function that is called or on the next line in the
+current function).
+
+<P>
+<DT><STRONG>n(ext)</STRONG>
+<DD><P>
+Continue execution until the next line in the current function
+is reached or it returns.  (The difference between <tt>next</tt> and
+<tt>step</tt> is that <tt>step</tt> stops inside a called function, while
+<tt>next</tt> executes called functions at (nearly) full speed, only
+stopping at the next line in the current function.)
+
+<P>
+<DT><STRONG>r(eturn)</STRONG>
+<DD><P>
+Continue execution until the current function returns.
+
+<P>
+<DT><STRONG>c(ont(inue))</STRONG>
+<DD><P>
+Continue execution, only stop when a breakpoint is encountered.
+
+<P>
+<DT><STRONG>l(ist) </var><big>[</big><var><i>first</var><big>[</big><var>, last</var><big>]</big><var></i></var><big>]</big><var></STRONG>
+<DD><P>
+List source code for the current file.  Without arguments, list 11
+lines around the current line or continue the previous listing.  With
+one argument, list 11 lines around at that line.  With two arguments,
+list the given range; if the second argument is less than the first,
+it is interpreted as a count.
+
+<P>
+<DT><STRONG>a(rgs)</STRONG>
+<DD><P>
+Print the argument list of the current function.
+
+<P>
+<DT><STRONG>p <i>expression</i></STRONG>
+<DD><P>
+Evaluate the <i>expression</i> in the current context and print its
+value.  (Note: <tt>print</tt> can also be used, but is not a debugger
+command -- this executes the Python <tt>print</tt> statement.)
+
+<P>
+<DT><STRONG>alias </var><big>[</big><var><i>name</i> </var><big>[</big><var>command</var><big>]</big><big>]</big><var></STRONG>
+<DD><P>
+Creates an alias called <i>name</i> that executes <i>command</i>.  The
+command must <i>not</i> be enclosed in quotes.  Replaceable parameters
+can be indicated by "<tt>%1</tt>", "<tt>%2</tt>", and so on, while "<tt>%*</tt>" is
+replaced by all the parameters.  If no command is given, the current
+alias for <i>name</i> is shown. If no arguments are given, all
+aliases are listed.
+
+<P>
+Aliases may be nested and can contain anything that can be
+legally typed at the pdb prompt.  Note that internal pdb commands
+<i>can</i> be overridden by aliases.  Such a command is
+then hidden until the alias is removed.  Aliasing is recursively
+applied to the first word of the command line; all other words
+in the line are left alone.
+
+<P>
+As an example, here are two useful aliases (especially when placed
+in the "<tt>.pdbrc</tt>" file):
+
+<P>
+<dl><dd><pre>
+#Print instance variables (usage "pi classInst")
+alias pi for k in %1.__dict__.keys(): print "%1.",k,"=",%1.__dict__[k]
+#Print instance variables in self
+alias ps pi self
+</pre></dl>
+		
+<DT><STRONG>unalias <i>name</i></STRONG>
+<DD><P>
+Deletes the specified alias.
+
+<P>
+<DT><STRONG></var><big>[</big><var>!</var><big>]</big><var><i>statement</i></STRONG>
+<DD><P>
+Execute the (one-line) <i>statement</i> in the context of
+the current stack frame.
+The exclamation point can be omitted unless the first word
+of the statement resembles a debugger command.
+To set a global variable, you can prefix the assignment
+command with a ``<tt>global</tt>'' command on the same line, e.g.:
+
+<P>
+<dl><dd><pre>
+(Pdb) global list_options; list_options = ['-l']
+(Pdb)
+</pre></dl>
+
+<P>
+<DT><STRONG>q(uit)</STRONG>
+<DD><P>
+Quit from the debugger.
+The program being executed is aborted.
+
+<P>
+</DL>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2284"
+ HREF="node149.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2280"
+ HREF="module-pdb.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2274"
+ HREF="module-pdb.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2282"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2283"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2285"
+ HREF="node149.html">9.2 How It Works</A>
+<b>Up:</b> <A NAME="tex2html2281"
+ HREF="module-pdb.html">9. The Python Debugger</A>
+<b>Previous:</b> <A NAME="tex2html2275"
+ HREF="module-pdb.html">9. The Python Debugger</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

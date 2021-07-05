@@ -1,0 +1,66 @@
+BODY {
+	BACKGROUND: #ffffff; COLOR: #000000; FONT-FAMILY: "Trebuchet MS", Arial, Helvetica, sans-serif; FONT-SIZE: medium
+}
+H1 {
+	COLOR: #044484; FONT-FAMILY: "Trebuchet MS", Arial, Helvetica, sans-serif; FONT-WEIGHT: bold
+}
+H2 {
+	COLOR: #044484; FONT-FAMILY: "Trebuchet MS", Arial, Helvetica, sans-serif; FONT-WEIGHT: bold
+}
+H3 {
+	COLOR: #044484; FONT-FAMILY: "Trebuchet MS", Arial, Helvetica, sans-serif; FONT-WEIGHT: bold
+}
+H1 {
+	FONT-SIZE: xx-large; FONT-WEIGHT: bold
+}
+H2 {
+	FONT-SIZE: x-large; FONT-WEIGHT: bold
+}
+H1 TT {
+	FONT-WEIGHT: bold
+}
+H2 TT {
+	FONT-WEIGHT: bold
+}
+H3 TT {
+	FONT-WEIGHT: bold
+}
+H1 A:link {
+	COLOR: #044484; TEXT-DECORATION: none
+}
+H1 A:visited {
+	COLOR: #044484; TEXT-DECORATION: none
+}
+H1 A:active {
+	COLOR: #044484; TEXT-DECORATION: none
+}
+H1 A:hover {
+	COLOR: #044484; TEXT-DECORATION: underline
+}
+.subtitle {
+	COLOR: #044484; FONT-FAMILY: "Trebuchet MS", Arial, Helvetica, sans-serif; FONT-SIZE: large; FONT-WEIGHT: bold; MARGIN-BOTTOM: 0px
+}
+.subinfo {
+	COLOR: #044484; FONT-SIZE: x-small; MARGIN: 0px
+}
+.small {
+	FONT-SIZE: xx-small
+}
+.highlight {
+	BACKGROUND: #ffffcc
+}
+.mark {
+	COLOR: #044484
+}
+.h4 {
+	COLOR: #044484
+}
+.timestamp {
+	COLOR: #044484; FONT-SIZE: xx-small
+}
+.navigation {
+	BACKGROUND: #add8e6; FONT-SIZE: x-small
+}
+.grid {
+	BACKGROUND: #000000
+}

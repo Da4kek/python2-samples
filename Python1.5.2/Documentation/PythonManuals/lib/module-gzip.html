@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.11 gzip --
+gzip compression and decompression using files.</TITLE>
+<META NAME="description" CONTENT="7.11 gzip --
+gzip compression and decompression using files.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-zlib.html">
+<LINK REL="up" HREF="someos.html">
+<LINK REL="next" HREF="unix.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2010"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2006"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2002"
+ HREF="module-zlib.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2008"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2009"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2011"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Up:</b> <A NAME="tex2html2007"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html2003"
+ HREF="module-zlib.html">7.10 zlib  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0091100000000000000000">
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">11</SPAN> <tt>gzip</tt> --
+         <b>gzip</b> compression and decompression using files.</A>
+</H1>
+
+
+<P>
+
+<P>
+The data compression provided by the <tt>zlib</tt> module is compatible
+with that used by the GNU compression program <b>gzip</b>.
+Accordingly, the <tt>gzip</tt> module provides the <tt>GzipFile</tt>
+class to read and write <b>gzip</b>-format files, automatically
+compressing or decompressing the data so it looks like an ordinary
+file object.
+
+<P>
+The module defines the following items:
+
+<P>
+<dl><dt><b><a name="l2h-12191"><tt>GzipFile</tt></a></b> (<big>[</big><var>filename</var><big>[</big><var>, mode</var><big>[</big><var>,
+                            compresslevel</var><big>[</big><var>, fileobj</var><big>]</big><big>]</big><big>]</big><big>]</big>)
+<dd>
+Constructor for the <tt>GzipFile</tt> class, which simulates most of
+the methods of a file object, with the exception of the
+<tt>seek()</tt> and <tt>tell()</tt> methods.  At least one of
+<i>fileobj</i> and <i>filename</i> must be given a non-trivial value.
+
+<P>
+The new class instance is based on <i>fileobj</i>, which can be a
+regular file, a <tt>StringIO</tt> object, or any other object which
+simulates a file.  It defaults to <tt>None</tt>, in which case
+<i>filename</i> is opened to provide a file object.
+
+<P>
+When <i>fileobj</i> is not <tt>None</tt>, the <i>filename</i> argument is
+only used to be included in the <b>gzip</b> file header, which may
+includes the original filename of the uncompressed file.  It defaults
+to the filename of <i>fileobj</i>, if discernible; otherwise, it
+defaults to the empty string, and in this case the original filename
+is not included in the header.
+
+<P>
+The <i>mode</i> argument can be either <tt>'r'</tt> or <tt>'w'</tt>,
+depending on whether the file will be read or written.  The default is
+the mode of <i>fileobj</i> if discernible; otherwise, the default is
+<tt>'r'</tt>.
+
+<P>
+The <i>compresslevel</i> argument is an integer from <tt>1</tt> to
+<tt>9</tt> controlling the level of compression; <tt>1</tt> is fastest and
+produces the least compression, and <tt>9</tt> is slowest and produces
+the most compression.  The default is <tt>9</tt>.
+
+<P>
+Calling a <tt>GzipFile</tt> object's <tt>close()</tt> method does not
+close <i>fileobj</i>, since you might wish to append more material
+after the compressed data.  This also allows you to pass a
+<tt>StringIO</tt> object opened for writing as <i>fileobj</i>, and
+retrieve the resulting memory buffer using the <tt>StringIO</tt>
+object's <tt>getvalue()</tt> method.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-12189"><tt>open</tt></a></b> (<var>filename</var><big>[</big><var>, mode</var><big>[</big><var>, compresslevel</var><big>]</big><big>]</big>)
+<dd>
+This is a shorthand for <tt>GzipFile(<i>filename</i>,</tt>
+<tt><i>mode</i>,</tt> <tt><i>compresslevel</i>)</tt>.  The <i>filename</i>
+argument is required; <i>mode</i> defaults to <tt>'r'</tt> and
+<i>compresslevel</i> defaults to <tt>9</tt>.
+</dl>
+
+<P>
+<p><b>See Also:</b></p>
+
+<p>Module <tt><b><a href="module-zlib.html">zlib</a></b></tt>&nbsp;&nbsp;&nbsp;(the basic data compression module)</p>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2010"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2006"
+ HREF="someos.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2002"
+ HREF="module-zlib.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2008"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2009"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2011"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Up:</b> <A NAME="tex2html2007"
+ HREF="someos.html">7. Optional Operating System</A>
+<b>Previous:</b> <A NAME="tex2html2003"
+ HREF="module-zlib.html">7.10 zlib  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

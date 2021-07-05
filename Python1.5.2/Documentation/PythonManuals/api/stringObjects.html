@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7.2.1 String Objects</TITLE>
+<META NAME="description" CONTENT="7.2.1 String Objects">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="api.css">
+<LINK REL="next" HREF="tupleObjects.html">
+<LINK REL="previous" HREF="sequenceObjects.html">
+<LINK REL="up" HREF="sequenceObjects.html">
+<LINK REL="next" HREF="tupleObjects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html467"
+ HREF="tupleObjects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html463"
+ HREF="sequenceObjects.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html457"
+ HREF="sequenceObjects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html465"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html466"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html468"
+ HREF="tupleObjects.html">7.2.2 Tuple Objects</A>
+<b>Up:</b> <A NAME="tex2html464"
+ HREF="sequenceObjects.html">7.2 Sequence Objects</A>
+<b>Previous:</b> <A NAME="tex2html458"
+ HREF="sequenceObjects.html">7.2 Sequence Objects</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION009210000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">7</SPAN>.<SPAN CLASS="arabic">2</SPAN>.<SPAN CLASS="arabic">1</SPAN> String Objects
+</H2>
+
+<P>
+<dl><dt><b><a name="l2h-1544"><tt>PyStringObject</tt></a></b>
+<dd>
+This subtype of <tt>PyObject</tt> represents a Python string object.
+</dl>
+
+<P>
+<dl><dt>PyTypeObject <b><a name="l2h-1549"><tt>PyString_Type</tt></a></b>
+<dd>
+This instance of <tt>PyTypeObject</tt> represents the Python string type.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1554"><tt>PyString_Check</tt></a></b>(<var>PyObject *o</var>)
+<dd>
+Returns true if the object <i>o</i> is a string object.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1560"><tt>PyString_FromStringAndSize</tt></a></b>(<var>const char *v,
+                                                          int len</var>)
+<dd>
+Returns a new string object with the value <i>v</i> and length
+<i>len</i> on success, and <tt>NULL</tt> on failure.  If <i>v</i> is <tt>NULL</tt>,
+the contents of the string are uninitialized.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1570"><tt>PyString_FromString</tt></a></b>(<var>const char *v</var>)
+<dd>
+Returns a new string object with the value <i>v</i> on success, and
+<tt>NULL</tt> on failure.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1577"><tt>PyString_Size</tt></a></b>(<var>PyObject *string</var>)
+<dd>
+Returns the length of the string in string object <i>string</i>.
+</dl>
+
+<P>
+<dl><dt>char* <b><a name="l2h-1583"><tt>PyString_AsString</tt></a></b>(<var>PyObject *string</var>)
+<dd>
+Resturns a <tt>NULL</tt> terminated representation of the contents of <i>string</i>.
+</dl>
+
+<P>
+<dl><dt>void <b><a name="l2h-1590"><tt>PyString_Concat</tt></a></b>(<var>PyObject **string,
+                                         PyObject *newpart</var>)
+<dd>
+Creates a new string object in <i>*string</i> containing the contents
+of <i>newpart</i> appended to <i>string</i>.
+</dl>
+
+<P>
+<dl><dt>void <b><a name="l2h-1598"><tt>PyString_ConcatAndDel</tt></a></b>(<var>PyObject **string,
+                                               PyObject *newpart</var>)
+<dd>
+Creates a new string object in <i>*string</i> containing the contents
+of <i>newpart</i> appended to <i>string</i>.  This version decrements
+the reference count of <i>newpart</i>.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1607"><tt>_PyString_Resize</tt></a></b>(<var>PyObject **string, int newsize</var>)
+<dd>
+A way to resize a string object even though it is ``immutable''.  
+Only use this to build up a brand new string object; don't use this if
+the string may already be known in other parts of the code.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1612"><tt>PyString_Format</tt></a></b>(<var>PyObject *format,
+                                              PyObject *args</var>)
+<dd>
+Returns a new string object from <i>format</i> and <i>args</i>.  Analogous
+to <tt><i>format</i> % <i>args</i></tt>.  The <i>args</i> argument must be
+a tuple.
+</dl>
+
+<P>
+<dl><dt>void <b><a name="l2h-1622"><tt>PyString_InternInPlace</tt></a></b>(<var>PyObject **string</var>)
+<dd>
+Intern the argument <i>*string</i> in place.  The argument must be the
+address of a pointer variable pointing to a Python string object.
+If there is an existing interned string that is the same as
+<i>*string</i>, it sets <i>*string</i> to it (decrementing the reference 
+count of the old string object and incrementing the reference count of
+the interned string object), otherwise it leaves <i>*string</i> alone
+and interns it (incrementing its reference count).  (Clarification:
+even though there is a lot of talk about reference counts, think of
+this function as reference-count-neutral; you own the object after
+the call if and only if you owned it before the call.)
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name="l2h-1631"><tt>PyString_InternFromString</tt></a></b>(<var>const char *v</var>)
+<dd>
+A combination of <tt>PyString_FromString()</tt> and
+<tt>PyString_InternInPlace()</tt>, returning either a new string object
+that has been interned, or a new (``owned'') reference to an earlier
+interned string object with the same value.
+</dl>
+
+<P>
+<dl><dt>char* <b><a name="l2h-1638"><tt>PyString_AS_STRING</tt></a></b>(<var>PyObject *string</var>)
+<dd>
+Macro form of <tt>PyString_AsString()</tt> but without error checking.
+</dl>
+
+<P>
+<dl><dt>int <b><a name="l2h-1644"><tt>PyString_GET_SIZE</tt></a></b>(<var>PyObject *string</var>)
+<dd>
+Macro form of <tt>PyString_GetSize()</tt> but without error checking.
+</dl>
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html467"
+ HREF="tupleObjects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html463"
+ HREF="sequenceObjects.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html457"
+ HREF="sequenceObjects.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python/C API Reference Manual</b></td>
+<td align=right width="20%"><A NAME="tex2html465"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  <A NAME="tex2html466"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html468"
+ HREF="tupleObjects.html">7.2.2 Tuple Objects</A>
+<b>Up:</b> <A NAME="tex2html464"
+ HREF="sequenceObjects.html">7.2 Sequence Objects</A>
+<b>Previous:</b> <A NAME="tex2html458"
+ HREF="sequenceObjects.html">7.2 Sequence Objects</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

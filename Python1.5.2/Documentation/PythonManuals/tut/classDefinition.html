@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>9.3.1 Class Definition Syntax </TITLE>
+<META NAME="description" CONTENT="9.3.1 Class Definition Syntax ">
+<META NAME="keywords" CONTENT="tut">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="tut.css">
+<LINK REL="next" HREF="classObjects.html">
+<LINK REL="previous" HREF="firstClasses.html">
+<LINK REL="up" HREF="firstClasses.html">
+<LINK REL="next" HREF="classObjects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html910"
+ HREF="classObjects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html907"
+ HREF="firstClasses.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html901"
+ HREF="firstClasses.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Tutorial</b></td>
+<td align=right width="20%"><A NAME="tex2html909"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html911"
+ HREF="classObjects.html">9.3.2 Class Objects</A>
+<b>Up:</b> <A NAME="tex2html908"
+ HREF="firstClasses.html">9.3 A First Look</A>
+<b>Previous:</b> <A NAME="tex2html902"
+ HREF="firstClasses.html">9.3 A First Look</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0011310000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">9</SPAN>.<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN> Class Definition Syntax 
+</H2>
+
+<P>
+The simplest form of class definition looks like this:
+
+<P>
+<dl><dd><pre>
+class ClassName:
+    &lt;statement-1&gt;
+    .
+    .
+    .
+    &lt;statement-N&gt;
+</pre></dl>
+
+<P>
+Class definitions, like function definitions (<tt>def</tt>
+statements) must be executed before they have any effect.  (You could
+conceivably place a class definition in a branch of an <tt>if</tt>
+statement, or inside a function.)
+
+<P>
+In practice, the statements inside a class definition will usually be
+function definitions, but other statements are allowed, and sometimes
+useful -- we'll come back to this later.  The function definitions
+inside a class normally have a peculiar form of argument list,
+dictated by the calling conventions for methods -- again, this is
+explained later.
+
+<P>
+When a class definition is entered, a new name space is created, and
+used as the local scope -- thus, all assignments to local variables
+go into this new name space.  In particular, function definitions bind
+the name of the new function here.
+
+<P>
+When a class definition is left normally (via the end), a <i>class
+object</i> is created.  This is basically a wrapper around the contents
+of the name space created by the class definition; we'll learn more
+about class objects in the next section.  The original local scope
+(the one in effect just before the class definitions was entered) is
+reinstated, and the class object is bound here to the class name given
+in the class definition header (<tt>ClassName</tt> in the example).
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html910"
+ HREF="classObjects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html907"
+ HREF="firstClasses.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html901"
+ HREF="firstClasses.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Tutorial</b></td>
+<td align=right width="20%"><A NAME="tex2html909"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html911"
+ HREF="classObjects.html">9.3.2 Class Objects</A>
+<b>Up:</b> <A NAME="tex2html908"
+ HREF="firstClasses.html">9.3 A First Look</A>
+<b>Previous:</b> <A NAME="tex2html902"
+ HREF="firstClasses.html">9.3 A First Look</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

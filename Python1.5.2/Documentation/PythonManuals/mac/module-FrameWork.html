@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>15. FrameWork --
+Interactive application framework.</TITLE>
+<META NAME="description" CONTENT="15. FrameWork --
+Interactive application framework.">
+<META NAME="keywords" CONTENT="mac">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="mac.css">
+<LINK REL="next" HREF="module-MiniAEFrame.html">
+<LINK REL="previous" HREF="module-EasyDialogs.html">
+<LINK REL="up" HREF="contents.html">
+<LINK REL="next" HREF="application-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html474"
+ HREF="application-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html470"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html464"
+ HREF="module-EasyDialogs.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html472"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html473"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html475"
+ HREF="application-objects.html">15.1 Application Objects</A>
+<b>Up:</b> <A NAME="tex2html471"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html465"
+ HREF="module-EasyDialogs.html">14. EasyDialogs  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0021500000000000000000">
+<SPAN CLASS="arabic">15</SPAN>. <tt>FrameWork</tt> --
+         Interactive application framework.</A>
+</H1>
+
+
+<P>
+
+<P>
+The <tt>FrameWork</tt> module contains classes that together provide a
+framework for an interactive Macintosh application. The programmer
+builds an application by creating subclasses that override various
+methods of the bases classes, thereby implementing the functionality
+wanted. Overriding functionality can often be done on various
+different levels, i.e. to handle clicks in a single dialog window in a
+non-standard way it is not necessary to override the complete event
+handling.
+
+<P>
+The <tt>FrameWork</tt> is still very much work-in-progress, and the
+documentation describes only the most important functionality, and not
+in the most logical manner at that. Examine the source or the examples
+for more details.
+
+<P>
+The <tt>FrameWork</tt> module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-1739"><tt>Application</tt></a></b> ()
+<dd>
+An object representing the complete application. See below for a
+description of the methods. The default <tt>__init__()</tt> routine
+creates an empty window dictionary and a menu bar with an apple menu.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1744"><tt>MenuBar</tt></a></b> ()
+<dd>
+An object representing the menubar. This object is usually not created
+by the user.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1960"><tt>Menu</tt></a></b> (<var>bar, title</var><big>[</big><var>, after</var><big>]</big>)
+<dd>
+An object representing a menu. Upon creation you pass the
+<tt>MenuBar</tt> the menu appears in, the <i>title</i> string and a
+position (1-based) <i>after</i> where the menu should appear (default:
+at the end).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1961"><tt>MenuItem</tt></a></b> (<var>menu, title</var><big>[</big><var>, shortcut, callback</var><big>]</big>)
+<dd>
+Create a menu item object. The arguments are the menu to crate the
+item it, the item title string and optionally the keyboard shortcut
+and a callback routine. The callback is called with the arguments
+menu-id, item number within menu (1-based), current front window and
+the event record.
+
+<P>
+In stead of a callable object the callback can also be a string. In
+this case menu selection causes the lookup of a method in the topmost
+window and the application. The method name is the callback string
+with <tt>'domenu_'</tt> prepended.
+
+<P>
+Calling the <tt>MenuBar</tt> <tt>fixmenudimstate</tt> method sets the
+correct dimming for all menu items based on the current front window.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1762"><tt>Separator</tt></a></b> (<var>menu</var>)
+<dd>
+Add a separator to the end of a menu.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1766"><tt>SubMenu</tt></a></b> (<var>menu, label</var>)
+<dd>
+Create a submenu named <i>label</i> under menu <i>menu</i>. The menu
+object is returned.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1772"><tt>Window</tt></a></b> (<var>parent</var>)
+<dd>
+Creates a (modeless) window. <i>Parent</i> is the application object to
+which the window belongs. The window is not displayed until later.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1777"><tt>DialogWindow</tt></a></b> (<var>parent</var>)
+<dd>
+Creates a modeless dialog window.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1781"><tt>windowbounds</tt></a></b> (<var>width, height</var>)
+<dd>
+Return a <tt>(left, top, right, bottom)</tt> tuple suitable for creation
+of a window of given width and height. The window will be staggered
+with respect to previous windows, and an attempt is made to keep the
+whole window on-screen. The window will however always be exact the
+size given, so parts may be offscreen.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1786"><tt>setwatchcursor</tt></a></b> ()
+<dd>
+Set the mouse cursor to a watch.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-1790"><tt>setarrowcursor</tt></a></b> ()
+<dd>
+Set the mouse cursor to an arrow.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html476"
+ HREF="application-objects.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">1</SPAN> Application Objects</A>
+<LI><A NAME="tex2html477"
+ HREF="window-objects.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">2</SPAN> Window Objects</A>
+<LI><A NAME="tex2html478"
+ HREF="controlswindow-object.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">3</SPAN> ControlsWindow Object</A>
+<LI><A NAME="tex2html479"
+ HREF="scrolledwindow-object.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">4</SPAN> ScrolledWindow Object</A>
+<LI><A NAME="tex2html480"
+ HREF="dialogwindow-objects.html"><SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">5</SPAN> DialogWindow Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html474"
+ HREF="application-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html470"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html464"
+ HREF="module-EasyDialogs.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Macintosh Library Modules</b></td>
+<td align=right width="20%"><A NAME="tex2html472"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html473"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html475"
+ HREF="application-objects.html">15.1 Application Objects</A>
+<b>Up:</b> <A NAME="tex2html471"
+ HREF="contents.html">Contents</A>
+<b>Previous:</b> <A NAME="tex2html465"
+ HREF="module-EasyDialogs.html">14. EasyDialogs  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

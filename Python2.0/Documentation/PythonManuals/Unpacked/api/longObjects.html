@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>7.4.2 Long Integer Objects </title>
+<META NAME="description" CONTENT="7.4.2 Long Integer Objects ">
+<META NAME="keywords" CONTENT="api">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="api.css">
+<LINK REL="next" href="floatObjects.html">
+<LINK REL="previous" href="intObjects.html">
+<LINK REL="up" href="numericObjects.html">
+<LINK REL="next" href="floatObjects.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="intObjects.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="numericObjects.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="floatObjects.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="intObjects.html">7.4.1 Plain Integer Objects</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="numericObjects.html">7.4 Numeric Objects</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="floatObjects.html">7.4.3 Floating Point Objects</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H2>
+<BR>
+7.4.2 Long Integer Objects 
+</H2>
+
+<P>
+
+<dl><dt><b><tt class='ctype'><a name='l2h-444'>PyLongObject</a></tt></b>
+<dd>
+This subtype of <tt class="ctype">PyObject</tt> represents a Python long integer
+object.
+</dl>
+
+<P>
+<dl><dt>PyTypeObject <b><a name='l2h-445'><tt class='cdata'>PyLong_Type</tt></a></b>
+<dd>
+This instance of <tt class="ctype">PyTypeObject</tt> represents the Python long
+integer type.  This is the same object as <code>types.LongType</code>.
+</dl>
+
+<P>
+<dl><dt>int <b><a name='l2h-448'><tt class='cfunction'>PyLong_Check</tt></a></b> (<var>PyObject *p</var>)
+<dd>
+Returns true if its argument is a <tt class="ctype">PyLongObject</tt>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-449'><tt class='cfunction'>PyLong_FromLong</tt></a></b> (<var>long v</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+Returns a new <tt class="ctype">PyLongObject</tt> object from <var>v</var>, or <tt class="constant">NULL</tt> on
+failure.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-450'><tt class='cfunction'>PyLong_FromUnsignedLong</tt></a></b> (<var>unsigned long v</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+Returns a new <tt class="ctype">PyLongObject</tt> object from a C <tt class="ctype">unsigned
+long</tt>, or <tt class="constant">NULL</tt> on failure.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-451'><tt class='cfunction'>PyLong_FromDouble</tt></a></b> (<var>double v</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+Returns a new <tt class="ctype">PyLongObject</tt> object from the integer part of
+<var>v</var>, or <tt class="constant">NULL</tt> on failure.
+</dl>
+
+<P>
+<dl><dt>long <b><a name='l2h-452'><tt class='cfunction'>PyLong_AsLong</tt></a></b> (<var>PyObject *pylong</var>)
+<dd>
+Returns a C <tt class="ctype">long</tt> representation of the contents of
+<var>pylong</var>.  If <var>pylong</var> is greater than
+<tt class="constant">LONG_MAX</tt>, an <tt class="exception">OverflowError</tt> is
+raised.OverflowError</dl>
+
+<P>
+<dl><dt>unsigned long <b><a name='l2h-454'><tt class='cfunction'>PyLong_AsUnsignedLong</tt></a></b> (<var>PyObject *pylong</var>)
+<dd>
+Returns a C <tt class="ctype">unsigned long</tt> representation of the contents of 
+<var>pylong</var>.  If <var>pylong</var> is greater than
+<tt class="constant">ULONG_MAX</tt>, an <tt class="exception">OverflowError</tt>
+is raised.OverflowError</dl>
+
+<P>
+<dl><dt>double <b><a name='l2h-456'><tt class='cfunction'>PyLong_AsDouble</tt></a></b> (<var>PyObject *pylong</var>)
+<dd>
+Returns a C <tt class="ctype">double</tt> representation of the contents of <var>pylong</var>.
+</dl>
+
+<P>
+<dl><dt>PyObject* <b><a name='l2h-457'><tt class='cfunction'>PyLong_FromString</tt></a></b> (<var>char *str, char **pend,
+                                                int base</var>)
+<dd>
+<div class="refcount-info">
+  <span class="label">Return value:</span>
+  <span class="value">New reference.</span>
+</div>
+Return a new <tt class="ctype">PyLongObject</tt> based on the string value in
+<var>str</var>, which is interpreted according to the radix in <var>base</var>.
+If <var>pend</var> is non-<tt class="constant">NULL</tt>, <code>*<var>pend</var></code> will point to the first 
+character in <var>str</var> which follows the representation of the
+number.  If <var>base</var> is <code>0</code>, the radix will be determined base
+on the leading characters of <var>str</var>: if <var>str</var> starts with
+<code>'0x'</code> or <code>'0X'</code>, radix 16 will be used; if <var>str</var> starts 
+with <code>'0'</code>, radix 8 will be used; otherwise radix 10 will be
+used.  If <var>base</var> is not <code>0</code>, it must be between <code>2</code> and
+<code>36</code>, inclusive.  Leading spaces are ignored.  If there are no
+digits, <tt class="exception">ValueError</tt> will be raised.
+</dl>
+
+<P>
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="intObjects.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="numericObjects.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="floatObjects.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python/C API Reference Manual</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="intObjects.html">7.4.1 Plain Integer Objects</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="numericObjects.html">7.4 Numeric Objects</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="floatObjects.html">7.4.3 Floating Point Objects</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

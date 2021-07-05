@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.9 uu --
+Encode and decode files in uuencode format.</TITLE>
+<META NAME="description" CONTENT="12.9 uu --
+Encode and decode files in uuencode format.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-binascii.html">
+<LINK REL="previous" HREF="module-binhex.html">
+<LINK REL="up" HREF="netdata.html">
+<LINK REL="next" HREF="module-binascii.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3073"
+ HREF="module-binascii.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3069"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3063"
+ HREF="node212.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3071"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3072"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3074"
+ HREF="module-binascii.html">12.10 binascii  </A>
+<b>Up:</b> <A NAME="tex2html3070"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html3064"
+ HREF="node212.html">12.8.1 Notes</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0014900000000000000000">
+<SPAN CLASS="arabic">12</SPAN>.<SPAN CLASS="arabic">9</SPAN> <tt>uu</tt> --
+         Encode and decode files in uuencode format.</A>
+</H1>
+
+
+<P>
+
+<P>
+This module encodes and decodes files in uuencode format, allowing
+arbitrary binary data to be transferred over ascii-only connections.
+Wherever a file argument is expected, the methods accept a file-like
+object.  For backwards compatibility, a string containing a pathname
+is also accepted, and the corresponding file will be opened for
+reading and writing; the pathname <tt>'-'</tt> is understood to mean the
+standard input or output.  However, this interface is deprecated; it's
+better for the caller to open the file itself, and be sure that, when
+required, the mode is <tt>'rb'</tt> or <tt>'wb'</tt> on Windows or DOS.
+
+<P>
+This code was contributed by Lance Ellinghouse, and modified by Jack
+Jansen.
+<a name="l2h-19696"></a><a name="l2h-19697"></a>
+<P>
+The <tt>uu</tt> module defines the following functions:
+
+<P>
+<dl><dt><b><a name="l2h-19723"><tt>encode</tt></a></b> (<var>in_file, out_file</var><big>[</big><var>, name</var><big>[</big><var>, mode</var><big>]</big><big>]</big>)
+<dd>
+Uuencode file <i>in_file</i> into file <i>out_file</i>.  The uuencoded
+file will have the header specifying <i>name</i> and <i>mode</i> as the
+defaults for the results of decoding the file. The default defaults
+are taken from <i>in_file</i>, or <tt>'-'</tt> and <tt>0666</tt>
+respectively. 
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-19724"><tt>decode</tt></a></b> (<var>in_file</var><big>[</big><var>, out_file</var><big>[</big><var>, mode</var><big>]</big><big>]</big>)
+<dd>
+This call decodes uuencoded file <i>in_file</i> placing the result on
+file <i>out_file</i>. If <i>out_file</i> is a pathname the <i>mode</i> is
+also set. Defaults for <i>out_file</i> and <i>mode</i> are taken from
+the uuencode header.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3073"
+ HREF="module-binascii.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3069"
+ HREF="netdata.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3063"
+ HREF="node212.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3071"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3072"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3074"
+ HREF="module-binascii.html">12.10 binascii  </A>
+<b>Up:</b> <A NAME="tex2html3070"
+ HREF="netdata.html">12. Internet Data Handling</A>
+<b>Previous:</b> <A NAME="tex2html3064"
+ HREF="node212.html">12.8.1 Notes</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

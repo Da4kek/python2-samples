@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Installing Python Modules</title>
+<META NAME="description" CONTENT="Installing Python Modules">
+<META NAME="keywords" CONTENT="inst">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="inst.css">
+<LINK REL="next" href="contents.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A HREF="../index.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="contents.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="../index.html">Document Index</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="contents.html">Contents</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<P>
+
+<div class="titlepage">
+<table border="0" width="100%"><tr>
+<td class="titlegraphic" width="30%"><img width="121" height="110"
+  src="../icons/labslogo.gif"></td>
+<td>
+<h1>Installing Python Modules</h1>
+<p><b><font size='+2'>Greg Ward</font></b></p>
+<p>E-mail: <span class="email">gward@python.net</span></p>
+<p></td></tr>
+</table>
+</div>
+
+<P>
+
+<H3>Abstract:</H3>
+<DIV CLASS="ABSTRACT">
+  
+  This document describes the Python Distribution Utilities
+  (``Distutils'') from the end-user's point-of-view, describing how to
+  extend the capabilities of a standard Python installation by building
+  and installing third-party Python modules and extensions.
+</DIV>
+<P>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html6"
+  href="contents.html">Contents</A>
+<LI><A NAME="tex2html7"
+  href="intro.html">1 Introduction</A>
+<UL>
+<LI><A NAME="tex2html8"
+  href="trivial-install.html">1.1 Best case: trivial installation</A>
+<LI><A NAME="tex2html9"
+  href="new-standard.html">1.2 The new standard: Distutils</A>
+<LI><A NAME="tex2html10"
+  href="old-way.html">1.3 The old way: no standards</A>
+</UL>
+<LI><A NAME="tex2html11"
+  href="standard-install.html">2 Standard Build and Install</A>
+<UL>
+<LI><A NAME="tex2html12"
+  href="platform-variations.html">2.1 Platform variations</A>
+<LI><A NAME="tex2html13"
+  href="splitting-up.html">2.2 Splitting the job up</A>
+<LI><A NAME="tex2html14"
+  href="how-build-works.html">2.3 How building works</A>
+<LI><A NAME="tex2html15"
+  href="how-install-works.html">2.4 How installation works</A>
+</UL>
+<LI><A NAME="tex2html16"
+  href="building-ext.html">3 Building Extensions: Tips and Tricks</A>
+<UL>
+<LI><A NAME="tex2html17"
+  href="tweak-flags.html">3.1 Tweaking compiler/linker flags</A>
+<LI><A NAME="tex2html18"
+  href="non-ms-compilers.html">3.2 Using non-Microsoft compilers on Windows</A>
+</UL>
+<LI><A NAME="tex2html19"
+  href="alt-install.html">4 Alternate Installation</A>
+<UL>
+<LI><A NAME="tex2html20"
+  href="alt-install-prefix.html">4.1 Alternate installation: Unix (the home scheme)</A>
+<LI><A NAME="tex2html21"
+  href="alt-install-home.html">4.2 Alternate installation: Unix (the prefix scheme)</A>
+<LI><A NAME="tex2html22"
+  href="alt-install-windows.html">4.3 Alternate installation: Windows</A>
+<LI><A NAME="tex2html23"
+  href="alt-install-macos.html">4.4 Alternate installation: Mac&nbsp;OS</A>
+</UL>
+<LI><A NAME="tex2html24"
+  href="custom-install.html">5 Custom Installation</A>
+<LI><A NAME="tex2html25"
+  href="config-files.html">6 Distutils Configuration Files</A>
+<LI><A NAME="tex2html26"
+  href="pre-distutils.html">7 Pre-Distutils Conventions</A>
+<UL>
+<LI><A NAME="tex2html27"
+  href="makefile-pre-in.html">7.1 The Makefile.pre.in file</A>
+<LI><A NAME="tex2html28"
+  href="manual-install.html">7.2 Installing modules manually</A>
+</UL>
+<LI><A NAME="tex2html29"
+  href="about.html">About this document ...</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><A HREF="../index.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A href="contents.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Installing Python Modules</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+<td><img src="../icons/blank.gif" border="0" height="32"
+  alt="" width="32"></td>
+</tr></table>
+<b class="navlabel">Up:</b> <a class="sectref" HREF="../index.html">Document Index</A>
+<b class="navlabel">Next:</b> <a class="sectref" href="contents.html">Contents</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

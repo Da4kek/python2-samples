@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8.15 popen2 --
+Subprocesses with accessible standard I/O streams.</TITLE>
+<META NAME="description" CONTENT="8.15 popen2 --
+Subprocesses with accessible standard I/O streams.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-commands.html">
+<LINK REL="previous" HREF="module-stat.html">
+<LINK REL="up" HREF="unix.html">
+<LINK REL="next" HREF="popen3-objects.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2237"
+ HREF="popen3-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2233"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2227"
+ HREF="module-stat.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2235"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2236"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2238"
+ HREF="popen3-objects.html">8.15.1 Popen3 Objects</A>
+<b>Up:</b> <A NAME="tex2html2234"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2228"
+ HREF="module-stat.html">8.14 stat  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00101500000000000000000">
+<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">15</SPAN> <tt>popen2</tt> --
+         Subprocesses with accessible standard I/O streams.</A>
+</H1>
+
+
+<P>
+
+<P>
+
+<P>
+This module allows you to spawn processes and connect their 
+input/output/error pipes and obtain their return codes.
+
+<P>
+The primary interface offered by this module is a pair of factory
+functions:
+
+<P>
+<dl><dt><b><a name="l2h-14419"><tt>popen2</tt></a></b> (<var>cmd</var><big>[</big><var>, bufsize</var><big>]</big>)
+<dd>
+Executes <i>cmd</i> as a sub-process.  If <i>bufsize</i> is specified, 
+it specifies the buffer size for the I/O pipes.  Returns
+<tt>(<i>child_stdout</i>, <i>child_stdin</i>)</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-14421"><tt>popen3</tt></a></b> (<var>cmd</var><big>[</big><var>, bufsize</var><big>]</big>)
+<dd>
+Executes <i>cmd</i> as a sub-process.  If <i>bufsize</i> is specified, 
+it specifies the buffer size for the I/O pipes.  Returns
+<tt>(<i>child_stdout</i>, <i>child_stdin</i>, <i>child_stderr</i>)</tt>.
+</dl>
+
+<P>
+The class defining the objects returned by the factory functions is
+also available:
+
+<P>
+<dl><dt><b><a name="l2h-14424"><tt>Popen3</tt></a></b> (<var>cmd</var><big>[</big><var>, capturestderr</var><big>[</big><var>, bufsize</var><big>]</big><big>]</big>)
+<dd>
+This class represents a child process.  Normally, <tt>Popen3</tt>
+instances are created using the factory functions described above.
+
+<P>
+If not using one off the helper functions to create <tt>Popen3</tt>
+objects, the parameter <i>cmd</i> is the shell command to execute in a
+sub-process.  The <i>capturestderr</i> flag, if true, specifies that
+the object should capture standard error output of the child process.
+The default is false.  If the <i>bufsize</i> parameter is specified, it
+specifies the size of the I/O buffers to/from the child process.
+</dl>
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+
+
+<UL>
+<LI><A NAME="tex2html2239"
+ HREF="popen3-objects.html"><SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">15</SPAN>.<SPAN CLASS="arabic">1</SPAN> Popen3 Objects</A>
+</UL>
+<!--End of Table of Child-Links-->
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2237"
+ HREF="popen3-objects.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2233"
+ HREF="unix.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2227"
+ HREF="module-stat.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2235"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2236"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2238"
+ HREF="popen3-objects.html">8.15.1 Popen3 Objects</A>
+<b>Up:</b> <A NAME="tex2html2234"
+ HREF="unix.html">8. Unix Specific Services</A>
+<b>Previous:</b> <A NAME="tex2html2228"
+ HREF="module-stat.html">8.14 stat  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

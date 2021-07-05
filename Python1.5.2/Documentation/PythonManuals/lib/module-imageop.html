@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>14.2 imageop --
+Manipulate raw image data.</TITLE>
+<META NAME="description" CONTENT="14.2 imageop --
+Manipulate raw image data.">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="next" HREF="module-aifc.html">
+<LINK REL="previous" HREF="module-audioop.html">
+<LINK REL="up" HREF="mmedia.html">
+<LINK REL="next" HREF="module-aifc.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3296"
+ HREF="module-aifc.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3292"
+ HREF="mmedia.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3286"
+ HREF="module-audioop.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3294"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3295"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3297"
+ HREF="module-aifc.html">14.3 aifc  </A>
+<b>Up:</b> <A NAME="tex2html3293"
+ HREF="mmedia.html">14. Multimedia Services</A>
+<b>Previous:</b> <A NAME="tex2html3287"
+ HREF="module-audioop.html">14.1 audioop  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0016200000000000000000">
+<SPAN CLASS="arabic">14</SPAN>.<SPAN CLASS="arabic">2</SPAN> <tt>imageop</tt> --
+         Manipulate raw image data.</A>
+</H1>
+
+
+<P>
+
+<P>
+The <tt>imageop</tt> module contains some useful operations on images.
+It operates on images consisting of 8 or 32 bit pixels stored in
+Python strings.  This is the same format as used by
+<tt>gl.lrectwrite()</tt> and the <tt>imgfile</tt> module.
+
+<P>
+The module defines the following variables and functions:
+
+<P>
+<dl><dt><b><a name="l2h-21186"><tt>error</tt></a></b>
+<dd>
+This exception is raised on all errors, such as unknown number of bits
+per pixel, etc.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21190"><tt>crop</tt></a></b> (<var>image, psize, width, height, x0, y0, x1, y1</var>)
+<dd>
+Return the selected part of <i>image</i>, which should by
+<i>width</i> by <i>height</i> in size and consist of pixels of
+<i>psize</i> bytes. <i>x0</i>, <i>y0</i>, <i>x1</i> and <i>y1</i> are like
+the <tt>gl.lrectread()</tt> parameters, i.e. the boundary is
+included in the new image.  The new boundaries need not be inside the
+picture.  Pixels that fall outside the old image will have their value
+set to zero.  If <i>x0</i> is bigger than <i>x1</i> the new image is
+mirrored.  The same holds for the y coordinates.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21205"><tt>scale</tt></a></b> (<var>image, psize, width, height, newwidth, newheight</var>)
+<dd>
+Return <i>image</i> scaled to size <i>newwidth</i> by <i>newheight</i>.
+No interpolation is done, scaling is done by simple-minded pixel
+duplication or removal.  Therefore, computer-generated images or
+dithered images will not look nice after scaling.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21212"><tt>tovideo</tt></a></b> (<var>image, psize, width, height</var>)
+<dd>
+Run a vertical low-pass filter over an image.  It does so by computing
+each destination pixel as the average of two vertically-aligned source
+pixels.  The main use of this routine is to forestall excessive
+flicker if the image is displayed on a video device that uses
+interlacing, hence the name.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21216"><tt>grey2mono</tt></a></b> (<var>image, width, height, threshold</var>)
+<dd>
+Convert a 8-bit deep greyscale image to a 1-bit deep image by
+tresholding all the pixels.  The resulting image is tightly packed and
+is probably only useful as an argument to <tt>mono2grey()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21221"><tt>dither2mono</tt></a></b> (<var>image, width, height</var>)
+<dd>
+Convert an 8-bit greyscale image to a 1-bit monochrome image using a
+(simple-minded) dithering algorithm.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21225"><tt>mono2grey</tt></a></b> (<var>image, width, height, p0, p1</var>)
+<dd>
+Convert a 1-bit monochrome image to an 8 bit greyscale or color image.
+All pixels that are zero-valued on input get value <i>p0</i> on output
+and all one-value input pixels get value <i>p1</i> on output.  To
+convert a monochrome black-and-white image to greyscale pass the
+values <tt>0</tt> and <tt>255</tt> respectively.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21233"><tt>grey2grey4</tt></a></b> (<var>image, width, height</var>)
+<dd>
+Convert an 8-bit greyscale image to a 4-bit greyscale image without
+dithering.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21237"><tt>grey2grey2</tt></a></b> (<var>image, width, height</var>)
+<dd>
+Convert an 8-bit greyscale image to a 2-bit greyscale image without
+dithering.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21241"><tt>dither2grey2</tt></a></b> (<var>image, width, height</var>)
+<dd>
+Convert an 8-bit greyscale image to a 2-bit greyscale image with
+dithering.  As for <tt>dither2mono()</tt>, the dithering algorithm
+is currently very simple.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21246"><tt>grey42grey</tt></a></b> (<var>image, width, height</var>)
+<dd>
+Convert a 4-bit greyscale image to an 8-bit greyscale image.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-21250"><tt>grey22grey</tt></a></b> (<var>image, width, height</var>)
+<dd>
+Convert a 2-bit greyscale image to an 8-bit greyscale image.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html3296"
+ HREF="module-aifc.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html3292"
+ HREF="mmedia.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html3286"
+ HREF="module-audioop.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html3294"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html3295"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html3297"
+ HREF="module-aifc.html">14.3 aifc  </A>
+<b>Up:</b> <A NAME="tex2html3293"
+ HREF="mmedia.html">14. Multimedia Services</A>
+<b>Previous:</b> <A NAME="tex2html3287"
+ HREF="module-audioop.html">14.1 audioop  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

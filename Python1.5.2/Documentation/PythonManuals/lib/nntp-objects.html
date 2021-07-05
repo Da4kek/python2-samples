@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.8.1 NNTP Objects</TITLE>
+<META NAME="description" CONTENT="11.8.1 NNTP Objects">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="lib.css">
+<LINK REL="previous" HREF="module-nntplib.html">
+<LINK REL="up" HREF="module-nntplib.html">
+<LINK REL="next" HREF="module-smtplib.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2763"
+ HREF="module-smtplib.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2759"
+ HREF="module-nntplib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2755"
+ HREF="module-nntplib.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2761"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2762"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2764"
+ HREF="module-smtplib.html">11.9 smtplib  </A>
+<b>Up:</b> <A NAME="tex2html2760"
+ HREF="module-nntplib.html">11.8 nntplib  </A>
+<b>Previous:</b> <A NAME="tex2html2756"
+ HREF="module-nntplib.html">11.8 nntplib  </A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0013810000000000000000"></A>
+<BR>
+<SPAN CLASS="arabic">11</SPAN>.<SPAN CLASS="arabic">8</SPAN>.<SPAN CLASS="arabic">1</SPAN> NNTP Objects
+</H2>
+
+<P>
+NNTP instances have the following methods.  The <i>response</i> that is
+returned as the first item in the return tuple of almost all methods
+is the server's response: a string beginning with a three-digit code.
+If the server's response indicates an error, the method raises one of
+the above exceptions.
+
+<P>
+<dl><dt><b><a name="l2h-16988"><tt>getwelcome</tt></a></b> ()
+<dd>
+Return the welcome message sent by the server in reply to the initial
+connection.  (This message sometimes contains disclaimers or help
+information that may be relevant to the user.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16992"><tt>set_debuglevel</tt></a></b> (<var>level</var>)
+<dd>
+Set the instance's debugging level.  This controls the amount of
+debugging output printed.  The default, <tt>0</tt>, produces no debugging
+output.  A value of <tt>1</tt> produces a moderate amount of debugging
+output, generally a single line per request or response.  A value of
+<tt>2</tt> or higher produces the maximum amount of debugging output,
+logging each line sent and received on the connection (including
+message text).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-16999"><tt>newgroups</tt></a></b> (<var>date, time</var>)
+<dd>
+Send a "<tt>NEWGROUPS</tt>" command.  The <i>date</i> argument should be a
+string of the form <tt>"<i>yy</i><i>mm</i><i>dd</i>"</tt> indicating the
+date, and <i>time</i> should be a string of the form
+<tt>"<i>hh</i><i>mm</i><i>ss</i>"</tt> indicating the time.  Return a pair
+<tt>(<i>response</i>, <i>groups</i>)</tt> where <i>groups</i> is a list of
+group names that are new since the given date and time.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17015"><tt>newnews</tt></a></b> (<var>group, date, time</var>)
+<dd>
+Send a "<tt>NEWNEWS</tt>" command.  Here, <i>group</i> is a group name or
+<tt>'*'</tt>, and <i>date</i> and <i>time</i> have the same meaning as for
+<tt>newgroups()</tt>.  Return a pair <tt>(<i>response</i>,
+<i>articles</i>)</tt> where <i>articles</i> is a list of article ids.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17028"><tt>list</tt></a></b> ()
+<dd>
+Send a "<tt>LIST</tt>" command.  Return a pair <tt>(<i>response</i>,
+<i>list</i>)</tt> where <i>list</i> is a list of tuples.  Each tuple has the
+form <tt>(<i>group</i>, <i>last</i>, <i>first</i>, <i>flag</i>)</tt>, where
+<i>group</i> is a group name, <i>last</i> and <i>first</i> are the last
+and first article numbers (as strings), and <i>flag</i> is <tt>'y'</tt>
+if posting is allowed, <tt>'n'</tt> if not, and <tt>'m'</tt> if the
+newsgroup is moderated.  (Note the ordering: <i>last</i>, <i>first</i>.)
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17049"><tt>group</tt></a></b> (<var>name</var>)
+<dd>
+Send a "<tt>GROUP</tt>" command, where <i>name</i> is the group name.
+Return a tuple <tt>(</tt><i>response</i><tt>,</tt> <i>count</i><tt>,</tt>
+<i>first</i><tt>,</tt> <i>last</i><tt>,</tt> <i>name</i><tt>)</tt> where
+<i>count</i> is the (estimated) number of articles in the group,
+<i>first</i> is the first article number in the group, <i>last</i> is
+the last article number in the group, and <i>name</i> is the group
+name.  The numbers are returned as strings.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17070"><tt>help</tt></a></b> ()
+<dd>
+Send a "<tt>HELP</tt>" command.  Return a pair <tt>(<i>response</i>,
+<i>list</i>)</tt> where <i>list</i> is a list of help strings.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17078"><tt>stat</tt></a></b> (<var>id</var>)
+<dd>
+Send a "<tt>STAT</tt>" command, where <i>id</i> is the message id (enclosed
+in "<tt>&lt;</tt>" and "<tt>&gt;</tt>") or an article number (as a string).
+Return a triple <tt>(<i>response</i>, <i>number</i>, <i>id</i>)</tt> where
+<i>number</i> is the article number (as a string) and <i>id</i> is the
+article id  (enclosed in "<tt>&lt;</tt>" and "<tt>&gt;</tt>").
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17093"><tt>next</tt></a></b> ()
+<dd>
+Send a "<tt>NEXT</tt>" command.  Return as for <tt>stat()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17099"><tt>last</tt></a></b> ()
+<dd>
+Send a "<tt>LAST</tt>" command.  Return as for <tt>stat()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17105"><tt>head</tt></a></b> (<var>id</var>)
+<dd>
+Send a "<tt>HEAD</tt>" command, where <i>id</i> has the same meaning as for
+<tt>stat()</tt>.  Return a tuple
+<tt>(<i>response</i>, <i>number</i>, <i>id</i>, <i>list</i>)</tt>
+where the first three are the same as for <tt>stat()</tt>,
+and <i>list</i> is a list of the article's headers (an uninterpreted
+list of lines, without trailing newlines).
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17118"><tt>body</tt></a></b> (<var>id</var>)
+<dd>
+Send a "<tt>BODY</tt>" command, where <i>id</i> has the same meaning as for
+<tt>stat()</tt>.  Return as for <tt>head()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17126"><tt>article</tt></a></b> (<var>id</var>)
+<dd>
+Send a "<tt>ARTICLE</tt>" command, where <i>id</i> has the same meaning as
+for <tt>stat()</tt>.  Return as for <tt>head()</tt>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17134"><tt>slave</tt></a></b> ()
+<dd>
+Send a "<tt>SLAVE</tt>" command.  Return the server's <i>response</i>.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17140"><tt>xhdr</tt></a></b> (<var>header, string</var>)
+<dd>
+Send an "<tt>XHDR</tt>" command.  This command is not defined in the RFC
+but is a common extension.  The <i>header</i> argument is a header
+keyword, e.g. <tt>'subject'</tt>.  The <i>string</i> argument should have
+the form <tt>"<i>first</i>-<i>last</i>"</tt> where <i>first</i> and
+<i>last</i> are the first and last article numbers to search.  Return a
+pair <tt>(<i>response</i>, <i>list</i>)</tt>, where <i>list</i> is a list of
+pairs <tt>(<i>id</i>, <i>text</i>)</tt>, where <i>id</i> is an article id
+(as a string) and <i>text</i> is the text of the requested header for
+that article.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17159"><tt>post</tt></a></b> (<var>file</var>)
+<dd>
+Post an article using the "<tt>POST</tt>" command.  The <i>file</i>
+argument is an open file object which is read until EOF using its
+<tt>readline()</tt> method.  It should be a well-formed news article,
+including the required headers.  The <tt>post()</tt> method
+automatically escapes lines beginning with "<tt>.</tt>".
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17168"><tt>ihave</tt></a></b> (<var>id, file</var>)
+<dd>
+Send an "<tt>IHAVE</tt>" command.  If the response is not an error, treat
+<i>file</i> exactly as for the <tt>post()</tt> method.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17175"><tt>date</tt></a></b> ()
+<dd>
+Return a triple <tt>(<i>response</i>, <i>date</i>, <i>time</i>)</tt>,
+containing the current date and time in a form suitable for the
+<tt>newnews()</tt> and <tt>newgroups()</tt> methods.
+This is an optional NNTP extension, and may not be supported by all
+servers.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17184"><tt>xgtitle</tt></a></b> (<var>name</var>)
+<dd>
+Process an "<tt>XGTITLE</tt>" command, returning a pair <tt>(<i>response</i>,
+<i>list</i>)</tt>, where <i>list</i> is a list of tuples containing
+<tt>(<i>name</i>, <i>title</i>)</tt>.
+This is an optional NNTP extension, and may not be supported by all
+servers.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17194"><tt>xover</tt></a></b> (<var>start, end</var>)
+<dd>
+Return a pair <tt>(<i>resp</i>, <i>list</i>)</tt>.  <i>list</i> is a list
+of tuples, one for each article in the range delimited by the <i>start</i>
+and <i>end</i> article numbers.  Each tuple is of the form
+<tt>(</tt><i>article number</i><tt>,</tt> <i>subject</i><tt>,</tt>
+<i>poster</i><tt>,</tt> <i>date</i><tt>,</tt> <i>id</i><tt>,</tt>
+<i>references</i><tt>,</tt> <i>size</i><tt>,</tt> <i>lines</i><tt>)</tt>.
+This is an optional NNTP extension, and may not be supported by all
+servers.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17220"><tt>xpath</tt></a></b> (<var>id</var>)
+<dd>
+Return a pair <tt>(<i>resp</i>, <i>path</i>)</tt>, where <i>path</i> is the
+directory path to the article with message ID <i>id</i>.  This is an
+optional NNTP extension, and may not be supported by all servers.
+</dl>
+
+<P>
+<dl><dt><b><a name="l2h-17228"><tt>quit</tt></a></b> ()
+<dd>
+Send a "<tt>QUIT</tt>" command and close the connection.  Once this method
+has been called, no other methods of the NNTP object should be called.
+</dl><p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html2763"
+ HREF="module-smtplib.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A> <A NAME="tex2html2759"
+ HREF="module-nntplib.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A> <A NAME="tex2html2755"
+ HREF="module-nntplib.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A> </td>
+<td align=center width="60%"><b>Python Library Reference</b></td>
+<td align=right width="20%"><A NAME="tex2html2761"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A> <a
+ href="modindex.html"><img width=32 height=32 align=bottom border=0 alt="modules"
+ src="../icons/modules.gif"></a> <A NAME="tex2html2762"
+ HREF="genindex.html"><img width=32 height=32 align=bottom border=0 alt="index"
+ src="../icons/index.gif"></A></td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html2764"
+ HREF="module-smtplib.html">11.9 smtplib  </A>
+<b>Up:</b> <A NAME="tex2html2760"
+ HREF="module-nntplib.html">11.8 nntplib  </A>
+<b>Previous:</b> <A NAME="tex2html2756"
+ HREF="module-nntplib.html">11.8 nntplib  </A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

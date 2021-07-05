@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>6.23 gettext -- Multilingual internationalization services</title>
+<META NAME="description" CONTENT="6.23 gettext -- Multilingual internationalization services">
+<META NAME="keywords" CONTENT="lib">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="lib.css">
+<LINK REL="previous" href="module-locale.html">
+<LINK REL="up" href="allos.html">
+<LINK REL="next" HREF="node144.html">
+</head>
+<body>
+<DIV CLASS="navigation"><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="embedding-locale.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="allos.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node144.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="embedding-locale.html">6.22.2 For extension writers</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node144.html">6.23.1 GNU gettext API</A>
+<br><hr></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0082300000000000000000">
+6.23 <tt class="module">gettext</tt> --
+         Multilingual internationalization services</A>
+</H1>
+
+<P>
+
+
+<P>
+The <tt class="module">gettext</tt> module provides internationalization (I18N) and
+localization (L10N) services for your Python modules and applications.
+It supports both the GNU <code>gettext</code> message catalog API and a
+higher level, class-based API that may be more appropriate for Python
+files.  The interface described below allows you to write your
+module and application messages in one natural language, and provide a
+catalog of translated messages for running under different natural
+languages.
+
+<P>
+Some hints on localizing your Python modules and applications are also
+given.
+
+<P>
+
+<p><hr>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html2630"
+  HREF="node144.html">6.23.1 GNU <b class="program">gettext</b> API</A>
+<LI><A NAME="tex2html2631"
+  HREF="node145.html">6.23.2 Class-based API</A>
+<UL>
+<LI><A NAME="tex2html2632"
+  HREF="node146.html">6.23.2.1 The <tt class="class">NullTranslations</tt> class</A>
+<LI><A NAME="tex2html2633"
+  HREF="node147.html">6.23.2.2 The <tt class="class">GNUTranslations</tt> class</A>
+<LI><A NAME="tex2html2634"
+  HREF="node148.html">6.23.2.3 Solaris message catalog support</A>
+<LI><A NAME="tex2html2635"
+  HREF="node149.html">6.23.2.4 The Catalog constructor</A>
+</UL>
+<LI><A NAME="tex2html2636"
+  HREF="node150.html">6.23.3 Internationalizing your programs and modules</A>
+<UL>
+<LI><A NAME="tex2html2637"
+  HREF="node151.html">6.23.3.1 Localizing your module</A>
+<LI><A NAME="tex2html2638"
+  HREF="node152.html">6.23.3.2 Localizing your application</A>
+<LI><A NAME="tex2html2639"
+  HREF="node153.html">6.23.3.3 Changing languages on the fly</A>
+<LI><A NAME="tex2html2640"
+  HREF="node154.html">6.23.3.4 Deferred translations</A>
+</UL>
+<LI><A NAME="tex2html2641"
+  HREF="node155.html">6.23.4 Acknowledgements</A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><p><hr><table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td><A href="embedding-locale.html"><img src="../icons/previous.gif" border="0" height="32"
+  alt="Previous Page" width="32"></A></td>
+<td><A href="allos.html"><img src="../icons/up.gif" border="0" height="32"
+  alt="Up One Level" width="32"></A></td>
+<td><A HREF="node144.html"><img src="../icons/next.gif" border="0" height="32"
+  alt="Next Page" width="32"></A></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td><A href="contents.html"><img src="../icons/contents.gif" border="0" height="32"
+  alt="Contents" width="32"></A></td>
+<td><a href="modindex.html" title="Module Index"><img src="../icons/modules.gif" border="0" height="32"
+  alt="Module Index" width="32"></a></td>
+<td><A href="genindex.html"><img src="../icons/index.gif" border="0" height="32"
+  alt="Index" width="32"></A></td>
+</tr></table>
+<b class="navlabel">Previous:</b> <a class="sectref" href="embedding-locale.html">6.22.2 For extension writers</A>
+<b class="navlabel">Up:</b> <a class="sectref" href="allos.html">6. Generic Operating System</A>
+<b class="navlabel">Next:</b> <a class="sectref" HREF="node144.html">6.23.1 GNU gettext API</A>
+</DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</ADDRESS>
+</BODY>
+</HTML>

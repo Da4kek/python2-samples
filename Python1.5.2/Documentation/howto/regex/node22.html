@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 98.2 beta6 (August 14th, 1998)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6.2 match() versus search()</TITLE>
+<META NAME="description" CONTENT="6.2 match() versus search()">
+<META NAME="keywords" CONTENT="regex">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="STYLESHEET" HREF="regex.css">
+<LINK REL="next" HREF="node23.html">
+<LINK REL="previous" HREF="node21.html">
+<LINK REL="up" HREF="node20.html">
+<LINK REL="next" HREF="node23.html">
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class=navigation>
+<table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html304"
+ HREF="node23.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html301"
+ HREF="node20.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html295"
+ HREF="node21.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html303"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html305"
+ HREF="node23.html">6.3 Greedy versus Non-Greedy</A>
+<b>Up:</b> <A NAME="tex2html302"
+ HREF="node20.html">6. Common Problems</A>
+<b>Previous:</b> <A NAME="tex2html296"
+ HREF="node21.html">6.1 Know About the</A>
+<br><hr><p></div>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION000720000000000000000">
+<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN> match() versus search()</A>
+</H2>
+
+<P>
+The <tt>match()</tt> function only checks if the RE matches at
+the beginning of the string, while <tt>search()</tt> will scan
+forward through the string for a match.
+It's important to keep this distinction in mind.  Remember, 
+<tt>match()</tt> will only report a successful match which
+will start at 0; if the match wouldn't start at zero, 
+<tt>match()</tt> will <i>not</i> report it.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; print re.match('super', 'superstition').span()  
+(0, 5)
+&gt;&gt;&gt; print re.match('super', 'insuperable')    
+None
+</pre></dl>
+On the other hand, <tt>search()</tt> will scan forward through the
+string, reporting the first match it finds.
+
+<P>
+<dl><dd><pre>
+&gt;&gt;&gt; print re.search('super', 'superstition').span()
+(0, 5)
+&gt;&gt;&gt; print re.search('super', 'insuperable').span()
+(2, 7)
+</pre></dl>
+Sometimes you'll be tempted to keep using <tt>re.match()</tt>, and
+just add <tt>.*</tt> to the front of your RE.  Resist this
+tempation, and use <tt>re.search()</tt> instead.  The regular expression compiler
+does some analysis of REs in order to speed up the process of
+looking for a match.  One such analysis figures out what the first
+character of a match must be; for example, a pattern starting with 
+<tt>Crow</tt> must match starting with a "<tt>C</tt>".  The analysis
+lets the engine quickly scan through the string looking for the
+starting character, and only try the full match if one is found.
+
+<P>
+Adding <tt>.*</tt> defeats this optimization, and requires scanning to
+the end of the string and then backtracking to find a match for the
+rest of the RE.  Use <tt>re.search()</tt> instead.
+
+<P>
+<p>
+<div class=navigation><hr><table width="100%" cellpadding=0 cellspacing=0><tr><td width="20%"><A NAME="tex2html304"
+ HREF="node23.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="./next.gif"></A> <A NAME="tex2html301"
+ HREF="node20.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="./up.gif"></A> <A NAME="tex2html295"
+ HREF="node21.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="./previous.gif"></A> </td>
+<td align=center width="60%"><b>Regular Expression HOWTO</b></td>
+<td align=right width="20%"><A NAME="tex2html303"
+ HREF="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="./contents.gif"></A>  </td></tr></table>
+<hr>
+<b>Next:</b> <A NAME="tex2html305"
+ HREF="node23.html">6.3 Greedy versus Non-Greedy</A>
+<b>Up:</b> <A NAME="tex2html302"
+ HREF="node20.html">6. Common Problems</A>
+<b>Previous:</b> <A NAME="tex2html296"
+ HREF="node21.html">6.1 Know About the</A>
+</div>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

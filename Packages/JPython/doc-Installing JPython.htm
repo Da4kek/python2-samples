@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0035)http://www.jpython.org/install.html -->
+<HTML><HEAD><TITLE>Installing JPython</TITLE>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type><!-- THIS PAGE IS AUTOMATICALLY GENERATED.  DO NOT EDIT. --><!-- Wed Jan 26 12:27:43 2000 --><!-- USING HT2HTML 1.1 --><!-- SEE http://www.python.org/~bwarsaw/software/pyware.html --><!-- User-specified headers:
+Title: Installing JPython
+
+-->
+<META content="MSHTML 5.00.2614.3500" name=GENERATOR></HEAD>
+<BODY aLink=#ff0000 bgColor=#ffffff leftMargin=0 link=#0000bb text=#000000 
+topMargin=0 vLink=#551a8b MARGINHEIGHT="0" MARGINWIDTH="0"><!-- start of page table -->
+<TABLE border=0 cellPadding=0 cellSpacing=0 width="100%"><!-- start of banner row -->
+  <TBODY>
+  <TR><!-- start of corner cells -->
+    <TD bgColor=#cdb7b5 vAlign=center width=150>
+      <CENTER><A href="http://www.jpython.org/"><IMG border=0 
+      src="Installing JPython_files/jpython-new-small.gif"></A></CENTER></TD>
+    <TD bgColor=#cdb7b5 width=15>&nbsp;&nbsp;</TD><!--spacer--><!-- end of corner cells --><!-- start of banner -->
+    <TD bgColor=#cdb7b5 width="90%"><!-- start of site links table -->
+      <TABLE bgColor=#ffffff border=0 cellPadding=2 cellSpacing=0 cols=2 
+      width="100%" ROWS="2">
+        <TBODY>
+        <TR>
+          <TD bgColor=#cdb7b5><A href="http://www.jpython.org/">Home</A> </TD>
+          <TD bgColor=#cdb7b5><A 
+            href="http://www.python.org/">http://www.python.org/</A> </TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5><A 
+            href="http://www.jpython.org/download.html">Download</A> </TD>
+          <TD bgColor=#cdb7b5><A 
+            href="http://www.jpython.org/docs/">Documentation</A> 
+      </TD></TR></TBODY></TABLE><!-- end of site links table --></TD><!-- end of banner --></TR><!-- end of banner row -->
+  <TR><!-- start of sidebar/body row --><!-- start of sidebar cells -->
+    <TD bgColor=#cdb7b5 vAlign=top width=150><!-- start of sidebar table -->
+      <TABLE bgColor=#ffffff border=0 cellPadding=3 cellSpacing=0 
+        width="100%"><TBODY>
+        <TR>
+          <TD bgColor=#660099><B><FONT color=#ffffff>Getting JPython 
+            </FONT></B></TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5><A href="http://www.jpython.org/">Home</A> 
+</TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5><A 
+            href="http://www.jpython.org/newlicense.html">License</A> </TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5><A 
+            href="http://www.jpython.org/download.html">Download</A> </TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5><B>Installing</B> </TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5><A 
+            href="http://www.jpython.org/platform.html">JVM Compatibility</A> 
+        </TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5>&nbsp; 
+        <TR>
+          <TD bgColor=#660099><B><FONT color=#ffffff>Resources 
+        </FONT></B></TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5><A href="http://www.jpython.org/applets/">Applet 
+            Demos</A> </TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5><A 
+            href="http://www.python.org/mailman/listinfo/jpython-interest">Mailing 
+            List</A> </TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5><A 
+            href="http://www.jpython.org/bugs.html">Bugs</A> </TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5><A 
+            href="http://www.jpython.org/Users.html">JPython Users</A> </TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5>&nbsp; 
+        <TR>
+          <TD bgColor=#660099><B><FONT color=#ffffff>Email Us 
+</FONT></B></TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5><A 
+            href="mailto:jpython@python.org">jpython@python.org</A> </TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5>&nbsp; </TD></TR>
+        <TR>
+          <TD bgColor=#cdb7b5><A href="http://www.python.org/">
+            <CENTER><IMG border=0 
+            src="Installing JPython_files/PythonPoweredSmall.gif"></CENTER></A></TD></TR></TBODY></TABLE><!-- end of sidebar table --></TD>
+    <TD width=15>&nbsp;&nbsp;</TD><!--spacer--><!-- end of sidebar cell --><!-- start of body cell -->
+    <TD vAlign=top width="90%"><BR>
+      <H3>Installing JPython</H3>
+      <P>JPython is distributed as a self-extracting .class file created by <A 
+      href="http://www.installshield.com/java">InstallShield - Java Edition</A>. 
+      To install JPython, open the command line to the directory in which you 
+      have placed the JPython11.class file and then type: <PRE>    &lt;java interpreter&gt; JPython11
+</PRE>
+      <P><B>Note:</B> if you downloaded the JPythonONLY11.class file, you must 
+      first rename it to JPython11.class. 
+      <P>You will probably type one of the following three lines, depending on 
+      your system. <B>Be sure <EM>not</EM> to put "<TT>.class</TT>" on the end 
+      of the file name!</B> <PRE>    java JPython11
+
+    jre JPython11
+
+    jview JPython11
+</PRE>
+      <P>If you do not have a GUI, then add <TT>-o dir_to_install_to</TT> to the 
+      command above. JPython will install to the specified directory without 
+      bringing up the graphical installer. E.g. to install to 
+      <EM>JPython-1.1</EM> in the current directory do: <PRE>    java JPython11 -o JPython-1.1
+</PRE>
+      <P>After completing installation, you should be able to run JPython by 
+      typing:</P><PRE>    jpython
+</PRE>
+      <H3>What Can Go Wrong?</H3>
+      <P>You should check out this section if your JPython installation doesn't 
+      quite work right. It will contain tips for solving the most common 
+      problems.</P>
+      <H4>Failed to execute MakeScriptAction</H4>Sometimes the installation will 
+      fail with the above error message. I've never been able to recreate this, 
+      but from the reports, it only seems to occur when using jview on Windows 
+      98 machines. Windows NT and all *nix systems seem to be immune to this 
+      problem, as does anybody who's using Sun's JVM on Windows. This might be 
+      caused by an outdated version of jview. You should read the <A 
+      href="http://www.jpython.org/platform.html">platform specific notes</A> 
+      for information on how to upgrade your jview. If the problem persists, try 
+      downloading Sun's JVM for Windows. 
+      <H4>Can't Access Standard Python Modules</H4>
+      <P>JPython only comes with a small collection of the standard Python 
+      modules. This is both due to some legal issues as well as the fact that 
+      much of the functionality of these modules is duplicated by Java packages. 
+      If you want to use parts standard Python library that are not included 
+      with JPython, you have two choices:</P>
+      <OL>
+        <LI>Download and install these libraries from the <A 
+        href="http://www.jpython.org/download.html#pylib">JPython Download 
+        Page</A> 
+        <P></P>
+        <LI>Add a pointer in your python.path to the Lib directory of a 
+        preexisting CPython distribution. This requires editing your "registry" 
+        file. </LI></OL>
+      <H4>Other Problems</H4>
+      <P>Any other problems with the installation should be reported to <A 
+      href="mailto:jpython@python.org">jpython@python.org</A>. The installer has 
+      been modified so that JPython is now responsible for generating the 
+      appropriate launch script for each platform. The good news is that we're 
+      no longer dependant on InstallShield for fixing platform specific bugs 
+      (they don't seem to care at all about AIX, IRIX, Linux, or Mac). The bad 
+      news is that I'm now dependant on you to report any problems with the 
+      installer so that they can be fixed.</P>
+      <H4>Platform Specific Notes</H4>
+      <P>If all else fails, you might find that your problem is unique to your 
+      platform, and has a solution mentioned on the <A 
+      href="http://www.jpython.org/platform.html">Platform Specific 
+      Information</A> page. </P></TD><!-- end of body cell --></TR><!-- end of sidebar/body row --></TBODY></TABLE><!-- end of page table --></BODY></HTML>
